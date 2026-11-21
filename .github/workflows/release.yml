@@ -302,7 +302,8 @@ jobs:
               failed=1
             fi
             granted_services=$(/usr/libexec/PlistBuddy -c "Print :Entitlements:com.apple.developer.icloud-services" "$plist" 2>/dev/null || true)
-            if ! echo "$granted_services" | grep -qF CloudKit; then
+            # App Store profiles grant every iCloud service as `*`.
+            if ! echo "$granted_services" | grep -qE 'CloudKit|\*'; then
               echo "::error::Profile does not grant the CloudKit service."
               failed=1
             fi
