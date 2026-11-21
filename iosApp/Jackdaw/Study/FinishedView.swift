@@ -12,36 +12,23 @@ struct FinishedView: View {
 
     var body: some View {
         ZStack {
-            ScrollView {
-                VStack(spacing: 22) {
-                    Mascot(size: 150, happy: !isEmpty, animated: true)
-                        .scaleEffect(appeared ? 1 : 0.5)
-                        .opacity(appeared ? 1 : 0)
-                        .padding(.top, 12)
-                    VStack(spacing: 6) {
-                        Text(L10n.tr(titleKey))
-                            .font(.brand(.largeTitle, weight: .bold))
-                            .foregroundStyle(Brand.text)
-                            .multilineTextAlignment(.center)
-                        Text(L10n.tr(subtitleKey))
-                            .font(.brand(.body))
-                            .foregroundStyle(Brand.textSecondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    if !isEmpty && summary.answered > 0 {
-                        accuracyRing
-                        statsGrid
-                    }
-                    Button {
-                        onDone()
-                    } label: {
-                        Text("common.done")
-                    }
-                    .buttonStyle(BrandButtonStyle(fill: style.base, foreground: style.onBase))
-                    .padding(.top, 8)
+            ViewThatFits(in: .vertical) {
+                content(compact: false)
+                content(compact: true)
+                ScrollView {
+                    content(compact: true)
                 }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .safeAreaInset(edge: .bottom) {
+                Button {
+                    onDone()
+                } label: {
+                    Text("common.done")
+                }
+                .buttonStyle(BrandButtonStyle(fill: style.base, foreground: style.onBase))
                 .padding(.horizontal, 24)
-                .padding(.bottom, 32)
+                .padding(.vertical, 12)
             }
             if celebrates && !reduceMotion {
                 ConfettiView()
@@ -54,6 +41,31 @@ struct FinishedView: View {
         .onAppear {
             appeared = true
         }
+    }
+
+    private func content(compact: Bool) -> some View {
+        VStack(spacing: compact ? 12 : 18) {
+            Mascot(size: compact ? 80 : 112, happy: !isEmpty, animated: true)
+                .scaleEffect(appeared ? 1 : 0.5)
+                .opacity(appeared ? 1 : 0)
+            VStack(spacing: compact ? 2 : 6) {
+                Text(L10n.tr(titleKey))
+                    .font(.brand(compact ? .title : .largeTitle, weight: .bold))
+                    .foregroundStyle(Brand.text)
+                    .multilineTextAlignment(.center)
+                Text(L10n.tr(subtitleKey))
+                    .font(.brand(compact ? .subheadline : .body))
+                    .foregroundStyle(Brand.textSecondary)
+                    .multilineTextAlignment(.center)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            if !isEmpty && summary.answered > 0 {
+                accuracyRing(compact: compact)
+                statsGrid(compact: compact)
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 8)
     }
 
     private var titleKey: String {
@@ -71,17 +83,18 @@ struct FinishedView: View {
         return "finished.keep.message"
     }
 
-    private var accuracyRing: some View {
-        ZStack {
+    private func accuracyRing(compact: Bool) -> some View {
+        let side: CGFloat = compact ? 104 : 128
+        return ZStack {
             ProgressRing(
                 progress: summary.accuracy,
-                lineWidth: 14,
+                lineWidth: compact ? 10 : 12,
                 tint: summary.accuracy >= 0.7 ? Brand.success : Brand.flame,
                 track: Brand.hairline
             )
             VStack(spacing: 0) {
                 Text(L10n.format("pack.progress.percent", Int((summary.accuracy * 100).rounded())))
-                    .font(.brand(.title, weight: .bold))
+                    .font(.brand(compact ? .title2 : .title, weight: .bold))
                     .foregroundStyle(Brand.text)
                     .monospacedDigit()
                 Text("finished.accuracy")
@@ -89,34 +102,42 @@ struct FinishedView: View {
                     .foregroundStyle(Brand.textSecondary)
             }
         }
-        .frame(width: 150, height: 150)
+        .frame(width: side, height: side)
         .accessibilityElement(children: .combine)
     }
 
-    private var statsGrid: some View {
-        let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
-        return LazyVGrid(columns: columns, spacing: 12) {
-            statTile(value: String(summary.answered), key: "finished.answered", symbol: "checkmark.circle")
-            statTile(value: String(summary.correct), key: "finished.correct", symbol: "hand.thumbsup.fill")
-            statTile(value: String(summary.newFacets), key: "finished.new", symbol: "sparkles")
-            statTile(value: duration, key: "finished.time", symbol: "clock.fill")
+    private func statsGrid(compact: Bool) -> some View {
+        Grid(horizontalSpacing: 12, verticalSpacing: 12) {
+            GridRow {
+                statTile(value: String(summary.answered), key: "finished.answered", symbol: "checkmark.circle", compact: compact)
+                statTile(value: String(summary.correct), key: "finished.correct", symbol: "hand.thumbsup.fill", compact: compact)
+            }
+            GridRow {
+                statTile(value: String(summary.newFacets), key: "finished.new", symbol: "sparkles", compact: compact)
+                statTile(value: duration, key: "finished.time", symbol: "clock.fill", compact: compact)
+            }
         }
     }
 
-    private func statTile(value: String, key: LocalizedStringKey, symbol: String) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    private func statTile(value: String, key: LocalizedStringKey, symbol: String, compact: Bool) -> some View {
+        let layout = compact ? AnyLayout(HStackLayout(spacing: 10)) : AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+        return layout {
             Image(systemName: symbol)
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(style.accentText)
-            Text(value)
-                .font(.brand(.title2, weight: .bold))
-                .foregroundStyle(Brand.text)
-                .monospacedDigit()
-            Text(key)
-                .font(.brand(.caption))
-                .foregroundStyle(Brand.textSecondary)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(value)
+                    .font(.brand(compact ? .title3 : .title2, weight: .bold))
+                    .foregroundStyle(Brand.text)
+                    .monospacedDigit()
+                Text(key)
+                    .font(.brand(.caption))
+                    .foregroundStyle(Brand.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
         }
-        .padding(16)
+        .padding(compact ? 12 : 14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .card(radius: 20)
         .accessibilityElement(children: .combine)
