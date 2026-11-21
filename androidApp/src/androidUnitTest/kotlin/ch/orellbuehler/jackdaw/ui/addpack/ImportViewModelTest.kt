@@ -12,6 +12,7 @@ import ch.orellbuehler.jackdaw.packSummary
 import ch.orellbuehler.jackdaw.store.ImportCounts
 import ch.orellbuehler.jackdaw.store.ImportPreview
 import ch.orellbuehler.jackdaw.store.ImportResult
+import ch.orellbuehler.jackdaw.store.SamplePack
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -31,6 +32,7 @@ class ImportViewModelTest {
     private val sdk = mockk<JackdawSdk>()
     private var readOutcome: ReadOutcome = ReadOutcome.Text("{}")
     private val reader = PackTextReader { readOutcome }
+    private val fetched = HashMap<String, String>()
 
     private fun counts() = ImportCounts(0, 0, 0, 0)
 
@@ -62,8 +64,14 @@ class ImportViewModelTest {
     private fun viewModel(): ImportViewModel {
         every { sdk.samplePacks() } returns emptyList()
         every { sdk.observePacks() } returns flowOf(listOf(packSummary("p")))
-        return ImportViewModel(sdk, reader)
+        return ImportViewModel(sdk, reader) { url -> fetched[url] }
     }
+
+    private fun sample(
+        id: String,
+        revision: Int = 1,
+        downloadUrl: String? = null,
+    ) = SamplePack(id, "Sample $id", "", null, null, 3, revision, downloadUrl)
 
     @Test
     fun previewsValidTextWithoutImporting() =
@@ -177,6 +185,63 @@ class ImportViewModelTest {
                 assertEquals(true, assertIs<ImportEvent.Imported>(awaitItem()).fromSample)
                 vm.addSample("nope")
                 assertIs<ImportEvent.SampleFailed>(awaitItem())
+            }
+        }
+
+    @Test
+    fun theCatalogReplacesTheLibraryAndOnlinePacksAreDownloaded() =
+        runTest {
+            val online = sample("s2", revision = 2, downloadUrl = "https://example.org/s2.jackdaw")
+            every { sdk.catalogUrl() } returns "https://example.org/index.json"
+            every { sdk.readCatalog("index") } returns listOf(sample("s1"), online)
+            coEvery { sdk.importPack("pack text") } returns success()
+            coEvery { sdk.importSample("s1") } returns success()
+            val vm = viewModel()
+
+            vm.loadCatalog()
+            assertEquals(CatalogState.Failed, vm.catalog.value)
+            assertEquals(emptyList(), vm.library.value)
+
+            fetched["https://example.org/index.json"] = "index"
+            vm.loadCatalog()
+            assertEquals(CatalogState.Loaded, vm.catalog.value)
+            assertEquals(listOf("s1", "s2"), vm.library.value.map { it.id })
+
+            vm.events.test {
+                vm.addSample("s2")
+                assertEquals(ImportProblem.DownloadFailed, assertIs<ImportEvent.SampleFailed>(awaitItem()).problem)
+                fetched["https://example.org/s2.jackdaw"] = "pack text"
+                vm.addSample("s2")
+                assertEquals(true, assertIs<ImportEvent.Imported>(awaitItem()).fromSample)
+                vm.addSample("s1")
+                assertIs<ImportEvent.Imported>(awaitItem())
+            }
+            coVerify(exactly = 1) { sdk.importPack("pack text") }
+            coVerify(exactly = 1) { sdk.importSample("s1") }
+            assertEquals(emptySet(), vm.adding.value)
+        }
+
+    @Test
+    fun aCatalogThatCannotBeReadCountsAsFailed() =
+        runTest {
+            every { sdk.catalogUrl() } returns "https://example.org/index.json"
+            every { sdk.readCatalog("<html>") } returns null
+            fetched["https://example.org/index.json"] = "<html>"
+            val vm = viewModel()
+            vm.loadCatalog()
+            assertEquals(CatalogState.Failed, vm.catalog.value)
+        }
+
+    @Test
+    fun installedRevisionsFollowTheLibrary() =
+        runTest {
+            every { sdk.samplePacks() } returns emptyList()
+            every { sdk.observePacks() } returns flowOf(listOf(packSummary("p", revision = 3)))
+            val vm = ImportViewModel(sdk, reader) { null }
+            vm.installedRevisions.test {
+                var revisions = awaitItem()
+                while (revisions.isEmpty()) revisions = awaitItem()
+                assertEquals(mapOf("p" to 3), revisions)
             }
         }
 

@@ -45,6 +45,7 @@ fun ImportProblem.messageRes(): Int =
         ImportProblem.NotUtf8 -> R.string.error_not_utf8
         ImportProblem.Empty -> R.string.error_empty
         ImportProblem.TooLarge -> R.string.error_too_large
+        ImportProblem.DownloadFailed -> R.string.error_download_failed
     }
 
 fun ImportProblem.technicalDetail(): String? = (this as? ImportProblem.Sdk)?.error?.message

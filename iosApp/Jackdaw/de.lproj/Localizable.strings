@@ -77,6 +77,7 @@
 "grade.good" = "Gut";
 "grade.hard" = "Schwer";
 "import.error.downgrade" = "Das installierte Pack ist neuer als diese Datei.";
+"import.error.download" = "Das Pack konnte nicht heruntergeladen werden. Prüfe deine Verbindung und versuche es noch einmal.";
 "import.error.generic" = "Beim Lesen des Packs ist etwas schiefgelaufen.";
 "import.error.invalid" = "Dem Pack fehlt eine gültige ID, ein Titel oder eine Version.";
 "import.error.noitems" = "Das Pack enthält keine verwendbaren Einträge.";
@@ -160,7 +161,14 @@
 "preview.warnings.other" = "%lld Hinweise";
 "sample.add" = "Hinzufügen";
 "sample.added" = "Hinzugefügt";
+"sample.update" = "Aktualisieren";
 "samples.intro" = "Kostenlose Packs, die mit Jackdaw mitgeliefert werden. Füge so viele hinzu, wie du möchtest.";
+"samples.online.failed" = "Die Liste konnte nicht geladen werden. Prüfe deine Verbindung und versuche es noch einmal.";
+"samples.online.load" = "Liste laden";
+"samples.online.loaded" = "Das ist die aktuelle Liste von GitHub.";
+"samples.online.message" = "Hol dir die aktuelle Liste der Packs von GitHub. Jackdaw verbindet sich nur, wenn du auf den Button tippst.";
+"samples.online.retry" = "Nochmals versuchen";
+"samples.online.title" = "Weitere Packs online";
 "samples.title" = "Beispielbibliothek";
 "section.ungrouped" = "Weitere Einträge";
 "sections.one" = "%lld Abschnitt";

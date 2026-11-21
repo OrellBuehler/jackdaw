@@ -577,6 +577,7 @@ internal class PackStore(
             lastStudiedAt = lastStudied,
             importedAt = row.imported_at,
             updatedAt = row.updated_at,
+            revision = row.revision?.toInt() ?: 0,
         )
 }
 

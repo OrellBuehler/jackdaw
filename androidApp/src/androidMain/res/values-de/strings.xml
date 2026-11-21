@@ -40,6 +40,13 @@
     <string name="empty_samples_title">Starte mit einem Beispiel</string>
     <string name="empty_more_options">Weitere Möglichkeiten</string>
     <string name="sample_added">Hinzugefügt</string>
+    <string name="sample_update">Aktualisieren</string>
+    <string name="online_title">Weitere Packs online</string>
+    <string name="online_body">Hol dir die aktuelle Liste der Packs von GitHub. Jackdaw verbindet sich nur, wenn du auf den Button tippst.</string>
+    <string name="online_load">Liste laden</string>
+    <string name="online_loaded">Das ist die aktuelle Liste von GitHub.</string>
+    <string name="online_failed">Die Liste konnte nicht geladen werden. Prüfe deine Verbindung und versuche es noch einmal.</string>
+    <string name="online_retry">Nochmals versuchen</string>
     <string name="snackbar_added">«%1$s» hinzugefügt</string>
     <string name="snackbar_updated">«%1$s» aktualisiert</string>
     <string name="add_title">Pack hinzufügen</string>
@@ -92,6 +99,7 @@
     <string name="error_read_failed">Die Datei konnte nicht gelesen werden.</string>
     <string name="error_not_utf8">Die Datei ist kein UTF-8-Text.</string>
     <string name="error_empty">Es gibt nichts zu importieren.</string>
+    <string name="error_download_failed">Das Pack konnte nicht heruntergeladen werden. Prüfe deine Verbindung und versuche es noch einmal.</string>
     <string name="warning_item_skipped">Eintrag übersprungen</string>
     <string name="warning_duplicate_id">Doppelte Eintrags-ID</string>
     <string name="warning_unknown_type">Nicht unterstützter Eintragstyp</string>

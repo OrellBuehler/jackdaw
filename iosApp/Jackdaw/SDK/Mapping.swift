@@ -18,7 +18,8 @@ enum Mapping {
             masteredCount: Int(s.masteredCount),
             dueCount: Int(s.dueCount),
             progress: s.progress,
-            lastStudiedAt: date(fromMillis: s.lastStudiedAt)
+            lastStudiedAt: date(fromMillis: s.lastStudiedAt),
+            revision: Int(s.revision)
         )
     }
 
@@ -103,7 +104,9 @@ enum Mapping {
             blurb: s.descriptionText,
             icon: s.icon,
             colorHex: s.color,
-            itemCount: Int(s.itemCount)
+            itemCount: Int(s.itemCount),
+            revision: Int(s.revision),
+            downloadURL: s.downloadUrl.flatMap { URL(string: $0) }
         )
     }
 

@@ -9,6 +9,7 @@ import ch.orellbuehler.jackdaw.format.ItemType
 import ch.orellbuehler.jackdaw.format.PackReader
 import ch.orellbuehler.jackdaw.format.ReadResult
 import ch.orellbuehler.jackdaw.format.Study
+import ch.orellbuehler.jackdaw.samples.Catalog
 import ch.orellbuehler.jackdaw.samples.Samples
 import ch.orellbuehler.jackdaw.store.AppSettings
 import ch.orellbuehler.jackdaw.store.Env
@@ -126,8 +127,21 @@ class JackdawSdk internal constructor(
 
     fun samplePacks(): List<SamplePack> =
         Samples.all.map {
-            SamplePack(it.pack.id, it.pack.title, it.pack.description ?: "", it.pack.icon, it.pack.color, it.pack.items.size)
+            SamplePack(
+                id = it.pack.id,
+                title = it.pack.title,
+                descriptionText = it.pack.description ?: "",
+                icon = it.pack.icon,
+                color = it.pack.color,
+                itemCount = it.pack.items.size,
+                revision = it.pack.revision ?: 0,
+                downloadUrl = null,
+            )
         }
+
+    fun catalogUrl(): String = Catalog.INDEX_URL
+
+    fun readCatalog(text: String): List<SamplePack>? = Catalog.read(text, samplePacks())
 
     fun authoringPrompt(): String = GENERATED_AUTHORING_PROMPT
 

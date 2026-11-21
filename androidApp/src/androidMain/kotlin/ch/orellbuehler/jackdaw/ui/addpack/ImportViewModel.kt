@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import ch.orellbuehler.jackdaw.JackdawSdk
 import ch.orellbuehler.jackdaw.data.PackTextReader
 import ch.orellbuehler.jackdaw.data.ReadOutcome
+import ch.orellbuehler.jackdaw.data.TextFetcher
 import ch.orellbuehler.jackdaw.format.ImportError
 import ch.orellbuehler.jackdaw.store.ImportPreview
 import ch.orellbuehler.jackdaw.store.ImportResult
+import ch.orellbuehler.jackdaw.store.SamplePack
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,6 +33,15 @@ sealed interface ImportProblem {
     data object Empty : ImportProblem
 
     data object TooLarge : ImportProblem
+
+    data object DownloadFailed : ImportProblem
+}
+
+enum class CatalogState {
+    Idle,
+    Loading,
+    Loaded,
+    Failed,
 }
 
 sealed interface ImportUiState {
@@ -63,6 +74,7 @@ sealed interface ImportEvent {
 class ImportViewModel(
     private val sdk: JackdawSdk,
     private val reader: PackTextReader,
+    private val fetcher: TextFetcher,
 ) : ViewModel() {
     private val _state = MutableStateFlow<ImportUiState>(ImportUiState.Idle)
     val state: StateFlow<ImportUiState> = _state
@@ -71,6 +83,21 @@ class ImportViewModel(
     val events = _events.receiveAsFlow()
 
     val samples = sdk.samplePacks()
+
+    private val _library = MutableStateFlow(samples)
+    val library: StateFlow<List<SamplePack>> = _library
+
+    private val _catalog = MutableStateFlow(CatalogState.Idle)
+    val catalog: StateFlow<CatalogState> = _catalog
+
+    private val _adding = MutableStateFlow<Set<String>>(emptySet())
+    val adding: StateFlow<Set<String>> = _adding
+
+    val installedRevisions: StateFlow<Map<String, Int>> =
+        sdk
+            .observePacks()
+            .map { packs -> packs.associate { it.id to it.revision } }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyMap())
 
     val authoringPrompt: String by lazy { sdk.authoringPrompt() }
 
@@ -132,9 +159,29 @@ class ImportViewModel(
         _state.update { if (it is ImportUiState.Preview && it.busy) it else ImportUiState.Idle }
     }
 
-    fun addSample(sampleId: String) {
+    fun loadCatalog() {
+        if (_catalog.value == CatalogState.Loading) return
+        _catalog.value = CatalogState.Loading
         viewModelScope.launch {
-            when (val result = sdk.importSample(sampleId)) {
+            val packs = fetcher.fetch(sdk.catalogUrl())?.let { sdk.readCatalog(it) }
+            if (packs == null) {
+                _catalog.value = CatalogState.Failed
+            } else {
+                _library.value = packs
+                _catalog.value = CatalogState.Loaded
+            }
+        }
+    }
+
+    fun addSample(sampleId: String) {
+        if (sampleId in _adding.value) return
+        val url = _library.value.firstOrNull { it.id == sampleId }?.downloadUrl
+        _adding.update { it + sampleId }
+        viewModelScope.launch {
+            val result = if (url == null) sdk.importSample(sampleId) else fetcher.fetch(url)?.let { sdk.importPack(it) }
+            _adding.update { it - sampleId }
+            when (result) {
+                null -> _events.send(ImportEvent.SampleFailed(ImportProblem.DownloadFailed))
                 is ImportResult.Success -> _events.send(ImportEvent.Imported(result, fromSample = true))
                 is ImportResult.Failure -> _events.send(ImportEvent.SampleFailed(ImportProblem.Sdk(result.error)))
             }

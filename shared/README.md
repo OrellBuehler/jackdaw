@@ -47,13 +47,17 @@ Create exactly one instance per process and keep it alive (application scope). O
 | `resetProgress(packId)` | | All facets back to new. Activity history is kept. |
 | `exportPack(packId)` | `String?` | The pack JSON as it was imported (content only, no progress). |
 | `samplePacks()` | `List<SamplePack>` | Bundled packs (from `format/examples`). Not suspending. |
-| `importSample(sampleId)` | `ImportResult` | `sampleId` is the pack id (`SamplePack.id`). |
+| `importSample(sampleId)` | `ImportResult` | `sampleId` is the pack id (`SamplePack.id`) of a bundled pack. |
+| `catalogUrl()` | `String` | Where the online pack list is (`format/examples/index.json` on `main`). The UI downloads it; `shared` has no network code. |
+| `readCatalog(text)` | `List<SamplePack>?` | The sample library for a downloaded list, or `null` when the text is not a catalogue this version understands. Not suspending. |
+
+`SamplePack`: `id, title, descriptionText, icon, color, itemCount, revision, downloadUrl`. `downloadUrl == null` means the bundled copy is current: call `importSample(id)`. Otherwise download the text from `downloadUrl` and pass it to `importPack`. In a list from `readCatalog` a bundled pack keeps `downloadUrl == null` unless the catalogue has a higher revision, and bundled packs the catalogue does not list are appended. Entries whose `file` is not a plain `name.jackdaw` are dropped, so every `downloadUrl` points into `format/examples`. A sample is installed when `PackSummary.id` matches, and has an update when `SamplePack.revision > PackSummary.revision`.
 | `authoringPrompt()` | `String` | The copy-paste chatbot prompt of `format/prompt.txt` (also embedded in `AUTHORING.md`): offer it under "Create with AI". Not suspending. |
 | `refresh()` | | Re-emits all flows. Call it when the app returns to the foreground: "due" depends on the clock. |
 
 The text passed to `previewImport`/`importPack` is the file decoded as UTF-8 (a BOM is fine). Decode errors are the UI's to report.
 
-`PackSummary`: `id, title, descriptionText, icon (emoji or null), color ("#RRGGBB" or null), language, itemCount, facetCount, newCount, learningCount, reviewCount, masteredCount, dueCount, progress (0..1), lastStudiedAt, importedAt, updatedAt`. `newCount + learningCount + reviewCount + masteredCount == facetCount`; `dueCount` overlaps them.
+`PackSummary`: `id, title, descriptionText, icon (emoji or null), color ("#RRGGBB" or null), language, itemCount, facetCount, newCount, learningCount, reviewCount, masteredCount, dueCount, progress (0..1), lastStudiedAt, importedAt, updatedAt, revision (0 when the pack has none)`. `newCount + learningCount + reviewCount + masteredCount == facetCount`; `dueCount` overlaps them.
 
 - **new**: never answered. **learning**: failed or rated Hard recently, comes back within minutes. **review**: graduated, waiting for its due date. **mastered**: review facet with an interval of at least 21 days.
 - **due**: a learning facet due within the next 20 minutes, or a review facet whose due *day* is today or earlier (review facets become due at the start of their day, device time zone).
@@ -205,7 +209,7 @@ Pure and deterministic (`study/Scheduler.kt`), SM-2 family: facets go `NEW -> LE
 ## Threading
 
 - Everything that touches the database is a `suspend` function (runs on `Dispatchers.Default` internally) or a `Flow` (computed on `Dispatchers.Default`). Call suspend functions from any thread; results arrive on the caller's context.
-- Non-suspending members never touch the disk. `StudySession.reveal/revealHint/next/finish`, `refresh()` and `samplePacks()`/`authoringPrompt()` are cheap and safe on the main thread. The first `samplePacks()` call parses five small JSON files (a few ms).
+- Non-suspending members never touch the disk. `StudySession.reveal/revealHint/next/finish`, `refresh()` and `samplePacks()`/`authoringPrompt()` are cheap and safe on the main thread. The first `samplePacks()` call parses the bundled JSON files (a few ms).
 - `StudySession.state` is a `StateFlow`: collect on the main thread. A session is meant to be driven by one UI at a time; overlapping calls are ignored instead of queued.
 - Flows are cold: each collector recomputes on every change. Cancel collection when the screen goes away.
 

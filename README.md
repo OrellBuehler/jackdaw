@@ -47,7 +47,7 @@ Free, no ads, no account, no analytics, no servers of ours.
 
 **Any chatbot can write one.** "Create with AI" copies a ready-made prompt. Paste it into a chatbot, paste the answer back, and the import preview shows what will be added and what was skipped.
 
-**Your data stays yours.** There is no network code in the shared core, and the Android app does not even request the internet permission. The iOS app can sync through **your own private iCloud** (CloudKit private database, on by default, switch in Settings), which only the owner of the iCloud account can read. Nothing is ever sent anywhere else.
+**Your data stays yours.** There is no network code in the shared core. The iOS app can sync through **your own private iCloud** (CloudKit private database, on by default, switch in Settings), which only the owner of the iCloud account can read. The only other request the apps make is the online pack list: when you ask for it, they download the list and the packs you pick from this repository. Nothing about you is ever sent anywhere.
 
 **Offline devices merge, they do not overwrite.** Sync carries the review history, and schedules are rebuilt from it, so two devices that studied offline lose nothing ([how it works](shared/README.md#sync)).
 
@@ -61,7 +61,7 @@ Free, no ads, no account, no analytics, no servers of ours.
 | **Learn**            | An SM-2 family scheduler tracks every card direction separately, asks what is due and introduces new items                                                                       |
 | **Practice**         | Drill any items (mixed, flashcards, quiz or typing) without changing the schedule                                                                                                |
 | **Stats**            | Daily goal, streak, accuracy and an activity history                                                                                                                             |
-| **Add content**      | Open a `.jackdaw` file (also from Files, Mail or a chat), paste text, pick from the bundled sample library, or use "Create with AI"                                              |
+| **Add content**      | Open a `.jackdaw` file (also from Files, Mail or a chat), paste text, pick from the sample library (bundled, more on request from GitHub), or use "Create with AI"               |
 | **Pack updates**     | Importing a newer revision of a pack keeps the progress on items that still exist ([spec section 4.2](format/README.md#42-updating-a-pack))                                      |
 | **Sync**             | iOS: the same packs, progress and goals on every device signed in to the same iCloud account. Android is local-only                                                              |
 | **Languages**        | English and German, light and dark theme                                                                                                                                         |
@@ -122,7 +122,7 @@ A pack is one UTF-8 JSON file (`.jackdaw`, media type `application/vnd.jackdaw.p
 - [`format/AUTHORING.md`](format/AUTHORING.md): guide for AI assistants and tool authors
 - [`format/prompt.txt`](format/prompt.txt): the copy-paste chatbot prompt
 - [`format/jackdaw-pack.schema.json`](format/jackdaw-pack.schema.json): JSON Schema 2020-12
-- [`format/examples/`](format/examples/): sample packs (also bundled in the app); [`format/validate.py`](format/validate.py) and [`format/test-vectors.json`](format/test-vectors.json) check packs and readers
+- [`format/examples/`](format/examples/): sample packs (also bundled in the app; [`index.json`](format/examples/index.json) is the list the apps load on request); [`format/validate.py`](format/validate.py) and [`format/test-vectors.json`](format/test-vectors.json) check packs and readers
 
 ## Create a pack with any chatbot
 
