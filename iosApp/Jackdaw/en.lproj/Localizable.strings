@@ -77,6 +77,7 @@
 "grade.good" = "Good";
 "grade.hard" = "Hard";
 "import.error.downgrade" = "The installed pack is newer than this file.";
+"import.error.download" = "The pack couldn't be downloaded. Check your connection and try again.";
 "import.error.generic" = "Something went wrong while reading the pack.";
 "import.error.invalid" = "The pack is missing a valid id, title or version.";
 "import.error.noitems" = "The pack doesn't contain any usable items.";
@@ -160,7 +161,14 @@
 "preview.warnings.other" = "%lld notices";
 "sample.add" = "Add";
 "sample.added" = "Added";
+"sample.update" = "Update";
 "samples.intro" = "Free packs that ship with Jackdaw. Add as many as you like.";
+"samples.online.failed" = "The list couldn't be loaded. Check your connection and try again.";
+"samples.online.load" = "Load list";
+"samples.online.loaded" = "This is the current list from GitHub.";
+"samples.online.message" = "Get the current list of packs from GitHub. Jackdaw only connects when you tap the button.";
+"samples.online.retry" = "Try again";
+"samples.online.title" = "More packs online";
 "samples.title" = "Sample library";
 "section.ungrouped" = "Other items";
 "sections.one" = "%lld section";

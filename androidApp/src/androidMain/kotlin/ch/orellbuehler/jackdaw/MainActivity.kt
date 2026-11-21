@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ch.orellbuehler.jackdaw.data.ContentResolverTextReader
+import ch.orellbuehler.jackdaw.data.HttpsTextFetcher
 import ch.orellbuehler.jackdaw.ui.JackdawApp
 import ch.orellbuehler.jackdaw.ui.addpack.ImportViewModel
 import ch.orellbuehler.jackdaw.ui.settings.AppViewModel
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
 
     private val appViewModel: AppViewModel by viewModels { factory { AppViewModel(sdk) } }
     private val importViewModel: ImportViewModel by viewModels {
-        factory { ImportViewModel(sdk, ContentResolverTextReader(applicationContext.contentResolver)) }
+        factory { ImportViewModel(sdk, ContentResolverTextReader(applicationContext.contentResolver), HttpsTextFetcher()) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

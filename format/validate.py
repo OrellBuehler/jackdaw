@@ -2,7 +2,7 @@
 """Validate Jackdaw packs: JSON Schema plus the semantic rules a schema cannot express.
 
 Usage:
-    python3 validate.py [--strict] [--no-docs] [--no-vectors] [FILE ...]
+    python3 validate.py [--strict] [--no-docs] [--no-vectors] [--write-index] [FILE ...]
 
 With no FILE it checks every examples/*.jackdaw, the packs and items embedded in
 README.md / AUTHORING.md (code fences marked "json pack" and "json item") and the
@@ -464,10 +464,27 @@ def run_vectors(path):
 
 # --------------------------------------------------------------------------
 
+def build_index(paths):
+    """The catalogue of the example packs that the apps download (examples/index.json)."""
+    packs = []
+    for p in paths:
+        pack = json.loads(p.read_text(encoding="utf-8-sig"))
+        entry = {"id": pack["id"], "file": p.name, "title": pack["title"]}
+        for key in ("description", "language", "icon", "color"):
+            if key in pack:
+                entry[key] = pack[key]
+        entry["items"] = len(pack["items"])
+        entry["revision"] = pack.get("revision", 0)
+        packs.append(entry)
+    index = {"format": "jackdaw-catalog", "version": 1, "packs": packs}
+    return json.dumps(index, ensure_ascii=False, indent=2) + "\n"
+
+
 def main():
     ap = argparse.ArgumentParser(description="Validate Jackdaw packs against the schema and the semantic rules.")
     ap.add_argument("files", nargs="*", help="pack files (default: examples/*.jackdaw)")
     ap.add_argument("--strict", action="store_true", help="treat warnings as errors")
+    ap.add_argument("--write-index", action="store_true", help="rewrite examples/index.json from the example packs")
     ap.add_argument("--no-docs", action="store_true", help="skip the packs embedded in README.md and AUTHORING.md")
     ap.add_argument("--no-vectors", action="store_true", help="skip the test vectors")
     args = ap.parse_args()
@@ -517,6 +534,15 @@ def main():
             found = any(load_pack(t) == expected for label, t in extract_pack_blocks(readme) if label.endswith("(pack)"))
             print("%s  README.md contains examples/format-tour.jackdaw verbatim" % ("ok  " if found else "FAIL"))
             failed = failed or not found
+
+    if not args.files:
+        index_path = HERE / "examples" / "index.json"
+        index_text = build_index(sorted((HERE / "examples").glob("*.jackdaw")))
+        if args.write_index:
+            index_path.write_text(index_text, encoding="utf-8")
+        current = index_path.exists() and index_path.read_text(encoding="utf-8") == index_text
+        print("%s  examples/index.json lists the example packs (update it with --write-index)" % ("ok  " if current else "FAIL"))
+        failed = failed or not current
 
     if not args.files and not args.no_docs:
         prompt = HERE / "prompt.txt"

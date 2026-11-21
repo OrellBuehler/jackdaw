@@ -8,8 +8,21 @@ struct SamplePackRow: View {
     @State private var failure: String?
     @State private var showsFailure = false
 
+    private var installedRevision: Int? {
+        model.packs.first { $0.id == sample.id }?.revision
+    }
+
+    private var needsUpdate: Bool {
+        guard let installedRevision else { return false }
+        return sample.revision > installedRevision
+    }
+
     private var isInstalled: Bool {
-        justAdded || model.packs.contains { $0.id == sample.id }
+        justAdded || installedRevision != nil
+    }
+
+    private var buttonTitle: LocalizedStringKey {
+        needsUpdate ? "sample.update" : "sample.add"
     }
 
     private var style: PackStyle {
@@ -46,7 +59,7 @@ struct SamplePackRow: View {
 
     @ViewBuilder
     private var trailing: some View {
-        if isInstalled {
+        if isInstalled && !needsUpdate {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 26))
                 .foregroundStyle(Brand.success)
@@ -57,7 +70,7 @@ struct SamplePackRow: View {
             Button {
                 add()
             } label: {
-                Text("sample.add")
+                Text(buttonTitle)
                     .font(.brand(.subheadline, weight: .bold))
                     .padding(.horizontal, 14)
                     .padding(.vertical, 8)

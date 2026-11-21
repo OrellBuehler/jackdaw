@@ -1,0 +1,127 @@
+{
+  "format": "jackdaw-catalog",
+  "version": 1,
+  "packs": [
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.chemical-elements",
+      "file": "chemical-elements.jackdaw",
+      "title": "Chemical Elements and Their Symbols",
+      "description": "The symbols of the first 20 elements and 17 more that are worth knowing, from titanium to uranium. Every card is asked both ways, symbol to name and name to symbol, and a short quiz on the periodic table follows.",
+      "language": "en",
+      "icon": "⚗️",
+      "color": "#0E7490",
+      "items": 47,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.european-capitals",
+      "file": "european-capitals.jackdaw",
+      "title": "European Capitals",
+      "description": "The capitals of 45 European countries, region by region, followed by a few questions that go beyond the list. Cards are asked as multiple choice and as typed answers; local spellings such as Wien or Praha are accepted.",
+      "language": "en",
+      "icon": "🏛️",
+      "color": "#1E40AF",
+      "items": 52,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
+      "file": "format-tour.jackdaw",
+      "title": "Jackdaw Format Tour",
+      "description": "A complete example that uses every property of the format and every item type. It doubles as a small quiz about the format itself.",
+      "language": "en",
+      "icon": "🧭",
+      "color": "#7C3AED",
+      "items": 12,
+      "revision": 3
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.french-basics",
+      "file": "french-basics.jackdaw",
+      "title": "French Basics",
+      "description": "About 40 essential French words and phrases for travellers and beginners: greetings, numbers, food and drink, survival phrases and five false friends. French on the front, the English meaning on the back; every card is also asked in reverse, and accents are optional when typing.",
+      "language": "fr",
+      "icon": "🇫🇷",
+      "color": "#0055A4",
+      "items": 42,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.git-essentials",
+      "file": "git-essentials.jackdaw",
+      "title": "Git Essentials",
+      "description": "The 22 Git commands you need every day, asked as flashcards, multiple choice and typed answers, plus questions on how staging, branches, remotes and undoing work.",
+      "language": "en",
+      "icon": "🌿",
+      "color": "#C2410C",
+      "items": 33,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.interview-prep-software-engineer",
+      "file": "interview-prep-software-engineer.jackdaw",
+      "title": "Software Engineer Interview Prep",
+      "description": "Twenty questions for software engineering interviews. Mostly open questions with a checklist of key points to grade yourself against, plus a few flashcards and multiple-choice checks on fundamentals.",
+      "language": "en",
+      "icon": "💼",
+      "color": "#0F766E",
+      "items": 20,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.schweizer-staatskunde",
+      "file": "schweizer-staatskunde.jackdaw",
+      "title": "Schweizer Staatskunde",
+      "description": "32 Fragen zu Behörden, Volksrechten, Geschichte und Geografie der Schweiz. Zum Auffrischen oder als Vorbereitung auf den Einbürgerungstest; kantonale und kommunale Fragen kommen dort je nach Wohnort dazu.",
+      "language": "de",
+      "icon": "🗳️",
+      "color": "#B91C1C",
+      "items": 32,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.solar-system",
+      "file": "solar-system.jackdaw",
+      "title": "The Solar System",
+      "description": "28 questions about the planets, the Earth and Moon, moons and small bodies, and the Sun. Mixes sorting, multiple choice, true/false, typed answers and fill-in-the-gap, with two open questions to explain in your own words.",
+      "language": "en",
+      "icon": "🪐",
+      "color": "#4338CA",
+      "items": 28,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.spanish-basics",
+      "file": "spanish-basics.jackdaw",
+      "title": "Spanish Basics",
+      "description": "About 40 essential Spanish words and phrases for travellers and beginners: greetings, numbers, food and drink, survival phrases and four false friends. Spanish on the front, the English meaning on the back; every card is also asked in reverse, and accents are optional when typing.",
+      "language": "es",
+      "icon": "🇪🇸",
+      "color": "#C60B1E",
+      "items": 41,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.swiss-cantons",
+      "file": "swiss-cantons.jackdaw",
+      "title": "Swiss Cantons and Their Capitals",
+      "description": "Learn the capital of each of the 26 Swiss cantons, region by region, then test yourself on a few facts about Switzerland's geography and history. Cards are asked as multiple choice and as typed answers.",
+      "language": "en",
+      "icon": "🇨🇭",
+      "color": "#D52B1E",
+      "items": 36,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.world-history-20th-century",
+      "file": "world-history-20th-century.jackdaw",
+      "title": "World History: The 20th Century",
+      "description": "Thirty-one questions on key events and facts from the two world wars, the interwar years, the Cold War and the post-war world. Mixes multiple choice, true/false, typed answers, fill-in-the-gap and chronology questions.",
+      "language": "en",
+      "icon": "🌍",
+      "color": "#1D4ED8",
+      "items": 31,
+      "revision": 1
+    }
+  ]
+}

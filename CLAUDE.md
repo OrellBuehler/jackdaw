@@ -39,6 +39,7 @@ The spec in `format/` is a public contract. These change together, in one commit
 
 - Run `python3 format/validate.py --strict` and `./gradlew shared:allTests` after any change.
 - `validate.py` also checks that `format/README.md` embeds `examples/format-tour.jackdaw` verbatim and that `AUTHORING.md` embeds `prompt.txt` verbatim: edit both copies.
+- `format/examples/index.json` is the online pack list. The apps download it and the packs from `main` on request (URL and parsing in `shared/.../samples/Catalog.kt`; the HTTPS request itself is app code: `data/TextFetcher.kt`, `AddPack/RemoteText.swift`), so an example pack merged to `main` is live for every user at once. After adding or changing an example pack, bump its `revision` and run `python3 format/validate.py --write-index`; `validate.py` fails when the index is stale.
 - The `generateFormatResources` Gradle task compiles `format/examples/*.jackdaw`, `prompt.txt` and `test-vectors.json` into the shared module (sample library, authoring prompt, conformance tests). Never edit the generated files under `shared/build/`.
 - Additive changes keep `"version": 1`; anything breaking needs a new format version (spec section 14). Readers stay forgiving, writers strict.
 

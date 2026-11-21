@@ -16,6 +16,7 @@ struct PackInfo: Identifiable, Hashable, Sendable {
     let dueCount: Int
     let progress: Double
     let lastStudiedAt: Date?
+    let revision: Int
 }
 
 struct SectionInfo: Identifiable, Hashable, Sendable {
@@ -174,6 +175,8 @@ struct SamplePackInfo: Identifiable, Hashable, Sendable {
     let icon: String?
     let colorHex: String?
     let itemCount: Int
+    let revision: Int
+    let downloadURL: URL?
 }
 
 enum ImportIssueKind: Hashable, Sendable {
@@ -186,6 +189,7 @@ enum ImportIssueKind: Hashable, Sendable {
     case storage
     case unknownSample
     case unreadableFile
+    case downloadFailed
     case other
 }
 
@@ -203,6 +207,7 @@ struct ImportIssue: Hashable, Sendable {
         case .revisionDowngrade: L10n.tr("import.error.downgrade")
         case .storage: L10n.tr("import.error.storage")
         case .unreadableFile: L10n.tr("import.error.unreadable")
+        case .downloadFailed: L10n.tr("import.error.download")
         case .unknownSample, .other: message.isEmpty ? L10n.tr("import.error.generic") : message
         }
     }

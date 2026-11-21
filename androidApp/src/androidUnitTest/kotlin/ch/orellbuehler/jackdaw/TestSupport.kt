@@ -34,6 +34,7 @@ fun packSummary(
     new: Int = 0,
     lastStudiedAt: Long = 0,
     progress: Double = 0.0,
+    revision: Int = 0,
 ) = PackSummary(
     id = id,
     title = title,
@@ -52,6 +53,7 @@ fun packSummary(
     lastStudiedAt = lastStudiedAt,
     importedAt = 0,
     updatedAt = 0,
+    revision = revision,
 )
 
 fun packDetail(summary: PackSummary = packSummary()) =

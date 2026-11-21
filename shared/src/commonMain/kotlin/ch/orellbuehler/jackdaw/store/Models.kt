@@ -24,6 +24,7 @@ data class PackSummary(
     val lastStudiedAt: Long,
     val importedAt: Long,
     val updatedAt: Long,
+    val revision: Int,
 )
 
 data class SectionSummary(
@@ -144,6 +145,8 @@ data class SamplePack(
     val icon: String?,
     val color: String?,
     val itemCount: Int,
+    val revision: Int,
+    val downloadUrl: String?,
 )
 
 data class DayActivity(

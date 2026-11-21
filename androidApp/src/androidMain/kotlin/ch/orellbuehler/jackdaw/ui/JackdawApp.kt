@@ -69,6 +69,7 @@ import ch.orellbuehler.jackdaw.ui.addpack.AddPackScreen
 import ch.orellbuehler.jackdaw.ui.addpack.ImportEvent
 import ch.orellbuehler.jackdaw.ui.addpack.ImportSheetHost
 import ch.orellbuehler.jackdaw.ui.addpack.ImportViewModel
+import ch.orellbuehler.jackdaw.ui.addpack.messageRes
 import ch.orellbuehler.jackdaw.ui.components.LocalBottomBarInset
 import ch.orellbuehler.jackdaw.ui.library.LibraryScreen
 import ch.orellbuehler.jackdaw.ui.library.LibraryViewModel
@@ -172,7 +173,6 @@ private fun AppNavigation(
     val barInset = 80.dp + with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
 
     val openText = stringResource(R.string.action_open)
-    val importFailed = stringResource(R.string.import_error_title)
     LaunchedEffect(Unit) {
         importViewModel.events.collect { event ->
             when (event) {
@@ -200,7 +200,7 @@ private fun AppNavigation(
                         )
                     }
                 }
-                is ImportEvent.SampleFailed -> snackbar.showSnackbar(importFailed)
+                is ImportEvent.SampleFailed -> snackbar.showSnackbar(resources.getString(event.problem.messageRes()))
             }
         }
     }

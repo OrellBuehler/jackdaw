@@ -36,6 +36,8 @@ fun SampleRow(
     onAdd: () -> Unit,
     modifier: Modifier = Modifier,
     compact: Boolean = false,
+    updateAvailable: Boolean = false,
+    busy: Boolean = false,
 ) {
     val scheme = MaterialTheme.colorScheme
     val dark = MaterialTheme.isDark
@@ -59,7 +61,7 @@ fun SampleRow(
                     color = scheme.onSurfaceVariant,
                 )
             }
-            if (installed) {
+            if (installed && !updateAvailable) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                     Icon(Icons.Rounded.Check, null, Modifier.size(18.dp), tint = palette.accentOnContainer)
                     Text(
@@ -71,9 +73,10 @@ fun SampleRow(
             } else {
                 Button(
                     onClick = onAdd,
+                    enabled = !busy,
                     colors = ButtonDefaults.buttonColors(containerColor = palette.accent, contentColor = palette.onAccent),
                 ) {
-                    Text(stringResource(R.string.action_add), maxLines = 1)
+                    Text(stringResource(if (installed) R.string.sample_update else R.string.action_add), maxLines = 1)
                 }
             }
         }

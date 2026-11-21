@@ -17,6 +17,13 @@ struct AddPackRoute: Identifiable {
     var incomingURL: URL?
 }
 
+enum CatalogPhase: Sendable {
+    case idle
+    case loading
+    case loaded
+    case failed
+}
+
 struct ContinueTarget {
     let pack: PackInfo
     let count: Int
@@ -32,6 +39,8 @@ final class AppModel {
     private(set) var settings: SettingsInfo = .initial
     private(set) var settingsLoaded = false
     private(set) var samples: [SamplePackInfo] = []
+    private(set) var library: [SamplePackInfo] = []
+    private(set) var catalogPhase: CatalogPhase = .idle
 
     let sync = SyncModel()
 
@@ -86,6 +95,7 @@ final class AppModel {
         guard watchers.isEmpty else { return }
         let client = self.client
         samples = client.samplePacks()
+        library = samples
         let packsTask = Task {
             await client.watchPacks { [weak self] packs in
                 self?.applyPacks(packs)
@@ -161,7 +171,24 @@ final class AppModel {
     }
 
     func importSample(_ sample: SamplePackInfo) async -> ImportOutcome {
-        await client.importSample(id: sample.id)
+        guard let url = sample.downloadURL else {
+            return await client.importSample(id: sample.id)
+        }
+        guard let text = await RemoteText.fetch(url) else {
+            return .failure(ImportIssue(kind: .downloadFailed, message: ""))
+        }
+        return await client.importPack(text: text, allowDowngrade: false)
+    }
+
+    func loadCatalog() async {
+        guard catalogPhase != .loading, let url = client.catalogURL() else { return }
+        catalogPhase = .loading
+        guard let text = await RemoteText.fetch(url), let packs = client.readCatalog(text: text) else {
+            catalogPhase = .failed
+            return
+        }
+        library = packs
+        catalogPhase = .loaded
     }
 
     func authoringPrompt() -> String {

@@ -34,6 +34,7 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.CloudDownload
 import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.ContentPaste
 import androidx.compose.material.icons.rounded.FolderOpen
@@ -41,6 +42,7 @@ import androidx.compose.material.icons.rounded.LibraryAdd
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -284,7 +286,10 @@ private fun readClipboardText(context: Context): String? {
 
 @Composable
 private fun SamplesPage(importViewModel: ImportViewModel) {
-    val installed by importViewModel.installedIds.collectAsStateWithLifecycle()
+    val installed by importViewModel.installedRevisions.collectAsStateWithLifecycle()
+    val library by importViewModel.library.collectAsStateWithLifecycle()
+    val catalog by importViewModel.catalog.collectAsStateWithLifecycle()
+    val adding by importViewModel.adding.collectAsStateWithLifecycle()
     Column(
         Modifier
             .fillMaxSize()
@@ -295,9 +300,16 @@ private fun SamplesPage(importViewModel: ImportViewModel) {
             .padding(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        importViewModel.samples.forEach { sample ->
+        library.forEach { sample ->
+            val installedRevision = installed[sample.id]
             Column(Modifier.animateContentSize()) {
-                SampleRow(sample, installed = sample.id in installed, onAdd = { importViewModel.addSample(sample.id) })
+                SampleRow(
+                    sample,
+                    installed = installedRevision != null,
+                    onAdd = { importViewModel.addSample(sample.id) },
+                    updateAvailable = installedRevision != null && sample.revision > installedRevision,
+                    busy = sample.id in adding,
+                )
                 Text(
                     sample.descriptionText,
                     style = MaterialTheme.typography.bodySmall,
@@ -307,6 +319,42 @@ private fun SamplesPage(importViewModel: ImportViewModel) {
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                 )
             }
+        }
+        OnlineCatalogCard(catalog, onLoad = importViewModel::loadCatalog)
+    }
+}
+
+@Composable
+private fun OnlineCatalogCard(
+    state: CatalogState,
+    onLoad: () -> Unit,
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(20.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+            .padding(16.dp)
+            .animateContentSize(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Text(stringResource(R.string.online_title), style = MaterialTheme.typography.titleSmall)
+        val body =
+            when (state) {
+                CatalogState.Idle, CatalogState.Loading -> R.string.online_body
+                CatalogState.Loaded -> R.string.online_loaded
+                CatalogState.Failed -> R.string.online_failed
+            }
+        Text(stringResource(body), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        when (state) {
+            CatalogState.Loading -> CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 3.dp)
+            CatalogState.Loaded -> Unit
+            CatalogState.Idle, CatalogState.Failed ->
+                Button(onClick = onLoad) {
+                    Icon(Icons.Rounded.CloudDownload, null, Modifier.size(18.dp))
+                    Spacer8()
+                    Text(stringResource(if (state == CatalogState.Failed) R.string.online_retry else R.string.online_load), maxLines = 1)
+                }
         }
     }
 }

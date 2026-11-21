@@ -56,6 +56,14 @@ final class SDKClient: @unchecked Sendable {
         sdk.samplePacks().map { Mapping.sample($0) }
     }
 
+    func catalogURL() -> URL? {
+        URL(string: sdk.catalogUrl())
+    }
+
+    func readCatalog(text: String) -> [SamplePackInfo]? {
+        sdk.readCatalog(text: text)?.map { Mapping.sample($0) }
+    }
+
     func authoringPrompt() -> String {
         sdk.authoringPrompt()
     }
