@@ -6,6 +6,8 @@
 
 <p align="center">Learn any dataset. Local-first, with an open pack format that people, scripts and chatbots can write.</p>
 
+<p align="center"><a href="https://orellbuehler.github.io/jackdaw/">Website</a> · <a href="https://orellbuehler.github.io/jackdaw/privacy.html">Privacy</a> · <a href="https://orellbuehler.github.io/jackdaw/support.html">Support</a></p>
+
 Jackdaw is a spaced-repetition learning app for Android and iOS. You learn from **packs**: single JSON files that hold anything you can ask a question about, such as vocabulary, history facts, exam questions or interview preparation. Packs have an [open, documented format](format/README.md), so a chatbot can write one for you in a minute.
 
 Your data stays on your devices: no account of ours, no analytics, no servers, no network code in the shared core (the Android app does not even request the internet permission). The iOS app can sync through **your own private iCloud** (CloudKit private database, on by default, switch in Settings): packs, review history and the goal settings are then also stored there and shown on all your Apple devices. Only the owner of the iCloud account can read them, and nothing is ever sent anywhere else. Android is local-only.
@@ -146,7 +148,7 @@ The iOS jobs run on GitHub's `xcode-27` image with the Xcode 27.0 GM pinned and 
 
 ## Release
 
-Publishing a GitHub release (tag such as `v1.0.0`) runs `release.yml`. It can also be started by hand from the Actions tab (inputs: `version`, and `platforms` = both, android or ios, to retry one platform on its own). The version must look like `1.2.3` or `v1.2.3`.
+Every store build belongs to a [GitHub release](https://github.com/OrellBuehler/jackdaw/releases): publishing a release (tag such as `v1.0.0`) runs `release.yml`, and the tag is the version in both stores. Starting the workflow by hand from the Actions tab (inputs: `version`, and `platforms` = both, android or ios) only retries a platform of a release that already exists; it fails for a version without a published release. The version must look like `1.2.3` or `v1.2.3`.
 
 - **Versions**: the tag without `v` is the Android `versionName` and the iOS `MARKETING_VERSION`. The workflow run number is the iOS build number and is folded into the Android `versionCode` (`(major*10000 + minor*100 + patch) * 1000 + run number`), so re-runs always increase.
 - **Android job**: builds a signed AAB and APK, uploads both as workflow artifacts, attaches them to the GitHub release as `jackdaw-<version>.apk` and `.aab`, and uploads the AAB to the Google Play internal testing track when `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON` is set.

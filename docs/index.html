@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jackdaw: Learn & Remember</title>
+    <meta name="description" content="Jackdaw is a spaced-repetition learning app for iPhone and Android. Learn anything from open pack files, with no account and no tracking.">
+    <meta property="og:title" content="Jackdaw: Learn & Remember">
+    <meta property="og:description" content="Learn anything with spaced repetition. Open pack format, no account, no tracking.">
+    <meta name="theme-color" content="#5B47E0">
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+    <header class="site">
+        <a class="brand" href="./"><img src="assets/icon.svg" alt="">Jackdaw</a>
+        <nav class="site" aria-label="Main">
+            <a href="#features">Features</a>
+            <a href="#packs">Packs</a>
+            <a href="#privacy">Privacy</a>
+            <a href="support.html">Support</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero">
+            <div class="hero-copy">
+                <span class="pill">Coming soon to the App Store</span>
+                <h1>Learn anything.<br><em>Keep it.</em></h1>
+                <p class="lead">Jackdaw asks you the right question at the right moment, so what you learn today is still there next month. Vocabulary, history, exam questions, interview preparation: anything you can ask a question about.</p>
+                <div class="cta">
+                    <a class="button" href="#features">See how it works</a>
+                    <a class="button ghost" href="https://github.com/OrellBuehler/jackdaw">Source on GitHub</a>
+                </div>
+            </div>
+            <div class="phones" aria-hidden="true">
+                <div class="phone"><img src="assets/library.webp" width="603" height="1311" alt=""></div>
+                <div class="phone"><img src="assets/question.webp" width="603" height="1311" alt=""></div>
+            </div>
+        </div>
+
+        <section id="features">
+            <div class="section-head">
+                <span class="eyebrow">Features</span>
+                <h2>Short sessions that add up</h2>
+                <p class="lead">Ten minutes a day is enough. Jackdaw works out what is due, mixes in a few new items and tells you when you are done.</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg></div>
+                    <h3>Spaced repetition</h3>
+                    <p>Every answer moves an item's next review. Easy things come back rarely, hard things come back soon.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h6"/></svg></div>
+                    <h3>Seven ways to be asked</h3>
+                    <p>Flashcards, multiple choice, typed answers, fill the gaps, true or false, ordering and open questions with a key point checklist.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3c1 3 4 4.500 4 8a4 4 0 0 1-8 0c0-1.500.500-2.500 1.500-3.500C9.500 10 12 9 12 3z"/><path d="M6 14a6 6 0 0 0 12 0"/></svg></div>
+                    <h3>Goals and streaks</h3>
+                    <p>Set a daily goal, keep your streak and watch accuracy and mastered items grow in the stats.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg></div>
+                    <h3>Practice without pressure</h3>
+                    <p>Drill a whole pack as a quiz, by typing or all mixed. Practice never changes your schedule.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M7 18a4.500 4.500 0 0 1-.500-9A6 6 0 0 1 18 10.500 3.800 3.800 0 0 1 17.500 18z"/></svg></div>
+                    <h3>iCloud sync</h3>
+                    <p>On iPhone, your packs and progress follow you to every device on your iCloud account. Reviews made offline are merged, not overwritten.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.500 3 2.500 15 0 18M12 3c-2.500 3-2.500 15 0 18"/></svg></div>
+                    <h3>English and German</h3>
+                    <p>The app speaks both, in light and dark. Your packs can be in any language you like.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div class="shots" aria-label="Screenshots">
+    <div class="phone"><img src="assets/pack.webp" width="603" height="1311" loading="lazy" alt="A pack with its progress and practice modes"></div>
+    <div class="phone"><img src="assets/question.webp" width="603" height="1311" loading="lazy" alt="A multiple choice question answered correctly"></div>
+    <div class="phone"><img src="assets/stats.webp" width="603" height="1311" loading="lazy" alt="Stats with streak, daily goal and accuracy"></div>
+    <div class="phone"><img src="assets/add-pack.webp" width="603" height="1311" loading="lazy" alt="Adding a pack from a file, the clipboard, the sample library or a chatbot"></div>
+</div>
+
+<div class="wrap">
+    <section id="packs">
+        <div class="split">
+            <div class="copy">
+                <span class="eyebrow">Open pack format</span>
+                <h2>Your content, in a file you own</h2>
+                <p>A pack is one plain JSON file. The format is open and documented, so anyone can write one: you, a script, or a chatbot.</p>
+                <ol class="steps">
+                    <li><span>Tap <strong>Create with AI</strong> and copy the ready-made prompt.</span></li>
+                    <li><span>Tell any chatbot what you want to learn.</span></li>
+                    <li><span>Paste the answer back. Jackdaw checks it and shows what will be added.</span></li>
+                </ol>
+                <p>Or start with the bundled sample library and add packs with one tap.</p>
+                <a class="button ghost" href="https://github.com/OrellBuehler/jackdaw/blob/main/format/README.md">Read the format spec</a>
+            </div>
+<pre class="code"><code>{
+  <span class="k">"format"</span>: <span class="s">"jackdaw-pack"</span>,
+  <span class="k">"version"</span>: 1,
+  <span class="k">"id"</span>: <span class="s">"portuguese-travel"</span>,
+  <span class="k">"title"</span>: <span class="s">"Portuguese for travel"</span>,
+  <span class="k">"items"</span>: [
+    {
+      <span class="k">"id"</span>: <span class="s">"thanks"</span>,
+      <span class="k">"type"</span>: <span class="s">"card"</span>,
+      <span class="k">"front"</span>: <span class="s">"thank you"</span>,
+      <span class="k">"back"</span>: <span class="s">"obrigado / obrigada"</span>
+    }
+  ]
+}</code></pre>
+        </div>
+    </section>
+
+    <section id="privacy">
+        <div class="band">
+            <div>
+                <h2>Nobody is watching you learn</h2>
+                <p>Jackdaw has no servers. There is nothing to sign up for and nothing that reports back.</p>
+                <ul>
+                    <li>No account, no ads, no analytics</li>
+                    <li>Everything is stored on your device</li>
+                    <li>Sync goes to your own private iCloud, which only you can read</li>
+                    <li>Open source, so you can check</li>
+                </ul>
+                <p><a href="privacy.html">Read the privacy policy</a></p>
+            </div>
+            <img src="assets/symbol.svg" width="200" height="200" alt="The Jackdaw mascot peeking over a card">
+        </div>
+    </section>
+
+    <footer class="site">
+        <span>© 2026 Orell Bühler</span>
+        <nav aria-label="Footer">
+            <a href="privacy.html">Privacy</a>
+            <a href="support.html">Support</a>
+            <a href="https://github.com/OrellBuehler/jackdaw">GitHub</a>
+        </nav>
+    </footer>
+</div>
+</body>
+</html>

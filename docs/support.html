@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Support · Jackdaw</title>
+    <meta name="description" content="Help for Jackdaw: adding packs, iCloud sync, and how to report a problem.">
+    <meta name="theme-color" content="#5B47E0">
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap narrow">
+    <header class="site">
+        <a class="brand" href="./"><img src="assets/icon.svg" alt="">Jackdaw</a>
+        <nav class="site" aria-label="Main">
+            <a href="./">Home</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="support.html" aria-current="page">Support</a>
+        </nav>
+    </header>
+
+    <main class="doc">
+        <h1>Support</h1>
+        <p class="meta">Answers to common questions, and how to reach the developer.</p>
+
+        <div class="summary">
+            <p><strong>Found a bug or have a question?</strong> Open an issue at <a href="https://github.com/OrellBuehler/jackdaw/issues">github.com/OrellBuehler/jackdaw/issues</a>. Please say which device and app version you use (the version is shown in Settings) and what you did before the problem appeared.</p>
+        </div>
+
+        <h2>Adding content</h2>
+        <details>
+            <summary>How do I add something to learn?</summary>
+            <p>In the Library, tap the plus button. You can open a <code>.jackdaw</code> or JSON file, paste the contents of a pack from the clipboard, pick a ready-made pack from the sample library, or use Create with AI.</p>
+        </details>
+        <details>
+            <summary>How does Create with AI work?</summary>
+            <p>Jackdaw copies a prompt that explains the pack format. Paste it into any chatbot, say what you want to learn, and paste the chatbot's answer back into Jackdaw. The import preview shows what will be added and lists any problems. Jackdaw itself does not contact the chatbot.</p>
+        </details>
+        <details>
+            <summary>The import shows an error or notices. What now?</summary>
+            <p>An error means the file could not be imported, for example because it is not valid JSON or has no usable items; the message says why. Notices are only information: the pack is imported, but something was skipped, such as items of a type this version does not know. If a chatbot wrote the pack, paste the messages back to it and ask it to fix them. The format is described in the <a href="https://github.com/OrellBuehler/jackdaw/blob/main/format/README.md">format specification</a> and the <a href="https://github.com/OrellBuehler/jackdaw/blob/main/format/AUTHORING.md">authoring guide</a>.</p>
+        </details>
+        <details>
+            <summary>I got a newer version of a pack. Do I lose my progress?</summary>
+            <p>No. Import the new file: progress is kept for every item that still exists in the new version.</p>
+        </details>
+
+        <h2>Learning</h2>
+        <details>
+            <summary>What is the difference between Learn and Practice?</summary>
+            <p>Learn asks what is due today and introduces new items; your answers decide when each item comes back. Practice lets you drill any items as often as you like and never changes the schedule.</p>
+        </details>
+        <details>
+            <summary>How do the daily goal and the streak work?</summary>
+            <p>The daily goal is the number of reviews that make a successful day. Each day you reach it extends your streak. You can change the goal and the session size in Settings.</p>
+        </details>
+
+        <h2>iCloud sync (iPhone)</h2>
+        <details>
+            <summary>How do I sync between my devices?</summary>
+            <p>Sign in to the same iCloud account on each device and keep "Sync with iCloud" switched on in Jackdaw's Settings. Packs, review history, the daily goal and the session size are synced. The theme stays per device.</p>
+        </details>
+        <details>
+            <summary>Sync is not working.</summary>
+            <p>Open Settings in Jackdaw and read the status under iCloud sync; it says what is wrong. The usual causes: you are not signed in to iCloud, Jackdaw is not allowed to use iCloud (Settings app, your name, iCloud), your iCloud storage is full, or the device is offline. "Sync now" starts a new attempt.</p>
+        </details>
+        <details>
+            <summary>How do I delete my data?</summary>
+            <p>Deleting the app removes everything from that device. To also remove the synced copy, open the Settings app, tap your name, then iCloud, then Manage Storage, choose Jackdaw and delete its data.</p>
+        </details>
+        <details>
+            <summary>Is there sync on Android?</summary>
+            <p>No. The Android app is local-only and has no internet permission.</p>
+        </details>
+
+        <h2>Still stuck?</h2>
+        <p>Open an issue on <a href="https://github.com/OrellBuehler/jackdaw/issues">GitHub</a>. Jackdaw is open source, so you can also read how it works in the <a href="https://github.com/OrellBuehler/jackdaw">repository</a>.</p>
+    </main>
+
+    <footer class="site">
+        <span>© 2026 Orell Bühler</span>
+        <nav aria-label="Footer">
+            <a href="./">Home</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="https://github.com/OrellBuehler/jackdaw">GitHub</a>
+        </nav>
+    </footer>
+</div>
+</body>
+</html>
