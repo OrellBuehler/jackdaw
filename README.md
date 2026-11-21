@@ -1,27 +1,94 @@
-<p align="center">
-  <img src="brand/app-icon.svg" width="96" height="96" alt="Jackdaw logo">
-</p>
+<div align="center">
 
-<h1 align="center">Jackdaw</h1>
+<img src="brand/app-icon.svg" alt="Jackdaw app icon" width="112" height="112">
 
-<p align="center">Learn any dataset. Local-first, with an open pack format that people, scripts and chatbots can write.</p>
+# Jackdaw
 
-<p align="center"><a href="https://orellbuehler.github.io/jackdaw/">Website</a> · <a href="https://orellbuehler.github.io/jackdaw/privacy.html">Privacy</a> · <a href="https://orellbuehler.github.io/jackdaw/support.html">Support</a></p>
+### Learn anything. Keep it.
 
-Jackdaw is a spaced-repetition learning app for Android and iOS. You learn from **packs**: single JSON files that hold anything you can ask a question about, such as vocabulary, history facts, exam questions or interview preparation. Packs have an [open, documented format](format/README.md), so a chatbot can write one for you in a minute.
+A spaced-repetition learning app for **iPhone and Android**: local-first, no account, and an
+open pack format that people, scripts and chatbots can write.
 
-Your data stays on your devices: no account of ours, no analytics, no servers, no network code in the shared core (the Android app does not even request the internet permission). The iOS app can sync through **your own private iCloud** (CloudKit private database, on by default, switch in Settings): packs, review history and the goal settings are then also stored there and shown on all your Apple devices. Only the owner of the iCloud account can read them, and nothing is ever sent anywhere else. Android is local-only.
+**[Website](https://orellbuehler.github.io/jackdaw/) · [Pack format](format/README.md) · [Privacy](https://orellbuehler.github.io/jackdaw/privacy.html) · [Support](https://orellbuehler.github.io/jackdaw/support.html)**
+
+[![Release](https://img.shields.io/github/v/release/OrellBuehler/jackdaw?style=flat-square&color=3b82f6)](https://github.com/OrellBuehler/jackdaw/releases)
+[![Android CI](https://img.shields.io/github/actions/workflow/status/OrellBuehler/jackdaw/android.yml?branch=main&style=flat-square&label=android)](https://github.com/OrellBuehler/jackdaw/actions/workflows/android.yml)
+[![iOS CI](https://img.shields.io/github/actions/workflow/status/OrellBuehler/jackdaw/ios.yml?branch=main&style=flat-square&label=ios)](https://github.com/OrellBuehler/jackdaw/actions/workflows/ios.yml)
+[![iOS](https://img.shields.io/badge/iOS-18%2B-000000?style=flat-square&logo=apple&logoColor=white)](#try-it)
+[![Android](https://img.shields.io/badge/Android-8.0%2B-3ddc84?style=flat-square&logo=android&logoColor=white)](#try-it)
+[![Pack format](https://img.shields.io/badge/pack%20format-v1-8b5cf6?style=flat-square)](format/README.md)
+
+<br>
+
+<img src="docs/assets/library.webp" alt="Library with imported packs" width="190">&nbsp;
+<img src="docs/assets/question.webp" alt="A question in a study session" width="190">&nbsp;
+<img src="docs/assets/add-pack.webp" alt="Adding a pack" width="190">&nbsp;
+<img src="docs/assets/stats.webp" alt="Stats with daily goal and streak" width="190">
+
+</div>
+
+---
+
+## Try it
+
+|                |                                                                                                                        |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| 🍎 **iPhone**  | **App Store**: version 1.0.0 is in review, the link follows here once it is published                                  |
+| 🤖 **Android** | Not in a store yet: [build the debug APK](#android) from source                                                        |
+| 📦 **Packs**   | Start with the [sample packs](format/examples/), or let a chatbot [write one for you](#create-a-pack-with-any-chatbot) |
+
+Free, no ads, no account, no analytics, no servers of ours.
+
+## What makes it different
+
+**Packs are an open format.** A pack is one JSON file with a [documented specification](format/README.md), a JSON Schema, a validator and test vectors. It holds anything you can ask a question about: vocabulary, history facts, exam questions, interview preparation.
+
+**Any chatbot can write one.** "Create with AI" copies a ready-made prompt. Paste it into a chatbot, paste the answer back, and the import preview shows what will be added and what was skipped.
+
+**Your data stays yours.** There is no network code in the shared core, and the Android app does not even request the internet permission. The iOS app can sync through **your own private iCloud** (CloudKit private database, on by default, switch in Settings), which only the owner of the iCloud account can read. Nothing is ever sent anywhere else.
+
+**Offline devices merge, they do not overwrite.** Sync carries the review history, and schedules are rebuilt from it, so two devices that studied offline lose nothing ([how it works](shared/README.md#sync)).
+
+**Actually native.** One Kotlin Multiplatform core, with Jetpack Compose on Android and SwiftUI on iPhone.
 
 ## Features
 
-- **Seven item types**: flashcards (one or both directions), multiple choice, short typed answers, cloze (fill the gaps), true/false, ordering and open questions with a self-graded key point checklist.
-- **Spaced repetition**: an SM-2 family scheduler tracks every card direction separately. Learn mode asks what is due and introduces new items; practice mode drills any items (mixed, flashcards, quiz or typing) without changing the schedule.
-- **Stats**: daily goal, streak, accuracy and an activity history.
-- **Easy to add content**: open a `.jackdaw` file (also from Files, Mail or a chat), paste text, pick from the bundled sample library, or use "Create with AI" to copy a ready-made chatbot prompt.
-- **Pack updates keep your progress**: importing a newer revision of a pack keeps the progress on items that still exist ([spec section 4.2](format/README.md#42-updating-a-pack)).
-- **iCloud sync on iOS**: the same packs, progress and goals on every device signed in to the same iCloud account. Two devices that study offline merge their reviews instead of overwriting each other ([how it works](shared/README.md#sync)).
-- **English and German**, light and dark theme.
-- **One core, two native UIs**: all logic lives in a Kotlin Multiplatform module; the apps are Jetpack Compose (Android) and SwiftUI (iOS).
+|                      |                                                                                                                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Seven item types** | Flashcards (one or both directions), multiple choice, short typed answers, cloze (fill the gaps), true/false, ordering and open questions with a self-graded key point checklist |
+| **Learn**            | An SM-2 family scheduler tracks every card direction separately, asks what is due and introduces new items                                                                       |
+| **Practice**         | Drill any items (mixed, flashcards, quiz or typing) without changing the schedule                                                                                                |
+| **Stats**            | Daily goal, streak, accuracy and an activity history                                                                                                                             |
+| **Add content**      | Open a `.jackdaw` file (also from Files, Mail or a chat), paste text, pick from the bundled sample library, or use "Create with AI"                                              |
+| **Pack updates**     | Importing a newer revision of a pack keeps the progress on items that still exist ([spec section 4.2](format/README.md#42-updating-a-pack))                                      |
+| **Sync**             | iOS: the same packs, progress and goals on every device signed in to the same iCloud account. Android is local-only                                                              |
+| **Languages**        | English and German, light and dark theme                                                                                                                                         |
+
+## How it fits together
+
+```mermaid
+flowchart LR
+    P["Packs<br/>.jackdaw JSON files"]
+    C[("Your private iCloud<br/>CloudKit, optional")]
+
+    subgraph shared["shared (Kotlin Multiplatform)"]
+        direction TB
+        R["Pack reader"]
+        S["Scheduler and study sessions"]
+        D[("SQLDelight storage")]
+        R --> S --> D
+    end
+
+    A["Android app<br/>Jetpack Compose"]
+    I["iOS app<br/>SwiftUI"]
+
+    P --> R
+    shared --> A
+    shared --> I
+    I <--> C
+```
+
+All logic lives in `shared/`; the apps only render state and forward input.
 
 ## The pack format
 
@@ -175,6 +242,6 @@ One-time iOS setup: register the App ID `ch.orellbuehler.jackdaw`, create the ap
 
 ## Status
 
-MVP. The shared core and the Android app are built and tested in CI. The iOS app has not been compiled yet: the `ios.yml` run is the first compile gate, so expect build fixes on the first run.
+Version 1.0.0. The iOS app is in App Store review. The Android app is built and tested in CI; signed Android builds are not published yet.
 
 No licence has been chosen yet, so nothing in this repository is licensed for reuse for now.
