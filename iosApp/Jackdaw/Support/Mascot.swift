@@ -1,37 +1,22 @@
 import SwiftUI
 
-struct JackdawBill: Shape {
+struct JackdawHead: Shape {
     func path(in rect: CGRect) -> Path {
         let scale = min(rect.width, rect.height) / 256
-        let originX = rect.midX - 128 * scale
-        let originY = rect.midY - 128 * scale
-        func point(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
-            CGPoint(x: originX + x * scale, y: originY + y * scale)
-        }
-        var path = Path()
-        path.move(to: point(150, 88))
-        path.addCurve(to: point(240, 134), control1: point(198, 88), control2: point(228, 110))
-        path.addCurve(to: point(150, 168), control1: point(226, 158), control2: point(196, 168))
-        path.closeSubpath()
-        return path
+        return Path(ellipseIn: CGRect(x: rect.minX + 44 * scale, y: rect.minY + 62 * scale, width: 168 * scale, height: 168 * scale))
     }
 }
 
-struct JackdawNape: Shape {
+struct JackdawBeak: Shape {
     func path(in rect: CGRect) -> Path {
         let scale = min(rect.width, rect.height) / 256
-        let originX = rect.midX - 128 * scale
-        let originY = rect.midY - 128 * scale
         func point(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
-            CGPoint(x: originX + x * scale, y: originY + y * scale)
+            CGPoint(x: rect.minX + x * scale, y: rect.minY + y * scale)
         }
         var path = Path()
-        path.move(to: point(74.4, 65.7))
-        for degrees in stride(from: 235.0, through: 125.0, by: -5.0) {
-            let angle = degrees * .pi / 180
-            path.addLine(to: point(118 + 76 * CGFloat(cos(angle)), 128 + 76 * CGFloat(sin(angle))))
-        }
-        path.addQuadCurve(to: point(74.4, 65.7), control: point(104, 128))
+        path.move(to: point(112, 156))
+        path.addLine(to: point(144, 154))
+        path.addLine(to: point(129, 186))
         path.closeSubpath()
         return path
     }
@@ -58,21 +43,22 @@ struct Mascot: View {
 
     var body: some View {
         let s = size / 256
+        let lift: CGFloat = lifted ? -12 * s : 0
         ZStack(alignment: .topLeading) {
-            JackdawBill()
-                .fill(Brand.amber)
+            Brand.violet
                 .frame(width: size, height: size)
-            Circle()
-                .fill(Brand.violet)
-                .frame(width: 152 * s, height: 152 * s)
-                .offset(x: 42 * s, y: 52 * s)
-            JackdawNape()
-                .fill(Color(hex: 0xC9C4EC))
-                .frame(width: size, height: size)
-            eye(scale: s)
+            head(scale: s)
+                .offset(y: lift)
+            RoundedRectangle(cornerRadius: 26 * s, style: .continuous)
+                .fill(Color(hex: 0xF6F3FF))
+                .frame(width: 212 * s, height: 170 * s)
+                .rotationEffect(.degrees(-5))
+                .offset(x: 22 * s, y: 172 * s)
+            beak(scale: s)
+                .offset(y: lift)
         }
         .frame(width: size, height: size, alignment: .topLeading)
-        .offset(x: -13 * s, y: lifted ? -size * 0.04 : 0)
+        .clipShape(Circle())
         .animation(
             animated && !reduceMotion ? Animation.easeInOut(duration: 1.1).repeatForever(autoreverses: true) : nil,
             value: lifted
@@ -83,22 +69,60 @@ struct Mascot: View {
         .accessibilityHidden(true)
     }
 
+    private func head(scale s: CGFloat) -> some View {
+        ZStack(alignment: .topLeading) {
+            JackdawHead()
+                .fill(Brand.ink)
+                .frame(width: size, height: size)
+            nape(scale: s)
+            eye(centerX: 99, scale: s)
+            eye(centerX: 157, scale: s)
+        }
+        .frame(width: size, height: size, alignment: .topLeading)
+    }
+
+    private func nape(scale s: CGFloat) -> some View {
+        let lilac = Color(hex: 0xC9C4EC)
+        return ZStack(alignment: .topLeading) {
+            Circle()
+                .fill(lilac)
+                .frame(width: 140 * s, height: 140 * s)
+                .offset(x: -48 * s, y: 96 * s)
+            Circle()
+                .fill(lilac)
+                .frame(width: 140 * s, height: 140 * s)
+                .offset(x: 164 * s, y: 96 * s)
+        }
+        .frame(width: size, height: size, alignment: .topLeading)
+        .clipShape(JackdawHead())
+    }
+
+    private func beak(scale s: CGFloat) -> some View {
+        ZStack {
+            JackdawBeak()
+                .fill(Brand.amber)
+            JackdawBeak()
+                .stroke(Brand.amber, style: StrokeStyle(lineWidth: 10 * s, lineJoin: .round))
+        }
+        .frame(width: size, height: size)
+    }
+
     @ViewBuilder
-    private func eye(scale s: CGFloat) -> some View {
+    private func eye(centerX x: CGFloat, scale s: CGFloat) -> some View {
         if happy {
             HappyEye()
-                .stroke(Brand.cream, style: StrokeStyle(lineWidth: 8 * s, lineCap: .round))
-                .frame(width: 30 * s, height: 14 * s)
-                .offset(x: 127 * s, y: 100 * s)
+                .stroke(Brand.cream, style: StrokeStyle(lineWidth: 10 * s, lineCap: .round))
+                .frame(width: 40 * s, height: 18 * s)
+                .offset(x: (x - 20) * s, y: 112 * s)
         } else {
             Circle()
                 .fill(Brand.cream)
-                .frame(width: 32 * s, height: 32 * s)
-                .offset(x: 126 * s, y: 96 * s)
+                .frame(width: 50 * s, height: 50 * s)
+                .offset(x: (x - 25) * s, y: 101 * s)
             Circle()
                 .fill(Brand.ink)
-                .frame(width: 14 * s, height: 14 * s)
-                .offset(x: 138 * s, y: 105 * s)
+                .frame(width: 22 * s, height: 22 * s)
+                .offset(x: (x - 7) * s, y: 112 * s)
         }
     }
 }

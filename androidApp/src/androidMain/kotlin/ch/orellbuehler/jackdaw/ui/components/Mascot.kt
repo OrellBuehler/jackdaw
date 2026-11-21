@@ -12,11 +12,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.PathParser
@@ -34,9 +40,9 @@ enum class MascotMood {
     Sleepy,
 }
 
-private const val BILL = "M150 88C198 88 228 110 240 134C226 158 196 168 150 168Z"
-private const val NAPE = "M74.4 65.7A76 76 0 0 0 74.4 190.3Q104 128 74.4 65.7Z"
 private val NapeColor = Color(0xFFC9C4EC)
+private val CardColor = Color(0xFFF6F3FF)
+private const val BEAK = "M112 156L144 154L129 186Z"
 
 @Composable
 fun Mascot(
@@ -47,8 +53,7 @@ fun Mascot(
     animated: Boolean = true,
 ) {
     val animate = animated && !rememberReduceMotion()
-    val bill = remember { PathParser().parsePathString(BILL).toPath() }
-    val nape = remember { PathParser().parsePathString(NAPE).toPath() }
+    val beak = remember { PathParser().parsePathString(BEAK).toPath() }
     val transition = rememberInfiniteTransition(label = "mascot")
     val blink =
         if (animate && mood == MascotMood.Idle) {
@@ -83,42 +88,59 @@ fun Mascot(
                     label = "bob",
                 ).value
         } else {
-            0f
+            0.5f
         }
     Canvas(modifier.size(size).clearAndSetSemantics { }) {
         val unit = this.size.minDimension / 256f
-        translate(left = -13f * unit, top = (bob - 0.5f) * 8f * unit) {
-            fun p(
-                x: Float,
-                y: Float,
-            ) = Offset(x * unit, y * unit)
-            scale(unit, pivot = Offset.Zero) { drawPath(bill, Amber) }
-            drawCircle(bodyColor, radius = 76f * unit, center = p(118f, 128f))
-            scale(unit, pivot = Offset.Zero) { drawPath(nape, NapeColor) }
-            when (mood) {
-                MascotMood.Happy ->
-                    drawArc(
-                        Cream,
-                        startAngle = 200f,
-                        sweepAngle = 140f,
-                        useCenter = false,
-                        topLeft = p(142f - 15f, 112f - 6f),
-                        size = Size(30f * unit, 30f * unit),
-                        style = Stroke(width = 8f * unit, cap = StrokeCap.Round),
-                    )
-                MascotMood.Sleepy ->
-                    drawLine(Cream, p(142f - 15f, 114f), p(142f + 15f, 114f), strokeWidth = 8f * unit, cap = StrokeCap.Round)
-                MascotMood.Idle -> {
-                    drawOval(
-                        Cream,
-                        topLeft = p(142f - 16f, 112f - 16f * blink),
-                        size = Size(32f * unit, 32f * unit * blink),
-                    )
-                    drawOval(
-                        Ink,
-                        topLeft = p(145f - 7f, 112f - 7f * blink),
-                        size = Size(14f * unit, 14f * unit * blink),
-                    )
+
+        fun p(
+            x: Float,
+            y: Float,
+        ) = Offset(x * unit, y * unit)
+        val badge = Path().apply { addOval(Rect(Offset.Zero, Size(256f * unit, 256f * unit))) }
+        val head = Path().apply { addOval(Rect(p(44f, 62f), Size(168f * unit, 168f * unit))) }
+        val lift = (0.5f - bob) * 12f * unit
+        clipPath(badge) {
+            drawRect(bodyColor)
+            translate(top = lift) {
+                drawPath(head, Ink)
+                clipPath(head) {
+                    drawCircle(NapeColor, radius = 70f * unit, center = p(22f, 166f))
+                    drawCircle(NapeColor, radius = 70f * unit, center = p(234f, 166f))
+                }
+                for (x in listOf(99f, 157f)) {
+                    when (mood) {
+                        MascotMood.Happy ->
+                            drawArc(
+                                Cream,
+                                startAngle = 200f,
+                                sweepAngle = 140f,
+                                useCenter = false,
+                                topLeft = p(x - 20f, 118f),
+                                size = Size(40f * unit, 40f * unit),
+                                style = Stroke(width = 10f * unit, cap = StrokeCap.Round),
+                            )
+                        MascotMood.Sleepy ->
+                            drawLine(Cream, p(x - 20f, 130f), p(x + 20f, 130f), strokeWidth = 10f * unit, cap = StrokeCap.Round)
+                        MascotMood.Idle -> {
+                            drawOval(Cream, topLeft = p(x - 25f, 126f - 25f * blink), size = Size(50f * unit, 50f * unit * blink))
+                            drawOval(Ink, topLeft = p(x + 4f - 11f, 123f - 11f * blink), size = Size(22f * unit, 22f * unit * blink))
+                        }
+                    }
+                }
+            }
+            rotate(degrees = -5f, pivot = p(128f, 257f)) {
+                drawRoundRect(
+                    CardColor,
+                    topLeft = p(22f, 172f),
+                    size = Size(212f * unit, 170f * unit),
+                    cornerRadius = CornerRadius(26f * unit),
+                )
+            }
+            translate(top = lift) {
+                scale(unit, pivot = Offset.Zero) {
+                    drawPath(beak, Amber)
+                    drawPath(beak, Amber, style = Stroke(width = 10f, join = StrokeJoin.Round))
                 }
             }
         }
