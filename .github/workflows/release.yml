@@ -40,7 +40,33 @@ concurrency:
 permissions: {}
 
 jobs:
+  # Store builds always belong to a GitHub release. Publishing a release starts
+  # this workflow; a dispatch only retries a platform of an existing release.
+  release-exists:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Require a GitHub release for a dispatched version
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          VERSION="${INPUT_VERSION#v}"
+          for candidate in "$INPUT_VERSION" "v$VERSION" "$VERSION"; do
+            if gh release view "$candidate" > /dev/null 2>&1; then
+              echo "Found release $candidate."
+              exit 0
+            fi
+          done
+          echo "::error::There is no published GitHub release for $INPUT_VERSION. Publish a release with the tag v$VERSION instead: that starts this workflow."
+          exit 1
+
   android-release:
+    needs: release-exists
     # `inputs` is unset on the release trigger, which always ships both.
     if: github.event_name != 'workflow_dispatch' || inputs.platforms != 'ios'
     runs-on: ubuntu-latest
@@ -200,6 +226,7 @@ jobs:
           releaseName: ${{ steps.version.outputs.tag }}
 
   ios-release:
+    needs: release-exists
     if: github.event_name != 'workflow_dispatch' || inputs.platforms != 'android'
     # GitHub's arm64 Xcode 27 image, matching the iOS PR build (ios.yml). It
     # carries the Xcode 27.0 GM alongside 27.1/27.2 previews; the ios-setup
