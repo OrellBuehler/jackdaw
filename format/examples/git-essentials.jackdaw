@@ -1,0 +1,289 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.git-essentials",
+  "title": "Git Essentials",
+  "description": "The 22 Git commands you need every day, asked as flashcards, multiple choice and typed answers, plus questions on how staging, branches, remotes and undoing work.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["git", "programming", "command-line", "tools"],
+  "icon": "🌿",
+  "color": "#C2410C",
+  "revision": 1,
+  "created": "2026-11-21",
+  "updated": "2026-11-21",
+  "sections": [
+    {"id": "basics", "title": "Everyday basics"},
+    {"id": "branching", "title": "Branches and history"},
+    {"id": "remote", "title": "Working with remotes"},
+    {"id": "undo", "title": "Undoing and investigating"}
+  ],
+  "study": {"order": "sequential", "newPerSession": 6, "exercises": {"card": ["flip", "choice", "type"]}},
+  "items": [
+    {
+      "id": "cmd-init",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command turns the current folder into a new repository?",
+      "back": "git init"
+    },
+    {
+      "id": "cmd-clone",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command downloads a full copy of a remote repository?",
+      "back": "git clone"
+    },
+    {
+      "id": "cmd-status",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command shows which files are modified, staged or untracked?",
+      "back": "git status"
+    },
+    {
+      "id": "cmd-add",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command stages changes for the next commit?",
+      "back": "git add",
+      "explanation": "`git add -p` lets you stage a file piece by piece."
+    },
+    {
+      "id": "cmd-commit",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command records the staged changes as a new snapshot?",
+      "back": "git commit"
+    },
+    {
+      "id": "cmd-log",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command shows the history of commits?",
+      "back": "git log",
+      "explanation": "`git log --oneline --graph` gives a compact picture of the branches."
+    },
+    {
+      "id": "cmd-diff",
+      "type": "card",
+      "section": "basics",
+      "front": "Which command shows the changes that are not staged yet, line by line?",
+      "back": "git diff",
+      "explanation": "`git diff --staged` shows what the next commit will contain."
+    },
+    {
+      "id": "staging-area",
+      "type": "cloze",
+      "section": "basics",
+      "text": "A file moves through three places: the working tree, the staging area, which is also called the {{index}}, and the repository."
+    },
+    {
+      "id": "gitignore",
+      "type": "text",
+      "section": "basics",
+      "question": "Which file lists the patterns of files that Git should not track?",
+      "answers": [".gitignore", "gitignore"]
+    },
+    {
+      "id": "commit-hash",
+      "type": "truefalse",
+      "section": "basics",
+      "statement": "A commit is identified by a hash of its content, its parents and its metadata.",
+      "answer": true,
+      "explanation": "Changing anything about a commit therefore gives it a new id, which is why rewriting history produces new commits."
+    },
+    {
+      "id": "cmd-branch",
+      "type": "card",
+      "section": "branching",
+      "front": "Which command lists, creates or deletes branches?",
+      "back": "git branch"
+    },
+    {
+      "id": "cmd-switch",
+      "type": "card",
+      "section": "branching",
+      "front": "Which command changes to another branch?",
+      "back": "git switch",
+      "alternatives": ["git checkout"],
+      "explanation": "`git switch` was added in Git 2.23. The older `git checkout` does the same and more."
+    },
+    {
+      "id": "cmd-merge",
+      "type": "card",
+      "section": "branching",
+      "front": "Which command joins another branch into the current one?",
+      "back": "git merge"
+    },
+    {
+      "id": "cmd-rebase",
+      "type": "card",
+      "section": "branching",
+      "front": "Which command replays your commits on top of another branch?",
+      "back": "git rebase",
+      "explanation": "It rewrites the replayed commits, so avoid it on commits that others already use."
+    },
+    {
+      "id": "cmd-cherry-pick",
+      "type": "card",
+      "section": "branching",
+      "front": "Which command copies a single existing commit onto the current branch?",
+      "back": "git cherry-pick"
+    },
+    {
+      "id": "cmd-tag",
+      "type": "card",
+      "section": "branching",
+      "front": "Which command gives a commit a permanent name such as v1.0.0?",
+      "back": "git tag"
+    },
+    {
+      "id": "head",
+      "type": "choice",
+      "section": "branching",
+      "question": "What does `HEAD` refer to?",
+      "options": [
+        {"text": "The commit that is currently checked out, usually through a branch", "correct": true},
+        {"text": "The default branch", "explanation": "The default branch is only a convention, usually `main`."},
+        {"text": "The first commit of the repository"},
+        {"text": "The newest commit on the remote", "explanation": "That would be a remote-tracking branch such as `origin/main`."}
+      ]
+    },
+    {
+      "id": "merge-vs-rebase",
+      "type": "open",
+      "section": "branching",
+      "question": "What is the difference between merging and rebasing a feature branch?",
+      "answer": "A merge joins the two histories with a merge commit and leaves the existing commits untouched. A rebase replays the commits of the branch on top of the target, which gives a linear history but creates new commits with new ids.",
+      "keyPoints": [
+        "Merge keeps both histories and adds a merge commit",
+        "Rebase replays the commits on top of the target branch",
+        "Rebase gives a linear history",
+        "Rebase rewrites commits, so their ids change",
+        "Do not rebase commits that other people already build on"
+      ]
+    },
+    {
+      "id": "cmd-fetch",
+      "type": "card",
+      "section": "remote",
+      "front": "Which command downloads new commits from a remote without changing your files?",
+      "back": "git fetch"
+    },
+    {
+      "id": "cmd-pull",
+      "type": "card",
+      "section": "remote",
+      "front": "Which command downloads new commits and integrates them into the current branch?",
+      "back": "git pull"
+    },
+    {"id": "cmd-push", "type": "card", "section": "remote", "front": "Which command uploads your commits to a remote?", "back": "git push"},
+    {"id": "pull-is", "type": "cloze", "section": "remote", "text": "By default, git pull is git {{fetch}} followed by git {{merge}}."},
+    {
+      "id": "fetch-safe",
+      "type": "truefalse",
+      "section": "remote",
+      "statement": "`git fetch` changes the files in your working tree.",
+      "answer": false,
+      "explanation": "It only updates the remote-tracking branches such as `origin/main`. Your own branches and files stay as they are."
+    },
+    {
+      "id": "workflow",
+      "type": "order",
+      "section": "remote",
+      "prompt": "Put the steps of a typical contribution in order.",
+      "sequence": [
+        "Create a branch",
+        "Edit the files",
+        "Stage the changes with git add",
+        "Record them with git commit",
+        "Upload the branch with git push",
+        "Open a pull request"
+      ]
+    },
+    {
+      "id": "cmd-stash",
+      "type": "card",
+      "section": "undo",
+      "front": "Which command puts uncommitted changes aside so that you get a clean working tree?",
+      "back": "git stash",
+      "explanation": "`git stash pop` brings them back."
+    },
+    {
+      "id": "cmd-restore",
+      "type": "card",
+      "section": "undo",
+      "front": "Which command discards the uncommitted changes in a file?",
+      "back": "git restore",
+      "explanation": "`git restore --staged` unstages a file and keeps its changes."
+    },
+    {
+      "id": "cmd-revert",
+      "type": "card",
+      "section": "undo",
+      "front": "Which command creates a new commit that undoes an earlier one?",
+      "back": "git revert",
+      "explanation": "History stays intact, so it is safe on shared branches."
+    },
+    {
+      "id": "cmd-reset",
+      "type": "card",
+      "section": "undo",
+      "front": "Which command moves the current branch to another commit?",
+      "back": "git reset",
+      "explanation": "`--soft` keeps the changes staged, `--mixed` keeps them unstaged and `--hard` throws them away."
+    },
+    {
+      "id": "cmd-blame",
+      "type": "card",
+      "section": "undo",
+      "front": "Which command shows who last changed each line of a file?",
+      "back": "git blame"
+    },
+    {
+      "id": "cmd-bisect",
+      "type": "card",
+      "section": "undo",
+      "front": "Which command finds the commit that introduced a bug by binary search?",
+      "back": "git bisect"
+    },
+    {
+      "id": "undo-shared",
+      "type": "choice",
+      "section": "undo",
+      "question": "A bad commit is already on the shared main branch. What is the safe way to undo it?",
+      "options": [
+        {"text": "`git stash`", "explanation": "Stash only handles uncommitted changes."},
+        {"text": "Delete the branch and create it again"},
+        {"text": "`git reset --hard` and force push", "explanation": "That removes commits others may already have and breaks their branches."},
+        {"text": "`git revert` and push the new commit", "correct": true, "explanation": "Nobody's history changes."}
+      ]
+    },
+    {
+      "id": "revert-rewrites",
+      "type": "truefalse",
+      "section": "undo",
+      "statement": "`git revert` removes the original commit from the history.",
+      "answer": false,
+      "explanation": "It adds a new commit with the opposite changes. The original stays."
+    },
+    {
+      "id": "lost-commit",
+      "type": "open",
+      "section": "undo",
+      "question": "You ran `git reset --hard` and lost a commit. How do you get it back?",
+      "answer": "Commits are not deleted right away. `git reflog` lists where HEAD pointed before, including the lost commit. Create a branch at that id, or reset back to it.",
+      "keyPoints": [
+        "Commits stay in the repository for a while after a reset",
+        "git reflog shows the earlier positions of HEAD",
+        "Create a branch at the lost commit, or reset to it",
+        "Changes that were never committed cannot be recovered this way"
+      ],
+      "hint": "There is a log of where HEAD has been."
+    }
+  ]
+}

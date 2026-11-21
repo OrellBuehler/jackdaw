@@ -1,0 +1,280 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.solar-system",
+  "title": "The Solar System",
+  "description": "28 questions about the planets, the Earth and Moon, moons and small bodies, and the Sun. Mixes sorting, multiple choice, true/false, typed answers and fill-in-the-gap, with two open questions to explain in your own words.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["astronomy", "science", "space", "planets"],
+  "icon": "🪐",
+  "color": "#4338CA",
+  "revision": 1,
+  "created": "2026-11-21",
+  "updated": "2026-11-21",
+  "sections": [
+    {"id": "planets", "title": "The planets"},
+    {"id": "earth", "title": "Earth and Moon"},
+    {"id": "small", "title": "Moons and small bodies"},
+    {"id": "sun", "title": "The Sun and beyond"}
+  ],
+  "study": {"order": "sequential", "newPerSession": 6},
+  "items": [
+    {
+      "id": "planet-order",
+      "type": "order",
+      "section": "planets",
+      "prompt": "Order the planets by their distance from the Sun, closest first.",
+      "sequence": ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+      "explanation": "A classic mnemonic: **M**y **V**ery **E**ducated **M**other **J**ust **S**erved **U**s **N**oodles."
+    },
+    {
+      "id": "largest-planet",
+      "type": "text",
+      "section": "planets",
+      "question": "Which is the largest planet of the solar system?",
+      "answers": ["Jupiter"],
+      "explanation": "More than 1,300 Earths would fit inside it."
+    },
+    {
+      "id": "red-planet",
+      "type": "text",
+      "section": "planets",
+      "question": "Which planet is known as the Red Planet?",
+      "answers": ["Mars"],
+      "explanation": "Its colour comes from iron oxide, rust, in the soil."
+    },
+    {
+      "id": "hottest-planet",
+      "type": "choice",
+      "section": "planets",
+      "question": "Which planet has the hottest surface?",
+      "options": [
+        {"text": "Mars", "explanation": "A cold desert, on average about −60 °C."},
+        {"text": "Mercury", "explanation": "Closest to the Sun, but with almost no atmosphere it cools to about −180 °C at night."},
+        {"text": "Venus", "correct": true, "explanation": "Its thick carbon dioxide atmosphere traps the heat: about 465 °C, day and night."},
+        {"text": "Jupiter", "explanation": "It has no solid surface, and its cloud tops are about −110 °C."}
+      ]
+    },
+    {
+      "id": "rings",
+      "type": "choice",
+      "section": "planets",
+      "question": "Which planet has the largest and brightest ring system?",
+      "options": [
+        {"text": "Jupiter", "explanation": "It has rings, but they are faint and dusty."},
+        {"text": "Saturn", "correct": true, "explanation": "The rings are mostly water ice."},
+        {"text": "Neptune", "explanation": "It has thin, dark rings."},
+        {"text": "Uranus", "explanation": "It has thin, dark rings."}
+      ],
+      "explanation": "All four giant planets have rings."
+    },
+    {
+      "id": "tilted-planet",
+      "type": "choice",
+      "section": "planets",
+      "question": "Which planet rotates lying on its side?",
+      "options": [
+        {"text": "Neptune", "explanation": "Tilted by about 28 degrees."},
+        {"text": "Uranus", "correct": true, "explanation": "Its axis is tilted by about 98 degrees."},
+        {"text": "Earth", "explanation": "Tilted by about 23.4 degrees."},
+        {"text": "Saturn", "explanation": "Tilted by about 27 degrees."}
+      ]
+    },
+    {
+      "id": "great-red-spot",
+      "type": "choice",
+      "section": "planets",
+      "question": "On which planet is the Great Red Spot, a storm larger than the Earth?",
+      "options": [{"text": "Saturn"}, {"text": "Mars"}, {"text": "Jupiter", "correct": true}, {"text": "Neptune"}],
+      "explanation": "It has been observed for at least 150 years."
+    },
+    {
+      "id": "giants",
+      "type": "cloze",
+      "section": "planets",
+      "text": "Jupiter and Saturn are {{gas}} giants. Uranus and Neptune are often called {{ice}} giants."
+    },
+    {
+      "id": "venus-day",
+      "type": "truefalse",
+      "section": "planets",
+      "statement": "A day on Venus is longer than its year.",
+      "answer": true,
+      "explanation": "Venus needs about 243 Earth days to rotate once, but only about 225 to orbit the Sun."
+    },
+    {
+      "id": "pluto",
+      "type": "truefalse",
+      "section": "planets",
+      "statement": "Pluto has been classified as a dwarf planet since 2006.",
+      "answer": true,
+      "explanation": "The International Astronomical Union defined the term \"planet\" in 2006, and Pluto did not meet the definition."
+    },
+    {
+      "id": "planet-size",
+      "type": "order",
+      "section": "planets",
+      "prompt": "Order the planets by diameter, largest first.",
+      "sequence": ["Jupiter", "Saturn", "Uranus", "Neptune", "Earth", "Venus", "Mars", "Mercury"],
+      "explanation": "Neptune is slightly smaller than Uranus, but it has more mass."
+    },
+    {
+      "id": "earth-motion",
+      "type": "cloze",
+      "section": "earth",
+      "text": "The Earth needs about {{365}} days to orbit the Sun and about {{24}} hours to rotate once."
+    },
+    {
+      "id": "light-minutes",
+      "type": "text",
+      "section": "earth",
+      "question": "About how many minutes does sunlight need to reach the Earth?",
+      "answers": ["8", "eight", "8 minutes"],
+      "explanation": "About 8 minutes and 20 seconds for roughly 150 million kilometres."
+    },
+    {
+      "id": "moon-landing",
+      "type": "choice",
+      "section": "earth",
+      "question": "In which year did humans first land on the Moon?",
+      "options": [
+        {"text": "1969", "correct": true, "explanation": "Apollo 11 landed on 20 July 1969."},
+        {"text": "1972", "explanation": "The year of Apollo 17, the last crewed Moon landing so far."},
+        {"text": "1961", "explanation": "The year Yuri Gagarin became the first human in space."},
+        {"text": "1957", "explanation": "The year of Sputnik 1, the first artificial satellite."}
+      ]
+    },
+    {
+      "id": "moon-far-side",
+      "type": "truefalse",
+      "section": "earth",
+      "statement": "We always see the same side of the Moon from the Earth.",
+      "answer": true,
+      "explanation": "The Moon rotates once per orbit. The far side is not dark: it gets as much sunlight as the near side."
+    },
+    {
+      "id": "seasons",
+      "type": "open",
+      "section": "earth",
+      "question": "Why does the Earth have seasons?",
+      "answer": "The Earth's axis is tilted by about 23.4 degrees. During the year first one hemisphere and then the other leans towards the Sun: it gets steeper sunlight and longer days, which makes summer. The distance to the Sun is not the reason.",
+      "keyPoints": [
+        "The Earth's axis is tilted by about 23.4 degrees",
+        "The hemisphere that leans towards the Sun has summer",
+        "Steeper sunlight and longer days bring more warmth",
+        "The seasons are opposite in the northern and southern hemisphere",
+        "Distance is not the cause: the Earth is closest to the Sun in early January"
+      ],
+      "hint": "It is not the distance."
+    },
+    {
+      "id": "largest-moon",
+      "type": "choice",
+      "section": "small",
+      "question": "Which is the largest moon in the solar system?",
+      "options": [
+        {"text": "Ganymede", "correct": true, "explanation": "A moon of Jupiter, larger than the planet Mercury."},
+        {"text": "Europa", "explanation": "A moon of Jupiter, slightly smaller than our Moon."},
+        {"text": "The Moon", "explanation": "The fifth largest."},
+        {"text": "Titan", "explanation": "Saturn's largest moon, the second largest overall."}
+      ]
+    },
+    {
+      "id": "titan",
+      "type": "text",
+      "section": "small",
+      "question": "What is the name of Saturn's largest moon, the only moon with a thick atmosphere?",
+      "answers": ["Titan"]
+    },
+    {
+      "id": "mars-moons",
+      "type": "text",
+      "section": "small",
+      "question": "How many moons does Mars have?",
+      "answers": ["2", "two"],
+      "explanation": "Phobos and Deimos, both only a few kilometres across."
+    },
+    {
+      "id": "no-moons",
+      "type": "truefalse",
+      "section": "small",
+      "statement": "Mercury and Venus have no moons.",
+      "answer": true,
+      "explanation": "They are the only two planets without one."
+    },
+    {
+      "id": "asteroid-belt",
+      "type": "choice",
+      "section": "small",
+      "question": "Where is the asteroid belt?",
+      "options": [
+        {"text": "Between Earth and Mars"},
+        {"text": "Between Mars and Jupiter", "correct": true, "explanation": "Its largest body is the dwarf planet Ceres."},
+        {"text": "Beyond Neptune", "explanation": "That is the Kuiper belt, the home of Pluto."},
+        {"text": "Between Jupiter and Saturn"}
+      ]
+    },
+    {
+      "id": "olympus-mons",
+      "type": "choice",
+      "section": "small",
+      "question": "Olympus Mons is the tallest volcano in the solar system. Where is it?",
+      "options": [{"text": "Mars", "correct": true}, {"text": "Io"}, {"text": "The Moon"}, {"text": "Venus"}],
+      "explanation": "It is about 22 kilometres high, more than twice Mount Everest."
+    },
+    {
+      "id": "pluto-why",
+      "type": "open",
+      "section": "small",
+      "question": "Why is Pluto not counted as a planet any more?",
+      "answer": "Since 2006 a planet must orbit the Sun, be massive enough to be nearly round and have cleared the neighbourhood of its orbit. Pluto meets the first two conditions but shares its region, the Kuiper belt, with many similar bodies.",
+      "keyPoints": [
+        "The International Astronomical Union defined \"planet\" in 2006",
+        "A planet orbits the Sun and is nearly round",
+        "A planet has cleared the neighbourhood of its orbit",
+        "Pluto shares the Kuiper belt with many similar bodies",
+        "Pluto is now a dwarf planet"
+      ]
+    },
+    {
+      "id": "sun-star",
+      "type": "truefalse",
+      "section": "sun",
+      "statement": "The Sun is a star.",
+      "answer": true,
+      "explanation": "It is an ordinary star, and by far the closest one."
+    },
+    {
+      "id": "sun-mass",
+      "type": "truefalse",
+      "section": "sun",
+      "statement": "The Sun contains more than 99% of the mass of the solar system.",
+      "answer": true,
+      "explanation": "About 99.8%. Most of the rest is Jupiter."
+    },
+    {
+      "id": "sun-made-of",
+      "type": "choice",
+      "section": "sun",
+      "question": "What is the Sun mostly made of?",
+      "options": [
+        {"text": "Carbon and oxygen"},
+        {"text": "Molten rock and iron"},
+        {"text": "Burning gas and oxygen", "explanation": "Nothing burns in the chemical sense. The energy comes from nuclear fusion."},
+        {"text": "Hydrogen and helium", "correct": true, "explanation": "About 73% hydrogen and 25% helium by mass. Fusing hydrogen into helium is what makes it shine."}
+      ]
+    },
+    {
+      "id": "galaxy",
+      "type": "text",
+      "section": "sun",
+      "question": "What is the name of the galaxy that contains the solar system?",
+      "answers": ["Milky Way", "the Milky Way"]
+    },
+    {"id": "age", "type": "cloze", "section": "sun", "text": "The solar system is about {{4.6|4,6::number}} billion years old."}
+  ]
+}

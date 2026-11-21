@@ -845,7 +845,7 @@ This pack uses every property of the format and every item type. It is also stor
 }
 ```
 
-More examples in [`examples/`](examples/): [`spanish-basics.jackdaw`](examples/spanish-basics.jackdaw) (reversible vocabulary cards), [`world-history-20th-century.jackdaw`](examples/world-history-20th-century.jackdaw) (mixed question types), [`interview-prep-software-engineer.jackdaw`](examples/interview-prep-software-engineer.jackdaw) (open questions with key points) and [`swiss-cantons.jackdaw`](examples/swiss-cantons.jackdaw) (capitals as choice and typed answers).
+More examples in [`examples/`](examples/): [`spanish-basics.jackdaw`](examples/spanish-basics.jackdaw) (reversible vocabulary cards), [`world-history-20th-century.jackdaw`](examples/world-history-20th-century.jackdaw) (mixed question types), [`interview-prep-software-engineer.jackdaw`](examples/interview-prep-software-engineer.jackdaw) (open questions with key points) [`swiss-cantons.jackdaw`](examples/swiss-cantons.jackdaw) and [`european-capitals.jackdaw`](examples/european-capitals.jackdaw) (capitals as choice and typed answers), [`french-basics.jackdaw`](examples/french-basics.jackdaw), [`chemical-elements.jackdaw`](examples/chemical-elements.jackdaw) (symbols asked both ways), [`git-essentials.jackdaw`](examples/git-essentials.jackdaw) (commands as typed answers), [`solar-system.jackdaw`](examples/solar-system.jackdaw) and [`schweizer-staatskunde.jackdaw`](examples/schweizer-staatskunde.jackdaw) (a pack in German).
 
 ---
 

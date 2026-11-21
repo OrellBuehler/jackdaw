@@ -1,0 +1,300 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.european-capitals",
+  "title": "European Capitals",
+  "description": "The capitals of 45 European countries, region by region, followed by a few questions that go beyond the list. Cards are asked as multiple choice and as typed answers; local spellings such as Wien or Praha are accepted.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["geography", "europe", "capitals"],
+  "icon": "🏛️",
+  "color": "#1E40AF",
+  "revision": 1,
+  "created": "2026-11-21",
+  "updated": "2026-11-21",
+  "sections": [
+    {"id": "west", "title": "Western and Central Europe"},
+    {"id": "north", "title": "Northern Europe and the Baltics"},
+    {"id": "south", "title": "Southern Europe"},
+    {"id": "east", "title": "Eastern Europe"},
+    {"id": "balkans", "title": "The Balkans"},
+    {"id": "facts", "title": "Beyond the list", "description": "Seats of government, rivers and a little sorting."}
+  ],
+  "study": {"order": "sequential", "newPerSession": 8, "ignoreDiacritics": true, "exercises": {"card": ["choice", "type"]}},
+  "items": [
+    {"id": "capital-france", "type": "card", "section": "west", "front": "Capital of **France**?", "back": "Paris"},
+    {
+      "id": "capital-belgium",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Belgium**?",
+      "back": "Brussels",
+      "alternatives": ["Bruxelles", "Brussel"],
+      "explanation": "Brussels also hosts the main institutions of the European Union."
+    },
+    {
+      "id": "capital-netherlands",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Netherlands**?",
+      "back": "Amsterdam",
+      "explanation": "Amsterdam is the capital by constitution, but government and parliament sit in The Hague."
+    },
+    {
+      "id": "capital-luxembourg",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Luxembourg**?",
+      "back": "Luxembourg",
+      "alternatives": ["Luxembourg City"]
+    },
+    {
+      "id": "capital-germany",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Germany**?",
+      "back": "Berlin",
+      "explanation": "Berlin has been the capital of reunified Germany since 1990. West Germany was governed from Bonn."
+    },
+    {
+      "id": "capital-austria",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Austria**?",
+      "back": "Vienna",
+      "alternatives": ["Wien"]
+    },
+    {
+      "id": "capital-switzerland",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Switzerland**?",
+      "back": "Bern",
+      "alternatives": ["Berne"],
+      "explanation": "Bern is the seat of government and parliament. The constitution names no capital, so it is officially the *federal city*."
+    },
+    {"id": "capital-liechtenstein", "type": "card", "section": "west", "front": "Capital of **Liechtenstein**?", "back": "Vaduz"},
+    {"id": "capital-united-kingdom", "type": "card", "section": "west", "front": "Capital of **United Kingdom**?", "back": "London"},
+    {"id": "capital-ireland", "type": "card", "section": "west", "front": "Capital of **Ireland**?", "back": "Dublin"},
+    {
+      "id": "capital-monaco",
+      "type": "card",
+      "section": "west",
+      "front": "Capital of **Monaco**?",
+      "back": "Monaco",
+      "explanation": "Monaco is a city-state: the country and its capital are the same."
+    },
+    {
+      "id": "capital-iceland",
+      "type": "card",
+      "section": "north",
+      "front": "Capital of **Iceland**?",
+      "back": "Reykjavik",
+      "explanation": "The northernmost capital of a sovereign state."
+    },
+    {"id": "capital-norway", "type": "card", "section": "north", "front": "Capital of **Norway**?", "back": "Oslo"},
+    {"id": "capital-sweden", "type": "card", "section": "north", "front": "Capital of **Sweden**?", "back": "Stockholm"},
+    {"id": "capital-finland", "type": "card", "section": "north", "front": "Capital of **Finland**?", "back": "Helsinki"},
+    {
+      "id": "capital-denmark",
+      "type": "card",
+      "section": "north",
+      "front": "Capital of **Denmark**?",
+      "back": "Copenhagen",
+      "alternatives": ["København"]
+    },
+    {"id": "capital-estonia", "type": "card", "section": "north", "front": "Capital of **Estonia**?", "back": "Tallinn"},
+    {"id": "capital-latvia", "type": "card", "section": "north", "front": "Capital of **Latvia**?", "back": "Riga"},
+    {"id": "capital-lithuania", "type": "card", "section": "north", "front": "Capital of **Lithuania**?", "back": "Vilnius"},
+    {
+      "id": "capital-portugal",
+      "type": "card",
+      "section": "south",
+      "front": "Capital of **Portugal**?",
+      "back": "Lisbon",
+      "alternatives": ["Lisboa"]
+    },
+    {"id": "capital-spain", "type": "card", "section": "south", "front": "Capital of **Spain**?", "back": "Madrid"},
+    {"id": "capital-italy", "type": "card", "section": "south", "front": "Capital of **Italy**?", "back": "Rome", "alternatives": ["Roma"]},
+    {
+      "id": "capital-malta",
+      "type": "card",
+      "section": "south",
+      "front": "Capital of **Malta**?",
+      "back": "Valletta",
+      "explanation": "With about 6,000 inhabitants it is the smallest capital in the European Union."
+    },
+    {"id": "capital-greece", "type": "card", "section": "south", "front": "Capital of **Greece**?", "back": "Athens"},
+    {
+      "id": "capital-cyprus",
+      "type": "card",
+      "section": "south",
+      "front": "Capital of **Cyprus**?",
+      "back": "Nicosia",
+      "alternatives": ["Lefkosia"],
+      "explanation": "Nicosia is divided: the northern part lies in the area controlled by Turkish Cypriots."
+    },
+    {
+      "id": "capital-andorra",
+      "type": "card",
+      "section": "south",
+      "front": "Capital of **Andorra**?",
+      "back": "Andorra la Vella",
+      "explanation": "At about 1,020 m it is the highest capital in Europe."
+    },
+    {
+      "id": "capital-san-marino",
+      "type": "card",
+      "section": "south",
+      "front": "Capital of **San Marino**?",
+      "back": "San Marino",
+      "alternatives": ["City of San Marino"]
+    },
+    {
+      "id": "capital-poland",
+      "type": "card",
+      "section": "east",
+      "front": "Capital of **Poland**?",
+      "back": "Warsaw",
+      "alternatives": ["Warszawa"]
+    },
+    {
+      "id": "capital-czechia",
+      "type": "card",
+      "section": "east",
+      "front": "Capital of **Czechia**?",
+      "back": "Prague",
+      "alternatives": ["Praha"]
+    },
+    {
+      "id": "capital-slovakia",
+      "type": "card",
+      "section": "east",
+      "front": "Capital of **Slovakia**?",
+      "back": "Bratislava",
+      "explanation": "Bratislava borders both Austria and Hungary, and is only about 55 km from Vienna."
+    },
+    {"id": "capital-hungary", "type": "card", "section": "east", "front": "Capital of **Hungary**?", "back": "Budapest"},
+    {
+      "id": "capital-romania",
+      "type": "card",
+      "section": "east",
+      "front": "Capital of **Romania**?",
+      "back": "Bucharest",
+      "explanation": "Not to be confused with Budapest in Hungary."
+    },
+    {"id": "capital-bulgaria", "type": "card", "section": "east", "front": "Capital of **Bulgaria**?", "back": "Sofia"},
+    {
+      "id": "capital-moldova",
+      "type": "card",
+      "section": "east",
+      "front": "Capital of **Moldova**?",
+      "back": "Chisinau",
+      "alternatives": ["Kishinev"]
+    },
+    {
+      "id": "capital-ukraine",
+      "type": "card",
+      "section": "east",
+      "front": "Capital of **Ukraine**?",
+      "back": "Kyiv",
+      "alternatives": ["Kiev"]
+    },
+    {"id": "capital-belarus", "type": "card", "section": "east", "front": "Capital of **Belarus**?", "back": "Minsk"},
+    {"id": "capital-russia", "type": "card", "section": "east", "front": "Capital of **Russia**?", "back": "Moscow"},
+    {"id": "capital-slovenia", "type": "card", "section": "balkans", "front": "Capital of **Slovenia**?", "back": "Ljubljana"},
+    {"id": "capital-croatia", "type": "card", "section": "balkans", "front": "Capital of **Croatia**?", "back": "Zagreb"},
+    {
+      "id": "capital-bosnia-herzegovina",
+      "type": "card",
+      "section": "balkans",
+      "front": "Capital of **Bosnia and Herzegovina**?",
+      "back": "Sarajevo"
+    },
+    {
+      "id": "capital-serbia",
+      "type": "card",
+      "section": "balkans",
+      "front": "Capital of **Serbia**?",
+      "back": "Belgrade",
+      "alternatives": ["Beograd"]
+    },
+    {"id": "capital-montenegro", "type": "card", "section": "balkans", "front": "Capital of **Montenegro**?", "back": "Podgorica"},
+    {
+      "id": "capital-kosovo",
+      "type": "card",
+      "section": "balkans",
+      "front": "Capital of **Kosovo**?",
+      "back": "Pristina",
+      "alternatives": ["Prishtina"],
+      "explanation": "Kosovo declared independence in 2008. Not all states recognise it."
+    },
+    {"id": "capital-north-macedonia", "type": "card", "section": "balkans", "front": "Capital of **North Macedonia**?", "back": "Skopje"},
+    {"id": "capital-albania", "type": "card", "section": "balkans", "front": "Capital of **Albania**?", "back": "Tirana"},
+    {
+      "id": "istanbul",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "Istanbul is the capital of Turkey.",
+      "answer": false,
+      "explanation": "The capital is Ankara. Istanbul is the largest city."
+    },
+    {
+      "id": "the-hague",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "The Dutch government sits in Amsterdam.",
+      "answer": false,
+      "explanation": "Amsterdam is the capital, but government, parliament and the royal working palace are in The Hague."
+    },
+    {
+      "id": "non-eu-capital",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which of these capitals is **not** in a member state of the European Union?",
+      "options": [
+        {"text": "Dublin", "explanation": "Ireland joined in 1973."},
+        {"text": "Helsinki", "explanation": "Finland joined in 1995."},
+        {"text": "Oslo", "correct": true, "explanation": "Norway is not an EU member. It is part of the European Economic Area."},
+        {"text": "Zagreb", "explanation": "Croatia joined in 2013."}
+      ]
+    },
+    {
+      "id": "smallest-state",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which is the smallest sovereign state in Europe, and in the world?",
+      "options": [
+        {"text": "San Marino", "explanation": "About 61 square kilometres."},
+        {"text": "Monaco", "explanation": "The second smallest, about 2 square kilometres."},
+        {"text": "Vatican City", "correct": true, "explanation": "About 0.44 square kilometres, entirely surrounded by Rome."},
+        {"text": "Liechtenstein", "explanation": "About 160 square kilometres."}
+      ]
+    },
+    {
+      "id": "buda-pest",
+      "type": "text",
+      "section": "facts",
+      "question": "Which capital was formed in 1873 by merging the towns of Buda, Óbuda and Pest?",
+      "answers": ["Budapest"]
+    },
+    {
+      "id": "danube-capitals",
+      "type": "cloze",
+      "section": "facts",
+      "text": "Going downstream, the Danube flows through four capitals: Vienna, Bratislava, {{Budapest}} and {{Belgrade}}.",
+      "explanation": "No other river in the world flows through as many capitals."
+    },
+    {
+      "id": "north-to-south",
+      "type": "order",
+      "section": "facts",
+      "prompt": "Order these capitals from north to south.",
+      "sequence": ["Reykjavik", "Stockholm", "Copenhagen", "Berlin", "Paris", "Rome", "Athens"],
+      "explanation": "Their latitudes are about 64°, 59°, 56°, 52.5°, 49°, 42° and 38° north."
+    }
+  ]
+}

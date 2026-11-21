@@ -1,0 +1,243 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.french-basics",
+  "title": "French Basics",
+  "description": "About 40 essential French words and phrases for travellers and beginners: greetings, numbers, food and drink, survival phrases and five false friends. French on the front, the English meaning on the back; every card is also asked in reverse, and accents are optional when typing.",
+  "language": "fr",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["french", "vocabulary", "beginner", "a1"],
+  "icon": "🇫🇷",
+  "color": "#0055A4",
+  "revision": 1,
+  "created": "2026-11-21",
+  "updated": "2026-11-21",
+  "sections": [
+    {"id": "greetings", "title": "Greetings and politeness", "description": "Words for meeting, thanking and parting."},
+    {"id": "numbers", "title": "Numbers 1-10"},
+    {"id": "food", "title": "Food and drink", "description": "Nouns come with their article so you learn the gender along with the word."},
+    {"id": "survival", "title": "Survival phrases", "description": "Short sentences you will use on the first day of a trip."},
+    {"id": "false-friends", "title": "False friends", "description": "Words that look like English words but mean something else."}
+  ],
+  "study": {"order": "sequential", "newPerSession": 8, "reversible": true, "ignoreDiacritics": true, "exercises": {"card": ["flip", "choice", "type"]}},
+  "items": [
+    {
+      "id": "bonjour",
+      "type": "card",
+      "section": "greetings",
+      "front": "bonjour",
+      "back": "hello",
+      "alternatives": ["good morning", "good day"],
+      "explanation": "Used all day until the evening."
+    },
+    {"id": "bonsoir", "type": "card", "section": "greetings", "front": "bonsoir", "back": "good evening"},
+    {
+      "id": "salut",
+      "type": "card",
+      "section": "greetings",
+      "front": "salut",
+      "back": "hi",
+      "alternatives": ["hello", "bye"],
+      "explanation": "Informal, and used both for hello and goodbye."
+    },
+    {"id": "au-revoir", "type": "card", "section": "greetings", "front": "au revoir", "back": "goodbye", "alternatives": ["bye"]},
+    {
+      "id": "s-il-vous-plait",
+      "type": "card",
+      "section": "greetings",
+      "front": "s'il vous plaît",
+      "back": "please",
+      "explanation": "Literally \"if it pleases you\". To a friend you say *s'il te plaît*."
+    },
+    {"id": "merci", "type": "card", "section": "greetings", "front": "merci", "back": "thank you", "alternatives": ["thanks"]},
+    {
+      "id": "de-rien",
+      "type": "card",
+      "section": "greetings",
+      "front": "de rien",
+      "back": "you're welcome",
+      "alternatives": ["you are welcome", "not at all"],
+      "explanation": "Literally \"of nothing\"."
+    },
+    {"id": "pardon", "type": "card", "section": "greetings", "front": "pardon", "back": "sorry", "alternatives": ["excuse me"]},
+    {"id": "oui", "type": "card", "section": "greetings", "front": "oui", "back": "yes"},
+    {"id": "non", "type": "card", "section": "greetings", "front": "non", "back": "no"},
+    {"id": "un", "type": "card", "section": "numbers", "front": "un", "back": "one", "alternatives": ["1"]},
+    {"id": "deux", "type": "card", "section": "numbers", "front": "deux", "back": "two", "alternatives": ["2"]},
+    {"id": "trois", "type": "card", "section": "numbers", "front": "trois", "back": "three", "alternatives": ["3"]},
+    {"id": "quatre", "type": "card", "section": "numbers", "front": "quatre", "back": "four", "alternatives": ["4"]},
+    {"id": "cinq", "type": "card", "section": "numbers", "front": "cinq", "back": "five", "alternatives": ["5"]},
+    {
+      "id": "six",
+      "type": "card",
+      "section": "numbers",
+      "front": "six",
+      "back": "six",
+      "alternatives": ["6"],
+      "reversible": false,
+      "explanation": "Pronounced *seess*."
+    },
+    {
+      "id": "sept",
+      "type": "card",
+      "section": "numbers",
+      "front": "sept",
+      "back": "seven",
+      "alternatives": ["7"],
+      "explanation": "The *p* is silent."
+    },
+    {"id": "huit", "type": "card", "section": "numbers", "front": "huit", "back": "eight", "alternatives": ["8"]},
+    {
+      "id": "neuf",
+      "type": "card",
+      "section": "numbers",
+      "front": "neuf",
+      "back": "nine",
+      "alternatives": ["9"],
+      "explanation": "*Neuf* also means \"new\"."
+    },
+    {"id": "dix", "type": "card", "section": "numbers", "front": "dix", "back": "ten", "alternatives": ["10"]},
+    {"id": "le-pain", "type": "card", "section": "food", "front": "le pain", "back": "bread", "alternatives": ["the bread"]},
+    {
+      "id": "l-eau",
+      "type": "card",
+      "section": "food",
+      "front": "l'eau",
+      "back": "water",
+      "alternatives": ["the water"],
+      "explanation": "Feminine: *une eau*. Tap water is *une carafe d'eau*."
+    },
+    {
+      "id": "le-cafe",
+      "type": "card",
+      "section": "food",
+      "front": "le café",
+      "back": "coffee",
+      "alternatives": ["the coffee"],
+      "explanation": "Also the word for the place where you drink it."
+    },
+    {"id": "le-the", "type": "card", "section": "food", "front": "le thé", "back": "tea", "alternatives": ["the tea"]},
+    {"id": "le-fromage", "type": "card", "section": "food", "front": "le fromage", "back": "cheese", "alternatives": ["the cheese"]},
+    {"id": "le-vin", "type": "card", "section": "food", "front": "le vin", "back": "wine", "alternatives": ["the wine"]},
+    {"id": "la-biere", "type": "card", "section": "food", "front": "la bière", "back": "beer", "alternatives": ["the beer"]},
+    {"id": "le-poulet", "type": "card", "section": "food", "front": "le poulet", "back": "chicken", "alternatives": ["the chicken"]},
+    {
+      "id": "le-poisson",
+      "type": "card",
+      "section": "food",
+      "front": "le poisson",
+      "back": "fish",
+      "alternatives": ["the fish"],
+      "explanation": "One *s* less and it is *le poison*, poison."
+    },
+    {
+      "id": "la-pomme",
+      "type": "card",
+      "section": "food",
+      "front": "la pomme",
+      "back": "apple",
+      "alternatives": ["the apple"],
+      "explanation": "A potato is *une pomme de terre*, an \"apple of the earth\"."
+    },
+    {
+      "id": "je-ne-comprends-pas",
+      "type": "card",
+      "section": "survival",
+      "front": "Je ne comprends pas.",
+      "back": "I don't understand.",
+      "alternatives": ["I do not understand."]
+    },
+    {"id": "parlez-vous-anglais", "type": "card", "section": "survival", "front": "Parlez-vous anglais ?", "back": "Do you speak English?"},
+    {
+      "id": "ou-sont-les-toilettes",
+      "type": "card",
+      "section": "survival",
+      "front": "Où sont les toilettes ?",
+      "back": "Where are the toilets?",
+      "alternatives": ["Where is the toilet?", "Where is the bathroom?"],
+      "explanation": "*Les toilettes* is always plural."
+    },
+    {
+      "id": "combien-ca-coute",
+      "type": "card",
+      "section": "survival",
+      "front": "Combien ça coûte ?",
+      "back": "How much does it cost?",
+      "alternatives": ["How much is it?", "How much does this cost?"]
+    },
+    {
+      "id": "je-voudrais-un-cafe",
+      "type": "card",
+      "section": "survival",
+      "front": "Je voudrais un café.",
+      "back": "I would like a coffee.",
+      "alternatives": ["I'd like a coffee."],
+      "explanation": "*Je voudrais* is the polite way to order anything."
+    },
+    {
+      "id": "l-addition",
+      "type": "card",
+      "section": "survival",
+      "front": "L'addition, s'il vous plaît.",
+      "back": "The bill, please.",
+      "alternatives": ["The check, please."]
+    },
+    {
+      "id": "comment-vous-appelez-vous",
+      "type": "card",
+      "section": "survival",
+      "front": "Comment vous appelez-vous ?",
+      "back": "What is your name?",
+      "alternatives": ["What's your name?"],
+      "explanation": "The answer starts with *Je m'appelle*."
+    },
+    {
+      "id": "la-librairie",
+      "type": "card",
+      "section": "false-friends",
+      "front": "la librairie",
+      "back": "bookshop",
+      "alternatives": ["bookstore", "the bookshop", "the bookstore"],
+      "explanation": "A library is *une bibliothèque*."
+    },
+    {
+      "id": "actuellement",
+      "type": "card",
+      "section": "false-friends",
+      "front": "actuellement",
+      "back": "currently",
+      "alternatives": ["at the moment", "at present", "now"],
+      "explanation": "\"Actually\" is *en fait*."
+    },
+    {
+      "id": "le-coin",
+      "type": "card",
+      "section": "false-friends",
+      "front": "le coin",
+      "back": "corner",
+      "alternatives": ["the corner"],
+      "explanation": "A coin is *une pièce*."
+    },
+    {
+      "id": "la-monnaie",
+      "type": "card",
+      "section": "false-friends",
+      "front": "la monnaie",
+      "back": "change",
+      "alternatives": ["small change", "the change", "coins"],
+      "explanation": "Money in general is *l'argent*."
+    },
+    {
+      "id": "attendre",
+      "type": "card",
+      "section": "false-friends",
+      "front": "attendre",
+      "back": "to wait",
+      "alternatives": ["wait", "to wait for"],
+      "explanation": "\"To attend\" is *assister à*."
+    }
+  ]
+}

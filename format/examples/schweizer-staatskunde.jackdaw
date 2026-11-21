@@ -1,0 +1,340 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.schweizer-staatskunde",
+  "title": "Schweizer Staatskunde",
+  "description": "32 Fragen zu Behörden, Volksrechten, Geschichte und Geografie der Schweiz. Zum Auffrischen oder als Vorbereitung auf den Einbürgerungstest; kantonale und kommunale Fragen kommen dort je nach Wohnort dazu.",
+  "language": "de",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["schweiz", "staatskunde", "politik", "einbuergerung"],
+  "icon": "🗳️",
+  "color": "#B91C1C",
+  "revision": 1,
+  "created": "2026-11-21",
+  "updated": "2026-11-21",
+  "sections": [
+    {"id": "bund", "title": "Bund und Behörden", "description": "Bundesrat, Parlament, Bundesgericht und Föderalismus."},
+    {"id": "rechte", "title": "Volksrechte", "description": "Initiative, Referendum und Abstimmungen."},
+    {"id": "geschichte", "title": "Geschichte"},
+    {"id": "land", "title": "Land und Leute"}
+  ],
+  "study": {"order": "sequential", "newPerSession": 6},
+  "items": [
+    {
+      "id": "bundesrat-mitglieder",
+      "type": "choice",
+      "section": "bund",
+      "question": "Wie viele Mitglieder hat der Bundesrat?",
+      "options": [
+        {"text": "7", "correct": true, "explanation": "Jedes Mitglied leitet ein Departement. Entschieden wird gemeinsam (Kollegialitätsprinzip)."},
+        {"text": "12"},
+        {"text": "9"},
+        {"text": "5"}
+      ]
+    },
+    {
+      "id": "exekutive",
+      "type": "text",
+      "section": "bund",
+      "question": "Wie heisst die Regierung der Schweiz?",
+      "answers": ["Bundesrat", "der Bundesrat"],
+      "explanation": "Der Bundesrat ist die Exekutive des Bundes."
+    },
+    {
+      "id": "bundesrat-wahl",
+      "type": "choice",
+      "section": "bund",
+      "question": "Wer wählt die Mitglieder des Bundesrats?",
+      "options": [
+        {"text": "Die Kantonsregierungen"},
+        {"text": "Das Volk", "explanation": "Eine Volkswahl des Bundesrats wurde an der Urne mehrmals abgelehnt, zuletzt 2013."},
+        {"text": "Die Vereinigte Bundesversammlung", "correct": true, "explanation": "National- und Ständerat tagen dafür gemeinsam. Die Amtsdauer beträgt vier Jahre."},
+        {"text": "Der Nationalrat allein"}
+      ]
+    },
+    {
+      "id": "bundespraesident",
+      "type": "truefalse",
+      "section": "bund",
+      "statement": "Die Bundespräsidentin oder der Bundespräsident wird vom Volk gewählt.",
+      "answer": false,
+      "explanation": "Die Vereinigte Bundesversammlung wählt jedes Jahr ein Mitglied des Bundesrats für ein Jahr ins Präsidium. Es bleibt gleichberechtigt mit den anderen sechs."
+    },
+    {
+      "id": "zwei-kammern",
+      "type": "cloze",
+      "section": "bund",
+      "text": "Die Bundesversammlung besteht aus zwei gleichberechtigten Kammern: dem {{Nationalrat::Volksvertretung}} und dem {{Ständerat::Kantonsvertretung}}."
+    },
+    {
+      "id": "nationalrat-sitze",
+      "type": "text",
+      "section": "bund",
+      "question": "Wie viele Sitze hat der Nationalrat?",
+      "answers": ["200", "zweihundert"],
+      "explanation": "Die Sitze werden nach der Bevölkerungszahl auf die Kantone verteilt. Jeder Kanton hat mindestens einen."
+    },
+    {
+      "id": "staenderat-sitze",
+      "type": "text",
+      "section": "bund",
+      "question": "Wie viele Sitze hat der Ständerat?",
+      "answers": ["46"],
+      "explanation": "20 Kantone stellen je zwei Mitglieder, die sechs früheren Halbkantone je eines."
+    },
+    {
+      "id": "bundesgericht",
+      "type": "choice",
+      "section": "bund",
+      "question": "Wo hat das Bundesgericht seinen Hauptsitz?",
+      "options": [
+        {"text": "Bern", "explanation": "In Bern sitzen Bundesrat und Parlament."},
+        {"text": "Lausanne", "correct": true, "explanation": "Das Bundesgericht ist das oberste Gericht der Schweiz."},
+        {"text": "St. Gallen", "explanation": "Dort ist das Bundesverwaltungsgericht."},
+        {"text": "Bellinzona", "explanation": "Dort ist das Bundesstrafgericht."}
+      ]
+    },
+    {
+      "id": "hauptstadt",
+      "type": "truefalse",
+      "section": "bund",
+      "statement": "Die Bundesverfassung bezeichnet Bern als Hauptstadt der Schweiz.",
+      "answer": false,
+      "explanation": "Die Verfassung nennt keine Hauptstadt. Bern ist Sitz von Bundesrat und Parlament und heisst offiziell Bundesstadt."
+    },
+    {
+      "id": "foederalismus",
+      "type": "open",
+      "section": "bund",
+      "question": "Was bedeutet Föderalismus in der Schweiz?",
+      "answer": "Die Staatsaufgaben sind auf drei Ebenen verteilt: Bund, Kantone und Gemeinden. Der Bund ist nur für das zuständig, was ihm die Bundesverfassung überträgt. Alles andere regeln die Kantone, die eine eigene Verfassung, ein eigenes Parlament, eine eigene Regierung und eigene Gerichte haben.",
+      "keyPoints": [
+        "Drei Ebenen: Bund, Kantone, Gemeinden",
+        "Der Bund ist nur zuständig, wo die Bundesverfassung es vorsieht",
+        "Kantone haben eigene Verfassung, Parlament, Regierung und Gerichte",
+        "Beispiele für kantonale Aufgaben: Schule, Polizei, Gesundheitswesen"
+      ],
+      "hint": "Denk an die drei Ebenen des Staates."
+    },
+    {
+      "id": "initiative-unterschriften",
+      "type": "choice",
+      "section": "rechte",
+      "question": "Wie viele Unterschriften braucht eine eidgenössische Volksinitiative?",
+      "options": [
+        {"text": "50'000", "explanation": "So viele braucht es für ein fakultatives Referendum."},
+        {"text": "100'000", "correct": true, "explanation": "Sie müssen innert 18 Monaten gesammelt werden."},
+        {"text": "200'000"},
+        {"text": "30'000"}
+      ]
+    },
+    {
+      "id": "referendum-unterschriften",
+      "type": "choice",
+      "section": "rechte",
+      "question": "Was braucht es, damit über ein neues Bundesgesetz abgestimmt wird (fakultatives Referendum)?",
+      "options": [
+        {"text": "100'000 Unterschriften innert 18 Monaten", "explanation": "Das sind die Anforderungen an eine Volksinitiative."},
+        {"text": "50'000 Unterschriften innert 100 Tagen", "correct": true, "explanation": "Auch acht Kantone zusammen können das Referendum verlangen."},
+        {"text": "Nichts: über jedes Gesetz wird abgestimmt", "explanation": "Obligatorisch ist die Abstimmung nur bei Verfassungsänderungen und bestimmten Staatsverträgen."},
+        {"text": "Einen Beschluss des Bundesrats"}
+      ]
+    },
+    {
+      "id": "doppeltes-mehr",
+      "type": "cloze",
+      "section": "rechte",
+      "text": "Eine Änderung der Bundesverfassung braucht das doppelte Mehr: das {{Volksmehr}} und das {{Ständemehr}}.",
+      "explanation": "Die Mehrheit der Stimmenden und die Mehrheit der Kantone müssen zustimmen."
+    },
+    {
+      "id": "gesetzesinitiative",
+      "type": "truefalse",
+      "section": "rechte",
+      "statement": "Mit einer eidgenössischen Volksinitiative kann man direkt ein Bundesgesetz ändern.",
+      "answer": false,
+      "explanation": "Auf Bundesebene kann eine Volksinitiative nur eine Änderung der Bundesverfassung verlangen. Viele Kantone kennen zusätzlich die Gesetzesinitiative."
+    },
+    {
+      "id": "obligatorisches-referendum",
+      "type": "truefalse",
+      "section": "rechte",
+      "statement": "Über jede Änderung der Bundesverfassung müssen Volk und Stände abstimmen.",
+      "answer": true,
+      "explanation": "Das ist das obligatorische Referendum."
+    },
+    {
+      "id": "stimmrechtsalter",
+      "type": "text",
+      "section": "rechte",
+      "question": "Ab welchem Alter darf man auf Bundesebene abstimmen und wählen?",
+      "answers": ["18", "achtzehn", "18 Jahre"],
+      "explanation": "Das Stimmrechtsalter wurde 1991 von 20 auf 18 Jahre gesenkt."
+    },
+    {
+      "id": "initiative-referendum",
+      "type": "open",
+      "section": "rechte",
+      "question": "Erkläre den Unterschied zwischen Volksinitiative und Referendum.",
+      "answer": "Mit einer Volksinitiative schlagen Stimmberechtigte selbst eine Änderung der Bundesverfassung vor. Mit dem Referendum reagieren sie auf einen Beschluss des Parlaments und verlangen, dass das Volk darüber abstimmt.",
+      "keyPoints": [
+        "Initiative: das Volk schlägt etwas Neues vor",
+        "Referendum: das Volk stimmt über einen Beschluss des Parlaments ab",
+        "Initiative: 100'000 Unterschriften in 18 Monaten",
+        "Fakultatives Referendum: 50'000 Unterschriften in 100 Tagen",
+        "Initiative braucht Volks- und Ständemehr, beim fakultativen Referendum genügt das Volksmehr"
+      ],
+      "hint": "Das eine ist ein Gaspedal, das andere eine Bremse."
+    },
+    {
+      "id": "bundesbrief",
+      "type": "cloze",
+      "section": "geschichte",
+      "text": "Der Bundesbrief von {{1291::Jahr}} gilt als Gründungsdokument der Alten Eidgenossenschaft.",
+      "explanation": "Er erinnert an das Bündnis von Uri, Schwyz und Unterwalden."
+    },
+    {
+      "id": "nationalfeiertag",
+      "type": "text",
+      "section": "geschichte",
+      "question": "An welchem Datum ist der Schweizer Nationalfeiertag?",
+      "answers": ["1. August", "1.8.", "erster August", "1 August"],
+      "explanation": "Der 1. August ist seit 1994 in der ganzen Schweiz arbeitsfrei."
+    },
+    {
+      "id": "bundesstaat",
+      "type": "text",
+      "section": "geschichte",
+      "question": "In welchem Jahr wurde der moderne Bundesstaat gegründet?",
+      "answers": ["1848"],
+      "explanation": "Die erste Bundesverfassung folgte auf den Sonderbundskrieg von 1847."
+    },
+    {
+      "id": "frauenstimmrecht",
+      "type": "choice",
+      "section": "geschichte",
+      "question": "Seit wann dürfen Frauen auf Bundesebene abstimmen und wählen?",
+      "options": [
+        {"text": "1971", "correct": true, "explanation": "Die Männer stimmten am 7. Februar 1971 zu. Appenzell Innerrhoden führte das kantonale Frauenstimmrecht erst 1990 ein, nach einem Entscheid des Bundesgerichts."},
+        {"text": "1991"},
+        {"text": "1948"},
+        {"text": "1918"}
+      ]
+    },
+    {
+      "id": "juengster-kanton",
+      "type": "choice",
+      "section": "geschichte",
+      "question": "Welcher Kanton ist der jüngste?",
+      "options": [
+        {"text": "Jura", "correct": true, "explanation": "Er löste sich vom Kanton Bern und besteht seit 1979."},
+        {"text": "Basel-Landschaft", "explanation": "Basel teilte sich 1833."},
+        {"text": "Tessin", "explanation": "Das Tessin ist seit 1803 ein Kanton."},
+        {"text": "Genf", "explanation": "Genf trat 1815 der Eidgenossenschaft bei, zusammen mit Wallis und Neuenburg."}
+      ]
+    },
+    {
+      "id": "eu-mitglied",
+      "type": "truefalse",
+      "section": "geschichte",
+      "statement": "Die Schweiz ist Mitglied der Europäischen Union.",
+      "answer": false,
+      "explanation": "Die Schweiz regelt ihr Verhältnis zur EU mit bilateralen Verträgen. Sie gehört zur EFTA und zum Schengen-Raum."
+    },
+    {
+      "id": "chronologie",
+      "type": "order",
+      "section": "geschichte",
+      "prompt": "Bringe diese Ereignisse in die zeitliche Reihenfolge, das älteste zuerst.",
+      "sequence": [
+        "Bundesbrief",
+        "Schlacht bei Marignano",
+        "Gründung des Bundesstaats",
+        "Frauenstimmrecht auf Bundesebene",
+        "Beitritt zur UNO"
+      ],
+      "explanation": "1291, 1515, 1848, 1971 und 2002."
+    },
+    {
+      "id": "kantone-anzahl",
+      "type": "text",
+      "section": "land",
+      "question": "Wie viele Kantone hat die Schweiz?",
+      "answers": ["26", "sechsundzwanzig"]
+    },
+    {
+      "id": "landessprachen",
+      "type": "cloze",
+      "section": "land",
+      "text": "Die Schweiz hat {{vier|4::Anzahl}} Landessprachen: Deutsch, Französisch, Italienisch und {{Rätoromanisch|Romanisch}}."
+    },
+    {
+      "id": "groesster-kanton",
+      "type": "choice",
+      "section": "land",
+      "question": "Welcher Kanton hat die grösste Fläche?",
+      "options": [
+        {"text": "Graubünden", "correct": true, "explanation": "Rund 7100 Quadratkilometer, etwa ein Sechstel der Schweiz."},
+        {"text": "Zürich", "explanation": "Zürich hat am meisten Einwohnerinnen und Einwohner, ist aber deutlich kleiner."},
+        {"text": "Wallis", "explanation": "Der drittgrösste Kanton."},
+        {"text": "Bern", "explanation": "Der zweitgrösste Kanton."}
+      ]
+    },
+    {
+      "id": "bevoelkerung-kanton",
+      "type": "choice",
+      "section": "land",
+      "question": "In welchem Kanton leben am meisten Menschen?",
+      "options": [
+        {"text": "Aargau"},
+        {"text": "Waadt"},
+        {"text": "Bern", "explanation": "Rund eine Million, das ist Platz zwei."},
+        {"text": "Zürich", "correct": true, "explanation": "Rund 1,6 Millionen."}
+      ]
+    },
+    {
+      "id": "hoechster-berg",
+      "type": "text",
+      "section": "land",
+      "question": "Wie heisst der höchste Berg der Schweiz?",
+      "answers": ["Dufourspitze", "Dufour-Spitze", "die Dufourspitze"],
+      "hint": "Er ist nach einem General benannt.",
+      "explanation": "4634 Meter über Meer, im Monte-Rosa-Massiv im Wallis."
+    },
+    {
+      "id": "groesster-see",
+      "type": "choice",
+      "section": "land",
+      "question": "Welches ist der grösste See, der ganz in der Schweiz liegt?",
+      "options": [
+        {"text": "Genfersee", "explanation": "Grösser, aber ein Teil gehört zu Frankreich."},
+        {"text": "Neuenburgersee", "correct": true, "explanation": "Rund 218 Quadratkilometer."},
+        {"text": "Vierwaldstättersee", "explanation": "Rund 114 Quadratkilometer."},
+        {"text": "Bodensee", "explanation": "Grösser, aber er wird mit Deutschland und Österreich geteilt."}
+      ]
+    },
+    {
+      "id": "nachbarlaender",
+      "type": "truefalse",
+      "section": "land",
+      "statement": "Die Schweiz grenzt an fünf Länder.",
+      "answer": true,
+      "explanation": "Deutschland, Frankreich, Italien, Österreich und Liechtenstein."
+    },
+    {
+      "id": "landsgemeinde",
+      "type": "choice",
+      "section": "land",
+      "question": "In welchen beiden Kantonen gibt es noch eine Landsgemeinde?",
+      "options": [
+        {"text": "Uri und Schwyz"},
+        {"text": "Appenzell Innerrhoden und Glarus", "correct": true, "explanation": "Die Stimmberechtigten versammeln sich unter freiem Himmel und stimmen mit erhobener Hand ab."},
+        {"text": "Appenzell Ausserrhoden und Zug", "explanation": "Ausserrhoden schaffte sie 1997 ab."},
+        {"text": "Obwalden und Nidwalden", "explanation": "Beide haben die Landsgemeinde in den 1990er-Jahren abgeschafft."}
+      ]
+    }
+  ]
+}

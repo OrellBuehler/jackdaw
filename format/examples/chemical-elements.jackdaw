@@ -1,0 +1,326 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.chemical-elements",
+  "title": "Chemical Elements and Their Symbols",
+  "description": "The symbols of the first 20 elements and 17 more that are worth knowing, from titanium to uranium. Every card is asked both ways, symbol to name and name to symbol, and a short quiz on the periodic table follows.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["chemistry", "science", "periodic-table"],
+  "icon": "⚗️",
+  "color": "#0E7490",
+  "revision": 1,
+  "created": "2026-11-21",
+  "updated": "2026-11-21",
+  "sections": [
+    {"id": "first", "title": "Elements 1 to 10"},
+    {"id": "second", "title": "Elements 11 to 20"},
+    {"id": "more", "title": "More elements worth knowing", "description": "Mostly metals. Several symbols come from Latin names."},
+    {"id": "facts", "title": "About the periodic table"}
+  ],
+  "study": {"order": "sequential", "newPerSession": 8, "reversible": true, "exercises": {"card": ["flip", "choice", "type"]}},
+  "items": [
+    {
+      "id": "element-h",
+      "type": "card",
+      "section": "first",
+      "front": "H",
+      "back": "Hydrogen",
+      "explanation": "Atomic number 1. The lightest and most abundant element in the universe."
+    },
+    {
+      "id": "element-he",
+      "type": "card",
+      "section": "first",
+      "front": "He",
+      "back": "Helium",
+      "explanation": "Atomic number 2. A noble gas, named after the Greek word for the Sun, where it was first detected."
+    },
+    {
+      "id": "element-li",
+      "type": "card",
+      "section": "first",
+      "front": "Li",
+      "back": "Lithium",
+      "explanation": "Atomic number 3. The lightest metal."
+    },
+    {"id": "element-be", "type": "card", "section": "first", "front": "Be", "back": "Beryllium", "explanation": "Atomic number 4."},
+    {"id": "element-b", "type": "card", "section": "first", "front": "B", "back": "Boron", "explanation": "Atomic number 5."},
+    {
+      "id": "element-c",
+      "type": "card",
+      "section": "first",
+      "front": "C",
+      "back": "Carbon",
+      "explanation": "Atomic number 6. The basis of all known life. Diamond and graphite are both pure carbon."
+    },
+    {
+      "id": "element-n",
+      "type": "card",
+      "section": "first",
+      "front": "N",
+      "back": "Nitrogen",
+      "explanation": "Atomic number 7. Makes up about 78% of the air."
+    },
+    {
+      "id": "element-o",
+      "type": "card",
+      "section": "first",
+      "front": "O",
+      "back": "Oxygen",
+      "explanation": "Atomic number 8. Makes up about 21% of the air."
+    },
+    {
+      "id": "element-f",
+      "type": "card",
+      "section": "first",
+      "front": "F",
+      "back": "Fluorine",
+      "explanation": "Atomic number 9. The most reactive of all elements."
+    },
+    {
+      "id": "element-ne",
+      "type": "card",
+      "section": "first",
+      "front": "Ne",
+      "back": "Neon",
+      "explanation": "Atomic number 10. A noble gas that glows orange-red in discharge tubes."
+    },
+    {
+      "id": "element-na",
+      "type": "card",
+      "section": "second",
+      "front": "Na",
+      "back": "Sodium",
+      "explanation": "Atomic number 11. The symbol comes from the Latin name *natrium*."
+    },
+    {
+      "id": "element-mg",
+      "type": "card",
+      "section": "second",
+      "front": "Mg",
+      "back": "Magnesium",
+      "explanation": "Atomic number 12. Not to be confused with manganese (Mn)."
+    },
+    {
+      "id": "element-al",
+      "type": "card",
+      "section": "second",
+      "front": "Al",
+      "back": "Aluminium",
+      "alternatives": ["Aluminum"],
+      "explanation": "Atomic number 13. Spelled *aluminum* in American English."
+    },
+    {
+      "id": "element-si",
+      "type": "card",
+      "section": "second",
+      "front": "Si",
+      "back": "Silicon",
+      "explanation": "Atomic number 14. The basis of computer chips, and with oxygen the main component of sand and rock."
+    },
+    {"id": "element-p", "type": "card", "section": "second", "front": "P", "back": "Phosphorus", "explanation": "Atomic number 15."},
+    {
+      "id": "element-s",
+      "type": "card",
+      "section": "second",
+      "front": "S",
+      "back": "Sulfur",
+      "alternatives": ["Sulphur"],
+      "explanation": "Atomic number 16."
+    },
+    {"id": "element-cl", "type": "card", "section": "second", "front": "Cl", "back": "Chlorine", "explanation": "Atomic number 17."},
+    {
+      "id": "element-ar",
+      "type": "card",
+      "section": "second",
+      "front": "Ar",
+      "back": "Argon",
+      "explanation": "Atomic number 18. The most common noble gas in the air, almost 1%."
+    },
+    {
+      "id": "element-k",
+      "type": "card",
+      "section": "second",
+      "front": "K",
+      "back": "Potassium",
+      "explanation": "Atomic number 19. The symbol comes from the Latin name *kalium*."
+    },
+    {"id": "element-ca", "type": "card", "section": "second", "front": "Ca", "back": "Calcium", "explanation": "Atomic number 20."},
+    {"id": "element-ti", "type": "card", "section": "more", "front": "Ti", "back": "Titanium", "explanation": "Atomic number 22."},
+    {"id": "element-cr", "type": "card", "section": "more", "front": "Cr", "back": "Chromium", "explanation": "Atomic number 24."},
+    {
+      "id": "element-mn",
+      "type": "card",
+      "section": "more",
+      "front": "Mn",
+      "back": "Manganese",
+      "explanation": "Atomic number 25. Not to be confused with magnesium (Mg)."
+    },
+    {
+      "id": "element-fe",
+      "type": "card",
+      "section": "more",
+      "front": "Fe",
+      "back": "Iron",
+      "explanation": "Atomic number 26. The symbol comes from the Latin name *ferrum*."
+    },
+    {
+      "id": "element-co",
+      "type": "card",
+      "section": "more",
+      "front": "Co",
+      "back": "Cobalt",
+      "explanation": "Atomic number 27. Written Co. CO with a capital O is carbon monoxide."
+    },
+    {"id": "element-ni", "type": "card", "section": "more", "front": "Ni", "back": "Nickel", "explanation": "Atomic number 28."},
+    {
+      "id": "element-cu",
+      "type": "card",
+      "section": "more",
+      "front": "Cu",
+      "back": "Copper",
+      "explanation": "Atomic number 29. The symbol comes from the Latin name *cuprum*."
+    },
+    {"id": "element-zn", "type": "card", "section": "more", "front": "Zn", "back": "Zinc", "explanation": "Atomic number 30."},
+    {
+      "id": "element-ag",
+      "type": "card",
+      "section": "more",
+      "front": "Ag",
+      "back": "Silver",
+      "explanation": "Atomic number 47. The symbol comes from the Latin name *argentum*."
+    },
+    {
+      "id": "element-sn",
+      "type": "card",
+      "section": "more",
+      "front": "Sn",
+      "back": "Tin",
+      "explanation": "Atomic number 50. The symbol comes from the Latin name *stannum*."
+    },
+    {"id": "element-i", "type": "card", "section": "more", "front": "I", "back": "Iodine", "explanation": "Atomic number 53."},
+    {
+      "id": "element-w",
+      "type": "card",
+      "section": "more",
+      "front": "W",
+      "back": "Tungsten",
+      "alternatives": ["Wolfram"],
+      "explanation": "Atomic number 74. The symbol comes from the name *wolfram*, which many languages still use."
+    },
+    {"id": "element-pt", "type": "card", "section": "more", "front": "Pt", "back": "Platinum", "explanation": "Atomic number 78."},
+    {
+      "id": "element-au",
+      "type": "card",
+      "section": "more",
+      "front": "Au",
+      "back": "Gold",
+      "explanation": "Atomic number 79. The symbol comes from the Latin name *aurum*."
+    },
+    {
+      "id": "element-hg",
+      "type": "card",
+      "section": "more",
+      "front": "Hg",
+      "back": "Mercury",
+      "alternatives": ["Quicksilver"],
+      "explanation": "Atomic number 80. The symbol comes from *hydrargyrum*, \"liquid silver\"."
+    },
+    {
+      "id": "element-pb",
+      "type": "card",
+      "section": "more",
+      "front": "Pb",
+      "back": "Lead",
+      "explanation": "Atomic number 82. The symbol comes from the Latin name *plumbum*, as in plumbing."
+    },
+    {"id": "element-u", "type": "card", "section": "more", "front": "U", "back": "Uranium", "explanation": "Atomic number 92."},
+    {
+      "id": "most-abundant-universe",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which element is the most abundant in the universe?",
+      "options": [
+        {"text": "Oxygen", "explanation": "The third most abundant in the universe, and the most abundant in the Earth's crust."},
+        {"text": "Helium", "explanation": "The second most abundant, about a quarter by mass."},
+        {"text": "Hydrogen", "correct": true, "explanation": "About three quarters of all ordinary matter by mass."},
+        {"text": "Carbon"}
+      ]
+    },
+    {
+      "id": "air-main-gas",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which gas makes up most of the Earth's atmosphere?",
+      "options": [
+        {"text": "Nitrogen", "correct": true, "explanation": "About 78%."},
+        {"text": "Carbon dioxide", "explanation": "Only about 0.04%."},
+        {"text": "Argon", "explanation": "Just under 1%."},
+        {"text": "Oxygen", "explanation": "About 21%."}
+      ]
+    },
+    {
+      "id": "periodic-table-author",
+      "type": "choice",
+      "section": "facts",
+      "question": "Who published the periodic table in 1869 and used it to predict elements that had not been found yet?",
+      "options": [
+        {"text": "Marie Curie", "explanation": "She discovered polonium and radium."},
+        {"text": "Dmitri Mendeleev", "correct": true, "explanation": "He left gaps for unknown elements; gallium, scandium and germanium later filled them."},
+        {"text": "Niels Bohr", "explanation": "He developed a model of the atom in 1913."},
+        {"text": "Antoine Lavoisier", "explanation": "He wrote an early list of elements in 1789."}
+      ]
+    },
+    {
+      "id": "carbon-number",
+      "type": "text",
+      "section": "facts",
+      "question": "What is the atomic number of carbon?",
+      "answers": ["6", "six"],
+      "explanation": "The atomic number is the number of protons in the nucleus."
+    },
+    {
+      "id": "water",
+      "type": "cloze",
+      "section": "facts",
+      "text": "A water molecule, H₂O, consists of two atoms of {{hydrogen}} and one atom of {{oxygen}}."
+    },
+    {"id": "table-salt", "type": "cloze", "section": "facts", "text": "Table salt is sodium {{chloride}}, written {{NaCl::formula}}."},
+    {
+      "id": "noble-gases",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "Helium, neon and argon are noble gases.",
+      "answer": true,
+      "explanation": "The noble gases are group 18 of the periodic table. They hardly react with anything."
+    },
+    {
+      "id": "mercury-liquid",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "Mercury is a metal that is liquid at room temperature.",
+      "answer": true,
+      "explanation": "It melts at about −39 °C. Bromine is the only other element that is liquid at 20 °C."
+    },
+    {
+      "id": "atomic-number-neutrons",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "The atomic number of an element is its number of neutrons.",
+      "answer": false,
+      "explanation": "It is the number of protons. Atoms of one element with different numbers of neutrons are called isotopes."
+    },
+    {
+      "id": "by-atomic-number",
+      "type": "order",
+      "section": "facts",
+      "prompt": "Order these elements by atomic number, lowest first.",
+      "sequence": ["Hydrogen", "Carbon", "Oxygen", "Sodium", "Iron", "Gold"],
+      "explanation": "1, 6, 8, 11, 26 and 79."
+    }
+  ]
+}
