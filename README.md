@@ -16,6 +16,7 @@ open pack format that people, scripts and chatbots can write.
 [![iOS CI](https://img.shields.io/github/actions/workflow/status/OrellBuehler/jackdaw/ios.yml?branch=main&style=flat-square&label=ios)](https://github.com/OrellBuehler/jackdaw/actions/workflows/ios.yml)
 [![iOS](https://img.shields.io/badge/iOS-18%2B-000000?style=flat-square&logo=apple&logoColor=white)](#try-it)
 [![Android](https://img.shields.io/badge/Android-8.0%2B-3ddc84?style=flat-square&logo=android&logoColor=white)](#try-it)
+[![TestFlight](https://img.shields.io/badge/TestFlight-public%20beta-0d96f6?style=flat-square&logo=testflight&logoColor=white)](https://testflight.apple.com/join/74yDqrjd)
 [![Pack format](https://img.shields.io/badge/pack%20format-v1-8b5cf6?style=flat-square)](format/README.md)
 
 <br>
@@ -33,7 +34,7 @@ open pack format that people, scripts and chatbots can write.
 
 |                |                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| 🍎 **iPhone**  | **App Store**: version 1.0.0 is in review, the link follows here once it is published                                  |
+| 🍎 **iPhone**  | [<img src="https://cdn.simpleicons.org/testflight/0d96f6" alt="" width="16" height="16"> **Join the public beta on TestFlight**](https://testflight.apple.com/join/74yDqrjd) (opens once Apple has approved the beta build). App Store: 1.0.0 is in review, the link follows here |
 | 🤖 **Android** | Not in a store yet: [build the debug APK](#android) from source                                                        |
 | 📦 **Packs**   | Start with the [sample packs](format/examples/), or let a chatbot [write one for you](#create-a-pack-with-any-chatbot) |
 
