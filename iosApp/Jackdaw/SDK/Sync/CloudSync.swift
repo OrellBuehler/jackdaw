@@ -669,16 +669,17 @@ actor CloudSync: CKSyncEngineDelegate {
 
     private func finishCycle() async {
         status.isSyncing = false
-        if cycleErrors.isEmpty {
+        if !cycleErrors.isEmpty {
+            let text = cycleErrors.joined(separator: "\n\n")
+            status.lastError = text
+            try? await bridge.setMeta(Meta.lastError, text)
+        } else if blocked.isEmpty {
+            // Records that failed to send keep their error on screen until they went through.
             let now = Date()
             status.lastSyncedAt = now
             status.lastError = nil
             try? await bridge.setMeta(Meta.lastSyncedAt, String(now.timeIntervalSince1970))
             try? await bridge.setMeta(Meta.lastError, nil)
-        } else {
-            let text = cycleErrors.joined(separator: "\n\n")
-            status.lastError = text
-            try? await bridge.setMeta(Meta.lastError, text)
         }
         let clean = cycleErrors.isEmpty
         cycleErrors = []
