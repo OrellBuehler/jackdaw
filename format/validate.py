@@ -5,8 +5,8 @@ Usage:
     python3 validate.py [--strict] [--no-docs] [--no-vectors] [--write-index] [FILE ...]
 
 With no FILE it checks every examples/*.jackdaw, the packs and items embedded in
-README.md / AUTHORING.md (code fences marked "json pack" and "json item") and the
-reference implementation against test-vectors.json.
+README.md / AUTHORING.md (code fences marked "json pack" and "json item"), the frozen
+packs in compat/ and the reference implementation against test-vectors.json.
 
 Requires the Python package "jsonschema" (4.x). The module also contains a small
 reference implementation of the rules the specification defines (markup, cloze
@@ -222,6 +222,84 @@ def matches(typed, expected, case_sensitive=False, ignore_diacritics=False):
 # Validation
 # --------------------------------------------------------------------------
 
+# Figures (README.md section 8.4). The checks are lexical on purpose: every reader can apply
+# them without an XML parser and gets the same result.
+
+FIGURE_MAX_LENGTH = 200000
+FIGURE_ELEMENTS = frozenset("""
+svg g defs symbol use title desc path rect circle ellipse line polyline polygon text tspan textPath
+linearGradient radialGradient stop pattern clipPath mask marker style animate animateTransform
+animateMotion mpath set filter feBlend feColorMatrix feComponentTransfer feComposite feConvolveMatrix
+feDiffuseLighting feDisplacementMap feDistantLight feDropShadow feFlood feFuncA feFuncB feFuncG feFuncR
+feGaussianBlur feMerge feMergeNode feMorphology feOffset fePointLight feSpecularLighting feSpotLight
+feTile feTurbulence
+""".split())
+_FIG_SPACE = " \t\n\r\f"
+_FIG_TAG = re.compile(r"<(?!!--|!\[CDATA\[)(/?)([A-Za-z0-9:_.-]*)")
+_FIG_VIEWBOX = re.compile(r"[ \t\n\r\f]viewBox[ \t\n\r\f]*=[ \t\n\r\f]*(?:\"([^\"]*)\"|'([^']*)')")
+_FIG_HANDLER = re.compile(r"[ \t\n\r\f\"'/]on[a-z]+[ \t\n\r\f]*=")
+_FIG_HREF = re.compile(r"href[ \t\n\r\f]*=[ \t\n\r\f]*")
+_FIG_HREF_LOCAL = re.compile(r"[\"'][ \t\n\r\f]*#")
+_FIG_URL = re.compile(r"url\([ \t\n\r\f]*")
+_FIG_URL_LOCAL = re.compile(r"[\"']?[ \t\n\r\f]*#")
+_FIG_NUMBER = re.compile(r"[0-9+\-.eE]+")
+
+
+def check_figure(text):
+    """Returns (problem, aspect_ratio): problem is None for a figure a reader accepts."""
+    if len(text.encode("utf-16-le")) // 2 > FIGURE_MAX_LENGTH:
+        return "is longer than %d characters" % FIGURE_MAX_LENGTH, None
+    svg = text.strip(_FIG_SPACE)
+    if svg.startswith("<?xml"):
+        end = svg.find("?>")
+        if end < 0:
+            return "has an unterminated XML declaration", None
+        svg = svg[end + 2:].strip(_FIG_SPACE)
+    lower = svg.lower()
+    for bad in ("<?", "<!doctype", "<!entity", "javascript:", "@import"):
+        if bad in lower:
+            return "must not contain %r" % bad, None
+    root = None
+    for m in _FIG_TAG.finditer(svg):
+        if m.group(2) not in FIGURE_ELEMENTS:
+            return "element <%s> is not allowed (write a literal '<' as &lt;)" % m.group(2), None
+        if root is None:
+            close = svg.find(">", m.end())
+            if m.group(1) or m.group(2) != "svg" or close < 0:
+                return "must start with an <svg> element", None
+            root = svg[m.end():close]
+    if root is None:
+        return "must start with an <svg> element", None
+    box = _FIG_VIEWBOX.search(root)
+    if not box:
+        return "the <svg> element needs a viewBox", None
+    parts = [p for p in re.split(r"[ \t\n\r\f,]", box.group(1) if box.group(1) is not None else box.group(2)) if p]
+    try:
+        if len(parts) != 4 or not all(_FIG_NUMBER.fullmatch(p) for p in parts):
+            raise ValueError
+        numbers = [float(p) for p in parts]
+    except ValueError:
+        return "viewBox must be four numbers", None
+    if any(n != n or n in (float("inf"), float("-inf")) for n in numbers) or numbers[2] <= 0 or numbers[3] <= 0:
+        return "viewBox needs a positive width and height", None
+    if _FIG_HANDLER.search(lower):
+        return "event handler attributes (on...) are not allowed", None
+    if any(not _FIG_HREF_LOCAL.match(lower, m.end()) for m in _FIG_HREF.finditer(lower)):
+        return "href may only point to an element of the figure (#id)", None
+    if any(not _FIG_URL_LOCAL.match(lower, m.end()) for m in _FIG_URL.finditer(lower)):
+        return "url() may only point to an element of the figure (#id)", None
+    return None, numbers[2] / numbers[3]
+
+
+def figure_is_well_formed(text):
+    import xml.etree.ElementTree as ET
+    try:
+        ET.fromstring(text.strip(_FIG_SPACE).encode("utf-8"))
+        return True
+    except ET.ParseError:
+        return False
+
+
 class Report:
     def __init__(self, name):
         self.name = name
@@ -323,6 +401,15 @@ def check_semantics(pack, rep, size_bytes):
                 parse_markup(v, w)
                 for msg in w:
                     rep.warn("%s.%s" % (where, field), msg + " (escape it as \\* or \\` if literal)")
+
+        for field in ("figure", "answerFigure"):
+            fig = it.get(field)
+            if isinstance(fig, dict) and isinstance(fig.get("svg"), str):
+                problem, _ = check_figure(fig["svg"])
+                if problem:
+                    rep.error("%s.%s" % (where, field), "svg " + problem)
+                elif not figure_is_well_formed(fig["svg"]):
+                    rep.error("%s.%s" % (where, field), "svg is not well-formed XML")
 
         t = it.get("type")
         if t == "card":
@@ -459,7 +546,13 @@ def run_vectors(path):
         got = [[k, s] for k, s in parse_cloze(v["input"])]
         if got != v["segments"]:
             errors.append("cloze[%d] %r: expected %r, got %r" % (n, v["input"], v["segments"], got))
-    return errors, sum(len(data.get(k, [])) for k in ("normalize", "match", "markup", "cloze"))
+    for n, v in enumerate(data.get("figure", [])):
+        problem, ratio = check_figure(v["svg"])
+        if (problem is None) != v["valid"]:
+            errors.append("figure[%d] %r: expected valid=%r, got %r" % (n, v["svg"], v["valid"], problem))
+        elif v["valid"] and abs(ratio - v["aspectRatio"]) > 1e-9:
+            errors.append("figure[%d] %r: expected aspect ratio %r, got %r" % (n, v["svg"], v["aspectRatio"], ratio))
+    return errors, sum(len(data.get(k, [])) for k in ("normalize", "match", "markup", "cloze", "figure"))
 
 
 # --------------------------------------------------------------------------
@@ -478,6 +571,33 @@ def build_index(paths):
         packs.append(entry)
     index = {"format": "jackdaw-catalog", "version": 1, "packs": packs}
     return json.dumps(index, ensure_ascii=False, indent=2) + "\n"
+
+
+def check_compat(validator, type_index):
+    """The frozen packs of earlier revisions (compat/) must stay untouched and valid."""
+    import hashlib
+    folder = HERE / "compat"
+    problems = []
+    manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))["packs"]
+    listed = {entry["file"] for entry in manifest}
+    for p in sorted(folder.glob("*.jackdaw")):
+        if p.name not in listed:
+            problems.append("%s is not listed in compat/manifest.json" % p.name)
+    for entry in manifest:
+        p = folder / entry["file"]
+        if not p.exists():
+            problems.append("%s is missing" % entry["file"])
+            continue
+        data = p.read_bytes()
+        if hashlib.sha256(data).hexdigest() != entry["sha256"]:
+            problems.append("%s was changed: frozen packs are never edited" % entry["file"])
+            continue
+        rep, pack = validate_text(entry["file"], data.decode("utf-8-sig"), validator, type_index)
+        for m in rep.errors + rep.warnings:
+            problems.append("%s is no longer valid: %s" % (entry["file"], m))
+        if pack and len(pack.get("items", [])) != entry["items"]:
+            problems.append("%s: expected %d items" % (entry["file"], entry["items"]))
+    return problems
 
 
 def main():
@@ -551,6 +671,13 @@ def main():
             found = prompt.read_text(encoding="utf-8").strip() in authoring.read_text(encoding="utf-8")
             print("%s  AUTHORING.md contains prompt.txt verbatim" % ("ok  " if found else "FAIL"))
             failed = failed or not found
+
+    if not args.files:
+        problems = check_compat(validator, type_index)
+        print("%s  compat/  (frozen packs are unchanged and still valid)" % ("FAIL" if problems else "ok  "))
+        for e in problems:
+            print("      error: %s" % e)
+        failed = failed or bool(problems)
 
     if not args.no_vectors and VECTORS_PATH.exists() and not args.files:
         errs, total = run_vectors(VECTORS_PATH)

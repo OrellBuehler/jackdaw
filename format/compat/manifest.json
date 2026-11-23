@@ -1,0 +1,16 @@
+{
+  "packs": [
+    {
+      "file": "1.0-format-tour.jackdaw",
+      "revision": "1.0",
+      "sha256": "82ffde1d1c5d7b89f27a6d24e22a35100290bf39349a913d7a761a8690936c3b",
+      "items": 12
+    },
+    {
+      "file": "1.1-figures.jackdaw",
+      "revision": "1.1",
+      "sha256": "608390e031f05a3b345f3f7866c55c051534f41ac6c152da0f05fb9be2782918",
+      "items": 7
+    }
+  ]
+}

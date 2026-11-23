@@ -98,6 +98,7 @@ fun ExerciseFrame(
             ) {
                 if (isRetry) RetryPill()
                 HintCard(hint)
+                FigureCard()
                 body()
             }
         } else {

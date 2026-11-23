@@ -47,10 +47,34 @@ class PackReaderTest {
     }
 
     @Test
+    fun invalidFiguresAreIgnoredWithAWarning() {
+        val ok = """"figure":{"svg":"  <svg viewBox='0 0 30 10'/> ","alt":" "}"""
+        val script = """"answerFigure":{"svg":"<svg viewBox='0 0 1 1' onload='x()'/>","alt":"x"}"""
+        val result =
+            accepted(
+                packJson(
+                    card("a", "f", "b", ",$ok,$script"),
+                    card("b", "f2", "b2", ""","figure":"<svg viewBox='0 0 1 1'/>""""),
+                    card("c", "f3", "b3", ""","figure":{"alt":"no svg"}"""),
+                ),
+            )
+        assertEquals(3, result.pack.items.size)
+        val first = result.pack.items[0]
+        assertEquals(Figure("<svg viewBox='0 0 30 10'/>", null, 3.0), first.figure)
+        assertEquals(null, first.answerFigure)
+        assertEquals(null, result.pack.items[1].figure)
+        assertEquals(listOf("answerFigure", "figure", "figure"), result.warnings.map { it.detail })
+        assertTrue(result.warnings.all { it.code == ImportWarningCode.PROPERTY_IGNORED })
+        assertTrue(first.figure!!.html("#112233").contains("color:#112233"))
+        assertTrue(first.figure!!.html(null).contains("CanvasText"))
+        assertTrue(first.figure!!.html(null).contains("default-src 'none'"))
+    }
+
+    @Test
     fun formatTourDetails() {
         val pack = accepted(GENERATED_SAMPLE_PACKS.first { it.first == "format-tour.jackdaw" }.second).pack
         assertEquals("com.github.orellbuehler.jackdaw.examples.format-tour", pack.id)
-        assertEquals(3, pack.revision)
+        assertEquals(4, pack.revision)
         assertEquals("#7C3AED", pack.color)
         assertEquals(listOf("basics", "item-types"), pack.sections.map { it.id })
         assertEquals(5, pack.study.newPerSession)

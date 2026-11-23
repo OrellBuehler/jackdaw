@@ -365,6 +365,29 @@ class StudySessionTest {
         }
 
     @Test
+    fun figuresTravelWithQuestionAndFeedback() =
+        runTest {
+            val svg = "<svg viewBox='0 0 40 20'/>"
+            val figures = """"figure":{"svg":"$svg","alt":"before"},"answerFigure":{"svg":"$svg","alt":"after"}"""
+            val both = """{"id":"t","type":"text","question":"Q?","answers":["a"],$figures}"""
+            val session = start(both)
+            assertEquals("before", session.question().figure?.alt)
+            assertEquals(2.0, session.question().figure?.aspectRatio)
+            session.submit(TextAnswer("a"))
+            assertEquals("after", session.feedback().figure?.alt)
+
+            val questionOnly = start("""{"id":"t","type":"truefalse","statement":"S","answer":true,"figure":{"svg":"$svg"}}""")
+            assertNull(questionOnly.question().figure?.alt)
+            questionOnly.submit(TrueFalseAnswer(true))
+            assertEquals(svg, questionOnly.feedback().figure?.svg)
+
+            val script = "<svg viewBox='0 0 1 1'><script/></svg>"
+            val broken = start("""{"id":"t","type":"truefalse","statement":"S","answer":true,"figure":{"svg":"$script"}}""")
+            assertNull(broken.question().figure)
+            assertNull(start(card("a", "f", "b")).question().figure)
+        }
+
+    @Test
     fun caseSensitiveCardsAndTextItems() =
         runTest {
             val text = """{"id":"t","type":"text","question":"Sodium?","answers":["Na"],"caseSensitive":true}"""

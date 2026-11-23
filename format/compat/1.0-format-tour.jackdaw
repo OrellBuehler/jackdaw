@@ -1,0 +1,162 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
+  "title": "Jackdaw Format Tour",
+  "description": "A complete example that uses every property of the format and every item type. It doubles as a small quiz about the format itself.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw/tree/main/format",
+  "tags": ["jackdaw", "format", "example"],
+  "icon": "🧭",
+  "color": "#7C3AED",
+  "revision": 3,
+  "created": "2026-11-01T09:00:00Z",
+  "updated": "2026-11-20T14:30:00+01:00",
+  "sections": [
+    {"id": "basics", "title": "Basics", "description": "Files, ids and updates."},
+    {"id": "item-types", "title": "Item types", "description": "How the seven item types are written."}
+  ],
+  "study": {"order": "sequential", "newPerSession": 5, "reversible": false, "ignoreDiacritics": false, "exercises": {"card": ["flip", "choice", "type"]}},
+  "x-tool": {"name": "written by hand", "note": "Properties starting with x- are vendor extensions and may hold any JSON value."},
+  "items": [
+    {
+      "id": "card-extension",
+      "type": "card",
+      "section": "basics",
+      "tags": ["file"],
+      "front": "What is the file extension of a Jackdaw pack?",
+      "back": ".jackdaw",
+      "alternatives": ["jackdaw"],
+      "distractors": [".buf", ".pack", ".zip"],
+      "exercises": ["flip", "choice", "type"],
+      "hint": "It starts with a dot and uses the ASCII spelling of the app's name.",
+      "explanation": "`.jackdaw.json` and `.json` are accepted as well."
+    },
+    {
+      "id": "card-format-value",
+      "type": "card",
+      "section": "basics",
+      "tags": ["file"],
+      "front": "`format` value",
+      "back": "`jackdaw-pack`",
+      "reversible": true,
+      "caseSensitive": true,
+      "frontAlternatives": ["format", "format property"],
+      "distractors": ["jackdaw", "jackdaw-file", "jackdaw-pack"],
+      "frontDistractors": ["`version` value", "`id` value", "`type` value"],
+      "exercises": ["flip", "choice", "type"],
+      "hint": "A constant marker at the top level of every pack.",
+      "explanation": "Readers refuse files whose `format` is anything else."
+    },
+    {
+      "id": "choice-single",
+      "type": "choice",
+      "section": "item-types",
+      "question": "Which item type is meant for questions that the learner answers in their own words and then grades themselves?",
+      "options": [
+        {"text": "`open`", "correct": true, "explanation": "Open items offer a model answer and a checklist of key points for self-assessment."},
+        {"text": "`text`", "explanation": "Text items expect a short typed answer that is compared automatically."},
+        {"text": "`cloze`", "explanation": "Cloze items are sentences with gaps to fill in."},
+        {"text": "`order`", "explanation": "Order items are arranged into the right sequence."}
+      ]
+    },
+    {
+      "id": "choice-multi",
+      "type": "choice",
+      "section": "item-types",
+      "question": "Which of these are item types in format version 1? (Select all that apply.)",
+      "options": [
+        {"text": "`card`", "correct": true},
+        {"text": "`cloze`", "correct": true},
+        {"text": "`order`", "correct": true},
+        {"text": "`matching`", "explanation": "Not part of version 1."},
+        {"text": "`video`", "explanation": "Media is reserved for a future version."}
+      ],
+      "explanation": "Version 1 has seven item types: card, choice, text, cloze, truefalse, order and open."
+    },
+    {
+      "id": "choice-min-options",
+      "type": "choice",
+      "section": "item-types",
+      "shuffle": false,
+      "question": "How many options does a `choice` item need at minimum?",
+      "options": [
+        {"text": "1"},
+        {"text": "2", "correct": true, "explanation": "At least two options, and at least one of them marked correct."},
+        {"text": "3"},
+        {"text": "4"}
+      ]
+    },
+    {
+      "id": "text-extension-prefix",
+      "type": "text",
+      "section": "basics",
+      "question": "Property names starting with which prefix are reserved for vendor extensions?",
+      "answers": ["x-"],
+      "hint": "Two characters: a letter and a hyphen.",
+      "explanation": "Readers ignore extensions they do not understand, like the `x-tool` property of this pack."
+    },
+    {
+      "id": "text-exact-case",
+      "type": "text",
+      "section": "item-types",
+      "caseSensitive": true,
+      "question": "Type the value of the `type` property of a true/false item, in lowercase.",
+      "answers": ["truefalse"],
+      "explanation": "Item types are lowercase words without separators."
+    },
+    {
+      "id": "cloze-syntax",
+      "type": "cloze",
+      "section": "item-types",
+      "text": "A gap is written between {{two::how many?}} curly braces, and alternatives inside one gap are separated by the character {{\\|::the pipe}}.",
+      "explanation": "To use a literal pipe inside a gap, escape it with a backslash: `\\|`."
+    },
+    {
+      "id": "cloze-case",
+      "type": "cloze",
+      "section": "item-types",
+      "caseSensitive": true,
+      "text": "The chemical symbol for sodium is {{Na::two letters}}.",
+      "explanation": "`caseSensitive` is available on card, text and cloze items."
+    },
+    {
+      "id": "tf-progress",
+      "type": "truefalse",
+      "section": "basics",
+      "statement": "Learning progress is stored inside the pack file.",
+      "answer": false,
+      "explanation": "Progress and scheduling belong to the app. A pack only describes content, so it can be shared and updated freely."
+    },
+    {
+      "id": "order-update",
+      "type": "order",
+      "section": "basics",
+      "prompt": "Put the steps of updating a pack in the right order.",
+      "sequence": [
+        "Edit the items and keep the ids of unchanged items",
+        "Increase `revision` by one",
+        "Save the file with the same pack `id`",
+        "Import the file again; progress for unchanged item ids is kept"
+      ],
+      "explanation": "Importing a pack with an id that is already installed updates that pack."
+    },
+    {
+      "id": "open-stable-ids",
+      "type": "open",
+      "section": "basics",
+      "x-source-page": 12,
+      "question": "Why must item ids stay stable between versions of a pack?",
+      "answer": "Learning progress is stored per item id. If an id changes, the app treats the item as new and the learner loses its history. If an id is reused for different content, the old progress wrongly applies to it.",
+      "keyPoints": [
+        "Progress is stored per item id",
+        "A changed id makes the item look new",
+        "A reused id passes old progress on to different content",
+        "Fixing a typo does not require a new id"
+      ]
+    }
+  ]
+}

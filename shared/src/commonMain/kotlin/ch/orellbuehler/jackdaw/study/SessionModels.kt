@@ -1,5 +1,6 @@
 package ch.orellbuehler.jackdaw.study
 
+import ch.orellbuehler.jackdaw.format.Figure
 import ch.orellbuehler.jackdaw.format.RichText
 
 enum class SessionMode {
@@ -97,6 +98,7 @@ sealed class SessionState {
         val isRetry: Boolean,
         val hasHint: Boolean,
         val hint: RichText?,
+        val figure: Figure? = null,
     ) : SessionState()
 
     data class Feedback(
@@ -115,6 +117,7 @@ sealed class SessionState {
         val keyPoints: List<RichText>,
         val statementIsTrue: Boolean,
         val typo: Boolean = false,
+        val figure: Figure? = null,
     ) : SessionState() {
         val correct: Boolean get() = verdict == Verdict.CORRECT
 

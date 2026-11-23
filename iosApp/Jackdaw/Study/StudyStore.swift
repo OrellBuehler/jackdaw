@@ -7,6 +7,7 @@ struct StudyCurrent {
     let feedback: FeedbackInfo?
     let isRetry: Bool
     let hint: StyledText?
+    let figure: FigureInfo?
 }
 
 @MainActor
@@ -44,7 +45,8 @@ final class StudyStore {
                 question: question,
                 feedback: nil,
                 isRetry: question.isRetry,
-                hint: question.hint
+                hint: question.hint,
+                figure: question.figure
             )
         case .feedback(let feedback):
             return StudyCurrent(
@@ -52,7 +54,8 @@ final class StudyStore {
                 question: nil,
                 feedback: feedback,
                 isRetry: lastQuestion?.isRetry ?? false,
-                hint: lastQuestion?.hint
+                hint: lastQuestion?.hint,
+                figure: feedback.figure
             )
         case .finished:
             return nil

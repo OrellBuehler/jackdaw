@@ -28,6 +28,9 @@ struct ExerciseScaffold<Content: View, Bar: View>: View {
                     Chip(text: L10n.tr("study.retry"), systemImage: "arrow.counterclockwise", tint: Brand.flame)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                if let figure = current.figure {
+                    FigureView(figure: figure)
+                }
                 content
             }
             .padding(.horizontal, 20)

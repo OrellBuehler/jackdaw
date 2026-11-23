@@ -252,6 +252,7 @@
 "study.order.expected" = "Expected:";
 "study.order.hint" = "Use the arrows to bring the entries into the right order.";
 "study.order.up" = "Move up";
+"study.figure" = "Figure";
 "study.retry" = "Second try";
 "study.reveal" = "Show answer";
 "study.tf.false" = "False";

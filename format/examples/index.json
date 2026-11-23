@@ -32,8 +32,8 @@
       "language": "en",
       "icon": "🧭",
       "color": "#7C3AED",
-      "items": 12,
-      "revision": 3
+      "items": 13,
+      "revision": 4
     },
     {
       "id": "com.github.orellbuehler.jackdaw.examples.french-basics",
@@ -88,7 +88,7 @@
       "icon": "🪐",
       "color": "#4338CA",
       "items": 28,
-      "revision": 1
+      "revision": 2
     },
     {
       "id": "com.github.orellbuehler.jackdaw.examples.spanish-basics",

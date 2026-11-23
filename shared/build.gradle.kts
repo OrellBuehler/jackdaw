@@ -14,6 +14,10 @@ abstract class GenerateFormatResources : DefaultTask() {
     @get:PathSensitive(PathSensitivity.RELATIVE)
     abstract val examplesDir: DirectoryProperty
 
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val compatDir: DirectoryProperty
+
     @get:InputFile
     @get:PathSensitive(PathSensitivity.RELATIVE)
     abstract val vectorsFile: RegularFileProperty
@@ -70,6 +74,22 @@ abstract class GenerateFormatResources : DefaultTask() {
                 appendLine("internal val GENERATED_TEST_VECTORS: String = ${kotlinLiteral(vectorsFile.get().asFile.readText())}")
             },
         )
+        val frozen = compatDir.get().asFile
+        File(testOutput.get().asFile, "ch/orellbuehler/jackdaw/format/GeneratedCompat.kt").writeText(
+            buildString {
+                appendLine("// Generated from format/compat by the generateFormatResources Gradle task. Do not edit.")
+                appendLine("package ch.orellbuehler.jackdaw.format")
+                appendLine()
+                appendLine("internal val GENERATED_COMPAT_MANIFEST: String = ${kotlinLiteral(File(frozen, "manifest.json").readText())}")
+                appendLine()
+                appendLine("internal val GENERATED_COMPAT_PACKS: Map<String, String> =")
+                appendLine("    mapOf(")
+                frozen.listFiles { f -> f.name.endsWith(".jackdaw") }!!.sortedBy { it.name }.forEach {
+                    appendLine("        \"${it.name}\" to ${kotlinLiteral(it.readText())},")
+                }
+                appendLine("    )")
+            },
+        )
     }
 
     private fun kotlinLiteral(text: String): String {
@@ -93,6 +113,7 @@ abstract class GenerateFormatResources : DefaultTask() {
 val generateFormatResources =
     tasks.register<GenerateFormatResources>("generateFormatResources") {
         examplesDir.set(rootProject.layout.projectDirectory.dir("format/examples"))
+        compatDir.set(rootProject.layout.projectDirectory.dir("format/compat"))
         vectorsFile.set(rootProject.layout.projectDirectory.file("format/test-vectors.json"))
         promptFile.set(rootProject.layout.projectDirectory.file("format/prompt.txt"))
         mainOutput.set(layout.buildDirectory.dir("generated/formatResources/commonMain/kotlin"))

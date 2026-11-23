@@ -247,6 +247,32 @@
         "explanation": {
           "$ref": "#/$defs/RichText",
           "description": "Optional. Shown AFTER the learner has answered: why the answer is what it is, background, an example sentence, a mnemonic."
+        },
+        "figure": {
+          "$ref": "#/$defs/Figure",
+          "description": "Optional (since specification revision 1.1). A drawing shown WITH the question, above the prompt. Older apps show the item without it, so prefer items that still make sense without the figure."
+        },
+        "answerFigure": {
+          "$ref": "#/$defs/Figure",
+          "description": "Optional (since specification revision 1.1). A drawing shown AFTER answering, in place of 'figure'."
+        }
+      }
+    },
+    "Figure": {
+      "type": "object",
+      "required": ["svg", "alt"],
+      "description": "A drawing stored inside the pack as inline SVG. It is scaled to the available width, drawn on a transparent background in light and dark mode (CSS 'color' is the app's text colour: use currentColor for lines and labels) and may be animated with SVG animation elements or CSS animations. It must be self-contained and passive; see the specification, section 'Figures', for the exact rules a reader applies.",
+      "properties": {
+        "svg": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200000,
+          "pattern": "^\\s*(<\\?xml[^>]*\\?>\\s*)?(<!--[\\s\\S]*?-->\\s*)*<svg[\\s>]",
+          "description": "Required. The complete SVG source, starting with the <svg> element, which needs a viewBox of four numbers. Only drawing, text, gradient, clipping, filter, style and animation elements are allowed. Not allowed: script, foreignObject, a, image, event handler attributes (onclick, onload, ...), and any reference that leaves the figure (href and url() must point to '#id'). Use single quotes for attributes so that the JSON string needs no escaping."
+        },
+        "alt": {
+          "$ref": "#/$defs/PlainText",
+          "description": "Required by this schema, optional for readers. What the figure shows, for screen readers and for apps that cannot draw it."
         }
       }
     },

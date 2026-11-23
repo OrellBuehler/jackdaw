@@ -1,6 +1,6 @@
 # Jackdaw Pack Format
 
-**Format version 1** · specification revision 1.0 (draft, 2026-11-20)
+**Format version 1** · specification revision 1.1 (2026-11-24)
 
 A **Jackdaw pack** is a single UTF-8 JSON file that describes a learning dataset: foreign-language vocabulary, history facts, exam questions, interview preparation, anything you can ask a question about. The Jackdaw app imports packs, schedules the learning (spaced repetition) and keeps the learning progress. The file format is open and documented so that people, scripts and AI assistants can create packs without the app.
 
@@ -222,6 +222,8 @@ The scheduling algorithm (intervals, ease, lapses) is deliberately not configura
 | `tags` | array of plain text | no | Free-form labels, at most 50. |
 | `hint` | rich text | no | Help shown **on request, before answering**. A nudge (context, first letter, mnemonic), not the answer. |
 | `explanation` | rich text | no | Shown **after answering**: why the answer is right, background, an example. |
+| `figure` | figure | no | A drawing shown **with the question** ([8.4](#84-figures)). *Since revision 1.1.* |
+| `answerFigure` | figure | no | A drawing shown **after answering**, in place of `figure` ([8.4](#84-figures)). *Since revision 1.1.* |
 
 Items of an unknown `type` are skipped by readers ([section 10](#10-compatibility-and-extensibility)).
 
@@ -444,7 +446,7 @@ Every string in a pack is either **plain text** or **rich text**.
 - **Plain text** is taken literally. No character has a special meaning, not even the backslash. Plain text properties: `title`, `description`, `author`, `license`, section `title` and `description`, `tags`, and the answer lists `alternatives`, `frontAlternatives` and `answers`.
 - **Rich text** supports the tiny inline markup of [8.2](#82-inline-markup). All other string properties that are shown to the learner are rich text: `front`, `back`, `distractors`, `frontDistractors`, `question`, option `text`, `statement`, `prompt`, `sequence` entries, `answer`, `keyPoints`, `hint`, `explanation`, and the text of a `cloze` item outside of its gaps.
 
-There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables). A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Media (images, audio) is not part of version 1; the property name `media` is reserved for it ([section 10](#10-compatibility-and-extensibility)).
+There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text. A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)), never embedded in text. Photos and audio are not part of version 1; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
 
 A newline is the character U+000A, written `\n` in JSON. Readers normalise `\r\n` and `\r` to U+000A before interpreting rich text. Rich text may contain several lines; single-line properties (titles, ids, answers) SHOULD NOT contain newlines.
 
@@ -509,6 +511,54 @@ Examples, as they appear in the decoded text (more in [`test-vectors.json`](test
 - `{{|a|}}`: one answer, `a` (empty alternatives are dropped).
 - `{{}}`, `{{ }}`, `{{::hint}}`: not gaps, shown as literal text.
 
+### 8.4 Figures
+
+*Since specification revision 1.1. Older apps ignore figures and show the item without them ([section 10](#10-compatibility-and-extensibility)).*
+
+An item can carry a drawing: a map, a diagram, a formula, a circuit, an animation of a process. A figure is an object stored **inside the pack**:
+
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `svg` | string | **yes** | One SVG document: the complete source text, starting with the `<svg>` element. At most 200,000 characters. |
+| `alt` | plain text | recommended (the schema requires it) | What the figure shows, for screen readers and for apps that cannot draw it. At most 500 characters. |
+
+```json item
+{
+  "id": "largest-angle",
+  "type": "text",
+  "question": "How many degrees is the marked angle?",
+  "answers": ["90", "90°", "ninety"],
+  "figure": {
+    "alt": "A right triangle. The angle between the two short sides is marked.",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90'><path d='M10 80H110L10 10Z' fill='none' stroke='currentColor' stroke-width='3'/><path d='M10 66H24V80' fill='none' stroke='#E5484D' stroke-width='3'/></svg>"
+  }
+}
+```
+
+**Where it is shown.** `figure` is shown with the question, above the prompt, and stays visible after answering. If the item also has `answerFigure`, that one replaces it after answering (the blank map becomes the labelled map, the still picture becomes the animation). An item with only `answerFigure` shows a drawing only after answering. For reversible cards the figures are the same in both directions.
+
+**Size and colours.** The app scales the figure to the available width and keeps the proportions of the `viewBox`; `width` and `height` on the root element are ignored. The background is transparent and the app is used in light and dark mode: the CSS `color` of the figure is set to the app's text colour, so draw lines and labels with `currentColor` (`stroke="currentColor"`, `fill="currentColor"`) and choose other colours that are readable on a light and on a dark background.
+
+**Animation.** Figures may be animated with SVG animation elements (`animate`, `animateTransform`, `animateMotion`, `set`) and with CSS animations and transitions in a `style` element. There is no interaction: the learner cannot click, hover or type into a figure, and scripts never run.
+
+**The safe subset.** A figure must be self-contained and passive. A reader checks the `svg` text with the following rules and **drops a figure that breaks any of them** (the item itself is kept, [section 11](#11-what-a-reader-does-with-invalid-input)). The rules are lexical on purpose, they work on the characters of the text without an XML parser, so that every implementation decides the same; they are stricter than necessary in rare cases. "Whitespace" here is space, tab, line feed, carriage return and form feed, and "ignoring case" means after lowercasing the text.
+
+1. The text is at most 200,000 characters (UTF-16 code units).
+2. Surrounding whitespace is removed. One leading XML declaration (`<?xml ... ?>`) is removed, with the whitespace after it. No other `<?` may occur.
+3. Ignoring case, the text does not contain `<!doctype`, `<!entity`, `javascript:` or `@import`.
+4. Every `<` is the start of a comment (`<!--`), of a CDATA section (`<![CDATA[`), or of a tag: `<` or `</`, directly followed by an element name from the list below. The name is the longest run of the characters `A-Z a-z 0-9 : _ . -` and is compared case-sensitively. This also holds inside comments and CDATA sections. Consequently a literal `<` in a label must be written `&lt;`.
+5. The first tag is the opening `<svg` tag, and it is closed by a `>`. The text between them, the root tag, contains a `viewBox` attribute: whitespace, `viewBox`, optional whitespace, `=`, optional whitespace, and a value in single or double quotes. The value consists of four numbers separated by whitespace or commas; a number uses only the characters `0-9 + - . e E`. The third and fourth number (width and height) are greater than zero.
+6. No event handlers: ignoring case, there is no `on` followed by one or more letters `a-z`, optional whitespace and `=`, where the `on` comes directly after whitespace, a quote (`"` or `'`) or `/`.
+7. No references to anything outside the figure: ignoring case, every `href` that is followed by optional whitespace and `=` continues with optional whitespace, a quote, optional whitespace and `#`; and every `url(` continues with optional whitespace, an optional quote, optional whitespace and `#`.
+
+Allowed elements: `svg`, `g`, `defs`, `symbol`, `use`, `title`, `desc`, `path`, `rect`, `circle`, `ellipse`, `line`, `polyline`, `polygon`, `text`, `tspan`, `textPath`, `linearGradient`, `radialGradient`, `stop`, `pattern`, `clipPath`, `mask`, `marker`, `style`, `animate`, `animateTransform`, `animateMotion`, `mpath`, `set`, `filter` and the filter primitives `feBlend`, `feColorMatrix`, `feComponentTransfer`, `feComposite`, `feConvolveMatrix`, `feDiffuseLighting`, `feDisplacementMap`, `feDistantLight`, `feDropShadow`, `feFlood`, `feFuncA`, `feFuncB`, `feFuncG`, `feFuncR`, `feGaussianBlur`, `feMerge`, `feMergeNode`, `feMorphology`, `feOffset`, `fePointLight`, `feSpecularLighting`, `feSpotLight`, `feTile`, `feTurbulence`. Not allowed, among others: `script`, `foreignObject`, `a`, `image`, `feImage`, `iframe`, `audio`, `video`, and the editor-specific elements that drawing programs add (export as "plain" or "optimised" SVG). Fonts cannot be loaded; use generic families (`sans-serif`, `serif`, `monospace`).
+
+The **aspect ratio** of a figure is the third number of the `viewBox` divided by the fourth. [`test-vectors.json`](test-vectors.json) lists figures with the expected decision and aspect ratio; a reader MUST reproduce them.
+
+A writer MUST additionally produce well-formed XML. A reader need not verify that: it hands the text to an SVG renderer that MUST have scripting and network access switched off ([section 15](#15-security-considerations)). A reader that cannot draw SVG shows `alt` instead.
+
+**Write items that survive without the figure where you can.** Apps older than revision 1.1 show the item without it. A figure that illustrates ("here is what the orbit looks like") degrades gracefully; a question that only makes sense with the figure ("which part is marked?") does not.
+
 ---
 
 ## 9. Answer matching
@@ -568,7 +618,8 @@ These rules let the format grow without breaking existing apps and packs.
 - **`x-` properties are for extensions.** A property whose name starts with `x-` (for example `x-my-tool`) is reserved for vendor and tool extensions, at every level. The format will never define a property starting with `x-`. Its value can be any JSON. Readers ignore extensions they do not understand. Tools SHOULD pick a distinctive name (`x-acme-source-line`).
 - **Unknown item types MUST be skipped.** An item whose `type` the reader does not know is not imported, the rest of the pack is. The reader SHOULD report a warning ("skipped 3 items of unknown type 'matching'"). This is how new item types can appear in later revisions without breaking old apps.
 - **Unknown values of optional enumerated properties are ignored** (the property is treated as absent): an unknown `study.order`, an unknown kind inside `exercises` (the remaining known kinds are used; if none is left the default applies).
-- **Reserved names.** `media` (on the pack and on items) is reserved for a future version that will attach images and audio; writers MUST NOT use it for anything else in version 1, readers ignore it. Property names that start with `$` are reserved for the format.
+- **Version 1 packs stay readable for good.** Every app that reads Jackdaw packs, now and in the future, MUST import a valid version 1 pack with all of its items. Later revisions of this specification only add to version 1 ([section 14](#14-versioning-policy)); they never remove a property, never change what an existing property means and never make an existing valid pack invalid. The packs in [`compat/`](compat/) are frozen copies from each revision; an implementation must keep importing them completely.
+- **Reserved names.** `media` (on the pack and on items) is reserved for a future version that will attach photos and audio; writers MUST NOT use it for anything else in version 1, readers ignore it. Property names that start with `$` are reserved for the format.
 - **Version check.** A reader MUST reject a file whose `version` is greater than the highest version it supports and tell the user to update the app. A reader that supports version N MUST also read every version below N.
 - **The schema is stricter than readers.** The JSON Schema is for authors and tools. It rejects things a reader would tolerate: unknown item types (to catch typos like `"multiple-choice"`), length and count limits, malformed optional properties. A file that fails the schema may still be imported by a forgiving reader, but writers MUST aim to pass it.
 - **Progress is not content.** Packs MUST NOT contain learning progress, scheduling data, review history or user settings. An exporter in the app writes content only.
@@ -593,6 +644,7 @@ Readers MUST NOT crash, hang or run out of memory on invalid files. They apply t
 | `text`: no non-blank entry in `answers`. `cloze`: no valid gap ([8.3](#83-cloze-gaps)). `order`: fewer than 2 entries. `truefalse`: `answer` is not a boolean. | **Skip the item**, warn. |
 | An optional property has the wrong JSON type or an invalid value (including `icon`, `color`, dates, `exercises`) | **Ignore that property** (treat it as absent), warn. |
 | Entries of an array are invalid (for example a number inside `alternatives`) | **Drop those entries**; if none are left treat the property as absent. |
+| A `figure` or `answerFigure` is not an object, has no `svg` string, or its `svg` breaks a rule of [8.4](#84-figures) | **Ignore that property**: the item is imported without that figure, warn. |
 | A section is not an object, lacks `id` or `title`, or has a duplicate `id` (first wins) | **Drop that section**, warn. |
 | An item names a `section` that does not exist | Treat the item as **ungrouped**, warn. |
 | Unknown properties or unknown item types | Ignore / skip as described in [section 10](#10-compatibility-and-extensibility). |
@@ -613,6 +665,7 @@ A reader can be built in this order: (1) parse the JSON, tolerating a BOM; (2) c
 | Items per pack | 5,000 |
 | Text properties (`front`, `back`, `question`, `text`, `explanation`, ...) | 4,000 characters |
 | Answers, alternatives | 500 characters each |
+| `svg` of a figure | 200,000 characters (most figures need less than 5,000) |
 | `title` | 200 characters |
 | `description` | 2,000 characters |
 | Options of a `choice` item | 10 |
@@ -637,6 +690,7 @@ There are three layers:
    - every `cloze` text has at least one valid gap, and no gap is empty;
    - every typed answer is non-empty after normalisation;
    - `order` entries are different from each other;
+   - every figure passes the rules of [8.4](#84-figures) and is well-formed XML;
    - the JSON has no duplicate property names within an object.
 3. **Reader behaviour** ([section 11](#11-what-a-reader-does-with-invalid-input)): what the app does with whatever it receives.
 
@@ -658,6 +712,8 @@ Any other JSON Schema 2020-12 validator (for example `ajv`) can check layer 1.
 - **Compatible changes do not change `version`:** new optional properties, new item types, new values of optional enumerations, new exercise kinds. Readers cope with them through the rules of [section 10](#10-compatibility-and-extensibility) (ignore unknown properties, skip unknown item types and enumeration values). Packs that use such additions remain `"version": 1`; older apps import the parts they understand and report what they skipped.
 - **Breaking changes increase `version`:** removing or renaming a property, changing the meaning or default of a property, making an optional property required, changing the rules for ids, normalisation or grading. A pack that needs a breaking feature declares the higher version, and older apps reject it with a clear message.
 - A reader that supports version N MUST also read all earlier versions.
+- **Compatibility promise.** A pack that is valid under any revision of version 1 stays valid, and keeps its meaning, under every later revision. Each revision that adds something says so where the addition is described ("since revision 1.1") and adds a frozen pack to [`compat/`](compat/) that uses it. The validator checks that the frozen packs are unchanged and still valid, and the reference reader is tested to import them without skipping anything.
+- Revision history: **1.0** first release. **1.1** figures (`figure`, `answerFigure`, [8.4](#84-figures)).
 - The JSON Schema describes exactly one major version. The schema of a later major version will get its own file; this file keeps describing version 1 and is extended for compatible additions.
 - Editorial and clarifying changes of this document only change the *specification revision* shown at the top.
 
@@ -668,6 +724,7 @@ Any other JSON Schema 2020-12 validator (for example `ajv`) can check layer 1.
 A pack is untrusted input, possibly written by a stranger or generated by a program.
 
 - Render all text as text. Never interpret it as HTML, a URL to open, a file path or code. Do not turn text into links automatically.
+- **Figures are the one place where pack content reaches a renderer.** Apply the rules of [8.4](#84-figures) when importing, and do not rely on them alone: draw the SVG in a renderer that has scripting disabled, cannot reach the network, the file system or other app content, and cannot navigate (in a web view: JavaScript off, network loads blocked, a content security policy of `default-src 'none'; style-src 'unsafe-inline'`, no handling of links). Bound the size of the figure on screen.
 - Do not fetch `source` or any other URL automatically.
 - Bound the memory and time used for parsing (file size, nesting depth, number of items, length of strings) as in [section 12](#12-limits-and-size-guidance). Use a JSON parser with a nesting limit.
 - Importing a pack never executes anything and never needs permissions beyond reading the file.
@@ -695,7 +752,7 @@ This pack uses every property of the format and every item type. It is also stor
   "tags": ["jackdaw", "format", "example"],
   "icon": "🧭",
   "color": "#7C3AED",
-  "revision": 3,
+  "revision": 4,
   "created": "2026-11-01T09:00:00Z",
   "updated": "2026-11-20T14:30:00+01:00",
   "sections": [
@@ -840,6 +897,18 @@ This pack uses every property of the format and every item type. It is also stor
         "A reused id passes old progress on to different content",
         "Fixing a typo does not require a new id"
       ]
+    },
+    {
+      "id": "figure-svg",
+      "type": "truefalse",
+      "section": "item-types",
+      "statement": "A figure is stored inside the pack as inline SVG.",
+      "answer": true,
+      "figure": {
+        "alt": "A dot moving left and right inside a rounded frame.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 80'><rect x='4' y='4' width='232' height='72' rx='12' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='40' cy='40' r='12' fill='#7C5CFF'><animate attributeName='cx' values='40;200;40' dur='4s' repeatCount='indefinite'/></circle></svg>"
+      },
+      "explanation": "`figure` is shown with the question, `answerFigure` after answering. Both are self-contained SVG and may be animated."
     }
   ]
 }
@@ -872,7 +941,7 @@ More examples in [`examples/`](examples/): [`spanish-basics.jackdaw`](examples/s
 
 **Can an item have several typed answers, like "name three causes"?** Not as one `text` item. Use `open` with `keyPoints`, a `cloze` with several gaps, or one `text` item per fact.
 
-**Is there matching of pairs, drawing, audio or images?** Not in version 1. Pairs are best as separate `card` items (the app builds multiple choice from them). Media is reserved for a later version.
+**Is there matching of pairs, drawing, audio or images?** Drawings yes: any item can show an SVG figure ([8.4](#84-figures)). Matching of pairs, drawing by the learner, photos and audio are not in version 1. Pairs are best as separate `card` items (the app builds multiple choice from them).
 
 **How do I mark a formula or code?** Use backticks: `` `E = mc^2` ``. Everything is plain Unicode text; there is no math typesetting.
 
