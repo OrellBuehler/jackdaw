@@ -24,6 +24,10 @@ class SettingsViewModel(
         viewModelScope.launch { sdk.setDefaultSessionSize(size) }
     }
 
+    fun setTypoTolerance(enabled: Boolean) {
+        viewModelScope.launch { sdk.setTypoTolerance(enabled) }
+    }
+
     fun setTheme(theme: ThemePreference) {
         viewModelScope.launch { sdk.setTheme(theme) }
     }

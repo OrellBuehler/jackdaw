@@ -12,7 +12,7 @@
   "tags": ["geography", "switzerland", "cantons"],
   "icon": "🇨🇭",
   "color": "#D52B1E",
-  "revision": 1,
+  "revision": 2,
   "created": "2026-11-20",
   "updated": "2026-11-20",
   "sections": [
@@ -114,6 +114,7 @@
       "section": "zurich-northwest",
       "front": "Capital of canton **Basel-Stadt** (BS)?",
       "back": "Basel",
+      "alternatives": ["Basle", "Bâle"],
       "explanation": "Basel-Stadt is a city-canton consisting of the city of Basel and two neighbouring municipalities."
     },
     {
@@ -138,6 +139,7 @@
       "section": "mittelland",
       "front": "Capital of canton **Bern** (BE)?",
       "back": "Bern",
+      "alternatives": ["Berne"],
       "explanation": "Bern is also the seat of the federal government."
     },
     {

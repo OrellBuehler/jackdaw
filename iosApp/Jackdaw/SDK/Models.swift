@@ -164,8 +164,15 @@ struct SettingsInfo: Hashable, Sendable {
     var defaultSessionSize: Int
     var theme: ThemeChoice
     var onboardingSeen: Bool
+    var typoTolerance: Bool
 
-    static let initial = SettingsInfo(dailyGoal: 20, defaultSessionSize: 20, theme: .system, onboardingSeen: false)
+    static let initial = SettingsInfo(
+        dailyGoal: 20,
+        defaultSessionSize: 20,
+        theme: .system,
+        onboardingSeen: false,
+        typoTolerance: true
+    )
 }
 
 struct SamplePackInfo: Identifiable, Hashable, Sendable {
@@ -416,6 +423,7 @@ struct GapResultInfo: Identifiable, Hashable, Sendable {
     let given: String
     let canonical: String
     let correct: Bool
+    let typo: Bool
 
     var id: Int { index }
 }
@@ -449,6 +457,7 @@ struct FeedbackInfo: Hashable, Sendable {
     let orderResults: [OrderResultInfo]
     let keyPoints: [StyledText]
     let statementIsTrue: Bool
+    let typo: Bool
     let suggestedGrades: [GradeChoice]
 
     var needsSelfGrade: Bool { verdict == .pendingSelfGrade }

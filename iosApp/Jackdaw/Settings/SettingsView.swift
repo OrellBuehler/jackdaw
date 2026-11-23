@@ -41,6 +41,13 @@ private struct StudySettingsCard: View {
             Text("settings.session.footer")
                 .font(.brand(.footnote))
                 .foregroundStyle(Brand.textSecondary)
+            Divider()
+            Toggle("settings.typos", isOn: $model.typoToleranceSelection)
+                .font(.brand(.body, weight: .medium))
+                .tint(Brand.accent)
+            Text("settings.typos.footer")
+                .font(.brand(.footnote))
+                .foregroundStyle(Brand.textSecondary)
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)

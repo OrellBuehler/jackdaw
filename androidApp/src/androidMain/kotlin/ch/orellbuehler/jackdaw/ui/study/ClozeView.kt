@@ -184,7 +184,7 @@ fun ClozeView(
                                 },
                             )
                         } else {
-                            GapResultView(result.given, result.canonical, result.correct, style)
+                            GapResultView(result.given, result.canonical, result.correct, result.typo, style)
                         }
                     }
                 }
@@ -259,6 +259,7 @@ private fun GapResultView(
     given: String,
     canonical: String,
     correct: Boolean,
+    typo: Boolean,
     style: TextStyle,
 ) {
     val success = MaterialTheme.jackdaw
@@ -269,7 +270,8 @@ private fun GapResultView(
         modifier = Modifier.padding(horizontal = 2.dp),
     ) {
         if (correct) {
-            Chip(given, success.successContainer, success.onSuccessContainer, style, false)
+            Chip(given, success.successContainer, success.onSuccessContainer, style, typo)
+            if (typo) Chip(canonical, success.successContainer, success.onSuccessContainer, style, false)
         } else {
             Chip(given.ifBlank { "—" }, scheme.errorContainer, scheme.onErrorContainer, style, true)
             Chip(canonical, success.successContainer, success.onSuccessContainer, style, false)

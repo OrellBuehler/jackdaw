@@ -37,6 +37,7 @@ enum SessionAdapter {
                     orderResults: f.orderResults,
                     keyPoints: f.keyPoints,
                     statementIsTrue: f.statementIsTrue,
+                    typo: f.typo,
                     suggestedGrades: grades
                 )
             )
@@ -62,6 +63,7 @@ enum SessionAdapter {
         orderResults: [OrderResult],
         keyPoints: [RichText],
         statementIsTrue: Bool,
+        typo: Bool,
         suggestedGrades: [GradeChoice]
     ) -> FeedbackInfo {
         let verdict: FeedbackVerdict
@@ -91,7 +93,7 @@ enum SessionAdapter {
                 )
             },
             gapResults: gapResults.map { gap in
-                GapResultInfo(index: Int(gap.index), given: gap.given, canonical: gap.canonical, correct: gap.correct)
+                GapResultInfo(index: Int(gap.index), given: gap.given, canonical: gap.canonical, correct: gap.correct, typo: gap.typo)
             },
             orderResults: orderResults.map { entry in
                 OrderResultInfo(
@@ -103,6 +105,7 @@ enum SessionAdapter {
             },
             keyPoints: keyPoints.map { Mapping.styled($0) },
             statementIsTrue: statementIsTrue,
+            typo: typo,
             suggestedGrades: suggestedGrades
         )
     }

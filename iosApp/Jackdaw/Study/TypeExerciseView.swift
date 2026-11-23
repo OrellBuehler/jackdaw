@@ -85,9 +85,9 @@ struct TypeExerciseView: View {
                     .foregroundStyle(isCorrect ? Brand.success : Brand.error)
                     .strikethrough(!isCorrect && !feedback.userAnswer.isEmpty)
             }
-            if !isCorrect {
+            if !isCorrect || feedback.typo {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("study.type.expected")
+                    Text(L10n.tr(feedback.typo ? "study.type.spelling" : "study.type.expected"))
                         .font(.brand(.caption, weight: .bold))
                         .foregroundStyle(Brand.textSecondary)
                         .textCase(.uppercase)

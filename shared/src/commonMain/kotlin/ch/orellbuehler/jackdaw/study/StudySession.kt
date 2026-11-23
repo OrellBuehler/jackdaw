@@ -31,6 +31,7 @@ class StudySession internal constructor(
     private val recorder: AttemptRecorder,
     private val clock: Clock,
     private val random: Random,
+    private val tolerateTypos: Boolean = false,
 ) {
     private class Slot(
         val entry: PlanEntry,
@@ -171,7 +172,7 @@ class StudySession internal constructor(
             return
         }
         val entry = slot.entry
-        val exercise = ExerciseFactory.build(pack.context, entry.item, entry.facet, entry.type, random)
+        val exercise = ExerciseFactory.build(pack.context, entry.item, entry.facet, entry.type, random, tolerateTypos)
         current = slot
         built = exercise
         mutableState.value =
@@ -215,6 +216,7 @@ class StudySession internal constructor(
             orderResults = evaluation.orderResults,
             keyPoints = evaluation.keyPoints,
             statementIsTrue = evaluation.statementIsTrue,
+            typo = evaluation.typo,
         )
 
     private fun summary(abandoned: Boolean): SessionSummary {

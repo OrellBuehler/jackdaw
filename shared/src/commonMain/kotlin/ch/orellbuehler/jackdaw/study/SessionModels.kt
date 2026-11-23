@@ -66,6 +66,7 @@ data class GapResult(
     val given: String,
     val canonical: String,
     val correct: Boolean,
+    val typo: Boolean = false,
 )
 
 data class OrderResult(
@@ -113,6 +114,7 @@ sealed class SessionState {
         val orderResults: List<OrderResult>,
         val keyPoints: List<RichText>,
         val statementIsTrue: Boolean,
+        val typo: Boolean = false,
     ) : SessionState() {
         val correct: Boolean get() = verdict == Verdict.CORRECT
 

@@ -57,6 +57,7 @@
 "empty.title" = "Deine Bibliothek ist leer";
 "feedback.correct" = "Richtig!";
 "feedback.repeat" = "Das fragen wir bald nochmal.";
+"feedback.typo" = "Richtig, mit Tippfehler";
 "feedback.wrong" = "Nicht ganz";
 "finished.abandoned.message" = "Deine bisherigen Antworten sind gespeichert.";
 "finished.abandoned.title" = "Sitzung beendet";
@@ -189,6 +190,8 @@
 "settings.theme.light" = "Hell";
 "settings.theme.system" = "System";
 "settings.title" = "Einstellungen";
+"settings.typos" = "Tippfehler verzeihen";
+"settings.typos.footer" = "Ein kleiner Vertipper, etwa eine Nachbartaste oder zwei vertauschte Buchstaben, zählt trotzdem als richtig. Zahlen und Antworten mit exakter Gross- und Kleinschreibung bleiben streng.";
 "stat.due" = "Fällig";
 "stat.learning" = "Lernend";
 "stat.mastered" = "Gemeistert";
@@ -258,6 +261,7 @@
 "study.type.empty" = "(keine Antwort)";
 "study.type.expected" = "Richtige Antwort";
 "study.type.placeholder" = "Deine Antwort";
+"study.type.spelling" = "Richtige Schreibweise";
 "study.type.yours" = "Deine Antwort";
 "sync.error.title" = "Letzter Fehler";
 "sync.footer" = "Synchronisiert werden Packs samt Inhalt, dein Lernverlauf, das Tagesziel und die Sitzungsgrösse. Darstellung und Einführung bleiben pro Gerät. Die Daten gehen nur in deine private iCloud, die nur du lesen kannst. Jackdaw hat keine eigenen Server.";

@@ -303,6 +303,6 @@ internal class SyncStore(
     }
 
     companion object {
-        val SYNCED_SETTINGS: Set<String> = setOf(SettingsStore.DAILY_GOAL, SettingsStore.SESSION_SIZE)
+        val SYNCED_SETTINGS: Set<String> = setOf(SettingsStore.DAILY_GOAL, SettingsStore.SESSION_SIZE, SettingsStore.TYPO_TOLERANCE)
     }
 }

@@ -244,7 +244,13 @@ fun VerdictPanel(
             Icon(if (correct) Icons.Rounded.CheckCircle else Icons.Rounded.Cancel, null, Modifier.size(32.dp), tint = content)
             Column(Modifier.weight(1f)) {
                 Text(
-                    stringResource(if (correct) R.string.feedback_correct else R.string.feedback_wrong),
+                    stringResource(
+                        when {
+                            !correct -> R.string.feedback_wrong
+                            feedback.typo -> R.string.feedback_typo
+                            else -> R.string.feedback_correct
+                        },
+                    ),
                     style = MaterialTheme.typography.titleLarge,
                     color = content,
                 )

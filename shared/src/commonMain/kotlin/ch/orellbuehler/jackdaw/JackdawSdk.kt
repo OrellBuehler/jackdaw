@@ -178,6 +178,7 @@ class JackdawSdk internal constructor(
             recorder,
             env.clock,
             env.random,
+            prepared.tolerateTypos,
         )
     }
 
@@ -197,6 +198,10 @@ class JackdawSdk internal constructor(
         withContext(dispatcher) { settingsStore.setDefaultSessionSize(size) }
     }
 
+    suspend fun setTypoTolerance(enabled: Boolean) {
+        withContext(dispatcher) { settingsStore.setTypoTolerance(enabled) }
+    }
+
     suspend fun setTheme(theme: ThemePreference) {
         withContext(dispatcher) { settingsStore.setTheme(theme) }
     }
@@ -213,6 +218,7 @@ class JackdawSdk internal constructor(
         val pack: LoadedPack,
         val config: ResolvedConfig,
         val plan: Plan,
+        val tolerateTypos: Boolean,
     )
 
     private fun prepare(
@@ -220,9 +226,10 @@ class JackdawSdk internal constructor(
         config: SessionConfig,
     ): Prepared {
         val pack = packStore.load(packId) ?: LoadedPack(packId, PackContext(Study.DEFAULT, emptyList()), emptyMap())
-        val resolved = ResolvedConfig.resolve(config, settingsStore.get().defaultSessionSize, pack.context.study.newPerSession)
+        val settings = settingsStore.get()
+        val resolved = ResolvedConfig.resolve(config, settings.defaultSessionSize, pack.context.study.newPerSession)
         val plan = Planner.plan(pack, resolved, env.cutoffs(env.now()), env.random)
-        return Prepared(pack, resolved, plan)
+        return Prepared(pack, resolved, plan, settings.typoTolerance)
     }
 
     private fun install(

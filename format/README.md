@@ -556,7 +556,7 @@ The **plain-text rendering** of rich text is the concatenation of its text after
 
 Nothing else is equal. In particular these are **not** matched automatically; list them explicitly as alternatives: spelling variants (`colour`/`color`), synonyms, digits versus words (`3`/`three`), a missing article (`el pan`/`pan`), hyphen versus space, abbreviations. Accents are significant unless the pack sets `ignoreDiacritics`.
 
-An app MAY offer additional user-controlled leniency (for example tolerating a typo) as long as the result defined here stays the baseline: leniency must be visibly different from a correct answer and must be switched off by default.
+An app MAY offer additional leniency (for example tolerating a typo) as long as the result defined here stays the baseline: an answer accepted only through leniency must be shown visibly differently from a correct answer, together with the correct spelling, and the user must be able to switch the leniency off. Leniency MUST NOT apply to items with `caseSensitive`, and it MUST NOT change, add or remove a digit.
 
 ---
 

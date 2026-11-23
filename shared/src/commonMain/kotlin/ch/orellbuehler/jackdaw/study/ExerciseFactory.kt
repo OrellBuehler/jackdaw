@@ -1,5 +1,6 @@
 package ch.orellbuehler.jackdaw.study
 
+import ch.orellbuehler.jackdaw.format.AnswerMatch
 import ch.orellbuehler.jackdaw.format.CardItem
 import ch.orellbuehler.jackdaw.format.CardKind
 import ch.orellbuehler.jackdaw.format.ChoiceItem
@@ -13,7 +14,7 @@ import ch.orellbuehler.jackdaw.format.Study
 import ch.orellbuehler.jackdaw.format.TextItem
 import ch.orellbuehler.jackdaw.format.TextSpan
 import ch.orellbuehler.jackdaw.format.TrueFalseItem
-import ch.orellbuehler.jackdaw.format.matchesAnswer
+import ch.orellbuehler.jackdaw.format.matchAnswer
 import ch.orellbuehler.jackdaw.format.normalize
 import ch.orellbuehler.jackdaw.format.parseCloze
 import kotlin.random.Random
@@ -23,6 +24,24 @@ internal class PackContext(
     val items: List<Item>,
 ) {
     val cards: List<CardItem> = items.filterIsInstance<CardItem>()
+
+    val typedAnswers: Set<String> by lazy {
+        val raw = ArrayList<String>()
+        for (item in items) {
+            when (item) {
+                is CardItem -> {
+                    raw += RichText.parse(item.front).plain
+                    raw += RichText.parse(item.back).plain
+                    raw += item.alternatives
+                    raw += item.frontAlternatives
+                }
+                is TextItem -> raw += item.answers
+                is ClozeItem -> parseCloze(item.text).filterIsInstance<ClozePart.Gap>().forEach { raw += it.answers }
+                else -> Unit
+            }
+        }
+        raw.mapTo(HashSet()) { normalize(it, caseSensitive = false, ignoreDiacritics = study.ignoreDiacritics) }
+    }
 
     fun facetsOf(item: Item): List<Facet> =
         if (item is CardItem &&
@@ -43,6 +62,7 @@ internal class Evaluation(
     val orderResults: List<OrderResult> = emptyList(),
     val keyPoints: List<RichText> = emptyList(),
     val statementIsTrue: Boolean = false,
+    val typo: Boolean = false,
 )
 
 internal interface BuiltExercise {
@@ -197,9 +217,10 @@ internal object ExerciseFactory {
         facet: Facet,
         type: ExerciseType,
         random: Random,
+        tolerateTypos: Boolean = false,
     ): BuiltExercise =
         when (item) {
-            is CardItem -> buildCard(context, item, facet, type, random)
+            is CardItem -> buildCard(context, item, facet, type, random, tolerateTypos)
             is ChoiceItem -> buildChoiceItem(item, facet, random)
             is TextItem ->
                 BuiltType(
@@ -207,9 +228,10 @@ internal object ExerciseFactory {
                     item.answers,
                     RichText.fromPlain(item.answers.first()),
                     item.caseSensitive,
-                    context.study.ignoreDiacritics,
+                    context,
+                    tolerateTypos,
                 )
-            is ClozeItem -> buildCloze(context, item, facet)
+            is ClozeItem -> buildCloze(context, item, facet, tolerateTypos)
             is TrueFalseItem -> BuiltTrueFalse(TrueFalseExercise(item.id, facet, RichText.parse(item.statement)), item.answer)
             is OrderItem -> buildOrder(item, facet, random)
             is OpenItem ->
@@ -226,6 +248,7 @@ internal object ExerciseFactory {
         facet: Facet,
         type: ExerciseType,
         random: Random,
+        tolerateTypos: Boolean,
     ): BuiltExercise {
         val prompt = RichText.parse(promptSide(card, facet))
         val answer = RichText.parse(answerSide(card, facet))
@@ -248,7 +271,8 @@ internal object ExerciseFactory {
                 acceptedAnswers(card, facet),
                 answer,
                 card.caseSensitive,
-                context.study.ignoreDiacritics,
+                context,
+                tolerateTypos,
             )
         }
         return BuiltFlip(FlipExercise(card.id, facet, prompt), answer)
@@ -273,6 +297,7 @@ internal object ExerciseFactory {
         context: PackContext,
         item: ClozeItem,
         facet: Facet,
+        tolerateTypos: Boolean,
     ): BuiltExercise {
         val parts = parseCloze(item.text)
         val gaps = parts.filterIsInstance<ClozePart.Gap>()
@@ -288,7 +313,8 @@ internal object ExerciseFactory {
             ClozeExercise(item.id, facet, segments, gaps.size),
             parts,
             item.caseSensitive,
-            context.study.ignoreDiacritics,
+            context,
+            tolerateTypos,
         )
     }
 
@@ -375,7 +401,8 @@ private class BuiltType(
     private val accepted: List<String>,
     private val canonical: RichText,
     private val caseSensitive: Boolean,
-    private val ignoreDiacritics: Boolean,
+    private val context: PackContext,
+    private val tolerateTypos: Boolean,
 ) : BuiltExercise {
     override val needsSelfGrade: Boolean get() = false
 
@@ -383,7 +410,8 @@ private class BuiltType(
 
     override fun evaluate(answer: Answer): Evaluation? {
         if (answer !is TextAnswer) return null
-        return Evaluation(matchesAnswer(answer.text, accepted, caseSensitive, ignoreDiacritics), canonical, answer.text)
+        val match = matchAnswer(answer.text, accepted, caseSensitive, context.study.ignoreDiacritics, tolerateTypos, context.typedAnswers)
+        return Evaluation(match != AnswerMatch.NONE, canonical, answer.text, typo = match == AnswerMatch.TYPO)
     }
 }
 
@@ -391,7 +419,8 @@ private class BuiltCloze(
     override val exercise: ClozeExercise,
     private val parts: List<ClozePart>,
     private val caseSensitive: Boolean,
-    private val ignoreDiacritics: Boolean,
+    private val context: PackContext,
+    private val tolerateTypos: Boolean,
 ) : BuiltExercise {
     override val needsSelfGrade: Boolean get() = false
 
@@ -403,7 +432,9 @@ private class BuiltCloze(
         val results =
             gaps.mapIndexed { index, gap ->
                 val given = answer.gaps.getOrElse(index) { "" }
-                GapResult(index, given, gap.answers.first(), matchesAnswer(given, gap.answers, caseSensitive, ignoreDiacritics))
+                val match =
+                    matchAnswer(given, gap.answers, caseSensitive, context.study.ignoreDiacritics, tolerateTypos, context.typedAnswers)
+                GapResult(index, given, gap.answers.first(), match != AnswerMatch.NONE, match == AnswerMatch.TYPO)
             }
         val spans = ArrayList<TextSpan>()
         var gapIndex = 0
@@ -418,6 +449,7 @@ private class BuiltCloze(
             RichText(spans),
             results.joinToString(", ") { it.given },
             gapResults = results,
+            typo = results.any { it.typo },
         )
     }
 }

@@ -12,7 +12,7 @@
   "tags": ["history", "20th-century", "world-wars", "cold-war"],
   "icon": "🌍",
   "color": "#1D4ED8",
-  "revision": 1,
+  "revision": 2,
   "created": "2026-11-20",
   "updated": "2026-11-20",
   "sections": [
@@ -146,7 +146,7 @@
       "id": "pearl-harbor",
       "type": "cloze",
       "section": "ww2",
-      "text": "The Japanese attack on {{Pearl Harbor}} on 7 December {{1941}} brought the United States into the Second World War.",
+      "text": "The Japanese attack on {{Pearl Harbor|Pearl Harbour::US naval base in Hawaii}} on 7 December {{1941::year}} brought the United States into the Second World War.",
       "explanation": "The US declared war on Japan the next day. Germany and Italy declared war on the US on 11 December."
     },
     {
@@ -208,16 +208,16 @@
       "id": "berlin-wall",
       "type": "cloze",
       "section": "cold-war",
-      "text": "The {{Berlin Wall}} was built in {{1961}} and fell in {{1989}}.",
+      "text": "The Berlin Wall was built in {{1961::year}} and fell in {{1989::year}}.",
       "explanation": "Construction began on 13 August 1961. The border opened on 9 November 1989."
     },
     {
       "id": "cuban-missile-crisis",
       "type": "text",
       "section": "cold-war",
-      "question": "Which crisis of October 1962 brought the United States and the Soviet Union close to nuclear war over missiles in Cuba?",
-      "answers": ["Cuban Missile Crisis", "The Cuban Missile Crisis"],
-      "hint": "Think of Kennedy and Khrushchev.",
+      "question": "What is the name of the confrontation of October 1962 that brought the United States and the Soviet Union close to nuclear war?",
+      "answers": ["Cuban Missile Crisis", "The Cuban Missile Crisis", "Cuba Crisis", "Cuban Crisis", "Missile Crisis", "October Crisis", "Caribbean Crisis"],
+      "hint": "It is named after the island where the Soviet missiles were stationed.",
       "explanation": "It ended when Khrushchev agreed to withdraw the missiles. The US pledged not to invade Cuba and secretly agreed to remove its missiles from Turkey."
     },
     {
@@ -264,7 +264,16 @@
       "type": "text",
       "section": "cold-war",
       "question": "Who was the last leader of the Soviet Union?",
-      "answers": ["Mikhail Gorbachev", "Gorbachev"],
+      "answers": [
+        "Mikhail Gorbachev",
+        "Gorbachev",
+        "Gorbatchev",
+        "Gorbachov",
+        "Gorbatschow",
+        "Mikhail Gorbatchev",
+        "Mikhail Gorbachov",
+        "Michail Gorbatschow"
+      ],
       "hint": "He led the USSR from 1985 to 1991.",
       "explanation": "His policies of *glasnost* (openness) and *perestroika* (restructuring) set the changes in motion."
     },
@@ -284,9 +293,9 @@
       "id": "gandhi-pm",
       "type": "truefalse",
       "section": "world",
-      "statement": "Mahatma Gandhi became India's first prime minister in 1947.",
+      "statement": "Mahatma Gandhi was the first prime minister of independent India.",
       "answer": false,
-      "explanation": "Jawaharlal Nehru was India's first prime minister. Gandhi held no government office and was assassinated in January 1948."
+      "explanation": "Jawaharlal Nehru became the first prime minister in 1947. Gandhi led the independence movement but never held a government office; he was assassinated in January 1948."
     },
     {
       "id": "un-founded",
@@ -323,7 +332,7 @@
       "id": "mandela",
       "type": "cloze",
       "section": "world",
-      "text": "{{Nelson Mandela|Mandela::anti-apartheid leader}} was released from prison in {{1990}} and became South Africa's first Black president in {{1994}}."
+      "text": "{{Nelson Mandela|Mandela::anti-apartheid leader}} was released from prison in {{1990::year}} and became South Africa's first Black president in {{1994::year}}."
     },
     {
       "id": "maastricht",
@@ -342,7 +351,7 @@
       "type": "text",
       "section": "world",
       "question": "Which leader proclaimed the People's Republic of China on 1 October 1949?",
-      "answers": ["Mao Zedong", "Mao Tse-tung", "Mao"],
+      "answers": ["Mao Zedong", "Mao Tse-tung", "Mao Tse Tung", "Mao Tsetung", "Mao"],
       "explanation": "After the Communist victory in the Chinese Civil War, the Nationalist government withdrew to Taiwan."
     }
   ]
