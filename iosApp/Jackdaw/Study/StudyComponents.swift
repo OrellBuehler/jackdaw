@@ -87,6 +87,10 @@ struct FeedbackBanner: View {
 
     private var isCorrect: Bool { feedback.verdict == .correct }
     private var tint: Color { isCorrect ? Brand.success : Brand.error }
+    private var title: String {
+        if !isCorrect { return "feedback.wrong" }
+        return feedback.typo ? "feedback.typo" : "feedback.correct"
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -95,7 +99,7 @@ struct FeedbackBanner: View {
                     .font(.system(size: 26))
                     .foregroundStyle(tint)
                     .symbolEffect(.bounce, value: feedback.position)
-                Text(L10n.tr(isCorrect ? "feedback.correct" : "feedback.wrong"))
+                Text(L10n.tr(title))
                     .font(.brand(.title3, weight: .bold))
                     .foregroundStyle(tint)
                 Spacer(minLength: 0)

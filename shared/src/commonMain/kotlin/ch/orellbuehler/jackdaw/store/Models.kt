@@ -182,4 +182,5 @@ data class AppSettings(
     val defaultSessionSize: Int,
     val theme: ThemePreference,
     val onboardingSeen: Boolean,
+    val typoTolerance: Boolean = true,
 )

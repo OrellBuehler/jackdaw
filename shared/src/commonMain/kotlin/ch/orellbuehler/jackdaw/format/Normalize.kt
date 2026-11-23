@@ -30,6 +30,22 @@ internal fun matchesAnswer(
     return accepted.any { normalize(it, caseSensitive, ignoreDiacritics) == typedNormal }
 }
 
+internal fun matchAnswer(
+    typed: String,
+    accepted: List<String>,
+    caseSensitive: Boolean,
+    ignoreDiacritics: Boolean,
+    tolerateTypos: Boolean,
+    otherAnswers: Set<String> = emptySet(),
+): AnswerMatch {
+    val typedNormal = normalize(typed, caseSensitive, ignoreDiacritics)
+    if (typedNormal.isEmpty()) return AnswerMatch.NONE
+    val forms = accepted.map { normalize(it, caseSensitive, ignoreDiacritics) }
+    if (typedNormal in forms) return AnswerMatch.EXACT
+    if (!tolerateTypos || caseSensitive || typedNormal in otherAnswers) return AnswerMatch.NONE
+    return if (forms.any { isTypoOf(typedNormal, it) }) AnswerMatch.TYPO else AnswerMatch.NONE
+}
+
 private fun unifyQuotesAndDashes(text: String): String {
     var changed = false
     for (c in text) {

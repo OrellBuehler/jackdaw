@@ -57,6 +57,7 @@
 "empty.title" = "Your library is empty";
 "feedback.correct" = "Correct!";
 "feedback.repeat" = "We'll ask this again soon.";
+"feedback.typo" = "Correct, with a typo";
 "feedback.wrong" = "Not quite";
 "finished.abandoned.message" = "Your answers so far are saved.";
 "finished.abandoned.title" = "Session ended";
@@ -189,6 +190,8 @@
 "settings.theme.light" = "Light";
 "settings.theme.system" = "System";
 "settings.title" = "Settings";
+"settings.typos" = "Forgive typos";
+"settings.typos.footer" = "A small slip, like a neighbouring key or two swapped letters, still counts as correct. Numbers and answers with exact capitalisation stay strict.";
 "stat.due" = "Due";
 "stat.learning" = "Learning";
 "stat.mastered" = "Mastered";
@@ -258,6 +261,7 @@
 "study.type.empty" = "(no answer)";
 "study.type.expected" = "Correct answer";
 "study.type.placeholder" = "Your answer";
+"study.type.spelling" = "Correct spelling";
 "study.type.yours" = "Your answer";
 "sync.error.title" = "Last error";
 "sync.footer" = "Synced: packs with their content, your review history, the daily goal and the session size. Theme and the welcome tour stay on each device. Data goes only to your private iCloud, which only you can read. Jackdaw has no servers of its own.";

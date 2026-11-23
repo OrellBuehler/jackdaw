@@ -191,6 +191,7 @@
     <string name="choice_check">Prüfen</string>
     <string name="type_hint">Deine Antwort</string>
     <string name="type_expected">Richtige Antwort</string>
+    <string name="type_spelling">Richtige Schreibweise</string>
     <string name="type_dont_know">Weiss ich nicht</string>
     <string name="cloze_instructions">Fülle die Lücken</string>
     <string name="cloze_gap_cd">Lücke %1$d</string>
@@ -209,6 +210,7 @@
     <string name="open_key_points">Kernpunkte</string>
     <string name="open_tick">Hake ab, was du abgedeckt hast</string>
     <string name="feedback_correct">Richtig!</string>
+    <string name="feedback_typo">Richtig, mit Tippfehler</string>
     <string name="feedback_wrong">Nicht ganz</string>
     <string name="feedback_repeat">Das kommt gleich nochmal</string>
     <string name="feedback_explanation">Erklärung</string>
@@ -247,6 +249,8 @@
     <string name="settings_daily_goal_help">Wie viele Wiederholungen du pro Tag anstrebst.</string>
     <string name="settings_session_size">Sitzungsgrösse</string>
     <string name="settings_session_size_help">Die maximale Anzahl Einträge pro Lernsitzung.</string>
+    <string name="settings_typos">Tippfehler verzeihen</string>
+    <string name="settings_typos_help">Ein kleiner Vertipper, etwa eine Nachbartaste oder zwei vertauschte Buchstaben, zählt trotzdem als richtig. Zahlen und Antworten mit exakter Gross- und Kleinschreibung bleiben streng.</string>
     <string name="settings_appearance">Darstellung</string>
     <string name="theme_system">System</string>
     <string name="theme_light">Hell</string>

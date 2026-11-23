@@ -104,7 +104,9 @@ Updates follow spec section 4.2: same pack id replaces metadata, sections and hi
 
 Every first answer in a session counts as a review (practice too). Re-asked items in the same session do not.
 
-Settings: `observeSettings()`, `settings()`, `setDailyGoal(n)` (1..1000), `setDefaultSessionSize(n)` (1..500), `setTheme(ThemePreference.SYSTEM/LIGHT/DARK)`, `setOnboardingSeen(bool)`. Defaults: goal 20, session size 20, SYSTEM, onboarding not seen. `AppSettings` has the four values.
+Settings: `observeSettings()`, `settings()`, `setDailyGoal(n)` (1..1000), `setDefaultSessionSize(n)` (1..500), `setTypoTolerance(bool)`, `setTheme(ThemePreference.SYSTEM/LIGHT/DARK)`, `setOnboardingSeen(bool)`. Defaults: goal 20, session size 20, typo tolerance on, SYSTEM, onboarding not seen. `AppSettings` has the five values.
+
+**Typo tolerance** (read when a session starts). With it on, a typed answer (type exercise, text item, cloze gap) that does not match by the spec's normal form still counts as correct when it is a likely slip of an accepted answer: a letter replaced by a neighbouring key (QWERTY, QWERTZ or AZERTY), two letters swapped, a letter missing or doubled inside a word, a space or hyphen confused. One slip for answers of 4 to 8 characters, two from 9, none below 4. Never a typo: a key that is far away, a changed word ending (`gato`/`gatos`), any change to a digit, anything on a `caseSensitive` item, and an input that is itself an answer of another item in the pack (`pero`/`perro`). Such an answer is recorded as correct, and the feedback has `typo = true` so the UI can show the right spelling.
 
 ## Sync
 
@@ -116,7 +118,7 @@ What exists as a record (stable, device independent ids):
 |---|---|---|---|
 | `pack` | `pack.<packId>` | the pack's source JSON, `importedAt`, `contentAt`, `resetAt`, `deletedAt` | content: later `contentAt` wins, ties by source text. `resetAt` and `deletedAt` only grow (max). Live when `source != null` and `contentAt > deletedAt`. Deleting a pack keeps a tombstone (delete and reset time, no source) instead of removing the record, so a stale device can never bring it back, and importing it again starts without the old progress. |
 | `review` | `log.<random 128 bit id>` | one first answer: `ts`, `day`, pack, item, facet, exercise, grade, `correct`, `practice`, `reschedule`, `itemType` | immutable, union by id |
-| `setting` | `setting.<name>` | `value`, `updatedAt` | later `updatedAt` wins, ties by value. Only `daily_goal` and `default_session_size` are synced; `theme` and `onboarding_seen` stay on the device. |
+| `setting` | `setting.<name>` | `value`, `updatedAt` | later `updatedAt` wins, ties by value. Only `daily_goal`, `default_session_size` and `typo_tolerance` are synced; `theme` and `onboarding_seen` stay on the device. |
 
 The schedule of a facet is never merged, it is recomputed: replay of the facet's `reschedule` log entries (oldest first, ties by id) that are newer than the pack's `resetAt` and were recorded for the item's current type, starting from a new facet. Local answers apply the same step in place, so both ways agree. Review ids came from the old autoincrement column; `review_log.id` is now a random hex string.
 
@@ -198,7 +200,7 @@ Every exercise has `itemId`, `facet` and `type: ExerciseType`.
 
 Auto-built multiple choice for cards (spec 7.2) arrives as a normal `ChoiceExercise` with one correct option.
 
-`Feedback` fields: `exercise`, `position`, `total`, `verdict`, `correct` (verdict == CORRECT), `needsSelfGrade`, `willRepeat`, `correctAnswer: RichText` (flip: the other side; choice: the correct options, one per line; type: canonical answer; cloze: the full text with answers in bold; order: the sequence, one per line; open: the model answer; true/false: empty, use `statementIsTrue`), `userAnswer: String`, `explanation: RichText?` (the item's explanation), and per-kind detail (empty lists otherwise): `choiceResults` (option `id`, `text`, `correct`, `selected`, `explanation`: set for options that are selected or correct, as spec 7.3 suggests), `gapResults` (`index, given, canonical, correct`), `orderResults` (`position` (1-based), `arranged`, `expected`, `correct`), `keyPoints` (open), `statementIsTrue`.
+`Feedback` fields: `exercise`, `position`, `total`, `verdict`, `correct` (verdict == CORRECT), `needsSelfGrade`, `willRepeat`, `correctAnswer: RichText` (flip: the other side; choice: the correct options, one per line; type: canonical answer; cloze: the full text with answers in bold; order: the sequence, one per line; open: the model answer; true/false: empty, use `statementIsTrue`), `typo` (correct only thanks to typo tolerance: show `correctAnswer` as the right spelling), `userAnswer: String`, `explanation: RichText?` (the item's explanation), and per-kind detail (empty lists otherwise): `choiceResults` (option `id`, `text`, `correct`, `selected`, `explanation`: set for options that are selected or correct, as spec 7.3 suggests), `gapResults` (`index, given, canonical, correct, typo`), `orderResults` (`position` (1-based), `arranged`, `expected`, `correct`), `keyPoints` (open), `statementIsTrue`.
 
 `Grade`: `AGAIN, HARD, GOOD, EASY`. Auto-graded answers map to `GOOD` (right) and `AGAIN` (wrong). Hard counts as right for requeuing.
 

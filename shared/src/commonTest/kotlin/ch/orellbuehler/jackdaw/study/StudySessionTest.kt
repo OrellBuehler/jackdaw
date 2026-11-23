@@ -23,9 +23,10 @@ class StudySessionTest {
         config: SessionConfig = SessionConfig.learn(),
         random: Random = Random(1),
         schedules: Map<FacetKey, Schedule> = emptyMap(),
+        tolerateTypos: Boolean = false,
     ): StudySession {
         val pack = loaded(readPack(packJson(*items, study = study)), schedules)
-        return session(pack, config, recorder, clock, random)
+        return session(pack, config, recorder, clock, random, tolerateTypos)
     }
 
     private fun StudySession.question() = assertIs<SessionState.Question>(state.value)
@@ -305,6 +306,62 @@ class StudySessionTest {
                     .single()
                     .bold,
             )
+        }
+
+    @Test
+    fun typosAreAcceptedAndMarkedWhenTolerated() =
+        runTest {
+            val text = """{"id":"t","type":"text","question":"Crisis?","answers":["Cuban Missile Crisis"]}"""
+            val off = start(text)
+            off.submit(TextAnswer("Cuban Missle Crisis"))
+            assertFalse(off.feedback().correct)
+            assertFalse(off.feedback().typo)
+
+            val on = start(text, tolerateTypos = true)
+            on.submit(TextAnswer("cuban missle crisis"))
+            assertTrue(on.feedback().correct)
+            assertTrue(on.feedback().typo)
+            assertFalse(on.feedback().willRepeat)
+            assertEquals("Cuban Missile Crisis", on.feedback().correctAnswer.plain)
+            assertTrue(recorder.attempts.last().correct)
+
+            val exact = start(text, tolerateTypos = true)
+            exact.submit(TextAnswer("cuban missile crisis"))
+            assertTrue(exact.feedback().correct)
+            assertFalse(exact.feedback().typo)
+
+            val strict =
+                start(
+                    """{"id":"t","type":"text","question":"Command?","answers":["git commit"],"caseSensitive":true}""",
+                    tolerateTypos = true,
+                )
+            strict.submit(TextAnswer("git comit"))
+            assertFalse(strict.feedback().correct)
+
+            val cloze = start("""{"id":"c","type":"cloze","text":"{{Jupiter}} and {{Saturn}} in {{1989}}"}""", tolerateTypos = true)
+            cloze.submit(ClozeAnswer(listOf("Jupitre", "saturn", "1989")))
+            val feedback = cloze.feedback()
+            assertTrue(feedback.correct)
+            assertTrue(feedback.typo)
+            assertEquals(listOf(true, false, false), feedback.gapResults.map { it.typo })
+
+            val year = start("""{"id":"c","type":"cloze","text":"{{Jupiter}} in {{1989}}"}""", tolerateTypos = true)
+            year.submit(ClozeAnswer(listOf("Jupiter", "1998")))
+            assertFalse(year.feedback().correct)
+        }
+
+    @Test
+    fun aTypoThatIsAnotherAnswerOfThePackIsWrong() =
+        runTest {
+            val items = arrayOf(card("a", "but", "pero"), card("b", "dog", "perro"), card("c", "cat", "gato"))
+            val study = """{"exercises":{"card":["type"]}}"""
+            val session = start(*items, study = study, tolerateTypos = true)
+            assertEquals("a", session.question().exercise.itemId)
+            session.submit(TextAnswer("perro"))
+            assertFalse(session.feedback().correct)
+            val other = start(*items, study = study, tolerateTypos = true)
+            other.submit(TextAnswer("perp"))
+            assertTrue(other.feedback().typo)
         }
 
     @Test

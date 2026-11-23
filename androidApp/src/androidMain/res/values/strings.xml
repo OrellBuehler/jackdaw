@@ -191,6 +191,7 @@
     <string name="choice_check">Check</string>
     <string name="type_hint">Your answer</string>
     <string name="type_expected">Correct answer</string>
+    <string name="type_spelling">Correct spelling</string>
     <string name="type_dont_know">I don’t know</string>
     <string name="cloze_instructions">Fill in the gaps</string>
     <string name="cloze_gap_cd">Gap %1$d</string>
@@ -209,6 +210,7 @@
     <string name="open_key_points">Key points</string>
     <string name="open_tick">Tick the points you covered</string>
     <string name="feedback_correct">Correct!</string>
+    <string name="feedback_typo">Correct, with a typo</string>
     <string name="feedback_wrong">Not quite</string>
     <string name="feedback_repeat">You’ll see this again soon</string>
     <string name="feedback_explanation">Explanation</string>
@@ -247,6 +249,8 @@
     <string name="settings_daily_goal_help">How many reviews you aim for each day.</string>
     <string name="settings_session_size">Session size</string>
     <string name="settings_session_size_help">The most items a study session holds.</string>
+    <string name="settings_typos">Forgive typos</string>
+    <string name="settings_typos_help">A small slip, like a neighbouring key or two swapped letters, still counts as correct. Numbers and answers with exact capitalisation stay strict.</string>
     <string name="settings_appearance">Appearance</string>
     <string name="theme_system">System</string>
     <string name="theme_light">Light</string>

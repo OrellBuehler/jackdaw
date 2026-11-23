@@ -93,7 +93,8 @@ enum Mapping {
             dailyGoal: Int(s.dailyGoal),
             defaultSessionSize: Int(s.defaultSessionSize),
             theme: themeChoice(s.theme),
-            onboardingSeen: s.onboardingSeen
+            onboardingSeen: s.onboardingSeen,
+            typoTolerance: s.typoTolerance
         )
     }
 

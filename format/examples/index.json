@@ -22,7 +22,7 @@
       "icon": "🏛️",
       "color": "#1E40AF",
       "items": 52,
-      "revision": 1
+      "revision": 2
     },
     {
       "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
@@ -110,7 +110,7 @@
       "icon": "🇨🇭",
       "color": "#D52B1E",
       "items": 36,
-      "revision": 1
+      "revision": 2
     },
     {
       "id": "com.github.orellbuehler.jackdaw.examples.world-history-20th-century",
@@ -121,7 +121,7 @@
       "icon": "🌍",
       "color": "#1D4ED8",
       "items": 31,
-      "revision": 1
+      "revision": 2
     }
   ]
 }

@@ -29,6 +29,12 @@ private func clozeLines(_ segments: [ClozeSegmentInfo]) -> [[ClozeToken]] {
     return lines.filter { !$0.isEmpty }
 }
 
+private func clozeGapWidth(hint: String?, text: String) -> CGFloat {
+    let forHint = CGFloat(hint?.count ?? 0) * 8 + 16
+    let forText = CGFloat(text.count) * 12 + 16
+    return min(max(104, forHint, forText), 250)
+}
+
 struct ClozeExerciseView: View {
     let store: StudyStore
     let current: StudyCurrent
@@ -125,7 +131,8 @@ struct ClozeExerciseView: View {
         if let result = feedback?.gapResults.first(where: { $0.index == index }) {
             resultPill(result)
         } else if index >= 0 && index < answers.count {
-            TextField(hint ?? "", text: $answers[index])
+            TextField("", text: $answers[index])
+                .accessibilityLabel(hint ?? "")
                 .font(.brand(.title3, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .textInputAutocapitalization(.never)
@@ -135,7 +142,18 @@ struct ClozeExerciseView: View {
                 .onSubmit {
                     advance(from: index)
                 }
-                .frame(width: 104)
+                .frame(width: clozeGapWidth(hint: hint, text: answers[index]))
+                .overlay {
+                    if let hint, answers[index].isEmpty {
+                        Text(hint)
+                            .font(.brand(.footnote, weight: .medium))
+                            .foregroundStyle(Brand.textSecondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                            .allowsHitTesting(false)
+                            .accessibilityHidden(true)
+                    }
+                }
                 .padding(.vertical, 6)
                 .padding(.horizontal, 6)
                 .background(style.base.opacity(0.12), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -153,9 +171,9 @@ struct ClozeExerciseView: View {
         let tint = result.correct ? Brand.success : Brand.error
         return HStack(spacing: 6) {
             Text(result.given.isEmpty ? "…" : result.given)
-                .strikethrough(!result.correct && !result.given.isEmpty)
+                .strikethrough((!result.correct || result.typo) && !result.given.isEmpty)
                 .foregroundStyle(tint)
-            if !result.correct {
+            if !result.correct || result.typo {
                 Text(result.canonical)
                     .foregroundStyle(Brand.success)
             }

@@ -154,6 +154,12 @@ final class SDKClient: @unchecked Sendable {
         } catch {}
     }
 
+    func setTypoTolerance(_ enabled: Bool) async {
+        do {
+            try await sdk.setTypoTolerance(enabled: enabled)
+        } catch {}
+    }
+
     func setTheme(_ theme: ThemeChoice) async {
         do {
             try await sdk.setTheme(theme: Mapping.kotlinTheme(theme))

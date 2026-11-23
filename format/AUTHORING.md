@@ -109,13 +109,16 @@ Keep prompts short, unambiguous and answerable without seeing the options. Never
 - The answer must be a **short, unambiguous string**: a name, a year, a term. If several wordings are equally right, list them all in `answers` (first is the canonical one).
 - Typed answers are compared **after normalisation**: case is ignored (unless `caseSensitive`), surrounding and repeated spaces collapse, trailing `. , ; : ! ? …` and leading `¿ ¡` are ignored, typographic quotes and dashes are unified. Everything else must match, so **list**: spelling variants (`colour`/`color`), digits and words (`1969`/`nineteen sixty-nine`), abbreviations, with and without article, with and without first name.
 - **Accents matter** (`é` is not `e`). For languages with accents set `"study": {"ignoreDiacritics": true}` for the whole pack, or list the unaccented spelling as an alternative.
+- **The question must not contain the answer.** "Which crisis of 1962 brought the world close to nuclear war over missiles in Cuba?" gives away `Cuban Missile Crisis`; ask for it by description and move the telling detail into `hint` or `explanation`.
+- **Names from other scripts or languages** have several correct spellings. List the common transliterations and the local form: `Gorbachev`, `Gorbatchev`, `Gorbatschow`; `Kyiv`, `Kiev`.
 - Do not ask for answers that are long, multi-part or open to paraphrase. That is what `open` is for.
-- Do not accept answers that are wrong just to be lenient. Alternatives must all be *correct*.
+- Do not accept answers that are wrong just to be lenient. Alternatives must all be *correct*. Do not list misspellings either: the app can forgive a typo itself ([spec 9.3](README.md#93-matching)), except on `caseSensitive` items and in numbers.
 
 ### 4.5 Cloze
 
 - Write a natural sentence and blank out the **key word**, not a function word or something guessable from grammar alone.
-- Add a hint in the gap when several words would fit: `{{Versailles::city near Paris}}`.
+- **Leave enough context to identify every gap.** All gaps of an item are blank at the same time, so never blank out the subject together with its facts: `The {{Berlin Wall}} was built in {{1961}} and fell in {{1989}}.` leaves "The … was built in … and fell in …". Keep the subject: `The Berlin Wall was built in {{1961::year}} and fell in {{1989::year}}.`
+- Add a hint in the gap when several words would fit, and to say what kind of answer is expected: `{{Versailles::city near Paris}}`, `{{1919::year}}`.
 - Alternatives inside a gap are separated by `|`: `{{colour|color}}`. The first is shown as the canonical answer.
 - Do not wrap gaps in bold or italics, do not put a gap across a line break, and avoid more than three gaps in one item.
 - To write a literal `{{`, `|`, `:` or `\` in a gap, escape it with a backslash, and remember that a backslash is doubled in JSON: `"{{a\\|b}}"`. Better: rephrase.
@@ -190,6 +193,7 @@ Every item needs an `id`, and the pack needs one. Learning progress is stored pe
 | Changing ids on every regeneration | Learner loses all progress | Derive ids from content and keep them |
 | Answers only in one spelling | Learners are marked wrong | List variants in `answers`/`alternatives` |
 | Putting the answer into the question or `hint` | No learning effect | Hint points the way, never gives the answer |
+| A cloze whose gaps remove the subject | Nothing left to recall from | Keep the subject, blank the facts, add gap hints |
 | Distractors that are silly, or all from a different category | Right answer is obvious | Plausible, same category |
 | Correct option noticeably longer than the others | Gives it away | Similar length and style |
 | Facts you are not sure of | The learner memorises errors | Leave out or mark for review |
@@ -295,6 +299,9 @@ QUALITY RULES
 - Choose the type that fits: cards for pairs and vocabulary, "text" for one short factual answer, "choice" for recognition with plausible distractors (3-5 options, similar length and style, no "all of the above"), "cloze" for key words in a sentence, "truefalse" only for common misconceptions, "order" for sequences with one correct order, "open" with "keyPoints" for explanations and interview questions.
 - Mix types sensibly, do not force variety. Put prerequisites first. Keep items of a section together.
 - Give every item a short, meaningful, unique slug id. Do not use spaces, umlauts or slashes in ids.
+- The question must not contain its own answer or its distinctive words (not "Which crisis over missiles in Cuba ...?" for "Cuban Missile Crisis"). Ask for it by description.
+- A cloze must stay answerable: leave enough of the sentence to identify every gap, and never blank out the subject together with its facts (not "The {{Berlin Wall}} was built in {{1961}}").
+- Names from other scripts or languages: list the common transliterations and local spellings as accepted answers (Gorbachev, Gorbatchev, Gorbatschow).
 - Add "hint" only when it truly helps; add "explanation" where it teaches something.
 
 EXAMPLE of the expected output (content is only an illustration):

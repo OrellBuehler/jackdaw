@@ -270,9 +270,12 @@ class SdkStatsTest {
             assertEquals(20, defaults.defaultSessionSize)
             assertEquals(ThemePreference.SYSTEM, defaults.theme)
             assertFalse(defaults.onboardingSeen)
+            assertTrue(defaults.typoTolerance)
 
             sdk.observeSettings().test {
                 assertEquals(defaults, awaitItem())
+                sdk.setTypoTolerance(false)
+                assertFalse(awaitItem().typoTolerance)
                 sdk.setTheme(ThemePreference.DARK)
                 assertEquals(ThemePreference.DARK, awaitItem().theme)
                 sdk.setOnboardingSeen(true)

@@ -34,10 +34,11 @@ internal fun session(
     recorder: AttemptRecorder = RecordingRecorder(),
     clock: FakeClock = FakeClock(),
     random: Random = Random(1),
+    tolerateTypos: Boolean = false,
 ): StudySession {
     val resolved = ResolvedConfig.resolve(config, 20, pack.context.study.newPerSession)
     val plan = plan(pack, config, clock, random)
-    return StudySession(pack.packId, config.mode, pack, plan.entries, resolved, recorder, clock, random)
+    return StudySession(pack.packId, config.mode, pack, plan.entries, resolved, recorder, clock, random, tolerateTypos)
 }
 
 internal fun key(

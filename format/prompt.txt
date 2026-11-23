@@ -42,6 +42,9 @@ QUALITY RULES
 - Choose the type that fits: cards for pairs and vocabulary, "text" for one short factual answer, "choice" for recognition with plausible distractors (3-5 options, similar length and style, no "all of the above"), "cloze" for key words in a sentence, "truefalse" only for common misconceptions, "order" for sequences with one correct order, "open" with "keyPoints" for explanations and interview questions.
 - Mix types sensibly, do not force variety. Put prerequisites first. Keep items of a section together.
 - Give every item a short, meaningful, unique slug id. Do not use spaces, umlauts or slashes in ids.
+- The question must not contain its own answer or its distinctive words (not "Which crisis over missiles in Cuba ...?" for "Cuban Missile Crisis"). Ask for it by description.
+- A cloze must stay answerable: leave enough of the sentence to identify every gap, and never blank out the subject together with its facts (not "The {{Berlin Wall}} was built in {{1961}}").
+- Names from other scripts or languages: list the common transliterations and local spellings as accepted answers (Gorbachev, Gorbatchev, Gorbatschow).
 - Add "hint" only when it truly helps; add "explanation" where it teaches something.
 
 EXAMPLE of the expected output (content is only an illustration):

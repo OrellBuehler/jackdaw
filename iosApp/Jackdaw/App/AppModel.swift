@@ -75,6 +75,11 @@ final class AppModel {
         set { setSessionSize(newValue) }
     }
 
+    var typoToleranceSelection: Bool {
+        get { settings.typoTolerance }
+        set { setTypoTolerance(newValue) }
+    }
+
     var themeSelection: ThemeChoice {
         get { settings.theme }
         set { setTheme(newValue) }
@@ -159,6 +164,14 @@ final class AppModel {
         settings.defaultSessionSize = value
         enqueueWrite { client in
             await client.setDefaultSessionSize(value)
+        }
+    }
+
+    func setTypoTolerance(_ enabled: Bool) {
+        guard enabled != settings.typoTolerance else { return }
+        settings.typoTolerance = enabled
+        enqueueWrite { client in
+            await client.setTypoTolerance(enabled)
         }
     }
 

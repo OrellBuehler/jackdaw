@@ -107,10 +107,10 @@ fun TypeView(
                 },
         )
         if (feedback != null) {
-            if (!feedback.correct) {
+            if (!feedback.correct || feedback.typo) {
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        stringResource(R.string.type_expected),
+                        stringResource(if (feedback.typo) R.string.type_spelling else R.string.type_expected),
                         style = MaterialTheme.typography.labelLarge,
                         color = scheme.onSurfaceVariant,
                     )
