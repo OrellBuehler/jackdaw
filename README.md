@@ -36,7 +36,7 @@ open pack format that people, scripts and chatbots can write.
 |                |                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | 🍎 **iPhone**  | [<img src="https://cdn.simpleicons.org/apple/0d96f6" alt="" width="16" height="16"> **Get it on the App Store**](https://apps.apple.com/app/id6837738431), or try upcoming versions in the [public beta on TestFlight](https://testflight.apple.com/join/74yDqrjd) |
-| 🤖 **Android** | Not in a store yet: [build the debug APK](#android) from source                                                        |
+| 🤖 **Android** | Download the signed APK from the [latest release](https://github.com/OrellBuehler/jackdaw/releases/latest). Not on Google Play yet |
 | 📦 **Packs**   | Start with the [sample packs](format/examples/), or let a chatbot [write one for you](#create-a-pack-with-any-chatbot) |
 
 Free, no ads, no account, no analytics, no servers of ours.
@@ -244,6 +244,6 @@ One-time iOS setup: register the App ID `ch.orellbuehler.jackdaw`, create the ap
 
 ## Status
 
-The iOS app is in the App Store. The Android app is built and tested in CI; signed Android builds are not published yet.
+The iOS app is in the App Store. The Android app is published as a signed APK with every GitHub release; it is not on Google Play yet.
 
 No licence has been chosen yet, so nothing in this repository is licensed for reuse for now.
