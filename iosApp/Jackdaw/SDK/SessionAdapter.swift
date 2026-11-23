@@ -14,7 +14,8 @@ enum SessionAdapter {
                     total: Int(q.total),
                     isRetry: q.isRetry,
                     hasHint: q.hasHint,
-                    hint: q.hint.map { Mapping.styled($0) }
+                    hint: q.hint.map { Mapping.styled($0) },
+                    figure: q.figure.map { Mapping.figure($0) }
                 )
             )
         case .feedback(let f):
@@ -38,6 +39,7 @@ enum SessionAdapter {
                     keyPoints: f.keyPoints,
                     statementIsTrue: f.statementIsTrue,
                     typo: f.typo,
+                    figure: f.figure,
                     suggestedGrades: grades
                 )
             )
@@ -64,6 +66,7 @@ enum SessionAdapter {
         keyPoints: [RichText],
         statementIsTrue: Bool,
         typo: Bool,
+        figure: Figure?,
         suggestedGrades: [GradeChoice]
     ) -> FeedbackInfo {
         let verdict: FeedbackVerdict
@@ -106,6 +109,7 @@ enum SessionAdapter {
             keyPoints: keyPoints.map { Mapping.styled($0) },
             statementIsTrue: statementIsTrue,
             typo: typo,
+            figure: figure.map { Mapping.figure($0) },
             suggestedGrades: suggestedGrades
         )
     }

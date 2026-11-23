@@ -35,13 +35,15 @@ Merge rules and "what changed locally" live in `shared/.../sync/` (`JackdawSync`
 
 ## Format contract
 
-The spec in `format/` is a public contract. These change together, in one commit: `format/README.md` (spec), `jackdaw-pack.schema.json`, `validate.py`, `test-vectors.json`, `AUTHORING.md`, `prompt.txt`, the examples, and the Kotlin reader in `shared/.../format/`.
+The spec in `format/` is a public contract. These change together, in one commit: `format/README.md` (spec), `jackdaw-pack.schema.json`, `validate.py`, `test-vectors.json`, `AUTHORING.md`, `prompt.txt`, the examples, `compat/`, and the Kotlin reader in `shared/.../format/`.
 
 - Run `python3 format/validate.py --strict` and `./gradlew shared:allTests` after any change.
 - `validate.py` also checks that `format/README.md` embeds `examples/format-tour.jackdaw` verbatim and that `AUTHORING.md` embeds `prompt.txt` verbatim: edit both copies.
 - `format/examples/index.json` is the online pack list. The apps download it and the packs from `main` on request (URL and parsing in `shared/.../samples/Catalog.kt`; the HTTPS request itself is app code: `data/TextFetcher.kt`, `AddPack/RemoteText.swift`), so an example pack merged to `main` is live for every user at once. After adding or changing an example pack, bump its `revision` and run `python3 format/validate.py --write-index`; `validate.py` fails when the index is stale.
 - The `generateFormatResources` Gradle task compiles `format/examples/*.jackdaw`, `prompt.txt` and `test-vectors.json` into the shared module (sample library, authoring prompt, conformance tests). Never edit the generated files under `shared/build/`.
 - Additive changes keep `"version": 1`; anything breaking needs a new format version (spec section 14). Readers stay forgiving, writers strict.
+- Version 1 packs must import completely in every future app. `format/compat/` holds frozen packs per spec revision (`manifest.json` has their hashes, `validate.py` and `CompatibilityTest` check them): never edit one. An additive change bumps the spec revision, is marked "since revision x.y" in the spec and adds a new frozen pack that uses it.
+- Figures (spec 8.4) are the only pack content that reaches a renderer. The import rules live in `shared/.../format/Figure.kt` and `validate.py` (`check_figure`) and must agree on the `figure` vectors in `test-vectors.json`. Both apps draw `Figure.html()` in a web view with JavaScript and network off; keep it that way.
 
 ## Strings
 

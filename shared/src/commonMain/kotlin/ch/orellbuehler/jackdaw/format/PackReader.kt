@@ -410,6 +410,21 @@ internal class Props(
         return text.takeUnless { it.isBlankSpec() }
     }
 
+    fun figure(key: String): Figure? {
+        val element = obj[key] ?: return null
+        val figure =
+            (element as? JsonObject)?.let {
+                FigureRules.read(
+                    it["svg"].asString() ?: "",
+                    it["alt"].asString()?.takeUnless { alt ->
+                        alt.isBlankSpec()
+                    },
+                )
+            }
+        if (figure == null) ignored(key, "an object with a self-contained 'svg' that has a viewBox and no scripts or external references")
+        return figure
+    }
+
     fun optionalBool(key: String): Boolean? {
         val element = obj[key] ?: return null
         val value = element.asBoolean()
@@ -552,6 +567,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             front = front,
             back = back,
             reversible = props.optionalBool("reversible") ?: study.reversible,
@@ -601,6 +618,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             question = question,
             options = options,
             shuffle = props.optionalBool("shuffle") ?: true,
@@ -621,6 +640,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             question = question,
             answers = answers,
             caseSensitive = props.optionalBool("caseSensitive") ?: false,
@@ -640,6 +661,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             text = text,
             caseSensitive = props.optionalBool("caseSensitive") ?: false,
         )
@@ -659,6 +682,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             statement = statement,
             answer = answer,
         )
@@ -678,6 +703,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             prompt = prompt,
             sequence = sequence,
         )
@@ -695,6 +722,8 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
+            figure = props.figure("figure"),
+            answerFigure = props.figure("answerFigure"),
             question = question,
             answer = props.optionalText("answer"),
             keyPoints = props.stringList("keyPoints"),

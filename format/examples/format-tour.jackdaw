@@ -12,7 +12,7 @@
   "tags": ["jackdaw", "format", "example"],
   "icon": "🧭",
   "color": "#7C3AED",
-  "revision": 3,
+  "revision": 4,
   "created": "2026-11-01T09:00:00Z",
   "updated": "2026-11-20T14:30:00+01:00",
   "sections": [
@@ -157,6 +157,18 @@
         "A reused id passes old progress on to different content",
         "Fixing a typo does not require a new id"
       ]
+    },
+    {
+      "id": "figure-svg",
+      "type": "truefalse",
+      "section": "item-types",
+      "statement": "A figure is stored inside the pack as inline SVG.",
+      "answer": true,
+      "figure": {
+        "alt": "A dot moving left and right inside a rounded frame.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 80'><rect x='4' y='4' width='232' height='72' rx='12' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='40' cy='40' r='12' fill='#7C5CFF'><animate attributeName='cx' values='40;200;40' dur='4s' repeatCount='indefinite'/></circle></svg>"
+      },
+      "explanation": "`figure` is shown with the question, `answerFigure` after answering. Both are self-contained SVG and may be animated."
     }
   ]
 }

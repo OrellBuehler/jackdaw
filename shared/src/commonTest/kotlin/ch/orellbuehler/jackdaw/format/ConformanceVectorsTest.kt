@@ -35,6 +35,24 @@ class ConformanceVectorsTest {
     }
 
     @Test
+    fun figureVectors() {
+        assertTrue(section("figure").size > 30)
+        section("figure").forEachIndexed { index, v ->
+            val svg = v.getValue("svg").jsonPrimitive.content
+            val checked = FigureRules.check(svg)
+            assertEquals(v.getValue("valid").jsonPrimitive.boolean, checked != null, "figure[$index] $svg")
+            if (checked != null) {
+                val expected =
+                    v
+                        .getValue("aspectRatio")
+                        .jsonPrimitive.content
+                        .toDouble()
+                assertEquals(expected, checked.aspectRatio, 1e-9, "figure[$index] $svg")
+            }
+        }
+    }
+
+    @Test
     fun normalizeVectors() {
         section("normalize").forEachIndexed { index, v ->
             val input = v.getValue("input").jsonPrimitive.content

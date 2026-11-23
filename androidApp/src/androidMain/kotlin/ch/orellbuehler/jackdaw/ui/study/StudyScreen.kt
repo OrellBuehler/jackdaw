@@ -37,6 +37,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -223,14 +224,16 @@ private fun ActiveSession(
         }
         Box(Modifier.weight(1f).fillMaxWidth()) {
             val exercise = question?.exercise ?: feedback!!.exercise
-            when (exercise) {
-                is FlipExercise -> FlipView(exercise, question, feedback, palette, actions)
-                is ChoiceExercise -> ChoiceView(exercise, question, feedback, state.step, actions)
-                is TypeExercise -> TypeView(exercise, question, feedback, state.step, actions)
-                is ClozeExercise -> ClozeView(exercise, question, feedback, state.step, actions)
-                is TrueFalseExercise -> TrueFalseView(exercise, question, feedback, actions)
-                is OrderExercise -> OrderView(exercise, question, feedback, state.step, actions)
-                is OpenExercise -> OpenView(exercise, question, feedback, state.step, actions)
+            CompositionLocalProvider(LocalFigure provides (question?.figure ?: feedback?.figure)) {
+                when (exercise) {
+                    is FlipExercise -> FlipView(exercise, question, feedback, palette, actions)
+                    is ChoiceExercise -> ChoiceView(exercise, question, feedback, state.step, actions)
+                    is TypeExercise -> TypeView(exercise, question, feedback, state.step, actions)
+                    is ClozeExercise -> ClozeView(exercise, question, feedback, state.step, actions)
+                    is TrueFalseExercise -> TrueFalseView(exercise, question, feedback, actions)
+                    is OrderExercise -> OrderView(exercise, question, feedback, state.step, actions)
+                    is OpenExercise -> OpenView(exercise, question, feedback, state.step, actions)
+                }
             }
         }
     }

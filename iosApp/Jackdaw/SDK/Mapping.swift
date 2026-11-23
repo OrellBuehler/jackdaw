@@ -88,6 +88,10 @@ enum Mapping {
         )
     }
 
+    static func figure(_ f: Figure) -> FigureInfo {
+        FigureInfo(html: f.html(textColor: nil), alt: f.alt, aspectRatio: f.aspectRatio)
+    }
+
     static func settings(_ s: AppSettings) -> SettingsInfo {
         SettingsInfo(
             dailyGoal: Int(s.dailyGoal),

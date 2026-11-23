@@ -77,6 +77,7 @@ fun OrderView(
         Column(Modifier.padding(horizontal = 20.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (question?.isRetry == true) RetryPill()
             HintCard(question?.hint)
+            FigureCard(maxHeight = 140.dp)
             PromptText(exercise.prompt)
             if (feedback == null) {
                 Text(

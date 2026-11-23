@@ -53,6 +53,8 @@ internal sealed class Item {
     abstract val tags: List<String>
     abstract val hint: String?
     abstract val explanation: String?
+    abstract val figure: Figure?
+    abstract val answerFigure: Figure?
 }
 
 internal data class CardItem(
@@ -70,6 +72,8 @@ internal data class CardItem(
     val frontDistractors: List<String>,
     val exercises: List<CardKind>,
     val caseSensitive: Boolean,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.CARD
 }
@@ -83,6 +87,8 @@ internal data class ChoiceItem(
     val question: String,
     val options: List<OptionDef>,
     val shuffle: Boolean,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.CHOICE
 }
@@ -96,6 +102,8 @@ internal data class TextItem(
     val question: String,
     val answers: List<String>,
     val caseSensitive: Boolean,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.TEXT
 }
@@ -108,6 +116,8 @@ internal data class ClozeItem(
     override val explanation: String?,
     val text: String,
     val caseSensitive: Boolean,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.CLOZE
 }
@@ -120,6 +130,8 @@ internal data class TrueFalseItem(
     override val explanation: String?,
     val statement: String,
     val answer: Boolean,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.TRUE_FALSE
 }
@@ -132,6 +144,8 @@ internal data class OrderItem(
     override val explanation: String?,
     val prompt: String,
     val sequence: List<String>,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.ORDER
 }
@@ -145,6 +159,8 @@ internal data class OpenItem(
     val question: String,
     val answer: String?,
     val keyPoints: List<String>,
+    override val figure: Figure? = null,
+    override val answerFigure: Figure? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.OPEN
 }

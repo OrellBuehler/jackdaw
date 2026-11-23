@@ -148,6 +148,33 @@ Keep prompts short, unambiguous and answerable without seeing the options. Never
 - `explanation` teaches *after* answering: why it is so, an example sentence, a memory aid, the correction of a misconception. One to three sentences.
 - Both are rich text: `**bold**`, `*italic*`, `` `code` ``, newlines. No HTML, no links, no Markdown headings or lists.
 
+### 4.10 Figures
+
+Any item can show a drawing ([spec 8.4](README.md#84-figures)): `figure` with the question, `answerFigure` after answering. Both are inline SVG inside the pack.
+
+```json item
+{
+  "id": "earth-orbit",
+  "type": "text",
+  "question": "About how many days does the Earth need to orbit the Sun once?",
+  "answers": ["365", "365 days", "365.25"],
+  "answerFigure": {
+    "alt": "The Earth circling the Sun.",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'><ellipse cx='100' cy='60' rx='85' ry='45' fill='none' stroke='currentColor' stroke-opacity='0.4' stroke-dasharray='4 5'/><circle cx='100' cy='60' r='14' fill='#F5A524'/><circle r='6' fill='#3E8EF7'><animateMotion dur='10s' repeatCount='indefinite' path='M185 60A85 45 0 1 1 15 60A85 45 0 1 1 185 60'/></circle></svg>"
+  }
+}
+```
+
+- **Use a figure when a drawing carries the information**: maps, anatomy, geometry, circuits, graphs, molecules, the steps of a process. Do not decorate.
+- **A figure must not answer its own question.** Show the unlabelled drawing in `figure` and the labelled or animated one in `answerFigure`.
+- **Prefer items that still work without the figure.** Apps older than revision 1.1 ignore figures. An illustration in `answerFigure` is always safe; "Which part is marked?" is not.
+- **Light and dark.** The background is transparent. Draw lines and labels with `currentColor` and pick other colours with enough contrast on white and on near-black. Never draw a background rectangle in a fixed colour.
+- **Always a `viewBox`**, no fixed size: the app scales the figure to the width of the screen (a phone: roughly 340 points wide, at most about 240 high), so wide or square formats work best and labels below about a twentieth of the viewBox height become hard to read.
+- **Animation** with `<animate>`, `<animateTransform>`, `<animateMotion>`, `<set>` or CSS `@keyframes` in a `<style>` element. Loop it (`repeatCount='indefinite'`, `infinite`) and keep it slow: the learner looks at it for a few seconds. Nothing is interactive.
+- **Self-contained and passive**: no `<script>`, `<foreignObject>`, `<a>`, `<image>`, no `on...` attributes, no web fonts, and `href` / `url()` only to a `#id` in the same figure. Write `&lt;` for a literal `<`. The app drops a figure that breaks a rule and keeps the item.
+- **Single quotes** for SVG attributes, so that the JSON string needs no escaping. Export from drawing programs as plain or optimised SVG (SVGO), then check with `validate.py`.
+- Write `alt`: one sentence that says what the figure shows, without giving the answer away when it is a `figure`.
+
 ## 5. IDs
 
 Every item needs an `id`, and the pack needs one. Learning progress is stored per item id, so ids are a promise to the learner.
@@ -201,6 +228,8 @@ Every item needs an `id`, and the pack needs one. Learning progress is stored pe
 | Stray `*` or `` ` `` in text | May turn into styling | Escape with `\\*` in JSON, or rephrase |
 | Markdown fences or explanations inside the file | Not valid JSON | Output the JSON only |
 | Learner progress, scores or dates in items | Not part of the format | Content only |
+| A figure with `<script>`, links, external images or fonts | The figure is dropped | Self-contained SVG, see [4.10](#410-figures) |
+| A figure that only works on a white background | Unreadable in dark mode | `currentColor` and a transparent background |
 | Everything as `choice` or everything as `card` | Dull and not matched to the material | Use the type that fits ([section 3](#3-choosing-item-types)) |
 | `sections` declared, `section` ids misspelled | Items end up ungrouped | Section ids must match exactly |
 
@@ -287,6 +316,13 @@ The seven item types:
 5. "truefalse": required "statement" (string), "answer" (boolean true or false). Add an "explanation".
 6. "order": put things in order. Required "prompt" (what to order and by which criterion) and "sequence": array of 2-20 DISTINCT strings in the CORRECT order (the app shuffles them). Do not put years or ranks that reveal the order into the entries.
 7. "open": open question, self-graded. Required "question". Optional "answer" (compact model answer) and "keyPoints" (array of 3-7 short strings: the checklist a good answer covers).
+
+FIGURES (optional; only when a drawing really helps: a map, a diagram, a formula, a process)
+Any item may have "figure" (shown with the question) and "answerFigure" (shown after answering, replaces "figure"). Each is an object {"alt": "what the drawing shows", "svg": "<svg ...>...</svg>"}.
+- "svg" is one complete, self-contained SVG document inside the JSON string. Use single quotes for all SVG attributes. The root needs xmlns='http://www.w3.org/2000/svg' and a viewBox, e.g. viewBox='0 0 240 160'. Keep it small and simple (a few hundred characters up to a few thousand).
+- Allowed: shapes, paths, text, gradients, clip paths, filters, a <style> element, and animation with <animate>, <animateTransform>, <animateMotion>, <set> or CSS @keyframes. NOT allowed: <script>, <foreignObject>, <a>, <image>, event attributes (onclick, onload, ...), external fonts, and any href or url() that is not a '#id' inside the same SVG. Write a literal < in a label as &lt;.
+- The figure is shown on a light or a dark background: use stroke='currentColor' / fill='currentColor' for lines and labels, plus colours that are readable on both. Font: font-family='sans-serif'.
+- The figure must not show the answer of its own question; put the labelled version into "answerFigure". Older app versions do not show figures, so prefer questions that still make sense without one.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.

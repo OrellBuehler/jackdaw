@@ -252,6 +252,7 @@
 "study.order.expected" = "Erwartet:";
 "study.order.hint" = "Bringe die Einträge mit den Pfeilen in die richtige Reihenfolge.";
 "study.order.up" = "Nach oben";
+"study.figure" = "Abbildung";
 "study.retry" = "Zweiter Versuch";
 "study.reveal" = "Antwort zeigen";
 "study.tf.false" = "Falsch";

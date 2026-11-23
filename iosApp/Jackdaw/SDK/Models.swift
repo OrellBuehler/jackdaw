@@ -392,6 +392,12 @@ struct ExerciseInfo: Hashable, Sendable {
     let gapCount: Int
 }
 
+struct FigureInfo: Hashable, Sendable {
+    let html: String
+    let alt: String?
+    let aspectRatio: Double
+}
+
 struct QuestionInfo: Hashable, Sendable {
     let exercise: ExerciseInfo
     let position: Int
@@ -399,6 +405,7 @@ struct QuestionInfo: Hashable, Sendable {
     let isRetry: Bool
     let hasHint: Bool
     let hint: StyledText?
+    let figure: FigureInfo?
 }
 
 enum GradeChoice: Int, CaseIterable, Identifiable, Hashable, Sendable {
@@ -458,6 +465,7 @@ struct FeedbackInfo: Hashable, Sendable {
     let keyPoints: [StyledText]
     let statementIsTrue: Bool
     let typo: Bool
+    let figure: FigureInfo?
     let suggestedGrades: [GradeChoice]
 
     var needsSelfGrade: Bool { verdict == .pendingSelfGrade }

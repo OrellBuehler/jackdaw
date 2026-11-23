@@ -1,0 +1,102 @@
+{
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "ch.orellbuehler.jackdaw.compat.figures",
+  "title": "Compatibility: figures",
+  "description": "Frozen pack of specification revision 1.1. Every item type with figures. Never edit this file.",
+  "language": "en",
+  "revision": 1,
+  "items": [
+    {
+      "id": "card",
+      "type": "card",
+      "front": "front",
+      "back": "back",
+      "reversible": true,
+      "figure": {
+        "alt": "A dot moving left and right.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      },
+      "answerFigure": {
+        "alt": "A dot on a circular path.",
+        "svg": "<?xml version='1.0' encoding='UTF-8'?>\n<!-- frozen fixture -->\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100'><defs><linearGradient id='g'><stop offset='0' stop-color='#7C5CFF'/><stop offset='1' stop-color='#E5484D'/></linearGradient><path id='p' d='M10 50A40 40 0 1 1 90 50A40 40 0 1 1 10 50'/></defs><style>.spin{transform-origin:50px 50px;animation:turn 6s linear infinite}@keyframes turn{to{transform:rotate(360deg)}}</style><use xlink:href='#p' fill='none' stroke='url(#g)' stroke-width='4'/><g class='spin'><rect x='46' y='6' width='8' height='8' fill='currentColor'/></g><circle r='4' fill='currentColor'><animateMotion dur='6s' repeatCount='indefinite'><mpath href='#p'/></animateMotion></circle><text x='50' y='54' text-anchor='middle' font-family='sans-serif' font-size='10' fill='currentColor'>1 &lt; 2</text></svg>"
+      }
+    },
+    {
+      "id": "choice",
+      "type": "choice",
+      "question": "Pick one.",
+      "options": [
+        {
+          "text": "right",
+          "correct": true
+        },
+        {
+          "text": "wrong"
+        }
+      ],
+      "figure": {
+        "alt": "A dot.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      }
+    },
+    {
+      "id": "text",
+      "type": "text",
+      "question": "Type it.",
+      "answers": [
+        "answer"
+      ],
+      "answerFigure": {
+        "alt": "A circle.",
+        "svg": "<?xml version='1.0' encoding='UTF-8'?>\n<!-- frozen fixture -->\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100'><defs><linearGradient id='g'><stop offset='0' stop-color='#7C5CFF'/><stop offset='1' stop-color='#E5484D'/></linearGradient><path id='p' d='M10 50A40 40 0 1 1 90 50A40 40 0 1 1 10 50'/></defs><style>.spin{transform-origin:50px 50px;animation:turn 6s linear infinite}@keyframes turn{to{transform:rotate(360deg)}}</style><use xlink:href='#p' fill='none' stroke='url(#g)' stroke-width='4'/><g class='spin'><rect x='46' y='6' width='8' height='8' fill='currentColor'/></g><circle r='4' fill='currentColor'><animateMotion dur='6s' repeatCount='indefinite'><mpath href='#p'/></animateMotion></circle><text x='50' y='54' text-anchor='middle' font-family='sans-serif' font-size='10' fill='currentColor'>1 &lt; 2</text></svg>"
+      }
+    },
+    {
+      "id": "cloze",
+      "type": "cloze",
+      "text": "A {{gap}} here.",
+      "figure": {
+        "alt": "A circle.",
+        "svg": "<?xml version='1.0' encoding='UTF-8'?>\n<!-- frozen fixture -->\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100'><defs><linearGradient id='g'><stop offset='0' stop-color='#7C5CFF'/><stop offset='1' stop-color='#E5484D'/></linearGradient><path id='p' d='M10 50A40 40 0 1 1 90 50A40 40 0 1 1 10 50'/></defs><style>.spin{transform-origin:50px 50px;animation:turn 6s linear infinite}@keyframes turn{to{transform:rotate(360deg)}}</style><use xlink:href='#p' fill='none' stroke='url(#g)' stroke-width='4'/><g class='spin'><rect x='46' y='6' width='8' height='8' fill='currentColor'/></g><circle r='4' fill='currentColor'><animateMotion dur='6s' repeatCount='indefinite'><mpath href='#p'/></animateMotion></circle><text x='50' y='54' text-anchor='middle' font-family='sans-serif' font-size='10' fill='currentColor'>1 &lt; 2</text></svg>"
+      }
+    },
+    {
+      "id": "truefalse",
+      "type": "truefalse",
+      "statement": "True.",
+      "answer": true,
+      "figure": {
+        "alt": "A dot.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      }
+    },
+    {
+      "id": "order",
+      "type": "order",
+      "prompt": "Order.",
+      "sequence": [
+        "one",
+        "two"
+      ],
+      "figure": {
+        "alt": "A dot.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      }
+    },
+    {
+      "id": "open",
+      "type": "open",
+      "question": "Explain.",
+      "answer": "Because.",
+      "figure": {
+        "alt": "A dot.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      },
+      "answerFigure": {
+        "alt": "A dot.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      }
+    }
+  ]
+}

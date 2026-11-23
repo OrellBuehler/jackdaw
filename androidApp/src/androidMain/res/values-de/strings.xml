@@ -168,6 +168,7 @@
     <string name="study_close_cd">Sitzung schliessen</string>
     <string name="study_hint_cd">Hinweis zeigen</string>
     <string name="study_hint_label">Hinweis</string>
+    <string name="figure_cd">Abbildung</string>
     <string name="study_progress_cd">Frage %1$d von %2$d</string>
     <string name="study_end_title">Sitzung beenden?</string>
     <string name="study_end_body">Deine bisherigen Antworten sind gespeichert.</string>
