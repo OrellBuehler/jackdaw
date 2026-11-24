@@ -1,5 +1,6 @@
 import CloudKit
 import Foundation
+import os
 
 // CloudKit half of iCloud sync: a CKSyncEngine over one custom zone of the private database. It owns no data: what
 // changed locally, how fetched records merge and what is persisted all live in the shared module (SyncBridge).
@@ -28,6 +29,9 @@ actor CloudSync: CKSyncEngineDelegate {
 
     private static let batchLimit = 200
     private static let packsPerBatch = 3
+    private static let logLimit = 40
+    private static let shownErrors = 5
+    private static let logger = Logger(subsystem: "ch.orellbuehler.jackdaw", category: "sync")
 
     private struct AccountProbe: Sendable {
         let availability: SyncAvailability
@@ -50,6 +54,7 @@ actor CloudSync: CKSyncEngineDelegate {
     private var reconcileTask: Task<Void, Never>?
     private var changesTask: Task<Void, Never>?
     private var accountObserver: NSObjectProtocol?
+    private var log: [String] = []
 
     init(bridge: SyncBridge) {
         self.bridge = bridge
@@ -93,7 +98,7 @@ actor CloudSync: CKSyncEngineDelegate {
             await self.bridge.watchLocalChanges { await self.localChanged() }
         }
         accountObserver = NotificationCenter.default.addObserver(forName: .CKAccountChanged, object: nil, queue: nil) { _ in
-            Task { await self.reevaluateAccount() }
+            Task { await self.accountNotified() }
         }
         if enabled {
             await bringUp()
@@ -183,23 +188,30 @@ actor CloudSync: CKSyncEngineDelegate {
         if let error = probe.error {
             await setLastError("Account check failed:\n" + error)
         }
-        guard probe.availability == .available, let userName = probe.userName else {
-            publish()
-            return
-        }
         let knownAccount = try? await bridge.meta(Meta.account)
-        if let knownAccount, knownAccount != userName {
-            await pauseForAccountChange()
-            return
-        }
         var firstSync = false
-        if knownAccount == nil {
-            do {
-                try await bridge.setMeta(Meta.account, userName)
-            } catch {
-                await setLastError("Saving the account failed:\n" + SyncErrorText.describe(error))
+        if let userName = probe.userName {
+            if let knownAccount, knownAccount != userName {
+                await pauseForAccountChange()
+                return
             }
-            firstSync = true
+            if knownAccount == nil {
+                do {
+                    try await bridge.setMeta(Meta.account, userName)
+                } catch {
+                    await setLastError("Saving the account failed:\n" + SyncErrorText.describe(error))
+                }
+                firstSync = true
+            }
+        } else {
+            // Without a network the account cannot be looked up. A device that synced before starts its engine
+            // anyway: the engine stays dormant without an account and reports a switch itself.
+            let undetermined = probe.availability == .couldNotDetermine || probe.availability == .temporarilyUnavailable
+            guard knownAccount != nil, undetermined else {
+                note("no engine: account " + String(describing: probe.availability))
+                publish()
+                return
+            }
         }
         var serialization: CKSyncEngine.State.Serialization?
         let packFormat = bridge.packFormat
@@ -219,6 +231,7 @@ actor CloudSync: CKSyncEngineDelegate {
         configuration.automaticallySync = true
         let created = CKSyncEngine(configuration)
         engine = created
+        note("engine created" + (serialization == nil ? " without saved state" : "") + (firstSync ? ", first sync" : ""))
         if firstSync {
             created.state.add(pendingDatabaseChanges: [.saveZone(CKRecordZone(zoneID: CloudRecords.zoneID))])
             do {
@@ -236,6 +249,7 @@ actor CloudSync: CKSyncEngineDelegate {
         reconcileTask = nil
         let old = engine
         engine = nil
+        if old != nil { note("engine stopped") }
         activeOperations = 0
         status.isSyncing = false
         inflight = [:]
@@ -258,10 +272,18 @@ actor CloudSync: CKSyncEngineDelegate {
         publish()
     }
 
-    private func reevaluateAccount() async {
+    // The engine reports sign-in, sign-out and account switches itself. The notification only starts an engine that
+    // could not be started before and refreshes what the settings screen shows.
+    private func accountNotified() async {
         guard started, enabled, Self.isSupported else { return }
-        await tearDown()
-        await bringUp()
+        note("account notification")
+        if engine == nil {
+            await bringUp()
+        } else {
+            let probe = await Self.probeAccount()
+            status.availability = probe.availability
+            publish()
+        }
     }
 
     private func recoverByUploadingEverything(reason: String) async {
@@ -306,7 +328,11 @@ actor CloudSync: CKSyncEngineDelegate {
     // MARK: CKSyncEngineDelegate
 
     func handleEvent(_ event: CKSyncEngine.Event, syncEngine: CKSyncEngine) async {
-        guard syncEngine === engine else { return }
+        guard syncEngine === engine else {
+            note("ignored event of a stopped engine: " + Self.name(of: event))
+            return
+        }
+        if case .stateUpdate = event {} else { note(Self.name(of: event)) }
         switch event {
         case .stateUpdate(let update):
             await persist(update.stateSerialization)
@@ -317,6 +343,7 @@ actor CloudSync: CKSyncEngineDelegate {
         case .fetchedRecordZoneChanges(let changes):
             await handleFetched(changes)
         case .sentDatabaseChanges(let sent):
+            if !sent.savedZones.isEmpty { note("zone saved") }
             for failed in sent.failedZoneSaves {
                 cycleErrors.append("Creating the iCloud zone failed:\n" + SyncErrorText.describe(failed.error))
             }
@@ -368,6 +395,7 @@ actor CloudSync: CKSyncEngineDelegate {
         if !stale.isEmpty {
             syncEngine.state.remove(pendingRecordZoneChanges: stale)
         }
+        note("batch: \(records.count) of \(changes.count) pending")
         if records.isEmpty { return nil }
         return CKSyncEngine.RecordZoneChangeBatch(recordsToSave: records, recordIDsToDelete: [], atomicByZone: false)
     }
@@ -546,6 +574,7 @@ actor CloudSync: CKSyncEngineDelegate {
     private func handleSent(_ sent: CKSyncEngine.Event.SentRecordZoneChanges, engine: CKSyncEngine) async {
         var retry: [CKSyncEngine.PendingRecordZoneChange] = []
         var zoneLost = false
+        note("sent: \(sent.savedRecords.count) saved, \(sent.failedRecordSaves.count) failed")
         for record in sent.savedRecords {
             let name = record.recordID.recordName
             let version = inflight.removeValue(forKey: name) ?? 0
@@ -603,9 +632,8 @@ actor CloudSync: CKSyncEngineDelegate {
                 retry.append(.saveRecord(id))
             case .networkFailure, .networkUnavailable, .zoneBusy, .serviceUnavailable, .requestRateLimited,
                  .notAuthenticated, .operationCancelled, .accountTemporarilyUnavailable:
-                // The engine retries these itself; the record stays dirty in the database either way.
+                // The engine retries these itself, so the record must stay in its queue.
                 cycleErrors.append("Sending \(name) will be retried:\n" + SyncErrorText.describe(failure.error))
-                blocked.insert(name)
                 if failure.error.code == .notAuthenticated {
                     status.availability = .notAuthorized
                 }
@@ -630,21 +658,31 @@ actor CloudSync: CKSyncEngineDelegate {
 
     // MARK: Account and errors
 
+    // Runs inside an engine callback: the engine must not be stopped or replaced from here, and a new engine reports
+    // a sign-in before anything else, having dropped what was queued for it.
     private func handleAccountChange(_ change: CKSyncEngine.Event.AccountChange) async {
         switch change.changeType {
         case .signIn:
-            await reevaluateAccount()
+            note("account: sign in")
+            status.availability = .available
+            await recoverZone()
         case .signOut:
-            await tearDown()
-            try? await bridge.setMeta(Meta.engineState, nil)
-            try? await bridge.clearTracking()
-            status.availability = .noAccount
-            publish()
+            note("account: sign out")
+            Task { await self.signedOut() }
         case .switchAccounts:
-            await pauseForAccountChange()
+            note("account: switched")
+            Task { await self.pauseForAccountChange() }
         @unknown default:
-            await reevaluateAccount()
+            break
         }
+    }
+
+    private func signedOut() async {
+        await tearDown()
+        try? await bridge.setMeta(Meta.engineState, nil)
+        try? await bridge.clearTracking()
+        status.availability = .noAccount
+        publish()
     }
 
     private func handleOperationError(_ error: Error) async {
@@ -676,21 +714,29 @@ actor CloudSync: CKSyncEngineDelegate {
 
     private func finishCycle() async {
         status.isSyncing = false
+        await refreshPendingCount()
         if !cycleErrors.isEmpty {
-            let text = cycleErrors.joined(separator: "\n\n")
+            var shown = Array(cycleErrors.prefix(Self.shownErrors))
+            if cycleErrors.count > shown.count {
+                shown.append("… and \(cycleErrors.count - shown.count) more.")
+            }
+            let text = shown.joined(separator: "\n\n")
             status.lastError = text
             try? await bridge.setMeta(Meta.lastError, text)
         } else if blocked.isEmpty {
             // Records that failed to send keep their error on screen until they went through.
-            let now = Date()
-            status.lastSyncedAt = now
             status.lastError = nil
-            try? await bridge.setMeta(Meta.lastSyncedAt, String(now.timeIntervalSince1970))
             try? await bridge.setMeta(Meta.lastError, nil)
+            if status.pendingCount == 0 {
+                let now = Date()
+                status.lastSyncedAt = now
+                try? await bridge.setMeta(Meta.lastSyncedAt, String(now.timeIntervalSince1970))
+            }
         }
+        note("cycle done: \(cycleErrors.count) errors, \(status.pendingCount) pending")
         let clean = cycleErrors.isEmpty
         cycleErrors = []
-        await refreshPendingCount()
+        publish()
         if clean, !blocked.isEmpty {
             // Records that failed earlier get another try now that a whole cycle went through.
             blocked = []
@@ -709,6 +755,34 @@ actor CloudSync: CKSyncEngineDelegate {
             status.pendingCount = names.count
         }
         publish()
+    }
+
+    private func note(_ text: String) {
+        Self.logger.notice("\(text, privacy: .public)")
+        log.append(Date().formatted(date: .omitted, time: .standard) + "  " + text)
+        if log.count > Self.logLimit {
+            log.removeFirst(log.count - Self.logLimit)
+        }
+        status.log = log
+    }
+
+    private static func name(of event: CKSyncEngine.Event) -> String {
+        switch event {
+        case .stateUpdate: return "state update"
+        case .accountChange: return "account change"
+        case .fetchedDatabaseChanges: return "fetched database changes"
+        case .fetchedRecordZoneChanges(let changes):
+            return "fetched \(changes.modifications.count) records, \(changes.deletions.count) deletions"
+        case .sentDatabaseChanges: return "sent database changes"
+        case .sentRecordZoneChanges: return "sent record changes"
+        case .willFetchChanges: return "will fetch"
+        case .willFetchRecordZoneChanges: return "will fetch zone"
+        case .didFetchRecordZoneChanges: return "did fetch zone"
+        case .didFetchChanges: return "did fetch"
+        case .willSendChanges: return "will send"
+        case .didSendChanges: return "did send"
+        @unknown default: return "unknown event"
+        }
     }
 
     private func publish() {

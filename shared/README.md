@@ -46,6 +46,19 @@ Create exactly one instance per process and keep it alive (application scope). O
 | `deletePack(packId)` | | Removes pack and progress. Activity history (streak, stats) is kept. |
 | `resetProgress(packId)` | | All facets back to new. Activity history is kept. |
 | `exportPack(packId)` | `String?` | The pack JSON as it was imported (content only, no progress). |
+| `resolvePackUrl(input)` | `String?` | What the user typed as a link, as a fetchable `https` URL: a gist page or a GitHub file page becomes its raw file. `null` when it is not an https link. Not suspending; the app does the request. |
+| `importPackFromUrl(text, url, allowDowngrade)` | `ImportResult` | Like `importPack`, and remembers `url` as `PackSummary.sourceUrl` so the app can offer "Update from link". Nothing is ever fetched by `shared`. |
+| `removePackUrl(packId)` | | Forgets the link. |
+| `setPackArchived(packId, archived)` | | An archived pack stays installed with its progress, but its reviews leave `Stats.dueToday`. The apps hide it from the library. |
+| `observeGroups()` | `Flow<List<PackGroup>>` | The user's groups with the ids of their installed packs. A pack can be in several groups (`PackSummary.groupIds`). |
+| `createGroup(name)` / `renameGroup(groupId, name)` / `deleteGroup(groupId)` | `createGroup`: the new id, `null` for a blank name | Deleting a group keeps its packs. |
+| `setPackInGroup(packId, groupId, member)` | | Adds or removes one pack. Unknown ids are ignored. |
+| `itemSource(packId, itemId)` / `newItemSource()` | `String?` / `String` | One item as pretty-printed JSON for an editor, and a template for a new one. |
+| `saveItem(packId, itemId, json)` | `ImportResult` | Replaces the item (`itemId = null`: appends a new one). The pack is validated as a whole; an item the reader would skip or change is refused with `ITEM_INVALID` and the reader's message. An item with a figure raises the pack to `"version": 2`. |
+| `deleteItem(packId, itemId)` | `ImportResult` | The last item cannot be deleted (`NO_VALID_ITEMS`). |
+| `updatePackInfo(packId, title, descriptionText)` | `ImportResult` | Changes title and description in the pack source. |
+
+Editing rewrites the stored pack source and installs it like an import (same progress rules), then marks the pack `PackSummary.edited`. An import over an edited pack says so in `ImportPreview.Valid.overwritesEdits` and clears the mark. Archive, link, the edited mark and groups are stored per device (`Library.sq`) and are not synced.
 | `samplePacks()` | `List<SamplePack>` | Bundled packs (from `format/examples`). Not suspending. |
 | `importSample(sampleId)` | `ImportResult` | `sampleId` is the pack id (`SamplePack.id`) of a bundled pack. |
 | `catalogUrl()` | `String` | Where the online pack list is (`format/examples/index.json` on `main`). The UI downloads it; `shared` has no network code. |
@@ -86,6 +99,7 @@ Errors and warnings carry a stable `code` for localisation and an English `messa
 | `TOO_LARGE`, `TOO_MANY_ITEMS` | Over 25 MB / 50,000 items. |
 | `REVISION_DOWNGRADE` | Installed revision is higher. Ask the user, then call `importPackAllowingDowngrade`. |
 | `UNKNOWN_SAMPLE`, `STORAGE_ERROR` | `importSample` with an unknown id / the database write failed. |
+| `ITEM_INVALID`, `PACK_MISSING` | Editing only: the item is not valid (`message` says why) / the pack is not installed any more. |
 
 | `ImportWarningCode` | Fields |
 |---|---|

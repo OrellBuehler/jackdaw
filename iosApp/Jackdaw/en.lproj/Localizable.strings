@@ -307,6 +307,7 @@
 "sync.footer" = "Synced: packs with their content, your review history, the daily goal and the session size. Theme and the welcome tour stay on each device. Data goes only to your private iCloud, which only you can read. Jackdaw has no servers of its own.";
 "sync.last" = "Last synced: %@";
 "sync.never" = "never";
+"sync.log.title" = "Sync log";
 "sync.now" = "Sync now";
 "sync.pending.one" = "%lld change waiting to be sent";
 "sync.pending.other" = "%lld changes waiting to be sent";
