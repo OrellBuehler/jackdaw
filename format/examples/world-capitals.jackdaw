@@ -1,0 +1,982 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.world-capitals",
+  "title": "World Capitals",
+  "description": "The capitals of the 149 countries of Africa, Asia, the Americas and Oceania, region by region, with notes on the ones that are easy to get wrong: moved capitals, shared capitals and cities that are not the largest. It follows on from European Capitals. Cards are asked as multiple choice and as typed answers, and local spellings are accepted.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["geography", "capitals", "world", "africa", "asia", "americas", "oceania"],
+  "icon": "🌐",
+  "color": "#0F766E",
+  "revision": 1,
+  "created": "2026-11-24",
+  "updated": "2026-11-24",
+  "sections": [
+    {"id": "north-america", "title": "North and Central America"},
+    {"id": "caribbean", "title": "The Caribbean"},
+    {"id": "south-america", "title": "South America"},
+    {"id": "north-africa", "title": "North Africa"},
+    {"id": "west-africa", "title": "West Africa"},
+    {"id": "central-africa", "title": "Central Africa"},
+    {"id": "east-africa", "title": "East Africa"},
+    {"id": "southern-africa", "title": "Southern Africa"},
+    {"id": "middle-east", "title": "The Middle East and the Caucasus"},
+    {"id": "central-south-asia", "title": "Central and South Asia"},
+    {"id": "east-asia", "title": "East and Southeast Asia"},
+    {"id": "oceania", "title": "Oceania"},
+    {"id": "facts", "title": "Beyond the list", "description": "Moved capitals, shared capitals and a little sorting."}
+  ],
+  "study": {"order": "sequential", "newPerSession": 8, "ignoreDiacritics": true, "exercises": {"card": ["choice", "type"]}},
+  "items": [
+    {
+      "id": "capital-canada",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of **Canada**?",
+      "back": "Ottawa",
+      "explanation": "Not Toronto or Montreal: Queen Victoria chose Ottawa in 1857, on the border between English- and French-speaking Canada."
+    },
+    {
+      "id": "capital-united-states",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of the **United States**?",
+      "back": "Washington, D.C.",
+      "alternatives": ["Washington", "Washington DC", "Washington D.C.", "Washington, DC"],
+      "explanation": "The city belongs to no state: it forms the District of Columbia."
+    },
+    {
+      "id": "capital-mexico",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of **Mexico**?",
+      "back": "Mexico City",
+      "alternatives": ["Ciudad de México", "CDMX"],
+      "explanation": "Built on the site of Tenochtitlan, the capital of the Aztecs."
+    },
+    {
+      "id": "capital-guatemala",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of **Guatemala**?",
+      "back": "Guatemala City",
+      "alternatives": ["Ciudad de Guatemala", "Guatemala"]
+    },
+    {
+      "id": "capital-belize",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of **Belize**?",
+      "back": "Belmopan",
+      "explanation": "Built inland after a hurricane devastated Belize City in 1961. Capital since 1970."
+    },
+    {
+      "id": "capital-el-salvador",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of **El Salvador**?",
+      "back": "San Salvador"
+    },
+    {"id": "capital-honduras", "type": "card", "section": "north-america", "front": "Capital of **Honduras**?", "back": "Tegucigalpa"},
+    {"id": "capital-nicaragua", "type": "card", "section": "north-america", "front": "Capital of **Nicaragua**?", "back": "Managua"},
+    {"id": "capital-costa-rica", "type": "card", "section": "north-america", "front": "Capital of **Costa Rica**?", "back": "San José"},
+    {
+      "id": "capital-panama",
+      "type": "card",
+      "section": "north-america",
+      "front": "Capital of **Panama**?",
+      "back": "Panama City",
+      "alternatives": ["Ciudad de Panamá", "Panamá"]
+    },
+    {
+      "id": "capital-cuba",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Cuba**?",
+      "back": "Havana",
+      "alternatives": ["La Habana", "Habana"]
+    },
+    {"id": "capital-jamaica", "type": "card", "section": "caribbean", "front": "Capital of **Jamaica**?", "back": "Kingston"},
+    {
+      "id": "capital-haiti",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Haiti**?",
+      "back": "Port-au-Prince",
+      "alternatives": ["Port au Prince"]
+    },
+    {
+      "id": "capital-dominican-republic",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of the **Dominican Republic**?",
+      "back": "Santo Domingo",
+      "explanation": "Founded in 1496, it is the oldest European city in the Americas that has been inhabited ever since."
+    },
+    {"id": "capital-bahamas", "type": "card", "section": "caribbean", "front": "Capital of the **Bahamas**?", "back": "Nassau"},
+    {
+      "id": "capital-trinidad-and-tobago",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Trinidad and Tobago**?",
+      "back": "Port of Spain",
+      "alternatives": ["Port-of-Spain"]
+    },
+    {"id": "capital-barbados", "type": "card", "section": "caribbean", "front": "Capital of **Barbados**?", "back": "Bridgetown"},
+    {"id": "capital-saint-lucia", "type": "card", "section": "caribbean", "front": "Capital of **Saint Lucia**?", "back": "Castries"},
+    {
+      "id": "capital-grenada",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Grenada**?",
+      "back": "St. George's",
+      "alternatives": ["Saint George's", "St George's"]
+    },
+    {
+      "id": "capital-saint-vincent-and-the-grenadines",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Saint Vincent and the Grenadines**?",
+      "back": "Kingstown",
+      "explanation": "Kingstown, with a *w*: Kingston is the capital of Jamaica."
+    },
+    {
+      "id": "capital-antigua-and-barbuda",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Antigua and Barbuda**?",
+      "back": "St. John's",
+      "alternatives": ["Saint John's", "St John's"]
+    },
+    {
+      "id": "capital-dominica",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Dominica**?",
+      "back": "Roseau",
+      "explanation": "Dominica is not the Dominican Republic, whose capital is Santo Domingo."
+    },
+    {
+      "id": "capital-saint-kitts-and-nevis",
+      "type": "card",
+      "section": "caribbean",
+      "front": "Capital of **Saint Kitts and Nevis**?",
+      "back": "Basseterre"
+    },
+    {"id": "capital-colombia", "type": "card", "section": "south-america", "front": "Capital of **Colombia**?", "back": "Bogotá"},
+    {"id": "capital-venezuela", "type": "card", "section": "south-america", "front": "Capital of **Venezuela**?", "back": "Caracas"},
+    {"id": "capital-guyana", "type": "card", "section": "south-america", "front": "Capital of **Guyana**?", "back": "Georgetown"},
+    {"id": "capital-suriname", "type": "card", "section": "south-america", "front": "Capital of **Suriname**?", "back": "Paramaribo"},
+    {
+      "id": "capital-ecuador",
+      "type": "card",
+      "section": "south-america",
+      "front": "Capital of **Ecuador**?",
+      "back": "Quito",
+      "explanation": "At about 2,850 metres above sea level, one of the highest capitals in the world."
+    },
+    {"id": "capital-peru", "type": "card", "section": "south-america", "front": "Capital of **Peru**?", "back": "Lima"},
+    {
+      "id": "capital-bolivia",
+      "type": "card",
+      "section": "south-america",
+      "front": "Capital of **Bolivia**?",
+      "back": "Sucre",
+      "alternatives": ["La Paz"],
+      "explanation": "Sucre is the capital by constitution, but government and parliament sit in La Paz. Both are accepted."
+    },
+    {
+      "id": "capital-brazil",
+      "type": "card",
+      "section": "south-america",
+      "front": "Capital of **Brazil**?",
+      "back": "Brasília",
+      "explanation": "A planned city, inaugurated in 1960 to replace Rio de Janeiro."
+    },
+    {"id": "capital-paraguay", "type": "card", "section": "south-america", "front": "Capital of **Paraguay**?", "back": "Asunción"},
+    {"id": "capital-uruguay", "type": "card", "section": "south-america", "front": "Capital of **Uruguay**?", "back": "Montevideo"},
+    {"id": "capital-argentina", "type": "card", "section": "south-america", "front": "Capital of **Argentina**?", "back": "Buenos Aires"},
+    {
+      "id": "capital-chile",
+      "type": "card",
+      "section": "south-america",
+      "front": "Capital of **Chile**?",
+      "back": "Santiago",
+      "alternatives": ["Santiago de Chile"],
+      "explanation": "The National Congress meets in Valparaíso, on the coast."
+    },
+    {
+      "id": "capital-morocco",
+      "type": "card",
+      "section": "north-africa",
+      "front": "Capital of **Morocco**?",
+      "back": "Rabat",
+      "explanation": "Not Casablanca, the largest city."
+    },
+    {
+      "id": "capital-algeria",
+      "type": "card",
+      "section": "north-africa",
+      "front": "Capital of **Algeria**?",
+      "back": "Algiers",
+      "alternatives": ["Alger"]
+    },
+    {"id": "capital-tunisia", "type": "card", "section": "north-africa", "front": "Capital of **Tunisia**?", "back": "Tunis"},
+    {"id": "capital-libya", "type": "card", "section": "north-africa", "front": "Capital of **Libya**?", "back": "Tripoli"},
+    {"id": "capital-egypt", "type": "card", "section": "north-africa", "front": "Capital of **Egypt**?", "back": "Cairo"},
+    {
+      "id": "capital-sudan",
+      "type": "card",
+      "section": "north-africa",
+      "front": "Capital of **Sudan**?",
+      "back": "Khartoum",
+      "alternatives": ["Khartum"],
+      "explanation": "It lies where the Blue Nile and the White Nile meet."
+    },
+    {"id": "capital-mauritania", "type": "card", "section": "west-africa", "front": "Capital of **Mauritania**?", "back": "Nouakchott"},
+    {
+      "id": "capital-senegal",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Senegal**?",
+      "back": "Dakar",
+      "explanation": "The westernmost capital of mainland Africa."
+    },
+    {"id": "capital-gambia", "type": "card", "section": "west-africa", "front": "Capital of the **Gambia**?", "back": "Banjul"},
+    {"id": "capital-guinea-bissau", "type": "card", "section": "west-africa", "front": "Capital of **Guinea-Bissau**?", "back": "Bissau"},
+    {"id": "capital-guinea", "type": "card", "section": "west-africa", "front": "Capital of **Guinea**?", "back": "Conakry"},
+    {
+      "id": "capital-sierra-leone",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Sierra Leone**?",
+      "back": "Freetown",
+      "explanation": "Founded in 1792 as a settlement for freed slaves."
+    },
+    {
+      "id": "capital-liberia",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Liberia**?",
+      "back": "Monrovia",
+      "explanation": "Named after the US president James Monroe."
+    },
+    {
+      "id": "capital-ivory-coast",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Ivory Coast (Côte d'Ivoire)**?",
+      "back": "Yamoussoukro",
+      "explanation": "Capital since 1983. Abidjan is still the largest city and the seat of most government offices."
+    },
+    {"id": "capital-mali", "type": "card", "section": "west-africa", "front": "Capital of **Mali**?", "back": "Bamako"},
+    {
+      "id": "capital-burkina-faso",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Burkina Faso**?",
+      "back": "Ouagadougou"
+    },
+    {"id": "capital-ghana", "type": "card", "section": "west-africa", "front": "Capital of **Ghana**?", "back": "Accra"},
+    {"id": "capital-togo", "type": "card", "section": "west-africa", "front": "Capital of **Togo**?", "back": "Lomé"},
+    {
+      "id": "capital-benin",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Benin**?",
+      "back": "Porto-Novo",
+      "alternatives": ["Porto Novo"],
+      "explanation": "Porto-Novo is the official capital, but the government sits in Cotonou."
+    },
+    {"id": "capital-niger", "type": "card", "section": "west-africa", "front": "Capital of **Niger**?", "back": "Niamey"},
+    {
+      "id": "capital-nigeria",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Nigeria**?",
+      "back": "Abuja",
+      "explanation": "A planned city in the centre of the country. It replaced Lagos in 1991."
+    },
+    {
+      "id": "capital-cape-verde",
+      "type": "card",
+      "section": "west-africa",
+      "front": "Capital of **Cape Verde (Cabo Verde)**?",
+      "back": "Praia"
+    },
+    {
+      "id": "capital-chad",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of **Chad**?",
+      "back": "N'Djamena",
+      "alternatives": ["Ndjamena"],
+      "explanation": "Called Fort-Lamy until 1973."
+    },
+    {
+      "id": "capital-cameroon",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of **Cameroon**?",
+      "back": "Yaoundé",
+      "explanation": "Not Douala, the largest city."
+    },
+    {
+      "id": "capital-central-african-republic",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of the **Central African Republic**?",
+      "back": "Bangui"
+    },
+    {
+      "id": "capital-equatorial-guinea",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of **Equatorial Guinea**?",
+      "back": "Ciudad de la Paz",
+      "explanation": "A new city on the mainland, declared the capital in January 2026. It replaced Malabo, on the island of Bioko."
+    },
+    {"id": "capital-gabon", "type": "card", "section": "central-africa", "front": "Capital of **Gabon**?", "back": "Libreville"},
+    {
+      "id": "capital-republic-of-the-congo",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of the **Republic of the Congo**?",
+      "back": "Brazzaville",
+      "explanation": "Brazzaville and Kinshasa face each other across the Congo River."
+    },
+    {
+      "id": "capital-democratic-republic-of-the-congo",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of the **Democratic Republic of the Congo**?",
+      "back": "Kinshasa",
+      "explanation": "Called Léopoldville until 1966. Brazzaville, the capital of the other Congo, lies on the opposite bank of the river."
+    },
+    {
+      "id": "capital-sao-tome-and-principe",
+      "type": "card",
+      "section": "central-africa",
+      "front": "Capital of **São Tomé and Príncipe**?",
+      "back": "São Tomé"
+    },
+    {"id": "capital-angola", "type": "card", "section": "central-africa", "front": "Capital of **Angola**?", "back": "Luanda"},
+    {
+      "id": "capital-ethiopia",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Ethiopia**?",
+      "back": "Addis Ababa",
+      "alternatives": ["Addis Abeba"],
+      "explanation": "The African Union has its headquarters here."
+    },
+    {"id": "capital-eritrea", "type": "card", "section": "east-africa", "front": "Capital of **Eritrea**?", "back": "Asmara"},
+    {
+      "id": "capital-djibouti",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Djibouti**?",
+      "back": "Djibouti",
+      "alternatives": ["Djibouti City"]
+    },
+    {
+      "id": "capital-somalia",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Somalia**?",
+      "back": "Mogadishu",
+      "alternatives": ["Muqdisho"]
+    },
+    {"id": "capital-kenya", "type": "card", "section": "east-africa", "front": "Capital of **Kenya**?", "back": "Nairobi"},
+    {"id": "capital-uganda", "type": "card", "section": "east-africa", "front": "Capital of **Uganda**?", "back": "Kampala"},
+    {"id": "capital-rwanda", "type": "card", "section": "east-africa", "front": "Capital of **Rwanda**?", "back": "Kigali"},
+    {
+      "id": "capital-burundi",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Burundi**?",
+      "back": "Gitega",
+      "explanation": "Gitega became the political capital in 2019. Bujumbura, the largest city, is still the economic centre."
+    },
+    {
+      "id": "capital-tanzania",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Tanzania**?",
+      "back": "Dodoma",
+      "explanation": "Not Dar es Salaam, the largest city and former capital."
+    },
+    {
+      "id": "capital-south-sudan",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **South Sudan**?",
+      "back": "Juba",
+      "explanation": "South Sudan became independent in 2011 and is the youngest member of the United Nations."
+    },
+    {"id": "capital-seychelles", "type": "card", "section": "east-africa", "front": "Capital of the **Seychelles**?", "back": "Victoria"},
+    {"id": "capital-comoros", "type": "card", "section": "east-africa", "front": "Capital of the **Comoros**?", "back": "Moroni"},
+    {
+      "id": "capital-madagascar",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Madagascar**?",
+      "back": "Antananarivo",
+      "alternatives": ["Tananarive"]
+    },
+    {
+      "id": "capital-mauritius",
+      "type": "card",
+      "section": "east-africa",
+      "front": "Capital of **Mauritius**?",
+      "back": "Port Louis",
+      "alternatives": ["Port-Louis"]
+    },
+    {"id": "capital-zambia", "type": "card", "section": "southern-africa", "front": "Capital of **Zambia**?", "back": "Lusaka"},
+    {"id": "capital-malawi", "type": "card", "section": "southern-africa", "front": "Capital of **Malawi**?", "back": "Lilongwe"},
+    {
+      "id": "capital-mozambique",
+      "type": "card",
+      "section": "southern-africa",
+      "front": "Capital of **Mozambique**?",
+      "back": "Maputo",
+      "explanation": "Called Lourenço Marques until 1976."
+    },
+    {
+      "id": "capital-zimbabwe",
+      "type": "card",
+      "section": "southern-africa",
+      "front": "Capital of **Zimbabwe**?",
+      "back": "Harare",
+      "explanation": "Called Salisbury until 1982."
+    },
+    {"id": "capital-botswana", "type": "card", "section": "southern-africa", "front": "Capital of **Botswana**?", "back": "Gaborone"},
+    {"id": "capital-namibia", "type": "card", "section": "southern-africa", "front": "Capital of **Namibia**?", "back": "Windhoek"},
+    {
+      "id": "capital-south-africa",
+      "type": "card",
+      "section": "southern-africa",
+      "front": "Capital of **South Africa**?",
+      "back": "Pretoria",
+      "alternatives": ["Cape Town", "Bloemfontein"],
+      "explanation": "South Africa has three capitals: Pretoria (government), Cape Town (parliament) and Bloemfontein (highest court of appeal). All three are accepted."
+    },
+    {"id": "capital-lesotho", "type": "card", "section": "southern-africa", "front": "Capital of **Lesotho**?", "back": "Maseru"},
+    {
+      "id": "capital-eswatini",
+      "type": "card",
+      "section": "southern-africa",
+      "front": "Capital of **Eswatini (Swaziland)**?",
+      "back": "Mbabane",
+      "alternatives": ["Lobamba"],
+      "explanation": "Mbabane is the administrative capital. The parliament and the royal residence are in Lobamba, which is accepted too."
+    },
+    {
+      "id": "capital-turkey",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Turkey**?",
+      "back": "Ankara",
+      "explanation": "Not Istanbul: Ankara has been the capital since the republic was founded in 1923."
+    },
+    {
+      "id": "capital-georgia",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Georgia**?",
+      "back": "Tbilisi",
+      "alternatives": ["Tiflis"]
+    },
+    {
+      "id": "capital-armenia",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Armenia**?",
+      "back": "Yerevan",
+      "alternatives": ["Erevan"]
+    },
+    {"id": "capital-azerbaijan", "type": "card", "section": "middle-east", "front": "Capital of **Azerbaijan**?", "back": "Baku"},
+    {
+      "id": "capital-syria",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Syria**?",
+      "back": "Damascus",
+      "explanation": "One of the oldest continuously inhabited cities in the world."
+    },
+    {
+      "id": "capital-lebanon",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Lebanon**?",
+      "back": "Beirut",
+      "alternatives": ["Beyrouth"]
+    },
+    {
+      "id": "capital-israel",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Israel**?",
+      "back": "Jerusalem",
+      "explanation": "Israel's seat of government and declared capital. Its status is disputed internationally, and most embassies are in Tel Aviv."
+    },
+    {"id": "capital-jordan", "type": "card", "section": "middle-east", "front": "Capital of **Jordan**?", "back": "Amman"},
+    {
+      "id": "capital-iraq",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Iraq**?",
+      "back": "Baghdad",
+      "alternatives": ["Bagdad"]
+    },
+    {
+      "id": "capital-iran",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Iran**?",
+      "back": "Tehran",
+      "alternatives": ["Teheran"]
+    },
+    {
+      "id": "capital-kuwait",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Kuwait**?",
+      "back": "Kuwait City",
+      "alternatives": ["Kuwait"]
+    },
+    {
+      "id": "capital-saudi-arabia",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Saudi Arabia**?",
+      "back": "Riyadh",
+      "alternatives": ["Riad"]
+    },
+    {"id": "capital-bahrain", "type": "card", "section": "middle-east", "front": "Capital of **Bahrain**?", "back": "Manama"},
+    {"id": "capital-qatar", "type": "card", "section": "middle-east", "front": "Capital of **Qatar**?", "back": "Doha"},
+    {
+      "id": "capital-united-arab-emirates",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of the **United Arab Emirates**?",
+      "back": "Abu Dhabi",
+      "explanation": "Not Dubai, the largest city."
+    },
+    {
+      "id": "capital-oman",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Oman**?",
+      "back": "Muscat",
+      "alternatives": ["Masqat"]
+    },
+    {
+      "id": "capital-yemen",
+      "type": "card",
+      "section": "middle-east",
+      "front": "Capital of **Yemen**?",
+      "back": "Sanaa",
+      "alternatives": ["Sana'a", "Sana"],
+      "explanation": "The capital by constitution. The Houthi movement has held it since 2014, and the internationally recognised government works from Aden."
+    },
+    {
+      "id": "capital-kazakhstan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Kazakhstan**?",
+      "back": "Astana",
+      "explanation": "Capital since 1997, when it replaced Almaty. From 2019 to 2022 it was called Nur-Sultan."
+    },
+    {
+      "id": "capital-uzbekistan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Uzbekistan**?",
+      "back": "Tashkent",
+      "alternatives": ["Toshkent"]
+    },
+    {
+      "id": "capital-turkmenistan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Turkmenistan**?",
+      "back": "Ashgabat",
+      "alternatives": ["Aşgabat", "Ashkhabad"]
+    },
+    {
+      "id": "capital-kyrgyzstan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Kyrgyzstan**?",
+      "back": "Bishkek",
+      "explanation": "Called Frunze in Soviet times."
+    },
+    {
+      "id": "capital-tajikistan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Tajikistan**?",
+      "back": "Dushanbe",
+      "explanation": "The name means *Monday*, after the weekly market that was held here."
+    },
+    {"id": "capital-afghanistan", "type": "card", "section": "central-south-asia", "front": "Capital of **Afghanistan**?", "back": "Kabul"},
+    {
+      "id": "capital-pakistan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Pakistan**?",
+      "back": "Islamabad",
+      "explanation": "A planned city, built in the 1960s to replace Karachi."
+    },
+    {
+      "id": "capital-india",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **India**?",
+      "back": "New Delhi",
+      "alternatives": ["Delhi"],
+      "explanation": "New Delhi is the government district of the Delhi metropolis. It was inaugurated as the capital in 1931."
+    },
+    {
+      "id": "capital-nepal",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Nepal**?",
+      "back": "Kathmandu",
+      "alternatives": ["Katmandu"]
+    },
+    {
+      "id": "capital-bhutan",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Bhutan**?",
+      "back": "Thimphu",
+      "alternatives": ["Thimpu"]
+    },
+    {
+      "id": "capital-bangladesh",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Bangladesh**?",
+      "back": "Dhaka",
+      "alternatives": ["Dacca"]
+    },
+    {
+      "id": "capital-sri-lanka",
+      "type": "card",
+      "section": "central-south-asia",
+      "front": "Capital of **Sri Lanka**?",
+      "back": "Sri Jayawardenepura Kotte",
+      "alternatives": ["Kotte", "Colombo", "Sri Jayewardenepura Kotte"],
+      "explanation": "The parliament sits in Sri Jayawardenepura Kotte, a suburb of Colombo. Colombo, the largest city, is often named as the capital and is accepted too."
+    },
+    {"id": "capital-maldives", "type": "card", "section": "central-south-asia", "front": "Capital of the **Maldives**?", "back": "Malé"},
+    {
+      "id": "capital-china",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **China**?",
+      "back": "Beijing",
+      "alternatives": ["Peking"]
+    },
+    {
+      "id": "capital-mongolia",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Mongolia**?",
+      "back": "Ulaanbaatar",
+      "alternatives": ["Ulan Bator", "Ulan-Bator"]
+    },
+    {"id": "capital-north-korea", "type": "card", "section": "east-asia", "front": "Capital of **North Korea**?", "back": "Pyongyang"},
+    {"id": "capital-south-korea", "type": "card", "section": "east-asia", "front": "Capital of **South Korea**?", "back": "Seoul"},
+    {
+      "id": "capital-japan",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Japan**?",
+      "back": "Tokyo",
+      "alternatives": ["Tokio"]
+    },
+    {
+      "id": "capital-myanmar",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Myanmar (Burma)**?",
+      "back": "Naypyidaw",
+      "alternatives": ["Nay Pyi Taw", "Naypyitaw"],
+      "explanation": "A planned city. The government moved here from Yangon (Rangoon) in 2005."
+    },
+    {"id": "capital-thailand", "type": "card", "section": "east-asia", "front": "Capital of **Thailand**?", "back": "Bangkok"},
+    {"id": "capital-laos", "type": "card", "section": "east-asia", "front": "Capital of **Laos**?", "back": "Vientiane"},
+    {"id": "capital-cambodia", "type": "card", "section": "east-asia", "front": "Capital of **Cambodia**?", "back": "Phnom Penh"},
+    {
+      "id": "capital-vietnam",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Vietnam**?",
+      "back": "Hanoi",
+      "alternatives": ["Ha Noi"],
+      "explanation": "Not Ho Chi Minh City (Saigon), the largest city."
+    },
+    {
+      "id": "capital-malaysia",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Malaysia**?",
+      "back": "Kuala Lumpur",
+      "explanation": "The government sits in Putrajaya, a planned city nearby."
+    },
+    {
+      "id": "capital-singapore",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Singapore**?",
+      "back": "Singapore",
+      "alternatives": ["Singapore City"],
+      "explanation": "A city-state: the country and its capital are the same."
+    },
+    {"id": "capital-brunei", "type": "card", "section": "east-asia", "front": "Capital of **Brunei**?", "back": "Bandar Seri Begawan"},
+    {
+      "id": "capital-indonesia",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Indonesia**?",
+      "back": "Jakarta",
+      "explanation": "A new capital, Nusantara, is being built on Borneo, but Jakarta remains the capital until the move is decreed."
+    },
+    {"id": "capital-philippines", "type": "card", "section": "east-asia", "front": "Capital of the **Philippines**?", "back": "Manila"},
+    {
+      "id": "capital-timor-leste",
+      "type": "card",
+      "section": "east-asia",
+      "front": "Capital of **Timor-Leste (East Timor)**?",
+      "back": "Dili"
+    },
+    {
+      "id": "capital-australia",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Australia**?",
+      "back": "Canberra",
+      "explanation": "Not Sydney or Melbourne: Canberra was built as a compromise between the two rivals."
+    },
+    {
+      "id": "capital-new-zealand",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **New Zealand**?",
+      "back": "Wellington",
+      "explanation": "Not Auckland, the largest city."
+    },
+    {
+      "id": "capital-papua-new-guinea",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Papua New Guinea**?",
+      "back": "Port Moresby"
+    },
+    {"id": "capital-fiji", "type": "card", "section": "oceania", "front": "Capital of **Fiji**?", "back": "Suva"},
+    {
+      "id": "capital-solomon-islands",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of the **Solomon Islands**?",
+      "back": "Honiara"
+    },
+    {
+      "id": "capital-vanuatu",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Vanuatu**?",
+      "back": "Port Vila",
+      "alternatives": ["Port-Vila"]
+    },
+    {"id": "capital-samoa", "type": "card", "section": "oceania", "front": "Capital of **Samoa**?", "back": "Apia"},
+    {
+      "id": "capital-tonga",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Tonga**?",
+      "back": "Nuku'alofa",
+      "alternatives": ["Nukualofa", "Nukuʻalofa"]
+    },
+    {
+      "id": "capital-kiribati",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Kiribati**?",
+      "back": "Tarawa",
+      "alternatives": ["South Tarawa"],
+      "explanation": "The government offices are in South Tarawa, on the atoll of Tarawa."
+    },
+    {"id": "capital-tuvalu", "type": "card", "section": "oceania", "front": "Capital of **Tuvalu**?", "back": "Funafuti"},
+    {
+      "id": "capital-nauru",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Nauru**?",
+      "back": "Yaren",
+      "alternatives": ["Yaren District"],
+      "explanation": "Nauru has no official capital. The government offices are in the district of Yaren."
+    },
+    {
+      "id": "capital-marshall-islands",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of the **Marshall Islands**?",
+      "back": "Majuro"
+    },
+    {
+      "id": "capital-micronesia",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Micronesia**?",
+      "back": "Palikir",
+      "explanation": "On the island of Pohnpei."
+    },
+    {
+      "id": "capital-palau",
+      "type": "card",
+      "section": "oceania",
+      "front": "Capital of **Palau**?",
+      "back": "Ngerulmud",
+      "explanation": "Ngerulmud replaced Koror in 2006."
+    },
+    {
+      "id": "three-capitals",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which country has three capitals: one for the government, one for the parliament and one for the highest court of appeal?",
+      "options": [
+        {"text": "South Africa", "correct": true, "explanation": "Pretoria, Cape Town and Bloemfontein."},
+        {"text": "Bolivia", "explanation": "Two: Sucre and La Paz."},
+        {"text": "Nigeria", "explanation": "One: Abuja."},
+        {"text": "Malaysia", "explanation": "Kuala Lumpur is the capital, and the government sits in Putrajaya."}
+      ]
+    },
+    {
+      "id": "sucre-la-paz",
+      "type": "text",
+      "section": "facts",
+      "question": "Which South American country has its constitutional capital in Sucre and its seat of government in La Paz?",
+      "answers": ["Bolivia"],
+      "explanation": "At about 3,650 metres, La Paz is the highest seat of government in the world."
+    },
+    {
+      "id": "istanbul",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "Istanbul is the capital of Turkey.",
+      "answer": false,
+      "explanation": "Istanbul is the largest city. The capital is Ankara."
+    },
+    {
+      "id": "dubai",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "Dubai is the capital of the United Arab Emirates.",
+      "answer": false,
+      "explanation": "Dubai is the largest city. The capital is Abu Dhabi."
+    },
+    {
+      "id": "sydney",
+      "type": "truefalse",
+      "section": "facts",
+      "statement": "Sydney is the capital of Australia.",
+      "answer": false,
+      "explanation": "Sydney is the largest city. The capital is Canberra."
+    },
+    {
+      "id": "lagos",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which city was the capital of Nigeria until 1991?",
+      "options": [{"text": "Lagos", "correct": true}, {"text": "Kano"}, {"text": "Ibadan"}, {"text": "Port Harcourt"}],
+      "explanation": "Lagos is still the largest city of Nigeria. The capital moved to Abuja, in the centre of the country."
+    },
+    {
+      "id": "rio",
+      "type": "text",
+      "section": "facts",
+      "question": "Which city was the capital of Brazil before Brasília?",
+      "answers": ["Rio de Janeiro", "Rio"],
+      "explanation": "Brasília took over in 1960."
+    },
+    {
+      "id": "almaty",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which city was the capital of Kazakhstan until 1997?",
+      "options": [
+        {"text": "Almaty", "correct": true},
+        {"text": "Shymkent"},
+        {"text": "Karaganda"},
+        {"text": "Tashkent", "explanation": "The capital of Uzbekistan."}
+      ]
+    },
+    {
+      "id": "two-congos",
+      "type": "choice",
+      "section": "facts",
+      "question": "Kinshasa and Brazzaville face each other across a river. Which one?",
+      "options": [{"text": "Congo", "correct": true}, {"text": "Niger"}, {"text": "Nile"}, {"text": "Zambezi"}]
+    },
+    {
+      "id": "nile-confluence",
+      "type": "text",
+      "section": "facts",
+      "question": "Which capital lies where the Blue Nile and the White Nile meet?",
+      "answers": ["Khartoum", "Khartum"],
+      "hint": "It is the capital of Sudan."
+    },
+    {
+      "id": "african-union",
+      "type": "cloze",
+      "section": "facts",
+      "text": "The African Union has its headquarters in {{Addis Ababa|Addis Abeba::city}}, the capital of Ethiopia."
+    },
+    {
+      "id": "no-capital",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which country has no official capital?",
+      "options": [
+        {"text": "Nauru", "correct": true, "explanation": "The government offices are in the district of Yaren."},
+        {"text": "Tuvalu", "explanation": "Its capital is Funafuti."},
+        {"text": "Palau", "explanation": "Its capital is Ngerulmud."},
+        {"text": "Kiribati", "explanation": "Its capital is Tarawa."}
+      ]
+    },
+    {
+      "id": "southernmost",
+      "type": "choice",
+      "section": "facts",
+      "question": "Which is the southernmost capital of a sovereign state?",
+      "options": [
+        {"text": "Wellington", "correct": true, "explanation": "At about 41 degrees south."},
+        {"text": "Canberra", "explanation": "At about 35 degrees south."},
+        {"text": "Buenos Aires", "explanation": "At about 35 degrees south."},
+        {"text": "Pretoria", "explanation": "At about 26 degrees south."}
+      ]
+    },
+    {
+      "id": "americas-north-south",
+      "type": "order",
+      "section": "facts",
+      "prompt": "Order these capitals of the Americas from north to south.",
+      "sequence": ["Ottawa", "Washington, D.C.", "Mexico City", "Bogotá", "Lima", "Buenos Aires"]
+    },
+    {
+      "id": "asia-west-east",
+      "type": "order",
+      "section": "facts",
+      "prompt": "Order these Asian capitals from west to east.",
+      "sequence": ["Ankara", "Tehran", "New Delhi", "Bangkok", "Beijing", "Tokyo"]
+    }
+  ]
+}

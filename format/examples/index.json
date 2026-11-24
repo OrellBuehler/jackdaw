@@ -25,6 +25,17 @@
       "revision": 2
     },
     {
+      "id": "com.github.orellbuehler.jackdaw.examples.flags-of-the-world",
+      "file": "flags-of-the-world.jackdaw",
+      "title": "Flags of the World",
+      "description": "The national flags of 149 countries, region by region: you see the flag and name the country, as multiple choice or typed. Notes point out the look-alikes, from Romania and Chad to Indonesia and Monaco, and a short quiz on flag facts follows. The flags with very detailed coats of arms, such as those of Spain and Mexico, are not included. The drawings are public-domain files from Wikimedia Commons.",
+      "language": "en",
+      "icon": "🏳️",
+      "color": "#B45309",
+      "items": 163,
+      "revision": 1
+    },
+    {
       "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
       "file": "format-tour.jackdaw",
       "title": "Jackdaw Format Tour",
@@ -66,6 +77,28 @@
       "icon": "💼",
       "color": "#0F766E",
       "items": 20,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.japanese-hiragana",
+      "file": "japanese-hiragana.jackdaw",
+      "title": "Japanese Hiragana",
+      "description": "All of hiragana, row by row: the 46 basic characters, the 25 voiced ones and the 33 combined sounds, each asked both ways, character to reading and reading to character. Notes point out the look-alikes. At the end come the rules for long vowels, doubled consonants and particles, and sixteen first words to read.",
+      "language": "ja",
+      "icon": "🇯🇵",
+      "color": "#BC002D",
+      "items": 130,
+      "revision": 1
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.japanese-katakana",
+      "file": "japanese-katakana.jackdaw",
+      "title": "Japanese Katakana",
+      "description": "All of katakana, row by row: the 46 basic characters, the 25 voiced ones and the 33 combined sounds, each asked both ways, character to reading and reading to character. Notes point out the look-alikes such as シ and ツ. At the end come the extra combinations used for foreign sounds, the long-vowel bar and sixteen loanwords to read.",
+      "language": "ja",
+      "icon": "🗾",
+      "color": "#1D4ED8",
+      "items": 138,
       "revision": 1
     },
     {
@@ -111,6 +144,17 @@
       "color": "#D52B1E",
       "items": 36,
       "revision": 2
+    },
+    {
+      "id": "com.github.orellbuehler.jackdaw.examples.world-capitals",
+      "file": "world-capitals.jackdaw",
+      "title": "World Capitals",
+      "description": "The capitals of the 149 countries of Africa, Asia, the Americas and Oceania, region by region, with notes on the ones that are easy to get wrong: moved capitals, shared capitals and cities that are not the largest. It follows on from European Capitals. Cards are asked as multiple choice and as typed answers, and local spellings are accepted.",
+      "language": "en",
+      "icon": "🌐",
+      "color": "#0F766E",
+      "items": 164,
+      "revision": 1
     },
     {
       "id": "com.github.orellbuehler.jackdaw.examples.world-history-20th-century",
