@@ -94,7 +94,8 @@ overallCounts:
 SELECT
     COALESCE(SUM(CASE WHEN state != 0 THEN 1 ELSE 0 END), 0) AS learned_count,
     COALESCE(SUM(CASE WHEN state = 2 AND interval_days >= :masteredDays THEN 1 ELSE 0 END), 0) AS mastered_count,
-    COALESCE(SUM(CASE WHEN (state = 1 AND due_at <= :learnCutoff) OR (state = 2 AND due_at < :reviewCutoff) THEN 1 ELSE 0 END), 0) AS due_count
+    COALESCE(SUM(CASE WHEN ((state = 1 AND due_at <= :learnCutoff) OR (state = 2 AND due_at < :reviewCutoff))
+        AND pack_id NOT IN (SELECT pack_id FROM pack_local WHERE archived = 1) THEN 1 ELSE 0 END), 0) AS due_count
 FROM review_state;
 
 insertLog:

@@ -199,6 +199,8 @@ internal class PackStore(
             packs.deleteSections(packId)
             packs.deleteSource(packId)
             packs.deletePack(packId)
+            db.libraryQueries.deleteLocal(packId)
+            db.libraryQueries.deletePackMembers(packId)
             sync.writeSyncPack(
                 packId,
                 known?.content_at ?: 0L,
@@ -362,7 +364,25 @@ internal class PackStore(
                         )
                 }
         val lastStudied = reviews.lastStudied().executeAsList().associate { it.pack_id to it.last_ts }
-        return packs.selectPacks().executeAsList().map { summary(it, counts[it.id] ?: Counts(0, 0, 0, 0, 0), lastStudied[it.id] ?: 0L) }
+        val locals =
+            db.libraryQueries
+                .selectLocals()
+                .executeAsList()
+                .associateBy { it.pack_id }
+        val groups =
+            db.libraryQueries
+                .selectMembers()
+                .executeAsList()
+                .groupBy({ it.pack_id }, { it.group_id })
+        return packs.selectPacks().executeAsList().map {
+            val local = locals[it.id]
+            summary(it, counts[it.id] ?: Counts(0, 0, 0, 0, 0), lastStudied[it.id] ?: 0L).copy(
+                archived = local?.archived == 1L,
+                sourceUrl = local?.url,
+                edited = local?.edited == 1L,
+                groupIds = groups[it.id].orEmpty().sorted(),
+            )
+        }
     }
 
     fun summary(packId: String): PackSummary? = summaries().firstOrNull { it.id == packId }

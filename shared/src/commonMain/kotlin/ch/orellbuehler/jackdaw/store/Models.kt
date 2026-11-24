@@ -25,6 +25,16 @@ data class PackSummary(
     val importedAt: Long,
     val updatedAt: Long,
     val revision: Int,
+    val archived: Boolean = false,
+    val sourceUrl: String? = null,
+    val edited: Boolean = false,
+    val groupIds: List<String> = emptyList(),
+)
+
+data class PackGroup(
+    val id: String,
+    val name: String,
+    val packIds: List<String>,
 )
 
 data class SectionSummary(
@@ -131,6 +141,7 @@ sealed class ImportPreview {
         val installedRevision: Int,
         val isDowngrade: Boolean,
         val counts: ImportCounts,
+        val overwritesEdits: Boolean = false,
     ) : ImportPreview()
 
     data class Invalid(

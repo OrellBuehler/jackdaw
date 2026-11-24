@@ -32,6 +32,8 @@ enum class ImportErrorCode {
     REVISION_DOWNGRADE,
     UNKNOWN_SAMPLE,
     STORAGE_ERROR,
+    ITEM_INVALID,
+    PACK_MISSING,
 }
 
 data class ImportError(
