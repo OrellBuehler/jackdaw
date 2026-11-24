@@ -304,6 +304,7 @@ actor CloudSync: CKSyncEngineDelegate {
     }
 
     private func runReconcile() async {
+        guard !Task.isCancelled else { return }
         reconcileTask = nil
         await reconcilePending()
     }
@@ -319,6 +320,8 @@ actor CloudSync: CKSyncEngineDelegate {
             if !changes.isEmpty {
                 engine.state.add(pendingRecordZoneChanges: changes)
             }
+        } catch is CancellationError {
+            note("reading pending changes was cancelled")
         } catch {
             await setLastError("Reading pending changes failed:\n" + SyncErrorText.describe(error))
         }

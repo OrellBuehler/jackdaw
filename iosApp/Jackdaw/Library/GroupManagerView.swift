@@ -90,7 +90,6 @@ struct GroupManagerView: View {
                 }
             }
         }
-        .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
         .alert("groups.rename", isPresented: $showsRename) {
             TextField("groups.new", text: $renameText)
