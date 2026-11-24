@@ -179,6 +179,15 @@ private fun PreviewSheet(
                         ) + "\n" + stringResource(R.string.import_update_progress_kept),
                 )
             }
+            if (preview.overwritesEdits) {
+                Notice(
+                    icon = { Icon(Icons.Rounded.Warning, null, tint = scheme.onErrorContainer) },
+                    container = scheme.errorContainer,
+                    content = scheme.onErrorContainer,
+                    title = stringResource(R.string.import_overwrite_title),
+                    body = stringResource(R.string.import_overwrite_body),
+                )
+            }
             if (preview.skippedCount > 0) {
                 Notice(
                     icon = { Icon(Icons.Rounded.Info, null, tint = scheme.onSurfaceVariant) },

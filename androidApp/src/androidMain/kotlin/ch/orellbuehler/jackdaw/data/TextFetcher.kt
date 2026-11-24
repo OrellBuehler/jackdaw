@@ -18,7 +18,7 @@ class HttpsTextFetcher : TextFetcher {
                 try {
                     connection.connectTimeout = 10_000
                     connection.readTimeout = 15_000
-                    connection.instanceFollowRedirects = false
+                    connection.instanceFollowRedirects = true
                     if (connection.responseCode != HttpsURLConnection.HTTP_OK) return@withContext null
                     (connection.inputStream.use { decodePackText(it) } as? ReadOutcome.Text)?.text
                 } finally {

@@ -31,6 +31,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -42,6 +44,7 @@ import androidx.compose.material.icons.rounded.ContentCopy
 import androidx.compose.material.icons.rounded.ContentPaste
 import androidx.compose.material.icons.rounded.FolderOpen
 import androidx.compose.material.icons.rounded.LibraryAdd
+import androidx.compose.material.icons.rounded.Link
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -76,6 +79,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -87,6 +93,7 @@ import kotlinx.coroutines.launch
 private enum class AddPage {
     Menu,
     Paste,
+    Link,
     Samples,
     Ai,
 }
@@ -99,12 +106,14 @@ fun AddPackScreen(
 ) {
     var page by rememberSaveable { mutableStateOf(AddPage.Menu) }
     var pasted by rememberSaveable { mutableStateOf("") }
+    var link by rememberSaveable { mutableStateOf("") }
     val snackbar = remember { SnackbarHostState() }
     BackHandler(enabled = page != AddPage.Menu) { page = AddPage.Menu }
     val title =
         when (page) {
             AddPage.Menu -> R.string.add_title
             AddPage.Paste -> R.string.add_paste
+            AddPage.Link -> R.string.add_link
             AddPage.Samples -> R.string.add_samples
             AddPage.Ai -> R.string.add_ai
         }
@@ -138,6 +147,7 @@ fun AddPackScreen(
             when (current) {
                 AddPage.Menu -> MenuPage(importViewModel, onNavigate = { page = it })
                 AddPage.Paste -> PastePage(text = pasted, onTextChange = { pasted = it }, onPreview = { importViewModel.openText(pasted) })
+                AddPage.Link -> LinkPage(text = link, onTextChange = { link = it }, onContinue = { importViewModel.openUrl(link) })
                 AddPage.Samples -> SamplesPage(importViewModel)
                 AddPage.Ai -> AiPage(importViewModel, snackbar, onPaste = { page = AddPage.Paste })
             }
@@ -176,6 +186,13 @@ private fun MenuPage(
             container = MaterialTheme.colorScheme.secondaryContainer,
             content = MaterialTheme.colorScheme.onSecondaryContainer,
         ) { onNavigate(AddPage.Paste) }
+        OptionCard(
+            Icons.Rounded.Link,
+            R.string.add_link,
+            R.string.add_link_sub,
+            container = MaterialTheme.colorScheme.secondaryContainer,
+            content = MaterialTheme.colorScheme.onSecondaryContainer,
+        ) { onNavigate(AddPage.Link) }
         OptionCard(
             Icons.Rounded.LibraryAdd,
             R.string.add_samples,
@@ -275,6 +292,45 @@ private fun PastePage(
             Button(onClick = onPreview, enabled = text.isNotBlank(), modifier = Modifier.weight(1f)) {
                 Text(stringResource(R.string.paste_continue), maxLines = 1)
             }
+        }
+    }
+}
+
+@Composable
+private fun LinkPage(
+    text: String,
+    onTextChange: (String) -> Unit,
+    onContinue: () -> Unit,
+) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .imePadding()
+            .navigationBarsPadding()
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Text(stringResource(R.string.link_explainer), style = MaterialTheme.typography.bodyLarge)
+        OutlinedTextField(
+            value = text,
+            onValueChange = onTextChange,
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            placeholder = { Text(stringResource(R.string.link_hint), maxLines = 1) },
+            keyboardOptions =
+                KeyboardOptions(
+                    capitalization = KeyboardCapitalization.None,
+                    autoCorrectEnabled = false,
+                    keyboardType = KeyboardType.Uri,
+                    imeAction = ImeAction.Go,
+                ),
+            keyboardActions = KeyboardActions(onGo = { if (text.isNotBlank()) onContinue() }),
+            shape = MaterialTheme.shapes.large,
+        )
+        Button(onClick = onContinue, enabled = text.isNotBlank(), modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.paste_continue), maxLines = 1)
         }
     }
 }

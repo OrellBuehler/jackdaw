@@ -31,9 +31,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.rounded.List
+import androidx.compose.material.icons.rounded.Archive
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.Folder
 import androidx.compose.material.icons.rounded.Keyboard
+import androidx.compose.material.icons.rounded.LinkOff
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Quiz
@@ -42,6 +46,7 @@ import androidx.compose.material.icons.rounded.Save
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.Shuffle
 import androidx.compose.material.icons.rounded.Style
+import androidx.compose.material.icons.rounded.Unarchive
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -93,6 +98,8 @@ import ch.orellbuehler.jackdaw.study.SessionMode
 import ch.orellbuehler.jackdaw.study.SessionPreview
 import ch.orellbuehler.jackdaw.ui.components.PackIconTile
 import ch.orellbuehler.jackdaw.ui.components.SlimProgressBar
+import ch.orellbuehler.jackdaw.ui.library.GroupsSheet
+import ch.orellbuehler.jackdaw.ui.library.GroupsViewModel
 import ch.orellbuehler.jackdaw.ui.theme.Ink
 import ch.orellbuehler.jackdaw.ui.theme.PackPalette
 import ch.orellbuehler.jackdaw.ui.theme.cardSurface
@@ -111,6 +118,8 @@ private enum class Confirm {
 @Composable
 fun PackDetailScreen(
     viewModel: PackDetailViewModel,
+    groupsViewModel: GroupsViewModel,
+    onUpdateFromLink: (String) -> Unit,
     onBack: () -> Unit,
     onStudy: (SessionMode, String?, PracticeFilter) -> Unit,
     onBrowse: () -> Unit,
@@ -122,14 +131,16 @@ fun PackDetailScreen(
             LaunchedEffect(Unit) { onBack() }
             Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background))
         }
-        is PackDetailState.Ready -> PackDetailContent(viewModel, current, onBack, onStudy, onBrowse)
+        is PackDetailState.Ready -> PackDetailContent(viewModel, groupsViewModel, current, onUpdateFromLink, onBack, onStudy, onBrowse)
     }
 }
 
 @Composable
 private fun PackDetailContent(
     viewModel: PackDetailViewModel,
+    groupsViewModel: GroupsViewModel,
     state: PackDetailState.Ready,
+    onUpdateFromLink: (String) -> Unit,
     onBack: () -> Unit,
     onStudy: (SessionMode, String?, PracticeFilter) -> Unit,
     onBrowse: () -> Unit,
@@ -143,6 +154,8 @@ private fun PackDetailContent(
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
     var confirm by rememberSaveable { mutableStateOf(Confirm.None) }
+    var editing by rememberSaveable { mutableStateOf(false) }
+    var grouping by rememberSaveable { mutableStateOf(false) }
     val exportFailed = stringResource(R.string.export_failed)
     val savedText = stringResource(R.string.export_saved)
 
@@ -199,8 +212,13 @@ private fun PackDetailContent(
                         onSave = { saveLauncher.launch(packFileName(summary.title)) },
                         onReset = { confirm = Confirm.Reset },
                         onDelete = { confirm = Confirm.Delete },
+                        onEdit = { editing = true },
+                        onGroups = { grouping = true },
+                        onArchive = { viewModel.setArchived(!summary.archived) },
+                        onUnlink = if (summary.sourceUrl == null) null else viewModel::removeLink,
                     )
                 }
+                if (summary.archived) item { ArchivedNotice(Modifier.padding(horizontal = 16.dp)) }
                 item { StatRow(detail, Modifier.padding(horizontal = 16.dp)) }
                 item {
                     LearnBlock(state.learn, onLearn = {
@@ -225,6 +243,9 @@ private fun PackDetailContent(
                     }
                 }
                 item { BrowseRow(summary.itemCount, onBrowse, Modifier.padding(horizontal = 16.dp)) }
+                summary.sourceUrl?.let { url ->
+                    item { LinkBlock(url, summary.edited, onUpdate = { onUpdateFromLink(url) }, Modifier.padding(horizontal = 16.dp)) }
+                }
                 if (hasAbout(detail)) item { AboutBlock(detail, Modifier.padding(horizontal = 16.dp)) }
             }
             AnimatedVisibility(
@@ -242,6 +263,16 @@ private fun PackDetailContent(
             }
         }
     }
+
+    if (editing) {
+        EditDetailsDialog(
+            title = summary.title,
+            description = summary.descriptionText.orEmpty(),
+            onSave = viewModel::updateInfo,
+            onDismiss = { editing = false },
+        )
+    }
+    if (grouping) GroupsSheet(groupsViewModel, packId = summary.id, onDismiss = { grouping = false })
 
     when (confirm) {
         Confirm.None -> Unit
@@ -302,6 +333,10 @@ private fun Hero(
     onSave: () -> Unit,
     onReset: () -> Unit,
     onDelete: () -> Unit,
+    onEdit: () -> Unit,
+    onGroups: () -> Unit,
+    onArchive: () -> Unit,
+    onUnlink: (() -> Unit)?,
 ) {
     val summary = detail.summary
     var menu by remember { mutableStateOf(false) }
@@ -325,6 +360,40 @@ private fun Hero(
                     Icon(Icons.Rounded.MoreVert, stringResource(R.string.action_more), tint = on)
                 }
                 DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.menu_edit)) },
+                        leadingIcon = { Icon(Icons.Rounded.Edit, null) },
+                        onClick = {
+                            menu = false
+                            onEdit()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.menu_groups)) },
+                        leadingIcon = { Icon(Icons.Rounded.Folder, null) },
+                        onClick = {
+                            menu = false
+                            onGroups()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(if (summary.archived) R.string.menu_unarchive else R.string.menu_archive)) },
+                        leadingIcon = { Icon(if (summary.archived) Icons.Rounded.Unarchive else Icons.Rounded.Archive, null) },
+                        onClick = {
+                            menu = false
+                            onArchive()
+                        },
+                    )
+                    if (onUnlink != null) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.menu_unlink)) },
+                            leadingIcon = { Icon(Icons.Rounded.LinkOff, null) },
+                            onClick = {
+                                menu = false
+                                onUnlink()
+                            },
+                        )
+                    }
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.menu_share)) },
                         leadingIcon = { Icon(Icons.Rounded.Share, null) },

@@ -310,4 +310,42 @@
         <item quantity="one">%d day streak</item>
         <item quantity="other">%d day streak</item>
     </plurals>
+    <string name="library_filter_all">All</string>
+    <string name="library_filter_archived">Archived</string>
+    <string name="library_groups">Groups</string>
+    <string name="library_group_empty">No packs here yet. Open a pack and choose “Groups” in its menu to add it.</string>
+    <string name="groups_new">New group</string>
+    <string name="groups_rename">Rename</string>
+    <string name="groups_delete">Delete group</string>
+    <string name="groups_none">No groups yet. Create one, for example “Favourites” or “Languages”.</string>
+    <string name="groups_hint">Deleting a group does not delete its packs.</string>
+    <string name="menu_edit">Edit details</string>
+    <string name="menu_groups">Groups</string>
+    <string name="menu_archive">Archive</string>
+    <string name="menu_unarchive">Unarchive</string>
+    <string name="menu_unlink">Remove link</string>
+    <string name="detail_archived_notice">This pack is archived. It is hidden from the library and its reviews do not count as due.</string>
+    <string name="link_title">Linked pack</string>
+    <string name="link_update">Update from link</string>
+    <string name="link_edited">You changed this pack on this device. Updating replaces your changes.</string>
+    <string name="import_overwrite_title">Your changes will be replaced</string>
+    <string name="import_overwrite_body">You edited this pack on this device. Importing replaces it with this version and your edits are lost.</string>
+    <string name="add_link">From a link</string>
+    <string name="add_link_sub">A pack file on the web, for example a public GitHub gist</string>
+    <string name="link_explainer">Paste the link to a pack file. The app loads it once now, and again only when you tap “Update from link” in the pack.</string>
+    <string name="error_invalid_url">This is not a valid link. It must start with https://.</string>
+    <string name="edit_field_title">Title</string>
+    <string name="edit_field_description">Description</string>
+    <string name="action_save">Save</string>
+    <string name="action_edit">Edit</string>
+    <string name="item_edit_title">Edit item</string>
+    <string name="item_new_title">New item</string>
+    <string name="items_add">Add item</string>
+    <string name="item_delete">Delete item</string>
+    <string name="item_edit_help">Change the text between the quotes. If you change the type, the progress of this item starts over.</string>
+    <string name="item_delete_title">Delete this item?</string>
+    <string name="item_delete_body">Its progress is deleted too.</string>
+    <string name="error_item_invalid">This item is not valid.</string>
+    <string name="error_pack_missing">This pack is no longer installed.</string>
+    <string name="link_hint" translatable="false">https://gist.github.com/…</string>
 </resources>

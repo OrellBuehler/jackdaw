@@ -189,6 +189,32 @@ class ImportViewModelTest {
         }
 
     @Test
+    fun aLinkIsResolvedDownloadedAndImportedWithItsUrl() =
+        runTest {
+            val url = "https://example.org/pack.jackdaw"
+            every { sdk.resolvePackUrl("nonsense") } returns null
+            every { sdk.resolvePackUrl("example.org/pack.jackdaw") } returns url
+            coEvery { sdk.previewImport("pack text") } returns valid(isUpdate = true, isDowngrade = true)
+            coEvery { sdk.importPackFromUrl("pack text", url, true) } returns success(isUpdate = true)
+            val vm = viewModel()
+
+            vm.openUrl("nonsense")
+            assertEquals(ImportProblem.InvalidUrl, assertIs<ImportUiState.Failed>(vm.state.value).problem)
+            vm.openUrl("example.org/pack.jackdaw")
+            assertEquals(ImportProblem.DownloadFailed, assertIs<ImportUiState.Failed>(vm.state.value).problem)
+
+            fetched[url] = "pack text"
+            vm.openUrl("example.org/pack.jackdaw")
+            assertEquals(url, assertIs<ImportUiState.Preview>(vm.state.value).url)
+            vm.events.test {
+                vm.confirm()
+                assertIs<ImportEvent.Imported>(awaitItem())
+            }
+            coVerify(exactly = 1) { sdk.importPackFromUrl("pack text", url, true) }
+            coVerify(exactly = 0) { sdk.importPack(any()) }
+        }
+
+    @Test
     fun theCatalogReplacesTheLibraryAndOnlinePacksAreDownloaded() =
         runTest {
             val online = sample("s2", revision = 2, downloadUrl = "https://example.org/s2.jackdaw")

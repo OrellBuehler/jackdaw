@@ -71,6 +71,7 @@ import ch.orellbuehler.jackdaw.ui.addpack.ImportSheetHost
 import ch.orellbuehler.jackdaw.ui.addpack.ImportViewModel
 import ch.orellbuehler.jackdaw.ui.addpack.messageRes
 import ch.orellbuehler.jackdaw.ui.components.LocalBottomBarInset
+import ch.orellbuehler.jackdaw.ui.library.GroupsViewModel
 import ch.orellbuehler.jackdaw.ui.library.LibraryScreen
 import ch.orellbuehler.jackdaw.ui.library.LibraryViewModel
 import ch.orellbuehler.jackdaw.ui.nav.AddPackRoute
@@ -229,6 +230,7 @@ private fun AppNavigation(
                     val vm = viewModel { LibraryViewModel(sdk) }
                     LibraryScreen(
                         viewModel = vm,
+                        groupsViewModel = viewModel { GroupsViewModel(sdk) },
                         importViewModel = importViewModel,
                         onOpenPack = { nav.navigate(PackRoute(it)) },
                         onStudy = { nav.navigate(StudyRoute(it)) },
@@ -252,6 +254,8 @@ private fun AppNavigation(
                     val vm = viewModel(key = "pack-${route.packId}") { PackDetailViewModel(sdk, route.packId) }
                     PackDetailScreen(
                         viewModel = vm,
+                        groupsViewModel = viewModel { GroupsViewModel(sdk) },
+                        onUpdateFromLink = importViewModel::openUrl,
                         onBack = { nav.popBackStack() },
                         onStudy = { mode, sectionId, filter ->
                             nav.navigate(StudyRoute(route.packId, mode.name, sectionId, filter.name))

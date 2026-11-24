@@ -3,6 +3,7 @@ package ch.orellbuehler.jackdaw.ui.pack
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.orellbuehler.jackdaw.JackdawSdk
+import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.PackDetail
 import ch.orellbuehler.jackdaw.study.SessionConfig
 import ch.orellbuehler.jackdaw.study.SessionPreview
@@ -50,4 +51,17 @@ class PackDetailViewModel(
     }
 
     suspend fun exportJson(): String? = sdk.exportPack(packId)
+
+    fun setArchived(archived: Boolean) {
+        viewModelScope.launch { sdk.setPackArchived(packId, archived) }
+    }
+
+    fun removeLink() {
+        viewModelScope.launch { sdk.removePackUrl(packId) }
+    }
+
+    suspend fun updateInfo(
+        title: String,
+        description: String,
+    ): ImportResult = sdk.updatePackInfo(packId, title, description)
 }

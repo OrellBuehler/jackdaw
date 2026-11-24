@@ -5,6 +5,7 @@ import ch.orellbuehler.jackdaw.JackdawSdk
 import ch.orellbuehler.jackdaw.MainDispatcherRule
 import ch.orellbuehler.jackdaw.packSummary
 import ch.orellbuehler.jackdaw.statsOf
+import ch.orellbuehler.jackdaw.store.PackGroup
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,6 +59,7 @@ class LibraryViewModelTest {
             every { sdk.observePacks() } returns packs
             every { sdk.observeStats(7) } returns flowOf(statsOf(streak = 4, reviewsToday = 5))
             every { sdk.samplePacks() } returns emptyList()
+            every { sdk.observeGroups() } returns flowOf(emptyList())
             val viewModel = LibraryViewModel(sdk)
             viewModel.state.test {
                 var state = awaitItem()
@@ -72,4 +74,24 @@ class LibraryViewModelTest {
                 assertNull(state.continuePack)
             }
         }
+
+    @Test
+    fun filtersByGroupAndKeepsArchivedPacksApart() {
+        val packs =
+            listOf(
+                packSummary("a", due = 2, groupIds = listOf("g1")),
+                packSummary("b", due = 5),
+                packSummary("c", due = 9, archived = true, groupIds = listOf("g1")),
+            )
+        val groups = listOf(PackGroup("g1", "Favourites", listOf("a", "c")))
+        val state = LibraryState(loaded = true, packs = packs, groups = groups)
+        assertEquals(listOf("a", "b"), state.visible.map { it.id })
+        assertEquals(7, state.totalDue)
+        assertEquals("b", state.continuePack?.id)
+        assertEquals(listOf("a"), state.copy(selected = LibraryFilter.Group("g1")).visible.map { it.id })
+        assertEquals(listOf("c"), state.copy(selected = LibraryFilter.Archived).visible.map { it.id })
+        assertEquals(LibraryFilter.All, state.copy(selected = LibraryFilter.Group("gone")).filter)
+        assertEquals(LibraryFilter.All, state.copy(packs = packs.take(2), selected = LibraryFilter.Archived).filter)
+        assertEquals(LibraryFilter.Archived, state.copy(packs = packs.drop(2)).filter)
+    }
 }

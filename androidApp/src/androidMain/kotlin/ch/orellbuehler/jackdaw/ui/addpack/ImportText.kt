@@ -22,6 +22,8 @@ fun ImportErrorCode.messageRes(): Int =
         ImportErrorCode.REVISION_DOWNGRADE -> R.string.error_downgrade
         ImportErrorCode.UNKNOWN_SAMPLE -> R.string.error_unknown_sample
         ImportErrorCode.STORAGE_ERROR -> R.string.error_storage
+        ImportErrorCode.ITEM_INVALID -> R.string.error_item_invalid
+        ImportErrorCode.PACK_MISSING -> R.string.error_pack_missing
     }
 
 @StringRes
@@ -46,6 +48,7 @@ fun ImportProblem.messageRes(): Int =
         ImportProblem.Empty -> R.string.error_empty
         ImportProblem.TooLarge -> R.string.error_too_large
         ImportProblem.DownloadFailed -> R.string.error_download_failed
+        ImportProblem.InvalidUrl -> R.string.error_invalid_url
     }
 
 fun ImportProblem.technicalDetail(): String? = (this as? ImportProblem.Sdk)?.error?.message
