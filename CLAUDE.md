@@ -32,6 +32,9 @@ Merge rules and "what changed locally" live in `shared/.../sync/` (`JackdawSync`
 - Changing a record type or field means changing `iosApp/Jackdaw/SDK/Sync/CloudRecords.swift`, `iosApp/cloudkit/schema.ckdb` and the CloudKit production schema together (`scripts/ios/check-cloudkit-schema.py` checks the first two in CI; the production deploy is manual, see the README). Production schemas can only grow.
 - Sync must stay disabled where the process has no iCloud entitlement (simulator, tests, previews: `CloudSync.isSupported`), because CloudKit traps there. Do not touch `CKContainer` outside `CloudSync`.
 - A device skips a synced pack whose format version it cannot read. `CloudSync` drops the engine state when `sync.packFormatVersion` changes, so an updated app fetches everything again and picks those packs up.
+- Never stop or replace the engine inside a `CKSyncEngineDelegate` callback, and never rebuild it on an account event. A new engine reports `.signIn` first and has dropped what was queued for it: queue the zone and all records again on the same engine (`recoverZone`). Transient send errors are the engine's to retry; do not block those records.
+- `CloudSync.note` keeps the last engine events for the "Sync log" in Settings: without a Mac it is the only log there is.
+- Archive, link, the edited mark and groups (`Library.sq`) are per device and not synced.
 - Android does not call `sync.enableTracking()`: it keeps no sync bookkeeping.
 
 ## Format contract
@@ -74,7 +77,7 @@ Swift 6 language mode (`SWIFT_VERSION 6.0`), deployment target iOS 18. Check new
 
 ## SQLDelight
 
-Tables are in `shared/src/commonMain/sqldelight/ch/orellbuehler/jackdaw/db/*.sq`. `schemaOutputDirectory` is `shared/src/commonMain/sqldelight/databases/` (only `1.db` so far) and `verifyMigrations` is on. After changing a table, from the repo root:
+Tables are in `shared/src/commonMain/sqldelight/ch/orellbuehler/jackdaw/db/*.sq`. `schemaOutputDirectory` is `shared/src/commonMain/sqldelight/databases/` (`1.db` is what 1.0 and 1.1 shipped, `1.sqm` leads to `2.db`) and `verifyMigrations` is on. After changing a table, from the repo root:
 
 ```bash
 ./gradlew shared:generateCommonMainJackdawDatabaseSchema   # writes the snapshot of the current schema
