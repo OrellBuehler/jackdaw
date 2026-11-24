@@ -81,7 +81,7 @@ Errors and warnings carry a stable `code` for localisation and an English `messa
 | `ImportErrorCode` | Meaning |
 |---|---|
 | `NOT_JSON`, `NOT_AN_OBJECT`, `NOT_A_PACK` | Not a Jackdaw file. |
-| `VERSION_INVALID`, `VERSION_TOO_NEW` | Format version unreadable / newer than supported: tell the user to update the app. |
+| `VERSION_INVALID`, `VERSION_TOO_NEW` | Format version unreadable / newer than supported (the reader supports versions 1 and 2; figures make a pack version 2): tell the user to update the app. |
 | `ID_INVALID`, `TITLE_INVALID`, `ITEMS_MISSING`, `NO_VALID_ITEMS` | Required pack properties missing or no item survived validation. |
 | `TOO_LARGE`, `TOO_MANY_ITEMS` | Over 25 MB / 50,000 items. |
 | `REVISION_DOWNGRADE` | Installed revision is higher. Ask the user, then call `importPackAllowingDowngrade`. |

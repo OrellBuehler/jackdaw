@@ -96,7 +96,7 @@ All logic lives in `shared/`; the apps only render state and forward input.
 
 A pack is one UTF-8 JSON file (`.jackdaw`, media type `application/vnd.jackdaw.pack+json`).
 
-- Required: `format` (`"jackdaw-pack"`), `version` (`1`), `id` (stable and unique), `title`, and a non-empty `items` array.
+- Required: `format` (`"jackdaw-pack"`), `version` (`1`, or `2` for a pack with figures), `id` (stable and unique), `title`, and a non-empty `items` array.
 - Optional: `description`, `language`, `author`, `license`, `tags`, `icon`, `color`, `revision`, `sections` (chapters) and `study` (order, new items per session, reversible cards, ...).
 - Every item has a unique `id` and a `type`: `card`, `choice`, `text`, `cloze`, `truefalse`, `order` or `open`. It may also have a `section`, a `hint` (shown before answering) and an `explanation` (shown after).
 - Text is plain with `**bold**`, `*italic*` and `` `code` ``. Cloze gaps are written `{{answer}}`, with an optional hint `{{answer::hint}}` and alternatives `{{colour|color}}`.
@@ -118,7 +118,7 @@ A pack is one UTF-8 JSON file (`.jackdaw`, media type `application/vnd.jackdaw.p
 }
 ```
 
-- [`format/README.md`](format/README.md): the normative specification (format version 1, draft)
+- [`format/README.md`](format/README.md): the normative specification (format versions 1 and 2)
 - [`format/AUTHORING.md`](format/AUTHORING.md): guide for AI assistants and tool authors
 - [`format/prompt.txt`](format/prompt.txt): the copy-paste chatbot prompt
 - [`format/jackdaw-pack.schema.json`](format/jackdaw-pack.schema.json): JSON Schema 2020-12

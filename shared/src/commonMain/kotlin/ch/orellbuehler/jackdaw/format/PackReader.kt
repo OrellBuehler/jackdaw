@@ -82,7 +82,7 @@ internal class Warnings {
 }
 
 internal object PackReader {
-    const val SUPPORTED_VERSION = 1
+    const val SUPPORTED_VERSION = 2
     private const val MAX_CHARS = 25 * 1024 * 1024
     private const val MAX_ITEMS = 50_000
     private const val MAX_DEPTH = 64

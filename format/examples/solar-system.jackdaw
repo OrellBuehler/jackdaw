@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "format": "jackdaw-pack",
-  "version": 1,
+  "version": 2,
   "id": "com.github.orellbuehler.jackdaw.examples.solar-system",
   "title": "The Solar System",
   "description": "28 questions about the planets, the Earth and Moon, moons and small bodies, and the Sun. Mixes sorting, multiple choice, true/false, typed answers and fill-in-the-gap, with two open questions to explain in your own words.",

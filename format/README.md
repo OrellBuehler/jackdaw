@@ -1,6 +1,6 @@
 # Jackdaw Pack Format
 
-**Format version 1** · specification revision 1.1 (2026-11-24)
+**Format version 2** · specification revision 2.0 (2026-11-24)
 
 A **Jackdaw pack** is a single UTF-8 JSON file that describes a learning dataset: foreign-language vocabulary, history facts, exam questions, interview preparation, anything you can ask a question about. The Jackdaw app imports packs, schedules the learning (spaced repetition) and keeps the learning progress. The file format is open and documented so that people, scripts and AI assistants can create packs without the app.
 
@@ -95,7 +95,7 @@ The top level of the file is one JSON object.
 |---|---|---|---|---|
 | `$schema` | string | no | | URL of the JSON Schema. Lets editors validate and complete. Ignored by readers. |
 | `format` | string | **yes** | | Constant `"jackdaw-pack"`. |
-| `version` | integer | **yes** | | Major format version. `1` for this specification. |
+| `version` | integer | **yes** | | Format version: the lowest one that has everything the pack uses ([section 14](#14-versioning-policy)). `1`, or `2` for a pack with figures ([8.4](#84-figures)). |
 | `id` | string | **yes** | | Stable, globally unique identifier of the pack ([4.1](#41-identifiers)). |
 | `title` | string | **yes** | | Name of the pack. Plain text, one line, 1 to 200 characters. |
 | `description` | string | no | | What the pack covers. Plain text, newlines allowed, at most 2000 characters. |
@@ -222,8 +222,8 @@ The scheduling algorithm (intervals, ease, lapses) is deliberately not configura
 | `tags` | array of plain text | no | Free-form labels, at most 50. |
 | `hint` | rich text | no | Help shown **on request, before answering**. A nudge (context, first letter, mnemonic), not the answer. |
 | `explanation` | rich text | no | Shown **after answering**: why the answer is right, background, an example. |
-| `figure` | figure | no | A drawing shown **with the question** ([8.4](#84-figures)). *Since revision 1.1.* |
-| `answerFigure` | figure | no | A drawing shown **after answering**, in place of `figure` ([8.4](#84-figures)). *Since revision 1.1.* |
+| `figure` | figure | no | A drawing shown **with the question** ([8.4](#84-figures)). *Version 2.* |
+| `answerFigure` | figure | no | A drawing shown **after answering**, in place of `figure` ([8.4](#84-figures)). *Version 2.* |
 
 Items of an unknown `type` are skipped by readers ([section 10](#10-compatibility-and-extensibility)).
 
@@ -446,7 +446,7 @@ Every string in a pack is either **plain text** or **rich text**.
 - **Plain text** is taken literally. No character has a special meaning, not even the backslash. Plain text properties: `title`, `description`, `author`, `license`, section `title` and `description`, `tags`, and the answer lists `alternatives`, `frontAlternatives` and `answers`.
 - **Rich text** supports the tiny inline markup of [8.2](#82-inline-markup). All other string properties that are shown to the learner are rich text: `front`, `back`, `distractors`, `frontDistractors`, `question`, option `text`, `statement`, `prompt`, `sequence` entries, `answer`, `keyPoints`, `hint`, `explanation`, and the text of a `cloze` item outside of its gaps.
 
-There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text. A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)), never embedded in text. Photos and audio are not part of version 1; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
+There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text. A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)), never embedded in text. Photos and audio are not part of the format; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
 
 A newline is the character U+000A, written `\n` in JSON. Readers normalise `\r\n` and `\r` to U+000A before interpreting rich text. Rich text may contain several lines; single-line properties (titles, ids, answers) SHOULD NOT contain newlines.
 
@@ -513,7 +513,7 @@ Examples, as they appear in the decoded text (more in [`test-vectors.json`](test
 
 ### 8.4 Figures
 
-*Since specification revision 1.1. Older apps ignore figures and show the item without them ([section 10](#10-compatibility-and-extensibility)).*
+*Format version 2. A pack with a figure declares `"version": 2`; an app that only reads version 1 does not import it and asks the user to update ([section 14](#14-versioning-policy)).*
 
 An item can carry a drawing: a map, a diagram, a formula, a circuit, an animation of a process. A figure is an object stored **inside the pack**:
 
@@ -557,7 +557,7 @@ The **aspect ratio** of a figure is the third number of the `viewBox` divided by
 
 A writer MUST additionally produce well-formed XML. A reader need not verify that: it hands the text to an SVG renderer that MUST have scripting and network access switched off ([section 15](#15-security-considerations)). A reader that cannot draw SVG shows `alt` instead.
 
-**Write items that survive without the figure where you can.** Apps older than revision 1.1 show the item without it. A figure that illustrates ("here is what the orbit looks like") degrades gracefully; a question that only makes sense with the figure ("which part is marked?") does not.
+**A pack with a figure is a version 2 pack.** A writer MUST declare `"version": 2` as soon as one item has a `figure` or an `answerFigure`, so that an app without figures asks for an update instead of showing questions with the drawing missing. A pack without figures stays `"version": 1` and opens in every app. Readers are forgiving here as everywhere: a reader that supports version 2 draws the figures of a pack whatever version it declares.
 
 ---
 
@@ -616,10 +616,10 @@ These rules let the format grow without breaking existing apps and packs.
 
 - **Unknown properties MUST be ignored.** This holds for every object (the pack, sections, `study`, items, options) at every level. A reader never rejects a file, and never skips an item, because of a property it does not know.
 - **`x-` properties are for extensions.** A property whose name starts with `x-` (for example `x-my-tool`) is reserved for vendor and tool extensions, at every level. The format will never define a property starting with `x-`. Its value can be any JSON. Readers ignore extensions they do not understand. Tools SHOULD pick a distinctive name (`x-acme-source-line`).
-- **Unknown item types MUST be skipped.** An item whose `type` the reader does not know is not imported, the rest of the pack is. The reader SHOULD report a warning ("skipped 3 items of unknown type 'matching'"). This is how new item types can appear in later revisions without breaking old apps.
+- **Unknown item types MUST be skipped.** An item whose `type` the reader does not know is not imported, the rest of the pack is. The reader SHOULD report a warning ("skipped 3 items of unknown type 'matching'"). A new item type comes with a new format version ([section 14](#14-versioning-policy)); this rule is for packs that declare a lower version than they need.
 - **Unknown values of optional enumerated properties are ignored** (the property is treated as absent): an unknown `study.order`, an unknown kind inside `exercises` (the remaining known kinds are used; if none is left the default applies).
-- **Version 1 packs stay readable for good.** Every app that reads Jackdaw packs, now and in the future, MUST import a valid version 1 pack with all of its items. Later revisions of this specification only add to version 1 ([section 14](#14-versioning-policy)); they never remove a property, never change what an existing property means and never make an existing valid pack invalid. The packs in [`compat/`](compat/) are frozen copies from each revision; an implementation must keep importing them completely.
-- **Reserved names.** `media` (on the pack and on items) is reserved for a future version that will attach photos and audio; writers MUST NOT use it for anything else in version 1, readers ignore it. Property names that start with `$` are reserved for the format.
+- **Packs stay readable for good.** Every app that reads Jackdaw packs, now and in the future, MUST import a valid version 1 pack with all of its items, and so for every later version it supports. Later versions only add to the format ([section 14](#14-versioning-policy)); they never remove a property, never change what an existing property means and never make an existing valid pack invalid. The packs in [`compat/`](compat/) are frozen copies from each version; an implementation must keep importing them completely.
+- **Reserved names.** `media` (on the pack and on items) is reserved for a future version that will attach photos and audio; writers MUST NOT use it for anything else, readers ignore it. Property names that start with `$` are reserved for the format.
 - **Version check.** A reader MUST reject a file whose `version` is greater than the highest version it supports and tell the user to update the app. A reader that supports version N MUST also read every version below N.
 - **The schema is stricter than readers.** The JSON Schema is for authors and tools. It rejects things a reader would tolerate: unknown item types (to catch typos like `"multiple-choice"`), length and count limits, malformed optional properties. A file that fails the schema may still be imported by a forgiving reader, but writers MUST aim to pass it.
 - **Progress is not content.** Packs MUST NOT contain learning progress, scheduling data, review history or user settings. An exporter in the app writes content only.
@@ -691,6 +691,7 @@ There are three layers:
    - every typed answer is non-empty after normalisation;
    - `order` entries are different from each other;
    - every figure passes the rules of [8.4](#84-figures) and is well-formed XML;
+   - `version` is the lowest version that has everything the pack uses (`2` with figures, otherwise `1`);
    - the JSON has no duplicate property names within an object.
 3. **Reader behaviour** ([section 11](#11-what-a-reader-does-with-invalid-input)): what the app does with whatever it receives.
 
@@ -708,13 +709,15 @@ Any other JSON Schema 2020-12 validator (for example `ajv`) can check layer 1.
 
 ## 14. Versioning policy
 
-- `version` is the **major** version of the format, an integer. This specification describes version 1.
-- **Compatible changes do not change `version`:** new optional properties, new item types, new values of optional enumerations, new exercise kinds. Readers cope with them through the rules of [section 10](#10-compatibility-and-extensibility) (ignore unknown properties, skip unknown item types and enumeration values). Packs that use such additions remain `"version": 1`; older apps import the parts they understand and report what they skipped.
-- **Breaking changes increase `version`:** removing or renaming a property, changing the meaning or default of a property, making an optional property required, changing the rules for ids, normalisation or grading. A pack that needs a breaking feature declares the higher version, and older apps reject it with a clear message.
+- `version` is the version of the format, an integer. This specification describes versions 1 and 2.
+- **A pack declares the lowest version that has everything it uses.** A pack without figures is `"version": 1` and opens in every app; a pack with a figure is `"version": 2`.
+- **What the learner would miss gets a new version:** an addition that changes what the learner sees or is asked (figures, a new item type, a new exercise kind) increases `version`. An app that does not know that version rejects the pack and asks the user to update ([section 10](#10-compatibility-and-extensibility)), instead of showing a pack with parts missing.
+- **What can be ignored does not:** a new optional property that an older app can leave out without the learner noticing (metadata, information for tools) keeps the version. Readers cope with it through the rules of [section 10](#10-compatibility-and-extensibility).
+- **Breaking changes increase `version`** as well: removing or renaming a property, changing the meaning or default of a property, making an optional property required, changing the rules for ids, normalisation or grading. A pack that needs a breaking feature declares the higher version, and older apps reject it with a clear message.
 - A reader that supports version N MUST also read all earlier versions.
-- **Compatibility promise.** A pack that is valid under any revision of version 1 stays valid, and keeps its meaning, under every later revision. Each revision that adds something says so where the addition is described ("since revision 1.1") and adds a frozen pack to [`compat/`](compat/) that uses it. The validator checks that the frozen packs are unchanged and still valid, and the reference reader is tested to import them without skipping anything.
-- Revision history: **1.0** first release. **1.1** figures (`figure`, `answerFigure`, [8.4](#84-figures)).
-- The JSON Schema describes exactly one major version. The schema of a later major version will get its own file; this file keeps describing version 1 and is extended for compatible additions.
+- **Compatibility promise.** A pack that is valid under any version stays valid, and keeps its meaning, under every later version. Each version says where it adds something ("version 2") and adds a frozen pack to [`compat/`](compat/) that uses it. The validator checks that the frozen packs are unchanged and still valid, and the reference reader is tested to import them without skipping anything.
+- Version history: **1** first release. **2** figures (`figure`, `answerFigure`, [8.4](#84-figures)).
+- The JSON Schema describes every version and checks that a pack does not use more than the version it declares.
 - Editorial and clarifying changes of this document only change the *specification revision* shown at the top.
 
 ---
@@ -741,7 +744,7 @@ This pack uses every property of the format and every item type. It is also stor
 {
   "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "format": "jackdaw-pack",
-  "version": 1,
+  "version": 2,
   "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
   "title": "Jackdaw Format Tour",
   "description": "A complete example that uses every property of the format and every item type. It doubles as a small quiz about the format itself.",
@@ -941,7 +944,7 @@ More examples in [`examples/`](examples/): [`spanish-basics.jackdaw`](examples/s
 
 **Can an item have several typed answers, like "name three causes"?** Not as one `text` item. Use `open` with `keyPoints`, a `cloze` with several gaps, or one `text` item per fact.
 
-**Is there matching of pairs, drawing, audio or images?** Drawings yes: any item can show an SVG figure ([8.4](#84-figures)). Matching of pairs, drawing by the learner, photos and audio are not in version 1. Pairs are best as separate `card` items (the app builds multiple choice from them).
+**Is there matching of pairs, drawing, audio or images?** Drawings yes: any item can show an SVG figure ([8.4](#84-figures)), which makes the pack a version 2 pack. Matching of pairs, drawing by the learner, photos and audio are not part of the format. Pairs are best as separate `card` items (the app builds multiple choice from them).
 
 **How do I mark a formula or code?** Use backticks: `` `E = mc^2` ``. Everything is plain Unicode text; there is no math typesetting.
 

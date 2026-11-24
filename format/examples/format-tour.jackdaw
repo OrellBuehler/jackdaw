@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "format": "jackdaw-pack",
-  "version": 1,
+  "version": 2,
   "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
   "title": "Jackdaw Format Tour",
   "description": "A complete example that uses every property of the format and every item type. It doubles as a small quiz about the format itself.",

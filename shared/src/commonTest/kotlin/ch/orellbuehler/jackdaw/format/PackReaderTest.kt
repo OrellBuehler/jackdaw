@@ -113,7 +113,8 @@ class PackReaderTest {
         fun withVersion(version: String) = """{"format":"jackdaw-pack","version":$version,"id":"a","title":"t","items":[$simpleCard]}"""
         assertEquals(1, accepted(withVersion("1")).pack.items.size)
         assertEquals(1, accepted(withVersion("1.0")).pack.items.size)
-        assertEquals(ImportErrorCode.VERSION_TOO_NEW, rejected(withVersion("2")))
+        assertEquals(1, accepted(withVersion("2")).pack.items.size)
+        assertEquals(ImportErrorCode.VERSION_TOO_NEW, rejected(withVersion("3")))
         assertEquals(ImportErrorCode.VERSION_TOO_NEW, rejected(withVersion("1000")))
         assertEquals(ImportErrorCode.VERSION_INVALID, rejected(withVersion("0")))
         assertEquals(ImportErrorCode.VERSION_INVALID, rejected(withVersion("-1")))

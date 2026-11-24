@@ -24,6 +24,7 @@ class CompatibilityTest {
     fun everyFrozenPackIsListed() {
         assertEquals(GENERATED_COMPAT_PACKS.keys, manifest.map { it.getValue("file").jsonPrimitive.content }.toSet())
         assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "1.0" })
+        assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "2.0" })
     }
 
     @Test
@@ -50,7 +51,7 @@ class CompatibilityTest {
 
     @Test
     fun frozenFiguresAreRead() {
-        val result = assertIs<ReadResult.Accepted>(PackReader.read(GENERATED_COMPAT_PACKS.getValue("1.1-figures.jackdaw")))
+        val result = assertIs<ReadResult.Accepted>(PackReader.read(GENERATED_COMPAT_PACKS.getValue("2.0-figures.jackdaw")))
         val items = result.pack.items.associateBy { it.id }
         assertEquals(7, items.size)
         val card = items.getValue("card")
