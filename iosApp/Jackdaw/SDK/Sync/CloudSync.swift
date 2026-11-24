@@ -21,6 +21,7 @@ actor CloudSync: CKSyncEngineDelegate {
         static let account = "sync.account"
         static let accountChanged = "sync.accountChanged"
         static let engineState = "sync.engineState"
+        static let packFormat = "sync.packFormat"
         static let lastSyncedAt = "sync.lastSyncedAt"
         static let lastError = "sync.lastError"
     }
@@ -201,6 +202,12 @@ actor CloudSync: CKSyncEngineDelegate {
             firstSync = true
         }
         var serialization: CKSyncEngine.State.Serialization?
+        let packFormat = bridge.packFormat
+        let knownPackFormat = try? await bridge.meta(Meta.packFormat)
+        if knownPackFormat != packFormat {
+            try? await bridge.setMeta(Meta.engineState, nil)
+            try? await bridge.setMeta(Meta.packFormat, packFormat)
+        }
         if let text = try? await bridge.meta(Meta.engineState), let data = text.data(using: .utf8) {
             serialization = try? JSONDecoder().decode(CKSyncEngine.State.Serialization.self, from: data)
         }

@@ -31,6 +31,7 @@ Merge rules and "what changed locally" live in `shared/.../sync/` (`JackdawSync`
 - Records are never deleted in CloudKit: a deleted pack is a tombstone. Settings that are synced are listed in `SyncStore.SYNCED_SETTINGS`; device settings (theme, onboarding) are not.
 - Changing a record type or field means changing `iosApp/Jackdaw/SDK/Sync/CloudRecords.swift`, `iosApp/cloudkit/schema.ckdb` and the CloudKit production schema together (`scripts/ios/check-cloudkit-schema.py` checks the first two in CI; the production deploy is manual, see the README). Production schemas can only grow.
 - Sync must stay disabled where the process has no iCloud entitlement (simulator, tests, previews: `CloudSync.isSupported`), because CloudKit traps there. Do not touch `CKContainer` outside `CloudSync`.
+- A device skips a synced pack whose format version it cannot read. `CloudSync` drops the engine state when `sync.packFormatVersion` changes, so an updated app fetches everything again and picks those packs up.
 - Android does not call `sync.enableTracking()`: it keeps no sync bookkeeping.
 
 ## Format contract

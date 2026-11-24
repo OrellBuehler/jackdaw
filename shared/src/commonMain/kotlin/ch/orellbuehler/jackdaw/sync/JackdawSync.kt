@@ -1,5 +1,6 @@
 package ch.orellbuehler.jackdaw.sync
 
+import ch.orellbuehler.jackdaw.format.PackReader
 import ch.orellbuehler.jackdaw.store.Env
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,8 @@ class JackdawSync internal constructor(
     }
 
     fun kindOf(recordName: String): String = SyncNames.kindOf(recordName)
+
+    val packFormatVersion: Int get() = PackReader.SUPPORTED_VERSION
 
     fun observeLocalChanges(): Flow<SyncSignal> = tracker.signal.map { SyncSignal(it) }
 
