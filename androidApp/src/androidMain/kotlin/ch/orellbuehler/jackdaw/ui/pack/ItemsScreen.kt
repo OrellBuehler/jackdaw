@@ -21,7 +21,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -29,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -82,6 +85,8 @@ fun ItemsScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var selected by rememberSaveable { mutableStateOf<String?>(null) }
+    var editing by rememberSaveable { mutableStateOf<String?>(null) }
+    var adding by rememberSaveable { mutableStateOf(false) }
     val ungrouped = stringResource(R.string.section_ungrouped)
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -90,6 +95,9 @@ fun ItemsScreen(
                 title = { Text(stringResource(R.string.items_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Rounded.ArrowBack, stringResource(R.string.action_back)) }
+                },
+                actions = {
+                    IconButton(onClick = { adding = true }) { Icon(Icons.Rounded.Add, stringResource(R.string.items_add)) }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
             )
@@ -179,7 +187,18 @@ fun ItemsScreen(
         }
     }
     val chosen = state.all.firstOrNull { it.id == selected }
-    if (chosen != null) ItemSheet(chosen, onDismiss = { selected = null })
+    if (chosen != null) {
+        ItemSheet(
+            chosen,
+            onEdit = {
+                editing = chosen.id
+                selected = null
+            },
+            onDismiss = { selected = null },
+        )
+    }
+    editing?.let { id -> ItemEditor(viewModel, id, onDismiss = { editing = null }) }
+    if (adding) ItemEditor(viewModel, null, onDismiss = { adding = false })
 }
 
 @Composable
@@ -229,6 +248,7 @@ private fun ItemRow(
 @Composable
 private fun ItemSheet(
     item: ItemSummary,
+    onEdit: () -> Unit,
     onDismiss: () -> Unit,
 ) {
     val scheme = MaterialTheme.colorScheme
@@ -275,6 +295,10 @@ private fun ItemSheet(
                     InfoRow(stringResource(R.string.facet_reps), facet.reps.toString())
                     InfoRow(stringResource(R.string.facet_lapses), facet.lapses.toString())
                 }
+            }
+            OutlinedButton(onClick = onEdit, modifier = Modifier.fillMaxWidth()) {
+                Icon(Icons.Rounded.Edit, null, Modifier.size(18.dp))
+                Text(stringResource(R.string.item_edit_title), maxLines = 1, modifier = Modifier.padding(start = 8.dp))
             }
         }
     }

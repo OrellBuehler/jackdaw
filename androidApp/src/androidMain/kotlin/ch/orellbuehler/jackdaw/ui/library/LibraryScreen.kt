@@ -2,6 +2,7 @@ package ch.orellbuehler.jackdaw.ui.library
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,18 +17,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.CheckCircle
+import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.Inventory2
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -38,7 +44,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,6 +88,7 @@ import kotlin.math.roundToInt
 @Composable
 fun LibraryScreen(
     viewModel: LibraryViewModel,
+    groupsViewModel: GroupsViewModel,
     importViewModel: ImportViewModel,
     onOpenPack: (String) -> Unit,
     onStudy: (String) -> Unit,
@@ -87,6 +97,7 @@ fun LibraryScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val installed by importViewModel.installedIds.collectAsStateWithLifecycle()
     val scroll = TopAppBarDefaults.pinnedScrollBehavior()
+    var editGroups by rememberSaveable { mutableStateOf(false) }
     Scaffold(
         modifier = Modifier.nestedScroll(scroll.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
@@ -122,10 +133,11 @@ fun LibraryScreen(
                         onAddSample = importViewModel::addSample,
                         onMore = onAddPack,
                     )
-                else -> PackList(state, onOpenPack, onStudy)
+                else -> PackList(state, onOpenPack, onStudy, onFilter = viewModel::select, onEditGroups = { editGroups = true })
             }
         }
     }
+    if (editGroups) GroupsSheet(groupsViewModel, packId = null, onDismiss = { editGroups = false })
 }
 
 @Composable
@@ -133,7 +145,10 @@ private fun PackList(
     state: LibraryState,
     onOpenPack: (String) -> Unit,
     onStudy: (String) -> Unit,
+    onFilter: (LibraryFilter) -> Unit,
+    onEditGroups: () -> Unit,
 ) {
+    val visible = state.visible
     LazyColumn(
         Modifier.fillMaxSize(),
         contentPadding = bottomContentPadding(LocalBottomBarInset.current),
@@ -153,15 +168,69 @@ private fun PackList(
                     modifier = Modifier.weight(1f),
                 )
                 Text(
-                    pluralStringResource(R.plurals.pack_count, state.packs.size, state.packs.size),
+                    pluralStringResource(R.plurals.pack_count, visible.size, visible.size),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
-        items(state.packs, key = { it.id }) { pack ->
+        item(key = "filters") {
+            FilterRow(state, onFilter, onEditGroups)
+        }
+        if (visible.isEmpty()) {
+            item(key = "empty") {
+                Text(
+                    stringResource(R.string.library_group_empty),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(24.dp),
+                )
+            }
+        }
+        items(visible, key = { it.id }) { pack ->
             PackCard(pack, onClick = { onOpenPack(pack.id) })
         }
+    }
+}
+
+@Composable
+private fun FilterRow(
+    state: LibraryState,
+    onFilter: (LibraryFilter) -> Unit,
+    onEditGroups: () -> Unit,
+) {
+    val filter = state.filter
+    Row(
+        Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        FilterChip(
+            selected = filter == LibraryFilter.All,
+            onClick = { onFilter(LibraryFilter.All) },
+            label = { Text(stringResource(R.string.library_filter_all), maxLines = 1) },
+        )
+        state.groups.forEach { group ->
+            FilterChip(
+                selected = filter == LibraryFilter.Group(group.id),
+                onClick = { onFilter(LibraryFilter.Group(group.id)) },
+                label = { Text(group.name, maxLines = 1) },
+            )
+        }
+        if (state.archived.isNotEmpty()) {
+            FilterChip(
+                selected = filter == LibraryFilter.Archived,
+                onClick = { onFilter(LibraryFilter.Archived) },
+                label = { Text(stringResource(R.string.library_filter_archived), maxLines = 1) },
+                leadingIcon = { Icon(Icons.Rounded.Inventory2, null, Modifier.size(18.dp)) },
+            )
+        }
+        AssistChip(
+            onClick = onEditGroups,
+            label = { Text(stringResource(R.string.library_groups), maxLines = 1) },
+            leadingIcon = { Icon(Icons.Rounded.Edit, null, Modifier.size(18.dp)) },
+        )
     }
 }
 

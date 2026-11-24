@@ -35,6 +35,8 @@ fun packSummary(
     lastStudiedAt: Long = 0,
     progress: Double = 0.0,
     revision: Int = 0,
+    archived: Boolean = false,
+    groupIds: List<String> = emptyList(),
 ) = PackSummary(
     id = id,
     title = title,
@@ -54,6 +56,8 @@ fun packSummary(
     importedAt = 0,
     updatedAt = 0,
     revision = revision,
+    archived = archived,
+    groupIds = groupIds,
 )
 
 fun packDetail(summary: PackSummary = packSummary()) =

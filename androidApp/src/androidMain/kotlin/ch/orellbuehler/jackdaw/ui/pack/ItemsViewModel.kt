@@ -3,6 +3,7 @@ package ch.orellbuehler.jackdaw.ui.pack
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.orellbuehler.jackdaw.JackdawSdk
+import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.ItemStatus
 import ch.orellbuehler.jackdaw.store.ItemSummary
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,8 +35,8 @@ fun filterItems(
 }
 
 class ItemsViewModel(
-    sdk: JackdawSdk,
-    packId: String,
+    private val sdk: JackdawSdk,
+    private val packId: String,
 ) : ViewModel() {
     private val query = MutableStateFlow("")
     private val status = MutableStateFlow<ItemStatus?>(null)
@@ -58,4 +59,13 @@ class ItemsViewModel(
     fun setStatus(value: ItemStatus?) {
         status.value = value
     }
+
+    suspend fun source(itemId: String?): String? = if (itemId == null) sdk.newItemSource() else sdk.itemSource(packId, itemId)
+
+    suspend fun save(
+        itemId: String?,
+        json: String,
+    ): ImportResult = sdk.saveItem(packId, itemId, json)
+
+    suspend fun delete(itemId: String): ImportResult = sdk.deleteItem(packId, itemId)
 }

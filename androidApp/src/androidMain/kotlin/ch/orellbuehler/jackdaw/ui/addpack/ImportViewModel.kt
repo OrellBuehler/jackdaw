@@ -36,6 +36,8 @@ sealed interface ImportProblem {
     data object TooLarge : ImportProblem
 
     data object DownloadFailed : ImportProblem
+
+    data object InvalidUrl : ImportProblem
 }
 
 enum class CatalogState {
@@ -54,6 +56,7 @@ sealed interface ImportUiState {
         val text: String,
         val preview: ImportPreview.Valid,
         val busy: Boolean = false,
+        val url: String? = null,
     ) : ImportUiState
 
     data class Failed(
@@ -146,14 +149,34 @@ class ImportViewModel(
         viewModelScope.launch { preview(text) }
     }
 
-    private suspend fun preview(text: String) {
+    fun openUrl(input: String) {
+        val url = sdk.resolvePackUrl(input)
+        if (url == null) {
+            _state.value = ImportUiState.Failed(ImportProblem.InvalidUrl)
+            return
+        }
+        _state.value = ImportUiState.Reading
+        viewModelScope.launch {
+            val text = fetcher.fetch(url)
+            if (text == null) {
+                _state.value = ImportUiState.Failed(ImportProblem.DownloadFailed)
+            } else {
+                preview(text, url)
+            }
+        }
+    }
+
+    private suspend fun preview(
+        text: String,
+        url: String? = null,
+    ) {
         if (text.isBlank()) {
             _state.value = ImportUiState.Failed(ImportProblem.Empty)
             return
         }
         _state.value =
             when (val preview = sdk.previewImport(text)) {
-                is ImportPreview.Valid -> ImportUiState.Preview(text, preview)
+                is ImportPreview.Valid -> ImportUiState.Preview(text, preview, url = url)
                 is ImportPreview.Invalid -> ImportUiState.Failed(ImportProblem.Sdk(preview.error))
             }
     }
@@ -164,10 +187,10 @@ class ImportViewModel(
         _state.value = current.copy(busy = true)
         viewModelScope.launch {
             val result =
-                if (current.preview.isDowngrade) {
-                    sdk.importPackAllowingDowngrade(current.text)
-                } else {
-                    sdk.importPack(current.text)
+                when {
+                    current.url != null -> sdk.importPackFromUrl(current.text, current.url, current.preview.isDowngrade)
+                    current.preview.isDowngrade -> sdk.importPackAllowingDowngrade(current.text)
+                    else -> sdk.importPack(current.text)
                 }
             when (result) {
                 is ImportResult.Success -> {
