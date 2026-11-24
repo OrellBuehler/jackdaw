@@ -5,6 +5,8 @@ struct AuthoringScreen: View {
     let onPaste: () -> Void
     @Environment(AppModel.self) private var model
     @State private var prompt = ""
+    @State private var kinds = Set(ItemKind.allCases)
+    @State private var figures = false
     @State private var copied = false
 
     var body: some View {
@@ -17,6 +19,7 @@ struct AuthoringScreen: View {
                 Text("ai.explanation")
                     .font(.brand(.body))
                     .foregroundStyle(Brand.textSecondary)
+                configurator
                 promptPreview
                 actions
             }
@@ -29,8 +32,55 @@ struct AuthoringScreen: View {
         .navigationTitle("ai.title")
         .navigationBarTitleDisplayMode(.inline)
         .sensoryFeedback(.success, trigger: copied)
-        .onAppear {
-            if prompt.isEmpty { prompt = model.authoringPrompt() }
+        .onAppear { refresh() }
+        .onChange(of: kinds) { refresh() }
+        .onChange(of: figures) { refresh() }
+    }
+
+    private func refresh() {
+        prompt = model.authoringPrompt(kinds: kinds, figures: figures)
+        copied = false
+    }
+
+    private func toggle(_ kind: ItemKind) {
+        if !kinds.contains(kind) {
+            kinds.insert(kind)
+        } else if kinds.count > 1 {
+            kinds.remove(kind)
+        }
+    }
+
+    private var configurator: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("ai.types.label")
+                .font(.brand(.caption, weight: .bold))
+                .foregroundStyle(Brand.textSecondary)
+                .textCase(.uppercase)
+            FlowLayout(spacing: 8, lineSpacing: 8) {
+                ForEach(ItemKind.allCases, id: \.self) { kind in
+                    let selected = kinds.contains(kind)
+                    Button {
+                        toggle(kind)
+                    } label: {
+                        Chip(text: L10n.tr(kind.labelKey), systemImage: kind.symbolName, filled: selected)
+                            .padding(.vertical, 4)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityAddTraits(selected ? [.isSelected] : [])
+                }
+            }
+            Toggle(isOn: $figures) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("ai.figures")
+                        .font(.brand(.body, weight: .semibold))
+                        .foregroundStyle(Brand.text)
+                    Text("ai.figures.note")
+                        .font(.brand(.caption))
+                        .foregroundStyle(Brand.textSecondary)
+                }
+            }
+            .tint(Brand.accent)
         }
     }
 

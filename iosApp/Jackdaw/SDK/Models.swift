@@ -33,7 +33,7 @@ struct SectionInfo: Identifiable, Hashable, Sendable {
     let isUngrouped: Bool
 }
 
-enum ItemKind: Hashable, Sendable {
+enum ItemKind: Hashable, Sendable, CaseIterable {
     case card
     case choice
     case text
@@ -63,6 +63,18 @@ enum ItemKind: Hashable, Sendable {
         case .trueFalse: "kind.truefalse"
         case .order: "kind.order"
         case .open: "kind.open"
+        }
+    }
+
+    var code: String {
+        switch self {
+        case .card: "card"
+        case .choice: "choice"
+        case .text: "text"
+        case .cloze: "cloze"
+        case .trueFalse: "truefalse"
+        case .order: "order"
+        case .open: "open"
         }
     }
 }

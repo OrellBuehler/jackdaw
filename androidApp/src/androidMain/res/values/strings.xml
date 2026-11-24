@@ -62,7 +62,10 @@
     <string name="paste_from_clipboard">Paste</string>
     <string name="paste_clipboard_empty">The clipboard has no text.</string>
     <string name="paste_continue">Preview</string>
-    <string name="ai_explainer">Jackdaw packs are plain JSON files in an open format, so any chatbot can write one for you. Copy the prompt, tell the chatbot your topic, then paste its answer here or save it as a .jackdaw file.</string>
+    <string name="ai_explainer">Jackdaw packs are plain JSON files in an open format, so any chatbot can write one for you. Choose the question types, copy the prompt, tell the chatbot your topic, then paste its answer here or save it as a .jackdaw file.</string>
+    <string name="ai_types_title">Question types</string>
+    <string name="ai_figures">Figures</string>
+    <string name="ai_figures_help">Drawings and diagrams. A pack with figures needs an up-to-date Jackdaw.</string>
     <string name="ai_copy">Copy prompt</string>
     <string name="ai_copied">Prompt copied</string>
     <string name="ai_show_full">Show full prompt</string>
