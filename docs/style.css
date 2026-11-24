@@ -192,6 +192,12 @@ p {
     align-items: center;
 }
 
+.cta-note {
+    margin: 0;
+    color: var(--soft);
+    font-size: 15px;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
