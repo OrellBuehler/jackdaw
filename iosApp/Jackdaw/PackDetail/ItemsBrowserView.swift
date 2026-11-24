@@ -6,13 +6,21 @@ private struct ItemGroup: Identifiable {
     let items: [ItemInfo]
 }
 
+private struct ItemEditorTarget: Identifiable {
+    let id = UUID()
+    let itemId: String?
+}
+
 struct ItemsBrowserView: View {
+    let packId: String
     let title: String
     let sections: [SectionInfo]
     @State private var store: ItemsStore
     @State private var query = ""
+    @State private var editor: ItemEditorTarget?
 
     init(packId: String, title: String, sections: [SectionInfo]) {
+        self.packId = packId
         self.title = title
         self.sections = sections
         _store = State(initialValue: ItemsStore(packId: packId))
@@ -57,8 +65,13 @@ struct ItemsBrowserView: View {
             ForEach(groups) { group in
                 Section {
                     ForEach(group.items) { item in
-                        ItemRow(item: item)
-                            .listRowBackground(Brand.surface)
+                        Button {
+                            editor = ItemEditorTarget(itemId: item.id)
+                        } label: {
+                            ItemRow(item: item)
+                        }
+                        .buttonStyle(.plain)
+                        .listRowBackground(Brand.surface)
                     }
                 } header: {
                     Text(group.title)
@@ -73,6 +86,19 @@ struct ItemsBrowserView: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $query, prompt: "items.search")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    editor = ItemEditorTarget(itemId: nil)
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .accessibilityLabel("items.add")
+            }
+        }
+        .sheet(item: $editor) { target in
+            ItemEditorView(packId: packId, itemId: target.itemId)
+        }
         .task {
             await store.watch()
         }
@@ -114,6 +140,7 @@ private struct ItemRow: View {
             }
         }
         .padding(.vertical, 4)
+        .contentShape(Rectangle())
     }
 
     private var stateKey: String {

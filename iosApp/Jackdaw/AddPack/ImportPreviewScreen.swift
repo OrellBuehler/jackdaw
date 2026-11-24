@@ -66,6 +66,7 @@ private struct PreviewDetails: View {
             countsCard
             if info.isUpdate { updateNotice }
             if info.isDowngrade { downgradeNotice }
+            if info.overwritesEdits { overwriteNotice }
             if info.skippedCount > 0 || !info.warnings.isEmpty { warningsCard }
             actions
         }
@@ -159,6 +160,20 @@ private struct PreviewDetails: View {
                 .font(.brand(.subheadline, weight: .bold))
                 .foregroundStyle(Brand.flame)
             Text(L10n.format("preview.downgrade.body", info.installedRevision, info.revision))
+                .font(.brand(.footnote))
+                .foregroundStyle(Brand.text)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Brand.amber.opacity(0.2), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
+    private var overwriteNotice: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label("import.overwrite.title", systemImage: "exclamationmark.triangle.fill")
+                .font(.brand(.subheadline, weight: .bold))
+                .foregroundStyle(Brand.flame)
+            Text("import.overwrite.body")
                 .font(.brand(.footnote))
                 .foregroundStyle(Brand.text)
         }

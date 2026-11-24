@@ -46,6 +46,18 @@ final class PackDetailStore {
         await client.deletePack(packId)
     }
 
+    func setArchived(_ archived: Bool) async {
+        await client.setPackArchived(packId, archived: archived)
+    }
+
+    func removeLink() async {
+        await client.removePackURL(packId)
+    }
+
+    func updateInfo(title: String, description: String) async -> ImportOutcome {
+        await client.updatePackInfo(packId, title: title, description: description)
+    }
+
     func exportFile() async -> URL? {
         guard let title = detail?.pack.title, let text = await client.exportPack(packId) else { return nil }
         return try? PackFile.exportURL(title: title, text: text)
@@ -54,6 +66,34 @@ final class PackDetailStore {
     private func apply(_ value: PackDetailInfo?) {
         detail = value
         if value == nil { isGone = true }
+    }
+}
+
+@MainActor
+@Observable
+final class ItemEditorStore {
+    let packId: String
+    let itemId: String?
+
+    private let client = SDKClient.shared
+
+    init(packId: String, itemId: String?) {
+        self.packId = packId
+        self.itemId = itemId
+    }
+
+    func loadSource() async -> String? {
+        guard let itemId else { return client.newItemSource() }
+        return await client.itemSource(packId, itemId: itemId)
+    }
+
+    func save(_ json: String) async -> ImportOutcome {
+        await client.saveItem(packId, itemId: itemId, json: json)
+    }
+
+    func delete() async -> ImportOutcome? {
+        guard let itemId else { return nil }
+        return await client.deleteItem(packId, itemId: itemId)
     }
 }
 

@@ -230,6 +230,25 @@ struct FlowLayout: Layout {
     }
 }
 
+struct IssueNotice: View {
+    let issue: ImportIssue
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(issue.localizedMessage)
+                .font(.brand(.footnote, weight: .semibold))
+                .foregroundStyle(Brand.error)
+            if let detail = issue.detailMessage {
+                Text(detail)
+                    .font(.brand(.footnote))
+                    .foregroundStyle(Brand.textSecondary)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+    }
+}
+
 struct ShareSheet: UIViewControllerRepresentable {
     let url: URL
 

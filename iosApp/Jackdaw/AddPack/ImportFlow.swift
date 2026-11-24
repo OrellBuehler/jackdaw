@@ -17,6 +17,7 @@ final class ImportFlow {
 
     private let client = SDKClient.shared
     private var text = ""
+    private var sourceURL: String?
 
     var isFinished: Bool {
         if case .done = phase { return true }
@@ -26,10 +27,12 @@ final class ImportFlow {
     func reset() {
         phase = .idle
         text = ""
+        sourceURL = nil
     }
 
-    func begin(text source: String) async {
+    func begin(text source: String, sourceURL link: String? = nil) async {
         text = source
+        sourceURL = link
         phase = .loading
         let outcome = await client.previewImport(text: source)
         switch outcome {
@@ -53,7 +56,7 @@ final class ImportFlow {
     func confirm(allowDowngrade: Bool) async {
         guard case .preview(let info) = phase else { return }
         phase = .importing(info)
-        let outcome = await client.importPack(text: text, allowDowngrade: allowDowngrade)
+        let outcome = await client.importPack(text: text, allowDowngrade: allowDowngrade, sourceURL: sourceURL)
         switch outcome {
         case .success(let done):
             phase = .done(done)

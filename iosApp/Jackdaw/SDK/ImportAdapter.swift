@@ -46,7 +46,8 @@ enum ImportAdapter {
                     installedTitle: ok.installedTitle,
                     installedRevision: Int(ok.installedRevision),
                     isDowngrade: ok.isDowngrade,
-                    counts: counts(ok.counts)
+                    counts: counts(ok.counts),
+                    overwritesEdits: ok.overwritesEdits
                 )
             )
         case .invalid(let bad):
@@ -93,6 +94,8 @@ enum ImportAdapter {
         case "revisiondowngrade": return .revisionDowngrade
         case "unknownsample": return .unknownSample
         case "storageerror": return .storage
+        case "iteminvalid": return .itemInvalid
+        case "packmissing": return .packMissing
         default: return .other
         }
     }

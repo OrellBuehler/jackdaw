@@ -19,8 +19,16 @@ enum Mapping {
             dueCount: Int(s.dueCount),
             progress: s.progress,
             lastStudiedAt: date(fromMillis: s.lastStudiedAt),
-            revision: Int(s.revision)
+            revision: Int(s.revision),
+            archived: s.archived,
+            sourceUrl: s.sourceUrl,
+            edited: s.edited,
+            groupIds: s.groupIds
         )
+    }
+
+    static func group(_ g: PackGroup) -> PackGroupInfo {
+        PackGroupInfo(id: g.id, name: g.name, packIds: g.packIds)
     }
 
     static func section(_ s: SectionSummary) -> SectionInfo {

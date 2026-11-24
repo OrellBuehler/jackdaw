@@ -12,9 +12,15 @@ struct PackRoute: Hashable {
     let id: String
 }
 
+struct LinkedPackText {
+    let text: String
+    let url: String
+}
+
 struct AddPackRoute: Identifiable {
     let id = UUID()
     var incomingURL: URL?
+    var linked: LinkedPackText?
 }
 
 enum CatalogPhase: Sendable {
@@ -35,6 +41,7 @@ struct ContinueTarget {
 final class AppModel {
     private(set) var packs: [PackInfo] = []
     private(set) var packsLoaded = false
+    private(set) var groups: [PackGroupInfo] = []
     private(set) var stats: StatsInfo = .empty
     private(set) var settings: SettingsInfo = .initial
     private(set) var settingsLoaded = false
@@ -85,12 +92,21 @@ final class AppModel {
         set { setTheme(newValue) }
     }
 
+    var activePacks: [PackInfo] {
+        packs.filter { !$0.archived }
+    }
+
+    var archivedPacks: [PackInfo] {
+        packs.filter { $0.archived }
+    }
+
     var continueTarget: ContinueTarget? {
-        let due = packs.filter { $0.dueCount > 0 }
+        let active = activePacks
+        let due = active.filter { $0.dueCount > 0 }
         if let best = due.max(by: { $0.dueCount < $1.dueCount }) {
             return ContinueTarget(pack: best, count: best.dueCount, isDue: true)
         }
-        if let fresh = packs.first(where: { $0.newCount > 0 }) {
+        if let fresh = active.first(where: { $0.newCount > 0 }) {
             return ContinueTarget(pack: fresh, count: fresh.newCount, isDue: false)
         }
         return nil
@@ -106,6 +122,11 @@ final class AppModel {
                 self?.applyPacks(packs)
             }
         }
+        let groupsTask = Task {
+            await client.watchGroups { [weak self] groups in
+                self?.applyGroups(groups)
+            }
+        }
         let statsTask = Task {
             await client.watchStats { [weak self] stats in
                 self?.applyStats(stats)
@@ -116,7 +137,7 @@ final class AppModel {
                 self?.applySettings(settings)
             }
         }
-        watchers = [packsTask, statsTask, settingsTask]
+        watchers = [packsTask, groupsTask, statsTask, settingsTask]
         sync.start()
     }
 
@@ -135,6 +156,10 @@ final class AppModel {
 
     func presentAddPack() {
         addPackRoute = AddPackRoute()
+    }
+
+    func presentLinkedImport(text: String, url: String) {
+        addPackRoute = AddPackRoute(linked: LinkedPackText(text: text, url: url))
     }
 
     func handleIncoming(_ url: URL) {
@@ -193,6 +218,34 @@ final class AppModel {
         return await client.importPack(text: text, allowDowngrade: false)
     }
 
+    func resolveLink(_ input: String) -> String? {
+        client.resolvePackURL(input)
+    }
+
+    func downloadPack(from link: String) async -> String? {
+        guard let url = URL(string: link) else { return nil }
+        return await RemoteText.fetch(url)
+    }
+
+    func createGroup(_ name: String, adding packId: String? = nil) async {
+        guard let groupId = await client.createGroup(name) else { return }
+        if let packId {
+            await client.setPackInGroup(packId, groupId: groupId, member: true)
+        }
+    }
+
+    func renameGroup(_ groupId: String, to name: String) async {
+        await client.renameGroup(groupId, name: name)
+    }
+
+    func deleteGroup(_ groupId: String) async {
+        await client.deleteGroup(groupId)
+    }
+
+    func setPack(_ packId: String, inGroup groupId: String, member: Bool) async {
+        await client.setPackInGroup(packId, groupId: groupId, member: member)
+    }
+
     func loadCatalog() async {
         guard catalogPhase != .loading, let url = client.catalogURL() else { return }
         catalogPhase = .loading
@@ -211,6 +264,10 @@ final class AppModel {
     private func applyPacks(_ value: [PackInfo]) {
         packs = value
         packsLoaded = true
+    }
+
+    private func applyGroups(_ value: [PackGroupInfo]) {
+        groups = value
     }
 
     private func applyStats(_ value: StatsInfo) {

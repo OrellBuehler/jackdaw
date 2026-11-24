@@ -1,5 +1,12 @@
 import SwiftUI
 
+private enum DetailSheet: Identifiable {
+    case edit
+    case groups
+
+    var id: Self { self }
+}
+
 struct PackDetailView: View {
     let packId: String
     @Environment(AppModel.self) private var model
@@ -8,6 +15,7 @@ struct PackDetailView: View {
     @State private var confirmReset = false
     @State private var confirmDelete = false
     @State private var shareItem: ShareItem?
+    @State private var activeSheet: DetailSheet?
 
     init(packId: String) {
         self.packId = packId
@@ -45,10 +53,54 @@ struct PackDetailView: View {
             ShareSheet(url: item.url)
                 .presentationDetents([.medium, .large])
         }
+        .sheet(item: $activeSheet) { which in
+            switch which {
+            case .edit:
+                if let pack = store.detail?.pack {
+                    PackInfoEditor(store: store, initialTitle: pack.title, initialDescription: pack.blurb ?? "")
+                }
+            case .groups:
+                PackGroupsSheet(store: store)
+            }
+        }
+    }
+
+    private var isArchived: Bool {
+        store.detail?.pack.archived ?? false
+    }
+
+    private var hasLink: Bool {
+        store.detail?.pack.sourceUrl != nil
     }
 
     private var menu: some View {
         Menu {
+            Button {
+                activeSheet = .edit
+            } label: {
+                Label("detail.edit", systemImage: "pencil")
+            }
+            Button {
+                activeSheet = .groups
+            } label: {
+                Label("groups.title", systemImage: "folder")
+            }
+            Button {
+                Task { await store.setArchived(!isArchived) }
+            } label: {
+                Label(
+                    L10n.tr(isArchived ? "detail.unarchive" : "detail.archive"),
+                    systemImage: isArchived ? "tray.and.arrow.up" : "archivebox"
+                )
+            }
+            if hasLink {
+                Button {
+                    Task { await store.removeLink() }
+                } label: {
+                    Label("detail.link.remove", systemImage: "minus.circle")
+                }
+            }
+            Divider()
             Button {
                 Task { await exportPack() }
             } label: {
@@ -90,6 +142,9 @@ struct PackDetailView: View {
     private func content(_ detail: PackDetailInfo) -> some View {
         let style = PackStyle(hex: detail.pack.colorHex)
         return VStack(spacing: 28) {
+            if detail.pack.archived {
+                archivedNotice
+            }
             PackHero(
                 detail: detail,
                 style: style,
@@ -101,11 +156,28 @@ struct PackDetailView: View {
             practiceSection(detail, style: style)
             sectionsSection(detail, style: style)
             browseRow(detail, style: style)
+            if let url = detail.pack.sourceUrl {
+                LinkedPackCard(url: url, edited: detail.pack.edited)
+            }
             PackAboutCard(detail: detail)
         }
         .padding(.horizontal, 16)
         .padding(.top, 4)
         .padding(.bottom, 40)
+    }
+
+    private var archivedNotice: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "archivebox.fill")
+                .foregroundStyle(Brand.flame)
+            Text("detail.archived.notice")
+                .font(.brand(.footnote))
+                .foregroundStyle(Brand.text)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Brand.amber.opacity(0.2), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 
     @ViewBuilder
@@ -378,6 +450,69 @@ private struct SectionRow: View {
             text += " · " + L10n.plural("pack.badge.due", section.dueCount)
         }
         return text
+    }
+}
+
+private struct LinkedPackCard: View {
+    let url: String
+    let edited: Bool
+    @Environment(AppModel.self) private var model
+    @State private var isLoading = false
+    @State private var showsFailure = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionTitle("link.title")
+            VStack(alignment: .leading, spacing: 12) {
+                Text(url)
+                    .font(.brand(.subheadline, weight: .semibold))
+                    .foregroundStyle(Brand.text)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                if edited {
+                    Text("link.edited")
+                        .font(.brand(.footnote))
+                        .foregroundStyle(Brand.textSecondary)
+                }
+                Button {
+                    update()
+                } label: {
+                    updateLabel
+                }
+                .buttonStyle(SoftButtonStyle())
+                .disabled(isLoading)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .card(radius: 22)
+        }
+        .alert("import.failed.title", isPresented: $showsFailure) {
+            Button("common.ok", role: .cancel) {}
+        } message: {
+            Text("import.error.download")
+        }
+    }
+
+    @ViewBuilder
+    private var updateLabel: some View {
+        if isLoading {
+            ProgressView()
+        } else {
+            Label("link.update", systemImage: "arrow.triangle.2.circlepath")
+        }
+    }
+
+    private func update() {
+        isLoading = true
+        Task {
+            let text = await model.downloadPack(from: url)
+            isLoading = false
+            if let text {
+                model.presentLinkedImport(text: text, url: url)
+            } else {
+                showsFailure = true
+            }
+        }
     }
 }
 
