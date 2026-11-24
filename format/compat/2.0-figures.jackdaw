@@ -1,9 +1,9 @@
 {
   "format": "jackdaw-pack",
-  "version": 1,
+  "version": 2,
   "id": "ch.orellbuehler.jackdaw.compat.figures",
   "title": "Compatibility: figures",
-  "description": "Frozen pack of specification revision 1.1. Every item type with figures. Never edit this file.",
+  "description": "Frozen pack of format version 2. Every item type with figures. Never edit this file.",
   "language": "en",
   "revision": 1,
   "items": [

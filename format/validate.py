@@ -332,9 +332,19 @@ def _path(err):
     return "/" + "/".join(str(p) for p in err.absolute_path)
 
 
+def needed_version(pack):
+    """The lowest format version that has everything the pack uses (specification, section 14)."""
+    items = pack.get("items") if isinstance(pack.get("items"), list) else []
+    figures = any(isinstance(it, dict) and ("figure" in it or "answerFigure" in it) for it in items)
+    return 2 if figures else 1
+
+
 def _schema_errors(validator, pack, type_index):
     """Yield (path, message), replacing oneOf noise on items by the errors of the item's own type."""
     for err in validator.iter_errors(pack):
+        if err.validator == "not" and "then" in err.absolute_schema_path:
+            yield _path(err), "figures need \"version\": 2 (the pack declares version 1)"
+            continue
         if err.validator == "oneOf" and isinstance(err.instance, dict):
             branch = type_index.get(err.instance.get("type")) if isinstance(err.instance.get("type"), str) else None
             if branch is None:
@@ -364,6 +374,11 @@ def check_semantics(pack, rep, size_bytes):
         if sid in section_ids:
             rep.error("/sections/%d" % i, "duplicate section id %r" % sid)
         section_ids.add(sid)
+
+    declared = pack.get("version")
+    if type(declared) is int and declared > needed_version(pack):
+        rep.warn("/version", "nothing in the pack needs version %d: declare %d so that older apps can import it"
+                 % (declared, needed_version(pack)))
 
     if pack.get("created") and pack.get("updated") and str(pack["updated"])[:10] < str(pack["created"])[:10]:
         rep.warn("/updated", "'updated' is earlier than 'created'")
@@ -514,7 +529,9 @@ def extract_pack_blocks(md_path):
                 j += 1
             body = "\n".join(lines[start:j])
             if m.group(3) == "item":
-                body = ('{"format": "jackdaw-pack", "version": 1, "id": "snippet", "title": "snippet", "items": [%s]}' % body)
+                version = 2 if re.search(r'"(figure|answerFigure)"\s*:', body) else 1
+                body = ('{"format": "jackdaw-pack", "version": %d, "id": "snippet", "title": "snippet", "items": [%s]}'
+                        % (version, body))
             blocks.append(("%s line %d (%s)" % (md_path.name, start, m.group(3)), body))
             i = j
         i += 1

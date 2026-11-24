@@ -8,11 +8,11 @@ Number of items: about [e.g. 40]
 Preferred item types: [e.g. mostly cards and a few multiple-choice questions, or: choose what fits best]
 Use only facts you are sure about. If you are unsure about something, leave it out.
 
-FORMAT (Jackdaw Pack, version 1)
+FORMAT (Jackdaw Pack)
 The file is one JSON object.
 Top level:
 - "format": "jackdaw-pack"                      (required, always this string)
-- "version": 1                                  (required, always the number 1)
+- "version": 1                                  (required; the number 1, or the number 2 if any item has a "figure" or "answerFigure")
 - "id": string                                  (required; only A-Z a-z 0-9 . _ - ; use "pack." + topic slug + "." + 6 random hex characters, e.g. "pack.roman-emperors.7f3a9c")
 - "title": string                               (required)
 - optional: "description" (string), "language" (BCP-47 tag of the subject, e.g. "es", "en", "de-CH"), "author" (string), "license" (e.g. "CC-BY-4.0"), "tags" (string array), "icon" (ONE emoji), "color" ("#RRGGBB"), "revision": 1, "created" and "updated" ("YYYY-MM-DD")
@@ -36,7 +36,7 @@ Any item may have "figure" (shown with the question) and "answerFigure" (shown a
 - "svg" is one complete, self-contained SVG document inside the JSON string. Use single quotes for all SVG attributes. The root needs xmlns='http://www.w3.org/2000/svg' and a viewBox, e.g. viewBox='0 0 240 160'. Keep it small and simple (a few hundred characters up to a few thousand).
 - Allowed: shapes, paths, text, gradients, clip paths, filters, a <style> element, and animation with <animate>, <animateTransform>, <animateMotion>, <set> or CSS @keyframes. NOT allowed: <script>, <foreignObject>, <a>, <image>, event attributes (onclick, onload, ...), external fonts, and any href or url() that is not a '#id' inside the same SVG. Write a literal < in a label as &lt;.
 - The figure is shown on a light or a dark background: use stroke='currentColor' / fill='currentColor' for lines and labels, plus colours that are readable on both. Font: font-family='sans-serif'.
-- The figure must not show the answer of its own question; put the labelled version into "answerFigure". Older app versions do not show figures, so prefer questions that still make sense without one.
+- The figure must not show the answer of its own question; put the labelled version into "answerFigure". A pack with a figure must say "version": 2 and opens only in apps that can show figures, so add one only where it is worth that.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.
