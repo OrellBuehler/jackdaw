@@ -18,6 +18,7 @@ open pack format that people, scripts and chatbots can write.
 [![Android](https://img.shields.io/badge/Android-8.0%2B-3ddc84?style=flat-square&logo=android&logoColor=white)](#try-it)
 [![App Store](https://img.shields.io/badge/App%20Store-download-0d96f6?style=flat-square&logo=apple&logoColor=white)](https://apps.apple.com/app/id6837738431)
 [![TestFlight](https://img.shields.io/badge/TestFlight-public%20beta-0d96f6?style=flat-square&logo=apple&logoColor=white)](https://testflight.apple.com/join/74yDqrjd)
+[![Google Play](https://img.shields.io/badge/Google%20Play-beta-3ddc84?style=flat-square&logo=googleplay&logoColor=white)](#try-it)
 [![Pack format](https://img.shields.io/badge/pack%20format-v1-8b5cf6?style=flat-square)](format/README.md)
 
 <br>
@@ -36,7 +37,7 @@ open pack format that people, scripts and chatbots can write.
 |                |                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | 🍎 **iPhone**  | [<img src="https://cdn.simpleicons.org/apple/0d96f6" alt="" width="16" height="16"> **Get it on the App Store**](https://apps.apple.com/app/id6837738431), or try upcoming versions in the [public beta on TestFlight](https://testflight.apple.com/join/74yDqrjd) |
-| 🤖 **Android** | Download the signed APK from the [latest release](https://github.com/OrellBuehler/jackdaw/releases/latest). Not on Google Play yet |
+| 🤖 **Android** | Join the beta on Google Play: first join the [tester group](https://groups.google.com/g/jackdaw-test), then [become a tester](https://play.google.com/apps/testing/ch.orellbuehler.jackdaw) and install from Google Play. Or download the signed APK from the [latest release](https://github.com/OrellBuehler/jackdaw/releases/latest) |
 | 📦 **Packs**   | Start with the [sample packs](format/examples/), or let a chatbot [write one for you](#create-a-pack-with-any-chatbot) |
 
 Free, no ads, no account, no analytics, no servers of ours.
@@ -247,6 +248,6 @@ One-time iOS setup: register the App ID `ch.orellbuehler.jackdaw`, create the ap
 
 ## Status
 
-The iOS app is in the App Store. The Android app is published as a signed APK with every GitHub release; it is not on Google Play yet.
+The iOS app is in the App Store. The Android app is in a closed beta on Google Play that anyone can join through the [tester group](https://groups.google.com/g/jackdaw-test), and is published as a signed APK with every GitHub release.
 
 No licence has been chosen yet, so nothing in this repository is licensed for reuse for now.
