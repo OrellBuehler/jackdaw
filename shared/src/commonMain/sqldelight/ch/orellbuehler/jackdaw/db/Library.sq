@@ -1,0 +1,70 @@
+CREATE TABLE pack_local (
+    pack_id TEXT NOT NULL PRIMARY KEY,
+    archived INTEGER NOT NULL DEFAULT 0,
+    url TEXT,
+    edited INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE pack_group (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    position INTEGER NOT NULL
+);
+
+CREATE TABLE pack_group_member (
+    group_id TEXT NOT NULL,
+    pack_id TEXT NOT NULL,
+    PRIMARY KEY (group_id, pack_id)
+);
+
+selectLocals:
+SELECT * FROM pack_local;
+
+selectLocal:
+SELECT * FROM pack_local WHERE pack_id = ?;
+
+insertLocalIfMissing:
+INSERT OR IGNORE INTO pack_local (pack_id) VALUES (?);
+
+setArchived:
+UPDATE pack_local SET archived = ? WHERE pack_id = ?;
+
+setUrl:
+UPDATE pack_local SET url = ? WHERE pack_id = ?;
+
+setEdited:
+UPDATE pack_local SET edited = ? WHERE pack_id = ?;
+
+deleteLocal:
+DELETE FROM pack_local WHERE pack_id = ?;
+
+selectGroups:
+SELECT * FROM pack_group ORDER BY position, name COLLATE NOCASE, id;
+
+nextGroupPosition:
+SELECT COALESCE(MAX(position), -1) + 1 FROM pack_group;
+
+insertGroup:
+INSERT INTO pack_group (id, name, position) VALUES (?, ?, ?);
+
+renameGroup:
+UPDATE pack_group SET name = ? WHERE id = ?;
+
+deleteGroup:
+DELETE FROM pack_group WHERE id = ?;
+
+selectMembers:
+SELECT m.group_id, m.pack_id FROM pack_group_member m JOIN pack p ON p.id = m.pack_id;
+
+insertMember:
+INSERT OR IGNORE INTO pack_group_member (group_id, pack_id)
+SELECT id, :packId FROM pack_group WHERE id = :groupId;
+
+deleteMember:
+DELETE FROM pack_group_member WHERE group_id = ? AND pack_id = ?;
+
+deleteGroupMembers:
+DELETE FROM pack_group_member WHERE group_id = ?;
+
+deletePackMembers:
+DELETE FROM pack_group_member WHERE pack_id = ?;

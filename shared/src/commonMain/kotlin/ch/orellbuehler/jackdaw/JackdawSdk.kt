@@ -7,7 +7,9 @@ import ch.orellbuehler.jackdaw.format.AuthoringPrompt
 import ch.orellbuehler.jackdaw.format.ImportError
 import ch.orellbuehler.jackdaw.format.ImportErrorCode
 import ch.orellbuehler.jackdaw.format.ItemType
+import ch.orellbuehler.jackdaw.format.PackEditor
 import ch.orellbuehler.jackdaw.format.PackReader
+import ch.orellbuehler.jackdaw.format.PackUrl
 import ch.orellbuehler.jackdaw.format.ReadResult
 import ch.orellbuehler.jackdaw.format.Study
 import ch.orellbuehler.jackdaw.samples.Catalog
@@ -17,7 +19,9 @@ import ch.orellbuehler.jackdaw.store.Env
 import ch.orellbuehler.jackdaw.store.ImportPreview
 import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.ItemSummary
+import ch.orellbuehler.jackdaw.store.LibraryStore
 import ch.orellbuehler.jackdaw.store.PackDetail
+import ch.orellbuehler.jackdaw.store.PackGroup
 import ch.orellbuehler.jackdaw.store.PackStore
 import ch.orellbuehler.jackdaw.store.PackSummary
 import ch.orellbuehler.jackdaw.store.SamplePack
@@ -65,6 +69,7 @@ class JackdawSdk internal constructor(
     private val database = JackdawDatabase(driver)
     private val syncTracker = SyncTracker(database, env)
     private val packStore = PackStore(database, env, syncTracker)
+    private val libraryStore = LibraryStore(database, env)
     private val settingsStore = SettingsStore(database, env, syncTracker)
     private val statsStore = StatsStore(database, env, packStore, settingsStore)
 
@@ -107,6 +112,7 @@ class JackdawSdk internal constructor(
                         installedRevision = diff.existing?.revision ?: 0,
                         isDowngrade = diff.isDowngradeFor(pack),
                         counts = diff.counts,
+                        overwritesEdits = diff.existing != null && libraryStore.isEdited(pack.id),
                     )
                 }
             }
@@ -115,6 +121,94 @@ class JackdawSdk internal constructor(
     suspend fun importPack(text: String): ImportResult = withContext(dispatcher) { install(text, allowDowngrade = false) }
 
     suspend fun importPackAllowingDowngrade(text: String): ImportResult = withContext(dispatcher) { install(text, allowDowngrade = true) }
+
+    suspend fun importPackFromUrl(
+        text: String,
+        url: String,
+        allowDowngrade: Boolean,
+    ): ImportResult = withContext(dispatcher) { install(text, allowDowngrade, url) }
+
+    fun resolvePackUrl(input: String): String? = PackUrl.resolve(input)
+
+    suspend fun setPackArchived(
+        packId: String,
+        archived: Boolean,
+    ) {
+        withContext(dispatcher) { libraryStore.setArchived(packId, archived) }
+    }
+
+    suspend fun removePackUrl(packId: String) {
+        withContext(dispatcher) { libraryStore.setUrl(packId, null) }
+    }
+
+    fun observeGroups(): Flow<List<PackGroup>> = env.observe { libraryStore.groups() }
+
+    suspend fun createGroup(name: String): String? = withContext(dispatcher) { libraryStore.createGroup(name) }
+
+    suspend fun renameGroup(
+        groupId: String,
+        name: String,
+    ) {
+        withContext(dispatcher) { libraryStore.renameGroup(groupId, name) }
+    }
+
+    suspend fun deleteGroup(groupId: String) {
+        withContext(dispatcher) { libraryStore.deleteGroup(groupId) }
+    }
+
+    suspend fun setPackInGroup(
+        packId: String,
+        groupId: String,
+        member: Boolean,
+    ) {
+        withContext(dispatcher) { libraryStore.setMember(groupId, packId, member) }
+    }
+
+    fun newItemSource(): String = PackEditor.NEW_ITEM
+
+    suspend fun itemSource(
+        packId: String,
+        itemId: String,
+    ): String? = withContext(dispatcher) { packStore.source(packId)?.let { PackEditor.item(it, itemId) } }
+
+    suspend fun saveItem(
+        packId: String,
+        itemId: String?,
+        json: String,
+    ): ImportResult =
+        withContext(dispatcher) {
+            val source = packStore.source(packId) ?: return@withContext missingPack()
+            val placed =
+                PackEditor.withItem(source, itemId, json)
+                    ?: return@withContext invalidItem("The item is not a valid JSON object.")
+            val read = PackReader.read(placed.source)
+            if (read is ReadResult.Accepted) {
+                val id = PackEditor.idOf(json)
+                val problem = read.warnings.firstOrNull { it.itemIndex == placed.index || (id != null && it.itemId == id) }
+                if (problem != null) return@withContext invalidItem(problem.message)
+                if (read.pack.items.none { it.id == id }) return@withContext invalidItem("The item has a missing or unknown 'type'.")
+            }
+            edit(placed.source)
+        }
+
+    suspend fun deleteItem(
+        packId: String,
+        itemId: String,
+    ): ImportResult =
+        withContext(dispatcher) {
+            val source = packStore.source(packId) ?: return@withContext missingPack()
+            edit(PackEditor.withoutItem(source, itemId) ?: return@withContext invalidItem("There is no item '$itemId' in this pack."))
+        }
+
+    suspend fun updatePackInfo(
+        packId: String,
+        title: String,
+        description: String,
+    ): ImportResult =
+        withContext(dispatcher) {
+            val source = packStore.source(packId) ?: return@withContext missingPack()
+            edit(PackEditor.withInfo(source, title, description) ?: return@withContext missingPack())
+        }
 
     suspend fun deletePack(packId: String) {
         withContext(dispatcher) { packStore.delete(packId) }
@@ -236,9 +330,17 @@ class JackdawSdk internal constructor(
         return Prepared(pack, resolved, plan, settings.typoTolerance)
     }
 
+    private fun missingPack() = ImportResult.Failure(ImportError(ImportErrorCode.PACK_MISSING, "The pack is no longer installed."))
+
+    private fun invalidItem(message: String) = ImportResult.Failure(ImportError(ImportErrorCode.ITEM_INVALID, message))
+
+    private fun edit(source: String): ImportResult = install(source, allowDowngrade = true, edited = true)
+
     private fun install(
         text: String,
         allowDowngrade: Boolean,
+        url: String? = null,
+        edited: Boolean = false,
     ): ImportResult {
         val read = PackReader.read(text)
         if (read !is ReadResult.Accepted) return ImportResult.Failure((read as ReadResult.Rejected).error)
@@ -254,6 +356,8 @@ class JackdawSdk internal constructor(
                 )
             }
             val diff = packStore.install(pack, read.payloads, text.removePrefix("\uFEFF"), env.now())
+            libraryStore.setEdited(pack.id, edited)
+            if (url != null) libraryStore.setUrl(pack.id, url)
             ImportResult.Success(
                 packId = pack.id,
                 title = pack.title,
