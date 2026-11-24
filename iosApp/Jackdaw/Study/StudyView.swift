@@ -29,15 +29,6 @@ struct StudyView: View {
         .sensoryFeedback(.success, trigger: store.correctTicks)
         .sensoryFeedback(.error, trigger: store.wrongTicks)
         .sensoryFeedback(.selection, trigger: store.gradeTicks)
-        .confirmationDialog("study.close.title", isPresented: $confirmClose, titleVisibility: .visible) {
-            Button("study.close.confirm", role: .destructive) {
-                store.finishEarly()
-                dismiss()
-            }
-            Button("study.close.continue", role: .cancel) {}
-        } message: {
-            Text("study.close.message")
-        }
     }
 
     private var background: some View {
@@ -68,6 +59,15 @@ struct StudyView: View {
                     }
             }
             .accessibilityLabel("study.close")
+            .confirmationDialog("study.close.title", isPresented: $confirmClose, titleVisibility: .visible) {
+                Button("study.close.confirm", role: .destructive) {
+                    store.finishEarly()
+                    dismiss()
+                }
+                Button("study.close.continue", role: .cancel) {}
+            } message: {
+                Text("study.close.message")
+            }
             ProgressBar(
                 value: store.progress,
                 tint: style.accentText,

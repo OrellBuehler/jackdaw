@@ -41,22 +41,6 @@ struct PackDetailView: View {
         .onChange(of: store.isGone) { _, gone in
             if gone { dismiss() }
         }
-        .confirmationDialog("detail.reset.title", isPresented: $confirmReset, titleVisibility: .visible) {
-            Button("detail.reset.confirm", role: .destructive) {
-                Task { await store.resetProgress() }
-            }
-            Button("common.cancel", role: .cancel) {}
-        } message: {
-            Text("detail.reset.message")
-        }
-        .confirmationDialog("detail.delete.title", isPresented: $confirmDelete, titleVisibility: .visible) {
-            Button("detail.delete.confirm", role: .destructive) {
-                Task { await store.delete() }
-            }
-            Button("common.cancel", role: .cancel) {}
-        } message: {
-            Text("detail.delete.message")
-        }
         .sheet(item: $shareItem) { item in
             ShareSheet(url: item.url)
                 .presentationDetents([.medium, .large])
@@ -85,6 +69,22 @@ struct PackDetailView: View {
         }
         .disabled(store.detail == nil)
         .accessibilityLabel("detail.menu")
+        .confirmationDialog("detail.reset.title", isPresented: $confirmReset, titleVisibility: .visible) {
+            Button("detail.reset.confirm", role: .destructive) {
+                Task { await store.resetProgress() }
+            }
+            Button("common.cancel", role: .cancel) {}
+        } message: {
+            Text("detail.reset.message")
+        }
+        .confirmationDialog("detail.delete.title", isPresented: $confirmDelete, titleVisibility: .visible) {
+            Button("detail.delete.confirm", role: .destructive) {
+                Task { await store.delete() }
+            }
+            Button("common.cancel", role: .cancel) {}
+        } message: {
+            Text("detail.delete.message")
+        }
     }
 
     private func content(_ detail: PackDetailInfo) -> some View {
