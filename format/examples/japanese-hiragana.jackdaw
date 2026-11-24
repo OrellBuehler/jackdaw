@@ -1,0 +1,410 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 1,
+  "id": "com.github.orellbuehler.jackdaw.examples.japanese-hiragana",
+  "title": "Japanese Hiragana",
+  "description": "All of hiragana, row by row: the 46 basic characters, the 25 voiced ones and the 33 combined sounds, each asked both ways, character to reading and reading to character. Notes point out the look-alikes. At the end come the rules for long vowels, doubled consonants and particles, and sixteen first words to read.",
+  "language": "ja",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://github.com/OrellBuehler/jackdaw",
+  "tags": ["japanese", "hiragana", "kana", "writing", "beginner"],
+  "icon": "🇯🇵",
+  "color": "#BC002D",
+  "revision": 1,
+  "created": "2026-11-24",
+  "updated": "2026-11-24",
+  "sections": [
+    {"id": "vowels", "title": "The five vowels"},
+    {"id": "k-s", "title": "K and S rows"},
+    {"id": "t-n", "title": "T and N rows"},
+    {"id": "h-m", "title": "H and M rows"},
+    {"id": "y-r-w", "title": "Y, R and W rows, and n"},
+    {
+      "id": "voiced",
+      "title": "Voiced sounds",
+      "description": "Two small strokes (dakuten) or a small circle (handakuten) change the consonant."
+    },
+    {
+      "id": "combined",
+      "title": "Combined sounds",
+      "description": "A kana of the i column followed by a small ya, yu or yo is read as one syllable."
+    },
+    {"id": "combined-voiced", "title": "Combined sounds, voiced"},
+    {"id": "rules", "title": "Reading rules"},
+    {"id": "words", "title": "First words", "description": "Read the word, then check the reading and the meaning."}
+  ],
+  "study": {"order": "sequential", "newPerSession": 10, "reversible": true, "exercises": {"card": ["flip", "choice"]}},
+  "items": [
+    {"id": "a", "type": "card", "section": "vowels", "front": "あ", "back": "a"},
+    {"id": "i", "type": "card", "section": "vowels", "front": "い", "back": "i"},
+    {"id": "u", "type": "card", "section": "vowels", "front": "う", "back": "u"},
+    {"id": "e", "type": "card", "section": "vowels", "front": "え", "back": "e"},
+    {
+      "id": "o",
+      "type": "card",
+      "section": "vowels",
+      "front": "お",
+      "back": "o",
+      "explanation": "Unlike あ (*a*), it has a short separate stroke at the top right."
+    },
+    {"id": "ka", "type": "card", "section": "k-s", "front": "か", "back": "ka"},
+    {
+      "id": "ki",
+      "type": "card",
+      "section": "k-s",
+      "front": "き",
+      "back": "ki",
+      "explanation": "Two horizontal strokes. さ (*sa*) has only one."
+    },
+    {"id": "ku", "type": "card", "section": "k-s", "front": "く", "back": "ku"},
+    {"id": "ke", "type": "card", "section": "k-s", "front": "け", "back": "ke"},
+    {"id": "ko", "type": "card", "section": "k-s", "front": "こ", "back": "ko"},
+    {"id": "sa", "type": "card", "section": "k-s", "front": "さ", "back": "sa"},
+    {
+      "id": "shi",
+      "type": "card",
+      "section": "k-s",
+      "front": "し",
+      "back": "shi",
+      "explanation": "Written *shi*, not *si*: the consonant sounds like the English *sh*."
+    },
+    {"id": "su", "type": "card", "section": "k-s", "front": "す", "back": "su"},
+    {"id": "se", "type": "card", "section": "k-s", "front": "せ", "back": "se"},
+    {"id": "so", "type": "card", "section": "k-s", "front": "そ", "back": "so"},
+    {"id": "ta", "type": "card", "section": "t-n", "front": "た", "back": "ta"},
+    {
+      "id": "chi",
+      "type": "card",
+      "section": "t-n",
+      "front": "ち",
+      "back": "chi",
+      "explanation": "Written *chi*, not *ti*. It looks like さ (*sa*) mirrored."
+    },
+    {"id": "tsu", "type": "card", "section": "t-n", "front": "つ", "back": "tsu", "explanation": "Written *tsu*, not *tu*."},
+    {"id": "te", "type": "card", "section": "t-n", "front": "て", "back": "te"},
+    {"id": "to", "type": "card", "section": "t-n", "front": "と", "back": "to"},
+    {"id": "na", "type": "card", "section": "t-n", "front": "な", "back": "na"},
+    {"id": "ni", "type": "card", "section": "t-n", "front": "に", "back": "ni"},
+    {
+      "id": "nu",
+      "type": "card",
+      "section": "t-n",
+      "front": "ぬ",
+      "back": "nu",
+      "explanation": "It ends in a small loop. め (*me*) has the same shape without the loop."
+    },
+    {
+      "id": "ne",
+      "type": "card",
+      "section": "t-n",
+      "front": "ね",
+      "back": "ne",
+      "explanation": "It ends in a loop. れ (*re*) flicks outwards instead, and わ (*wa*) closes in a round curve."
+    },
+    {"id": "no", "type": "card", "section": "t-n", "front": "の", "back": "no"},
+    {
+      "id": "ha",
+      "type": "card",
+      "section": "h-m",
+      "front": "は",
+      "back": "ha",
+      "explanation": "As a particle that marks the topic it is read *wa*."
+    },
+    {"id": "hi", "type": "card", "section": "h-m", "front": "ひ", "back": "hi"},
+    {
+      "id": "fu",
+      "type": "card",
+      "section": "h-m",
+      "front": "ふ",
+      "back": "fu",
+      "explanation": "The sound lies between *fu* and *hu*: the lips do not touch the teeth."
+    },
+    {
+      "id": "he",
+      "type": "card",
+      "section": "h-m",
+      "front": "へ",
+      "back": "he",
+      "explanation": "As a particle that marks a direction it is read *e*."
+    },
+    {
+      "id": "ho",
+      "type": "card",
+      "section": "h-m",
+      "front": "ほ",
+      "back": "ho",
+      "explanation": "Like は (*ha*), with one more horizontal stroke on top."
+    },
+    {"id": "ma", "type": "card", "section": "h-m", "front": "ま", "back": "ma"},
+    {"id": "mi", "type": "card", "section": "h-m", "front": "み", "back": "mi"},
+    {"id": "mu", "type": "card", "section": "h-m", "front": "む", "back": "mu"},
+    {"id": "me", "type": "card", "section": "h-m", "front": "め", "back": "me"},
+    {"id": "mo", "type": "card", "section": "h-m", "front": "も", "back": "mo"},
+    {"id": "ya", "type": "card", "section": "y-r-w", "front": "や", "back": "ya"},
+    {"id": "yu", "type": "card", "section": "y-r-w", "front": "ゆ", "back": "yu"},
+    {"id": "yo", "type": "card", "section": "y-r-w", "front": "よ", "back": "yo"},
+    {"id": "ra", "type": "card", "section": "y-r-w", "front": "ら", "back": "ra"},
+    {
+      "id": "ri",
+      "type": "card",
+      "section": "y-r-w",
+      "front": "り",
+      "back": "ri",
+      "explanation": "The right stroke is the long one. In い (*i*) it is the left one."
+    },
+    {
+      "id": "ru",
+      "type": "card",
+      "section": "y-r-w",
+      "front": "る",
+      "back": "ru",
+      "explanation": "It ends in a small loop. ろ (*ro*) has the same shape without the loop."
+    },
+    {"id": "re", "type": "card", "section": "y-r-w", "front": "れ", "back": "re"},
+    {"id": "ro", "type": "card", "section": "y-r-w", "front": "ろ", "back": "ro"},
+    {"id": "wa", "type": "card", "section": "y-r-w", "front": "わ", "back": "wa"},
+    {
+      "id": "wo",
+      "type": "card",
+      "section": "y-r-w",
+      "front": "を",
+      "back": "wo",
+      "explanation": "Pronounced *o*. It is used only as the particle that marks the object of a sentence."
+    },
+    {
+      "id": "n",
+      "type": "card",
+      "section": "y-r-w",
+      "front": "ん",
+      "back": "n",
+      "explanation": "The only kana without a vowel. It never starts a word."
+    },
+    {"id": "ga", "type": "card", "section": "voiced", "front": "が", "back": "ga"},
+    {"id": "gi", "type": "card", "section": "voiced", "front": "ぎ", "back": "gi"},
+    {"id": "gu", "type": "card", "section": "voiced", "front": "ぐ", "back": "gu"},
+    {"id": "ge", "type": "card", "section": "voiced", "front": "げ", "back": "ge"},
+    {"id": "go", "type": "card", "section": "voiced", "front": "ご", "back": "go"},
+    {"id": "za", "type": "card", "section": "voiced", "front": "ざ", "back": "za"},
+    {"id": "ji", "type": "card", "section": "voiced", "front": "じ", "back": "ji", "frontAlternatives": ["ぢ"]},
+    {"id": "zu", "type": "card", "section": "voiced", "front": "ず", "back": "zu", "frontAlternatives": ["づ"]},
+    {"id": "ze", "type": "card", "section": "voiced", "front": "ぜ", "back": "ze"},
+    {"id": "zo", "type": "card", "section": "voiced", "front": "ぞ", "back": "zo"},
+    {"id": "da", "type": "card", "section": "voiced", "front": "だ", "back": "da"},
+    {
+      "id": "dji",
+      "type": "card",
+      "section": "voiced",
+      "front": "ぢ",
+      "back": "ji",
+      "reversible": false,
+      "explanation": "Pronounced like じ (*ji*), which is far more common."
+    },
+    {
+      "id": "dzu",
+      "type": "card",
+      "section": "voiced",
+      "front": "づ",
+      "back": "zu",
+      "reversible": false,
+      "explanation": "Pronounced like ず (*zu*), which is far more common."
+    },
+    {"id": "de", "type": "card", "section": "voiced", "front": "で", "back": "de"},
+    {"id": "do", "type": "card", "section": "voiced", "front": "ど", "back": "do"},
+    {"id": "ba", "type": "card", "section": "voiced", "front": "ば", "back": "ba"},
+    {"id": "bi", "type": "card", "section": "voiced", "front": "び", "back": "bi"},
+    {"id": "bu", "type": "card", "section": "voiced", "front": "ぶ", "back": "bu"},
+    {"id": "be", "type": "card", "section": "voiced", "front": "べ", "back": "be"},
+    {"id": "bo", "type": "card", "section": "voiced", "front": "ぼ", "back": "bo"},
+    {"id": "pa", "type": "card", "section": "voiced", "front": "ぱ", "back": "pa"},
+    {"id": "pi", "type": "card", "section": "voiced", "front": "ぴ", "back": "pi"},
+    {"id": "pu", "type": "card", "section": "voiced", "front": "ぷ", "back": "pu"},
+    {"id": "pe", "type": "card", "section": "voiced", "front": "ぺ", "back": "pe"},
+    {"id": "po", "type": "card", "section": "voiced", "front": "ぽ", "back": "po"},
+    {"id": "kya", "type": "card", "section": "combined", "front": "きゃ", "back": "kya"},
+    {"id": "kyu", "type": "card", "section": "combined", "front": "きゅ", "back": "kyu"},
+    {"id": "kyo", "type": "card", "section": "combined", "front": "きょ", "back": "kyo"},
+    {"id": "sha", "type": "card", "section": "combined", "front": "しゃ", "back": "sha"},
+    {"id": "shu", "type": "card", "section": "combined", "front": "しゅ", "back": "shu"},
+    {"id": "sho", "type": "card", "section": "combined", "front": "しょ", "back": "sho"},
+    {"id": "cha", "type": "card", "section": "combined", "front": "ちゃ", "back": "cha"},
+    {"id": "chu", "type": "card", "section": "combined", "front": "ちゅ", "back": "chu"},
+    {"id": "cho", "type": "card", "section": "combined", "front": "ちょ", "back": "cho"},
+    {"id": "nya", "type": "card", "section": "combined", "front": "にゃ", "back": "nya"},
+    {"id": "nyu", "type": "card", "section": "combined", "front": "にゅ", "back": "nyu"},
+    {"id": "nyo", "type": "card", "section": "combined", "front": "にょ", "back": "nyo"},
+    {"id": "hya", "type": "card", "section": "combined", "front": "ひゃ", "back": "hya"},
+    {"id": "hyu", "type": "card", "section": "combined", "front": "ひゅ", "back": "hyu"},
+    {"id": "hyo", "type": "card", "section": "combined", "front": "ひょ", "back": "hyo"},
+    {"id": "mya", "type": "card", "section": "combined", "front": "みゃ", "back": "mya"},
+    {"id": "myu", "type": "card", "section": "combined", "front": "みゅ", "back": "myu"},
+    {"id": "myo", "type": "card", "section": "combined", "front": "みょ", "back": "myo"},
+    {"id": "rya", "type": "card", "section": "combined", "front": "りゃ", "back": "rya"},
+    {"id": "ryu", "type": "card", "section": "combined", "front": "りゅ", "back": "ryu"},
+    {"id": "ryo", "type": "card", "section": "combined", "front": "りょ", "back": "ryo"},
+    {"id": "gya", "type": "card", "section": "combined-voiced", "front": "ぎゃ", "back": "gya"},
+    {"id": "gyu", "type": "card", "section": "combined-voiced", "front": "ぎゅ", "back": "gyu"},
+    {"id": "gyo", "type": "card", "section": "combined-voiced", "front": "ぎょ", "back": "gyo"},
+    {"id": "ja", "type": "card", "section": "combined-voiced", "front": "じゃ", "back": "ja"},
+    {"id": "ju", "type": "card", "section": "combined-voiced", "front": "じゅ", "back": "ju"},
+    {"id": "jo", "type": "card", "section": "combined-voiced", "front": "じょ", "back": "jo"},
+    {"id": "bya", "type": "card", "section": "combined-voiced", "front": "びゃ", "back": "bya"},
+    {"id": "byu", "type": "card", "section": "combined-voiced", "front": "びゅ", "back": "byu"},
+    {"id": "byo", "type": "card", "section": "combined-voiced", "front": "びょ", "back": "byo"},
+    {"id": "pya", "type": "card", "section": "combined-voiced", "front": "ぴゃ", "back": "pya"},
+    {"id": "pyu", "type": "card", "section": "combined-voiced", "front": "ぴゅ", "back": "pyu"},
+    {"id": "pyo", "type": "card", "section": "combined-voiced", "front": "ぴょ", "back": "pyo"},
+    {
+      "id": "rule-scripts",
+      "type": "choice",
+      "section": "rules",
+      "question": "What is hiragana mainly used for?",
+      "options": [
+        {"text": "Particles, word endings and words without kanji", "correct": true},
+        {"text": "Words borrowed from other languages", "explanation": "That is the job of katakana."},
+        {"text": "Words of Chinese origin", "explanation": "Those are usually written in kanji."},
+        {"text": "Names of people and places"}
+      ]
+    },
+    {
+      "id": "rule-same-sounds",
+      "type": "truefalse",
+      "section": "rules",
+      "statement": "Hiragana and katakana stand for the same basic sounds.",
+      "answer": true,
+      "explanation": "Every hiragana has a katakana counterpart. The two scripts differ in shape and in use, not in sound."
+    },
+    {
+      "id": "rule-dakuten",
+      "type": "choice",
+      "section": "rules",
+      "question": "What do the two small strokes (dakuten) do, as in か and が?",
+      "options": [
+        {"text": "They make the consonant voiced: *ka* becomes *ga*", "correct": true},
+        {"text": "They lengthen the vowel: *ka* becomes *kā*"},
+        {"text": "They double the consonant: *ka* becomes *kka*", "explanation": "That is what a small っ before the kana does."},
+        {"text": "They remove the vowel: *ka* becomes *k*"}
+      ]
+    },
+    {
+      "id": "rule-handakuten",
+      "type": "text",
+      "section": "rules",
+      "question": "The small circle (handakuten) is used on one row only. Which consonant does it turn *h* into?",
+      "answers": ["p"],
+      "explanation": "は *ha* becomes ぱ *pa*. With two strokes instead it becomes ば *ba*."
+    },
+    {
+      "id": "rule-small-tsu",
+      "type": "choice",
+      "section": "rules",
+      "question": "What does a small っ do, as in きって?",
+      "options": [
+        {"text": "It doubles the consonant that follows: *kitte*", "correct": true},
+        {"text": "It is read *tsu* as usual: *kitsute*"},
+        {"text": "It lengthens the vowel before it: *kīte*"},
+        {"text": "It is silent: *kite*"}
+      ],
+      "explanation": "The doubled consonant is held for one extra beat."
+    },
+    {
+      "id": "rule-long-o",
+      "type": "choice",
+      "section": "rules",
+      "question": "How is a long *o* usually written in hiragana, as in the word for school, *gakkō*?",
+      "options": [
+        {"text": "With う after the *o* kana: がっこう", "correct": true},
+        {"text": "With a bar: がっこー", "explanation": "The bar is how katakana marks a long vowel."},
+        {"text": "With a second こ: がっここ"},
+        {"text": "It is not written at all: がっこ"}
+      ]
+    },
+    {
+      "id": "rule-particle-wa",
+      "type": "text",
+      "section": "rules",
+      "question": "How is は read when it is the particle that marks the topic of a sentence?",
+      "answers": ["wa"],
+      "explanation": "Inside ordinary words it is read *ha*."
+    },
+    {
+      "id": "rule-particle-e",
+      "type": "text",
+      "section": "rules",
+      "question": "How is へ read when it is the particle that marks a direction?",
+      "answers": ["e"],
+      "explanation": "Inside ordinary words it is read *he*."
+    },
+    {
+      "id": "rule-particle-o",
+      "type": "text",
+      "section": "rules",
+      "question": "How is the particle を pronounced?",
+      "answers": ["o"],
+      "explanation": "Kana charts write it *wo* to tell it apart from お, but it sounds the same."
+    },
+    {
+      "id": "rule-yoon",
+      "type": "cloze",
+      "section": "rules",
+      "text": "きゃ is read {{kya}} as one syllable. With a full-size や, きや is read {{kiya}} as two."
+    },
+    {"id": "word-neko", "type": "card", "section": "words", "front": "ねこ", "back": "neko (cat)", "reversible": false},
+    {"id": "word-inu", "type": "card", "section": "words", "front": "いぬ", "back": "inu (dog)", "reversible": false},
+    {"id": "word-yama", "type": "card", "section": "words", "front": "やま", "back": "yama (mountain)", "reversible": false},
+    {"id": "word-mizu", "type": "card", "section": "words", "front": "みず", "back": "mizu (water)", "reversible": false},
+    {"id": "word-hon", "type": "card", "section": "words", "front": "ほん", "back": "hon (book)", "reversible": false},
+    {"id": "word-sushi", "type": "card", "section": "words", "front": "すし", "back": "sushi (sushi)", "reversible": false},
+    {"id": "word-sakura", "type": "card", "section": "words", "front": "さくら", "back": "sakura (cherry blossom)", "reversible": false},
+    {"id": "word-tomodachi", "type": "card", "section": "words", "front": "ともだち", "back": "tomodachi (friend)", "reversible": false},
+    {"id": "word-nihon", "type": "card", "section": "words", "front": "にほん", "back": "Nihon (Japan)", "reversible": false},
+    {"id": "word-ocha", "type": "card", "section": "words", "front": "おちゃ", "back": "ocha (tea)", "reversible": false},
+    {"id": "word-densha", "type": "card", "section": "words", "front": "でんしゃ", "back": "densha (train)", "reversible": false},
+    {
+      "id": "word-kitte",
+      "type": "card",
+      "section": "words",
+      "front": "きって",
+      "back": "kitte (stamp)",
+      "reversible": false,
+      "explanation": "The small っ doubles the *t*."
+    },
+    {
+      "id": "word-gakko",
+      "type": "card",
+      "section": "words",
+      "front": "がっこう",
+      "back": "gakkō (school)",
+      "reversible": false,
+      "explanation": "The small っ doubles the *k*, and the う lengthens the *o*."
+    },
+    {
+      "id": "word-kyo",
+      "type": "card",
+      "section": "words",
+      "front": "きょう",
+      "back": "kyō (today)",
+      "reversible": false,
+      "explanation": "The う lengthens the *o*."
+    },
+    {
+      "id": "word-arigato",
+      "type": "card",
+      "section": "words",
+      "front": "ありがとう",
+      "back": "arigatō (thank you)",
+      "reversible": false,
+      "explanation": "The う lengthens the *o*."
+    },
+    {
+      "id": "word-konnichiwa",
+      "type": "card",
+      "section": "words",
+      "front": "こんにちは",
+      "back": "konnichiwa (hello)",
+      "reversible": false,
+      "explanation": "The last は is the particle, so it is read *wa*."
+    }
+  ]
+}
