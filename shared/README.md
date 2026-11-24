@@ -128,7 +128,7 @@ Calls (all `suspend`, called by the platform layer):
 - `packRecord / reviewRecord / settingRecord(name)` return the current content to upload, with a `version` (null when the record is not dirty). After a successful send call `markSent(name, version, systemFields)`: the record stays dirty if it changed since the snapshot. `systemFields` is an opaque string the platform keeps per record (CloudKit change tags), see `systemFields` / `setSystemFields`.
 - `apply(packs, reviews, settings)` merges fetched records. Records that arrive this way are not marked dirty (no echo); `SyncApplyResult.needsUpload` names the records whose merged state differs from what was fetched, they are dirty and must be sent. `notes` are human readable warnings (for example a pack in a newer format).
 - `queueEverything()` marks every record dirty and forgets the stored system fields (first sync, and after the server side data was deleted). Merging makes this safe for data that already exists remotely.
-- `meta / setMeta` store small platform values (engine state, last sync time, last error, account id).
+- `meta / setMeta` store small platform values (engine state, last sync time, last error, account id). `packFormatVersion` is the highest pack format version this build reads: the platform keeps it next to the engine state and fetches everything again when it changes, because an older build skipped the packs it could not read.
 
 ## Study sessions
 

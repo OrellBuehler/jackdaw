@@ -9,6 +9,10 @@ final class SyncBridge: @unchecked Sendable {
         self.sync = sync
     }
 
+    var packFormat: String {
+        String(sync.packFormatVersion)
+    }
+
     func enableTracking() {
         sync.enableTracking()
     }
