@@ -27,6 +27,13 @@ final class SDKClient: @unchecked Sendable {
         }
     }
 
+    func watchGroups(deliver: @MainActor @Sendable ([PackGroupInfo]) -> Void) async {
+        for await groups in sdk.observeGroups() {
+            let mapped = groups.map { Mapping.group($0) }
+            await deliver(mapped)
+        }
+    }
+
     func watchItems(_ packId: String, deliver: @MainActor @Sendable ([ItemInfo]) -> Void) async {
         for await items in sdk.observeItems(packId: packId) {
             let mapped = items.map { Mapping.item($0) }
@@ -77,10 +84,16 @@ final class SDKClient: @unchecked Sendable {
         }
     }
 
-    func importPack(text: String, allowDowngrade: Bool) async -> ImportOutcome {
+    func resolvePackURL(_ input: String) -> String? {
+        sdk.resolvePackUrl(input: input)
+    }
+
+    func importPack(text: String, allowDowngrade: Bool, sourceURL: String? = nil) async -> ImportOutcome {
         do {
             let result: ImportResult
-            if allowDowngrade {
+            if let sourceURL {
+                result = try await sdk.importPackFromUrl(text: text, url: sourceURL, allowDowngrade: allowDowngrade)
+            } else if allowDowngrade {
                 result = try await sdk.importPackAllowingDowngrade(text: text)
             } else {
                 result = try await sdk.importPack(text: text)
@@ -117,6 +130,83 @@ final class SDKClient: @unchecked Sendable {
             return try await sdk.exportPack(packId: packId)
         } catch {
             return nil
+        }
+    }
+
+    func setPackArchived(_ packId: String, archived: Bool) async {
+        do {
+            try await sdk.setPackArchived(packId: packId, archived: archived)
+        } catch {}
+    }
+
+    func removePackURL(_ packId: String) async {
+        do {
+            try await sdk.removePackUrl(packId: packId)
+        } catch {}
+    }
+
+    func createGroup(_ name: String) async -> String? {
+        do {
+            return try await sdk.createGroup(name: name)
+        } catch {
+            return nil
+        }
+    }
+
+    func renameGroup(_ groupId: String, name: String) async {
+        do {
+            try await sdk.renameGroup(groupId: groupId, name: name)
+        } catch {}
+    }
+
+    func deleteGroup(_ groupId: String) async {
+        do {
+            try await sdk.deleteGroup(groupId: groupId)
+        } catch {}
+    }
+
+    func setPackInGroup(_ packId: String, groupId: String, member: Bool) async {
+        do {
+            try await sdk.setPackInGroup(packId: packId, groupId: groupId, member: member)
+        } catch {}
+    }
+
+    func newItemSource() -> String {
+        sdk.newItemSource()
+    }
+
+    func itemSource(_ packId: String, itemId: String) async -> String? {
+        do {
+            return try await sdk.itemSource(packId: packId, itemId: itemId)
+        } catch {
+            return nil
+        }
+    }
+
+    func saveItem(_ packId: String, itemId: String?, json: String) async -> ImportOutcome {
+        do {
+            let result = try await sdk.saveItem(packId: packId, itemId: itemId, json: json)
+            return ImportAdapter.outcome(result)
+        } catch {
+            return .failure(ImportIssue(kind: .other, message: error.localizedDescription))
+        }
+    }
+
+    func deleteItem(_ packId: String, itemId: String) async -> ImportOutcome {
+        do {
+            let result = try await sdk.deleteItem(packId: packId, itemId: itemId)
+            return ImportAdapter.outcome(result)
+        } catch {
+            return .failure(ImportIssue(kind: .other, message: error.localizedDescription))
+        }
+    }
+
+    func updatePackInfo(_ packId: String, title: String, description: String) async -> ImportOutcome {
+        do {
+            let result = try await sdk.updatePackInfo(packId: packId, title: title, descriptionText: description)
+            return ImportAdapter.outcome(result)
+        } catch {
+            return .failure(ImportIssue(kind: .other, message: error.localizedDescription))
         }
     }
 

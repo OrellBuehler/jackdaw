@@ -203,11 +203,11 @@ class JackdawSdk internal constructor(
     suspend fun updatePackInfo(
         packId: String,
         title: String,
-        description: String,
+        descriptionText: String,
     ): ImportResult =
         withContext(dispatcher) {
             val source = packStore.source(packId) ?: return@withContext missingPack()
-            edit(PackEditor.withInfo(source, title, description) ?: return@withContext missingPack())
+            edit(PackEditor.withInfo(source, title, descriptionText) ?: return@withContext missingPack())
         }
 
     suspend fun deletePack(packId: String) {

@@ -2,6 +2,7 @@ import SwiftUI
 
 private enum AddRoute: Hashable {
     case paste
+    case link
     case samples
     case authoring
     case preview
@@ -56,6 +57,9 @@ struct AddPackSheet: View {
             if let url = route.incomingURL {
                 path = [.preview]
                 await flow.begin(url: url)
+            } else if let linked = route.linked {
+                path = [.preview]
+                await flow.begin(text: linked.text, sourceURL: linked.url)
             }
         }
     }
@@ -86,6 +90,15 @@ struct AddPackSheet: View {
                 path.append(.paste)
             }
             AddOptionRow(
+                symbol: "link",
+                tint: Color(hex: 0x3E7BDE),
+                foreground: Color.white,
+                title: "add.link.title",
+                subtitle: "add.link.subtitle"
+            ) {
+                path.append(.link)
+            }
+            AddOptionRow(
                 symbol: "square.stack.3d.up.fill",
                 tint: Color(hex: 0xE5484D),
                 foreground: Color.white,
@@ -113,6 +126,11 @@ struct AddPackSheet: View {
             PasteScreen { text in
                 path.append(.preview)
                 Task { await flow.begin(text: text) }
+            }
+        case .link:
+            LinkScreen { text, url in
+                path.append(.preview)
+                Task { await flow.begin(text: text, sourceURL: url) }
             }
         case .samples:
             SampleLibraryScreen()
