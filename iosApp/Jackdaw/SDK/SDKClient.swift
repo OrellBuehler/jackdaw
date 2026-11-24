@@ -172,7 +172,7 @@ final class SDKClient: @unchecked Sendable {
     }
 
     func newItemSource() -> String {
-        sdk.newItemSource()
+        sdk.itemTemplate()
     }
 
     func itemSource(_ packId: String, itemId: String) async -> String? {

@@ -164,7 +164,7 @@ class JackdawSdk internal constructor(
         withContext(dispatcher) { libraryStore.setMember(groupId, packId, member) }
     }
 
-    fun newItemSource(): String = PackEditor.NEW_ITEM
+    fun itemTemplate(): String = PackEditor.NEW_ITEM
 
     suspend fun itemSource(
         packId: String,

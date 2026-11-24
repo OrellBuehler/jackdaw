@@ -53,7 +53,7 @@ Create exactly one instance per process and keep it alive (application scope). O
 | `observeGroups()` | `Flow<List<PackGroup>>` | The user's groups with the ids of their installed packs. A pack can be in several groups (`PackSummary.groupIds`). |
 | `createGroup(name)` / `renameGroup(groupId, name)` / `deleteGroup(groupId)` | `createGroup`: the new id, `null` for a blank name | Deleting a group keeps its packs. |
 | `setPackInGroup(packId, groupId, member)` | | Adds or removes one pack. Unknown ids are ignored. |
-| `itemSource(packId, itemId)` / `newItemSource()` | `String?` / `String` | One item as pretty-printed JSON for an editor, and a template for a new one. |
+| `itemSource(packId, itemId)` / `itemTemplate()` | `String?` / `String` | One item as pretty-printed JSON for an editor, and a template for a new one. |
 | `saveItem(packId, itemId, json)` | `ImportResult` | Replaces the item (`itemId = null`: appends a new one). The pack is validated as a whole; an item the reader would skip or change is refused with `ITEM_INVALID` and the reader's message. An item with a figure raises the pack to `"version": 2`. |
 | `deleteItem(packId, itemId)` | `ImportResult` | The last item cannot be deleted (`NO_VALID_ITEMS`). |
 | `updatePackInfo(packId, title, descriptionText)` | `ImportResult` | Changes title and description in the pack source. |

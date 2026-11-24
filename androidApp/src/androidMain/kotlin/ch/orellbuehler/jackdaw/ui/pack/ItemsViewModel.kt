@@ -60,7 +60,7 @@ class ItemsViewModel(
         status.value = value
     }
 
-    suspend fun source(itemId: String?): String? = if (itemId == null) sdk.newItemSource() else sdk.itemSource(packId, itemId)
+    suspend fun source(itemId: String?): String? = if (itemId == null) sdk.itemTemplate() else sdk.itemSource(packId, itemId)
 
     suspend fun save(
         itemId: String?,
