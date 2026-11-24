@@ -204,8 +204,8 @@ final class AppModel {
         catalogPhase = .loaded
     }
 
-    func authoringPrompt() -> String {
-        client.authoringPrompt()
+    func authoringPrompt(kinds: Set<ItemKind>, figures: Bool) -> String {
+        client.authoringPrompt(types: ItemKind.allCases.filter { kinds.contains($0) }.map(\.code), figures: figures)
     }
 
     private func applyPacks(_ value: [PackInfo]) {

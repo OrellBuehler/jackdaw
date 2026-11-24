@@ -18,6 +18,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +29,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -44,6 +47,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -52,6 +56,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -69,12 +74,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ch.orellbuehler.jackdaw.R
+import ch.orellbuehler.jackdaw.format.ItemType
 import kotlinx.coroutines.launch
 
 private enum class AddPage {
@@ -359,6 +366,7 @@ private fun OnlineCatalogCard(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun AiPage(
     importViewModel: ImportViewModel,
@@ -367,7 +375,9 @@ private fun AiPage(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val prompt = importViewModel.authoringPrompt
+    val types by importViewModel.promptTypes.collectAsStateWithLifecycle()
+    val figures by importViewModel.promptFigures.collectAsStateWithLifecycle()
+    val prompt = remember(types, figures) { importViewModel.authoringPrompt(types, figures) }
     var expanded by rememberSaveable { mutableStateOf(false) }
     val copied = stringResource(R.string.ai_copied)
     val shareSubject = stringResource(R.string.ai_share_subject)
@@ -382,6 +392,33 @@ private fun AiPage(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(stringResource(R.string.ai_explainer), style = MaterialTheme.typography.bodyLarge)
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(stringResource(R.string.ai_types_title), style = MaterialTheme.typography.titleSmall)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                ItemType.entries.forEach { type ->
+                    FilterChip(
+                        selected = type in types,
+                        onClick = { importViewModel.togglePromptType(type) },
+                        label = { Text(stringResource(type.labelRes()), maxLines = 1) },
+                    )
+                }
+            }
+        }
+        Row(
+            Modifier.fillMaxWidth().toggleable(value = figures, role = Role.Switch, onValueChange = importViewModel::setPromptFigures),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(stringResource(R.string.ai_figures), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    stringResource(R.string.ai_figures_help),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Switch(checked = figures, onCheckedChange = null)
+        }
         Column(
             Modifier
                 .fillMaxWidth()

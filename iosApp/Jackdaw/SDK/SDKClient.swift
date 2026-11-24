@@ -64,8 +64,8 @@ final class SDKClient: @unchecked Sendable {
         sdk.readCatalog(text: text)?.map { Mapping.sample($0) }
     }
 
-    func authoringPrompt() -> String {
-        sdk.authoringPrompt()
+    func authoringPrompt(types: [String], figures: Bool) -> String {
+        sdk.authoringPrompt(types: types, figures: figures)
     }
 
     func previewImport(text: String) async -> PreviewOutcome {

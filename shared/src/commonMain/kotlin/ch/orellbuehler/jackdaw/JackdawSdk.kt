@@ -3,6 +3,7 @@ package ch.orellbuehler.jackdaw
 import app.cash.sqldelight.db.SqlDriver
 import ch.orellbuehler.jackdaw.db.DatabaseDriverFactory
 import ch.orellbuehler.jackdaw.db.JackdawDatabase
+import ch.orellbuehler.jackdaw.format.AuthoringPrompt
 import ch.orellbuehler.jackdaw.format.ImportError
 import ch.orellbuehler.jackdaw.format.ImportErrorCode
 import ch.orellbuehler.jackdaw.format.ItemType
@@ -143,7 +144,10 @@ class JackdawSdk internal constructor(
 
     fun readCatalog(text: String): List<SamplePack>? = Catalog.read(text, samplePacks())
 
-    fun authoringPrompt(): String = GENERATED_AUTHORING_PROMPT
+    fun authoringPrompt(
+        types: List<String> = emptyList(),
+        figures: Boolean = false,
+    ): String = AuthoringPrompt.build(GENERATED_AUTHORING_PROMPT, types, figures)
 
     suspend fun importSample(sampleId: String): ImportResult {
         val sample =

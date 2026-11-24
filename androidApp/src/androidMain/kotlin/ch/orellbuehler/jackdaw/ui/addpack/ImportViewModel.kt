@@ -8,6 +8,7 @@ import ch.orellbuehler.jackdaw.data.PackTextReader
 import ch.orellbuehler.jackdaw.data.ReadOutcome
 import ch.orellbuehler.jackdaw.data.TextFetcher
 import ch.orellbuehler.jackdaw.format.ImportError
+import ch.orellbuehler.jackdaw.format.ItemType
 import ch.orellbuehler.jackdaw.store.ImportPreview
 import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.SamplePack
@@ -99,7 +100,30 @@ class ImportViewModel(
             .map { packs -> packs.associate { it.id to it.revision } }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyMap())
 
-    val authoringPrompt: String by lazy { sdk.authoringPrompt() }
+    private val _promptTypes = MutableStateFlow(ItemType.entries.toSet())
+    val promptTypes: StateFlow<Set<ItemType>> = _promptTypes
+
+    private val _promptFigures = MutableStateFlow(false)
+    val promptFigures: StateFlow<Boolean> = _promptFigures
+
+    fun togglePromptType(type: ItemType) {
+        _promptTypes.update { types ->
+            when {
+                type !in types -> types + type
+                types.size > 1 -> types - type
+                else -> types
+            }
+        }
+    }
+
+    fun setPromptFigures(enabled: Boolean) {
+        _promptFigures.value = enabled
+    }
+
+    fun authoringPrompt(
+        types: Set<ItemType>,
+        figures: Boolean,
+    ): String = sdk.authoringPrompt(types.map { it.code }, figures)
 
     val installedIds: StateFlow<Set<String>> =
         sdk
