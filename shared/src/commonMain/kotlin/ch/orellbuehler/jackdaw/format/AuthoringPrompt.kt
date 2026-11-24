@@ -9,6 +9,8 @@ internal object AuthoringPrompt {
     private const val EXAMPLE_ITEMS_END = "  ]"
     private const val VERSION_WITH_FIGURES = "(required; the number 1, or the number 2 if any item has a \"figure\" or \"answerFigure\")"
     private const val VERSION_WITHOUT_FIGURES = "(required, always the number 1)"
+    private const val EXAMPLE_VERSION = "  \"version\": 2,"
+    private val exampleFigure = Regex("""^ +"(figure|answerFigure)": """)
 
     fun build(
         source: String,
@@ -45,14 +47,14 @@ internal object AuthoringPrompt {
                         items.last().second += lines[i++]
                     }
                     val kept =
-                        items.filter { it.first in types }.map {
-                            it.second
-                                .joinToString("\n")
-                                .trimEnd()
-                                .removeSuffix(",")
+                        items.filter { it.first in types }.map { item ->
+                            val plain = item.second.filterNot { !figures && exampleFigure.containsMatchIn(it) }
+                            val text = plain.joinToString("\n").trimEnd().removeSuffix(",")
+                            if (plain.size < item.second.size) "$text }" else text
                         }
                     out += kept.joinToString(",\n")
                 }
+                !figures && line == EXAMPLE_VERSION -> out += line.replace('2', '1')
                 else -> out += if (figures) line else line.replace(VERSION_WITH_FIGURES, VERSION_WITHOUT_FIGURES)
             }
         }

@@ -31,12 +31,12 @@ The item types:
 6. "order": put things in order, for sequences with one correct order. Required "prompt" (what to order and by which criterion) and "sequence": array of 2-20 DISTINCT strings in the CORRECT order (the app shuffles them). Do not put years or ranks that reveal the order into the entries.
 7. "open": open question, self-graded, for explanations and interview questions. Required "question". Optional "answer" (compact model answer) and "keyPoints" (array of 3-7 short strings: the checklist a good answer covers).
 
-FIGURES (optional; only when a drawing really helps: a map, a diagram, a formula, a process)
+FIGURES (drawings; add them wherever seeing it helps: a map, a diagram, a shape, a formula, a process, a timeline)
 Any item may have "figure" (shown with the question) and "answerFigure" (shown after answering, replaces "figure"). Each is an object {"alt": "what the drawing shows", "svg": "<svg ...>...</svg>"}.
 - "svg" is one complete, self-contained SVG document inside the JSON string. Use single quotes for all SVG attributes. The root needs xmlns='http://www.w3.org/2000/svg' and a viewBox, e.g. viewBox='0 0 240 160'. Keep it small and simple (a few hundred characters up to a few thousand).
 - Allowed: shapes, paths, text, gradients, clip paths, filters, a <style> element, and animation with <animate>, <animateTransform>, <animateMotion>, <set> or CSS @keyframes. NOT allowed: <script>, <foreignObject>, <a>, <image>, event attributes (onclick, onload, ...), external fonts, and any href or url() that is not a '#id' inside the same SVG. Write a literal < in a label as &lt;.
 - The figure is shown on a light or a dark background: use stroke='currentColor' / fill='currentColor' for lines and labels, plus colours that are readable on both. Font: font-family='sans-serif'.
-- The figure must not show the answer of its own question; put the labelled version into "answerFigure". A pack with a figure must say "version": 2 and opens only in apps that can show figures, so add one only where it is worth that.
+- The figure must not show the answer of its own question; put the labelled version into "answerFigure". A pack with a figure must say "version": 2.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.
@@ -57,7 +57,7 @@ EXAMPLE of the expected output (content is only an illustration):
 ```json pack
 {
   "format": "jackdaw-pack",
-  "version": 1,
+  "version": 2,
   "id": "pack.solar-system.4f7a2c",
   "title": "The Solar System",
   "description": "Basic facts about the Sun and the planets.",
@@ -66,7 +66,8 @@ EXAMPLE of the expected output (content is only an illustration):
   "sections": [{ "id": "basics", "title": "Basics" }],
   "study": { "newPerSession": 5 },
   "items": [
-    { "id": "largest-planet", "type": "card", "section": "basics", "front": "Largest planet in the Solar System", "back": "Jupiter", "distractors": ["Saturn", "Neptune", "Earth"] },
+    { "id": "largest-planet", "type": "card", "section": "basics", "front": "Largest planet in the Solar System", "back": "Jupiter", "distractors": ["Saturn", "Neptune", "Earth"],
+      "figure": { "alt": "The eight planets in a row, drawn to scale, the largest one filled", "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 230 56'><g fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='28' r='3'/><circle cx='26' cy='28' r='5'/><circle cx='44' cy='28' r='5'/><circle cx='60' cy='28' r='4'/><circle cx='148' cy='28' r='14'/><circle cx='184' cy='28' r='8'/><circle cx='212' cy='28' r='8'/></g><circle cx='96' cy='28' r='24' fill='#e8a33d'/></svg>" } },
     { "id": "red-planet", "type": "choice", "section": "basics", "question": "Which planet is called the Red Planet?",
       "options": [{ "text": "Mars", "correct": true }, { "text": "Venus" }, { "text": "Mercury", "explanation": "Mercury is grey and closest to the Sun." }] },
     { "id": "planet-count", "type": "text", "section": "basics", "question": "How many planets does the Solar System have?", "answers": ["8", "eight"] },
