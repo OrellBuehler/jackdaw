@@ -307,6 +307,7 @@
 "sync.footer" = "Synchronisiert werden Packs samt Inhalt, dein Lernverlauf, das Tagesziel und die Sitzungsgrösse. Darstellung und Einführung bleiben pro Gerät. Die Daten gehen nur in deine private iCloud, die nur du lesen kannst. Jackdaw hat keine eigenen Server.";
 "sync.last" = "Zuletzt synchronisiert: %@";
 "sync.never" = "nie";
+"sync.log.title" = "Sync-Protokoll";
 "sync.now" = "Jetzt synchronisieren";
 "sync.pending.one" = "%lld Änderung wartet auf das Senden";
 "sync.pending.other" = "%lld Änderungen warten auf das Senden";

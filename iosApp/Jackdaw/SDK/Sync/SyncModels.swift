@@ -66,6 +66,7 @@ struct SyncStatus: Sendable, Equatable {
     var lastSyncedAt: Date?
     var lastError: String?
     var pendingCount: Int
+    var log: [String] = []
 
     static let initial = SyncStatus(
         isEnabled: true,

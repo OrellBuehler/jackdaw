@@ -153,6 +153,18 @@ private struct SyncSettingsCard: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
+            if !status.log.isEmpty {
+                DisclosureGroup("sync.log.title") {
+                    Text(status.log.joined(separator: "\n"))
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundStyle(Brand.textSecondary)
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 6)
+                }
+                .font(.brand(.footnote, weight: .bold))
+                .tint(Brand.textSecondary)
+            }
             Text("sync.footer")
                 .font(.brand(.footnote))
                 .foregroundStyle(Brand.textSecondary)

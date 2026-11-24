@@ -62,6 +62,9 @@ Free, no ads, no account, no analytics, no servers of ours.
 | **Practice**         | Drill any items (mixed, flashcards, quiz or typing) without changing the schedule                                                                                                |
 | **Stats**            | Daily goal, streak, accuracy and an activity history                                                                                                                             |
 | **Add content**      | Open a `.jackdaw` file (also from Files, Mail or a chat), paste text, pick from the sample library (bundled, more on request from GitHub), or use "Create with AI"               |
+| **Packs from a link**| Add a pack from an https link, for example a public GitHub gist, and pull a newer version with "Update from link". Nothing is fetched on its own                                 |
+| **Organise**         | Put packs into your own groups (favourites, languages, ...) and archive the ones you are done with                                                                               |
+| **Edit**             | Change a pack's title and description, and edit, add or delete items on the device                                                                                               |
 | **Pack updates**     | Importing a newer revision of a pack keeps the progress on items that still exist ([spec section 4.2](format/README.md#42-updating-a-pack))                                      |
 | **Sync**             | iOS: the same packs, progress and goals on every device signed in to the same iCloud account. Android is local-only                                                              |
 | **Languages**        | English and German, light and dark theme                                                                                                                                         |
