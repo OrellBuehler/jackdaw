@@ -348,4 +348,26 @@
     <string name="error_item_invalid">This item is not valid.</string>
     <string name="error_pack_missing">This pack is no longer installed.</string>
     <string name="link_hint" translatable="false">https://gist.github.com/…</string>
+    <string name="menu_combine">Add items from another pack</string>
+    <string name="combine_pick">Choose the pack whose items you want to add to “%1$s”.</string>
+    <string name="combine_none">There are no other packs on this device yet.</string>
+    <string name="combine_nothing">Nothing to add: every item of “%1$s” is already in this pack.</string>
+    <string name="combine_note">“%1$s” stays as it is. The added items start as new in this pack.</string>
+    <string name="combine_confirm">Add items</string>
+    <plurals name="combine_added">
+        <item quantity="one">%d item will be added.</item>
+        <item quantity="other">%d items will be added.</item>
+    </plurals>
+    <plurals name="combine_duplicates">
+        <item quantity="one">%d item is skipped because this pack already has exactly the same one.</item>
+        <item quantity="other">%d items are skipped because this pack already has exactly the same ones.</item>
+    </plurals>
+    <plurals name="combine_sections">
+        <item quantity="one">%d section comes along with them.</item>
+        <item quantity="other">%d sections come along with them.</item>
+    </plurals>
+    <plurals name="combine_done">
+        <item quantity="one">%d item added</item>
+        <item quantity="other">%d items added</item>
+    </plurals>
 </resources>

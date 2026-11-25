@@ -149,6 +149,19 @@ sealed class ImportPreview {
     ) : ImportPreview()
 }
 
+sealed class CombinePreview {
+    data class Valid(
+        val otherTitle: String,
+        val addedCount: Int,
+        val duplicateCount: Int,
+        val sectionCount: Int,
+    ) : CombinePreview()
+
+    data class Invalid(
+        val error: ImportError,
+    ) : CombinePreview()
+}
+
 data class SamplePack(
     val id: String,
     val title: String,

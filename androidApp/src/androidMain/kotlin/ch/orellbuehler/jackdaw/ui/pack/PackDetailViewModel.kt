@@ -3,12 +3,15 @@ package ch.orellbuehler.jackdaw.ui.pack
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.orellbuehler.jackdaw.JackdawSdk
+import ch.orellbuehler.jackdaw.store.CombinePreview
 import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.PackDetail
+import ch.orellbuehler.jackdaw.store.PackSummary
 import ch.orellbuehler.jackdaw.study.SessionConfig
 import ch.orellbuehler.jackdaw.study.SessionPreview
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -38,6 +41,16 @@ class PackDetailViewModel(
                     PackDetailState.Ready(detail, sdk.previewSession(packId, SessionConfig.learn()))
                 }
             }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), PackDetailState.Loading)
+
+    val otherPacks: StateFlow<List<PackSummary>> =
+        sdk
+            .observePacks()
+            .map { packs -> packs.filter { it.id != packId } }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    suspend fun previewCombine(otherPackId: String): CombinePreview = sdk.previewCombine(packId, otherPackId)
+
+    suspend fun combine(otherPackId: String): ImportResult = sdk.combinePacks(packId, otherPackId)
 
     fun resetProgress() {
         viewModelScope.launch { sdk.resetProgress(packId) }

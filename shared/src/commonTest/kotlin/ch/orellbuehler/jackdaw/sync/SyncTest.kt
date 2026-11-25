@@ -2,6 +2,7 @@ package ch.orellbuehler.jackdaw.sync
 
 import ch.orellbuehler.jackdaw.FakeClock
 import ch.orellbuehler.jackdaw.JackdawSdk
+import ch.orellbuehler.jackdaw.store.CombinePreview
 import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.ItemStatus
 import ch.orellbuehler.jackdaw.store.ItemSummary
@@ -185,6 +186,29 @@ class SyncTest {
             )
             b.sdk.sync.apply(packs, emptyList(), emptyList())
             assertEquals(a.items(), b.items())
+        }
+
+    @Test
+    fun aCombinedPackReachesTheOtherDeviceWithItsProgress() =
+        runTest {
+            val a = device(1)
+            val b = device(2)
+            a.import(cardPack())
+            a.import(cardPack(id = "sync.other", cards = 5, title = "Other"))
+            converge(a, b)
+            clock.advanceMinutes(5)
+            b.study()
+            clock.advanceMinutes(5)
+            val shown = assertIs<CombinePreview.Valid>(a.sdk.previewCombine(PACK, "sync.other"))
+            assertEquals(2, shown.addedCount)
+            assertEquals(3, shown.duplicateCount)
+            assertIs<ImportResult.Success>(a.sdk.combinePacks(PACK, "sync.other"))
+            assertEquals(3 + 2, a.items().size)
+            converge(a, b)
+            assertEquals(a.items(), b.items())
+            assertEquals(a.sdk.exportPack(PACK), b.sdk.exportPack(PACK))
+            assertTrue(b.items().take(3).all { item -> item.facets.all { it.reps == 1 } })
+            assertTrue(b.items().drop(3).all { it.status == ItemStatus.NEW })
         }
 
     @Test
