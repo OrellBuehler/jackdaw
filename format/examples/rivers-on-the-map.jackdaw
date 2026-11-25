@@ -4267,9 +4267,11 @@
       "question": "Into which sea, gulf or ocean does the Murray flow?",
       "answers": [
         "Southern Ocean",
-        "The Southern Ocean"
+        "The Southern Ocean",
+        "Indian Ocean",
+        "Great Australian Bight"
       ],
-      "explanation": "The Murray ends in the Southern Ocean at Encounter Bay in South Australia.",
+      "explanation": "The Murray ends at Encounter Bay in South Australia. Australia counts these waters as the Southern Ocean; other definitions call them part of the Indian Ocean.",
       "answerMap": {
         "alt": "A map with a pin at the mouth of the Murray, labelled Southern Ocean.",
         "pins": [

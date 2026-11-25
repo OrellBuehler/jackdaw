@@ -446,7 +446,9 @@
         "Suleyman the Magnificent",
         "Süleyman the Magnificent",
         "Suleyman I",
-        "Süleyman I"
+        "Süleyman I",
+        "Suleiman",
+        "Suleyman"
       ],
       "hint": "An Ottoman sultan.",
       "explanation": "Ottoman sultan under whom the empire reached the height of its power; he died during a siege in Hungary. Born in Trabzon, died in Szigetvár in Hungary.",
@@ -1472,7 +1474,8 @@
         "JFK",
         "John Kennedy",
         "John F Kennedy",
-        "President Kennedy"
+        "President Kennedy",
+        "Kennedy"
       ],
       "hint": "A US president of the 20th century.",
       "explanation": "35th president of the United States, the youngest man ever elected to the office, who was assassinated in 1963. Born in Brookline near Boston, died in Dallas.",
@@ -1518,7 +1521,8 @@
       "alternatives": [
         "FDR",
         "Franklin Roosevelt",
-        "Franklin Delano Roosevelt"
+        "Franklin Delano Roosevelt",
+        "Roosevelt"
       ],
       "hint": "A US president of the 20th century.",
       "explanation": "The only US president elected four times, who led the country through the Great Depression and most of the Second World War. Born in Hyde Park in New York State, died in Warm Springs in Georgia.",
@@ -2985,7 +2989,8 @@
         "Maria Skłodowska",
         "Madame Curie",
         "Skłodowska-Curie",
-        "Sklodowska-Curie"
+        "Sklodowska-Curie",
+        "Curie"
       ],
       "hint": "A physicist and chemist who won two Nobel Prizes.",
       "explanation": "Polish-French physicist and chemist who discovered polonium and radium and won Nobel Prizes in both physics and chemistry. Born in Warsaw, died in Passy in the French Alps.",
