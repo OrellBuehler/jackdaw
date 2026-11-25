@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import ch.orellbuehler.jackdaw.R
 import ch.orellbuehler.jackdaw.format.RichText
 import ch.orellbuehler.jackdaw.format.TextSpan
+import ch.orellbuehler.jackdaw.study.AnswerKeyboard
 import ch.orellbuehler.jackdaw.study.ClozeAnswer
 import ch.orellbuehler.jackdaw.study.ClozeExercise
 import ch.orellbuehler.jackdaw.study.ClozeSegment
@@ -173,6 +174,7 @@ fun ClozeView(
                             GapField(
                                 value = answers.getOrElse(segment.index) { "" },
                                 hint = segment.hint,
+                                keyboard = segment.keyboard,
                                 index = segment.index,
                                 isLast = segment.index == exercise.gapCount - 1,
                                 focusRequester = if (segment.index == 0) first else null,
@@ -198,6 +200,7 @@ fun ClozeView(
 private fun GapField(
     value: String,
     hint: String?,
+    keyboard: AnswerKeyboard,
     index: Int,
     isLast: Boolean,
     focusRequester: FocusRequester?,
@@ -221,6 +224,7 @@ private fun GapField(
             KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
                 autoCorrectEnabled = false,
+                keyboardType = keyboard.keyboardType(),
                 imeAction = if (isLast) ImeAction.Done else ImeAction.Next,
             ),
         keyboardActions =

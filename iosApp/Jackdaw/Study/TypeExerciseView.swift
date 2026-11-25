@@ -52,6 +52,16 @@ struct TypeExerciseView: View {
             _ = try? await Task.sleep(nanoseconds: 400_000_000)
             focused = true
         }
+        .toolbar {
+            if feedback == nil && current.exercise.keyboard == .integer {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("common.done") {
+                        focused = false
+                    }
+                }
+            }
+        }
     }
 
     private var field: some View {
@@ -59,6 +69,7 @@ struct TypeExerciseView: View {
             .font(.brand(.title3, weight: .medium))
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
+            .keyboardType(current.exercise.keyboard.keyboardType)
             .submitLabel(.done)
             .focused($focused)
             .onSubmit {

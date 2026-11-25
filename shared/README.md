@@ -214,11 +214,13 @@ Every first answer is written to the database before `submit`/`selfGrade` return
 |---|---|---|---|
 | `FlipExercise(prompt)` | prompt, then "reveal" | `reveal()`, then `selfGrade(AGAIN/HARD/GOOD/EASY)` | self |
 | `ChoiceExercise(question, options, multiSelect)` | options as radio buttons / checkboxes (`multiSelect`: "select all that apply") | `submit(ChoiceAnswer(selectedIds))` (option ids) | the selected set must equal the correct set |
-| `TypeExercise(prompt)` | text field | `submit(TextAnswer(text))` | spec section 9 normal form; empty is wrong |
-| `ClozeExercise(segments, gapCount)` | `ClozeSegment.Text(text: RichText)` and `ClozeSegment.Gap(index, hint)` inline, all gaps at once | `submit(ClozeAnswer(gaps))` (`gaps[i]` answers gap `index == i`) | every gap must match (`hint` is plain text shown with the gap) |
+| `TypeExercise(prompt, keyboard)` | text field (`keyboard`: see below) | `submit(TextAnswer(text))` | spec section 9 normal form; empty is wrong |
+| `ClozeExercise(segments, gapCount)` | `ClozeSegment.Text(text: RichText)` and `ClozeSegment.Gap(index, hint, keyboard)` inline, all gaps at once | `submit(ClozeAnswer(gaps))` (`gaps[i]` answers gap `index == i`) | every gap must match (`hint` is plain text shown with the gap) |
 | `TrueFalseExercise(statement)` | two buttons | `submit(TrueFalseAnswer(value))` | |
 | `OrderExercise(prompt, entries)` | entries (already shuffled, never in the right order), user arranges | `submit(OrderAnswer(entryIds))` (all entry ids in the arranged order) | position by position |
 | `OpenExercise(question)` | question, "reveal" | `reveal()`, then `selfGrade(grade)` | self (use `feedback.suggestedGrade(tickedKeyPoints)` as the default) |
+
+`keyboard` (`AnswerKeyboard`) is a hint for the on-screen keyboard of a typed answer, derived from the canonical answer only (the first accepted one): `INTEGER` when it is only ASCII digits (numeric keypad), `DECIMAL` when it is digits with `.` or `,` separators or has a leading `-` or `+` (decimal or punctuation keypad that has those characters), otherwise `TEXT`. It never changes grading. The pack format has no number input type.
 
 Every exercise has `itemId`, `facet` and `type: ExerciseType`.
 

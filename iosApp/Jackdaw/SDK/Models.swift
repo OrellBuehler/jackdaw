@@ -411,9 +411,15 @@ struct OptionInfo: Identifiable, Hashable, Sendable {
     let text: StyledText
 }
 
+enum AnswerKeyboardInfo: Hashable, Sendable {
+    case text
+    case integer
+    case decimal
+}
+
 enum ClozeSegmentInfo: Hashable, Sendable {
     case text(StyledText)
-    case gap(index: Int, hint: String?)
+    case gap(index: Int, hint: String?, keyboard: AnswerKeyboardInfo)
 }
 
 enum ExerciseKind: Hashable, Sendable {
@@ -434,6 +440,7 @@ struct ExerciseInfo: Hashable, Sendable {
     let multiSelect: Bool
     let segments: [ClozeSegmentInfo]
     let gapCount: Int
+    var keyboard: AnswerKeyboardInfo = .text
 }
 
 struct FigureInfo: Hashable, Sendable {

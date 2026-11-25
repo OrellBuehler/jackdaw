@@ -25,8 +25,10 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import ch.orellbuehler.jackdaw.R
+import ch.orellbuehler.jackdaw.study.AnswerKeyboard
 import ch.orellbuehler.jackdaw.study.SessionState
 import ch.orellbuehler.jackdaw.study.TextAnswer
 import ch.orellbuehler.jackdaw.study.TypeExercise
@@ -91,6 +93,7 @@ fun TypeView(
                 KeyboardOptions(
                     capitalization = KeyboardCapitalization.None,
                     autoCorrectEnabled = false,
+                    keyboardType = exercise.keyboard.keyboardType(),
                     imeAction = ImeAction.Done,
                 ),
             keyboardActions = KeyboardActions(onDone = { if (text.isNotBlank() && feedback == null) actions.submit(TextAnswer(text)) }),
@@ -121,3 +124,10 @@ fun TypeView(
         }
     }
 }
+
+fun AnswerKeyboard.keyboardType(): KeyboardType =
+    when (this) {
+        AnswerKeyboard.TEXT -> KeyboardType.Text
+        AnswerKeyboard.INTEGER -> KeyboardType.Number
+        AnswerKeyboard.DECIMAL -> KeyboardType.Decimal
+    }
