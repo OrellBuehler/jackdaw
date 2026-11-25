@@ -1,0 +1,5650 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 3,
+  "id": "com.github.orellbuehler.jackdaw.examples.history-on-the-map",
+  "title": "History on the Map",
+  "description": "124 turning points of world history, from the Battle of Marathon to the 2008 Sichuan earthquake. You see a pin on the world map and a year and name the event; after the answer the map shows the place. Mostly multiple choice, with typed answers for the shorter names, and a last chapter of 31 questions that asks where it happened.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://www.wikidata.org",
+  "tags": [
+    "history",
+    "geography",
+    "maps",
+    "events",
+    "world"
+  ],
+  "icon": "📍",
+  "color": "#B45309",
+  "revision": 1,
+  "created": "2026-11-25",
+  "updated": "2026-11-25",
+  "sections": [
+    {
+      "id": "antiquity",
+      "title": "Antiquity",
+      "description": "From the Bronze Age to the fall of Rome."
+    },
+    {
+      "id": "middle-ages",
+      "title": "The Middle Ages",
+      "description": "From 500 to 1500."
+    },
+    {
+      "id": "early-modern",
+      "title": "The early modern world",
+      "description": "From 1500 to 1800: empires, voyages and revolutions."
+    },
+    {
+      "id": "nineteenth",
+      "title": "Revolutions and empires",
+      "description": "From 1800 to 1899."
+    },
+    {
+      "id": "ww1",
+      "title": "1900 to 1918",
+      "description": "Empires at war and a world in revolt."
+    },
+    {
+      "id": "interwar",
+      "title": "Between the wars",
+      "description": "From 1919 to 1938."
+    },
+    {
+      "id": "ww2",
+      "title": "The Second World War",
+      "description": "From 1939 to 1945."
+    },
+    {
+      "id": "postwar",
+      "title": "Since 1946",
+      "description": "From the end of the Second World War to today."
+    },
+    {
+      "id": "where",
+      "title": "Where did it happen?",
+      "description": "The same events seen from the other side: name the city, country or region."
+    }
+  ],
+  "study": {
+    "order": "sequential",
+    "newPerSession": 6,
+    "ignoreDiacritics": true,
+    "exercises": {
+      "card": [
+        "flip",
+        "choice"
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "thera",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **c. 1600 BCE**?",
+      "back": "Minoan eruption of Thera",
+      "alternatives": [
+        "Minoan eruption",
+        "Eruption of Thera",
+        "Santorini eruption",
+        "Eruption of Santorini",
+        "Thera eruption"
+      ],
+      "distractors": [
+        "Eruption of Mount Vesuvius",
+        "1556 Shaanxi earthquake",
+        "Great Fire of London"
+      ],
+      "hint": "A volcanic eruption.",
+      "explanation": "One of the largest volcanic eruptions in human history blew apart the island of Thera, today Santorini in the Aegean Sea, and buried a Bronze Age town at Akrotiri.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 36.404,
+            "lng": 25.396
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Thera (Santorini).",
+        "pins": [
+          {
+            "lat": 36.404,
+            "lng": 25.396,
+            "label": "Thera (Santorini)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kadesh",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **c. 1274 BCE**?",
+      "back": "Battle of Kadesh",
+      "alternatives": [
+        "Kadesh",
+        "Qadesh",
+        "Battle of Qadesh"
+      ],
+      "distractors": [
+        "Battle of Marathon",
+        "Battle of Salamis",
+        "Battle of Thermopylae"
+      ],
+      "hint": "A chariot battle.",
+      "explanation": "Pharaoh Ramesses II fought the Hittite king Muwatalli II near the city of Kadesh on the Orontes river, in one of the largest chariot battles ever, in what is now Syria.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 34.567,
+            "lng": 36.517
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Kadesh.",
+        "pins": [
+          {
+            "lat": 34.567,
+            "lng": 36.517,
+            "label": "Kadesh"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marathon",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **490 BCE**?",
+      "back": "Battle of Marathon",
+      "alternatives": [
+        "Marathon"
+      ],
+      "distractors": [
+        "Battle of Salamis",
+        "Battle of Thermopylae",
+        "Battle of Gaugamela"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "The Athenians and their Plataean allies defeated a Persian landing force on the plain of Marathon, north-east of Athens, ending the first Persian invasion of Greece.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 38.15,
+            "lng": 23.96
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Marathon.",
+        "pins": [
+          {
+            "lat": 38.15,
+            "lng": 23.96,
+            "label": "Marathon"
+          }
+        ]
+      }
+    },
+    {
+      "id": "thermopylae",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **480 BCE**?",
+      "back": "Battle of Thermopylae",
+      "alternatives": [
+        "Thermopylae"
+      ],
+      "distractors": [
+        "Battle of Marathon",
+        "Battle of Salamis",
+        "Battle of Gaugamela"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "A small Greek force under King Leonidas of Sparta held the narrow coastal pass of Thermopylae against the huge Persian army of Xerxes until it was outflanked.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 38.797,
+            "lng": 22.536
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Thermopylae.",
+        "pins": [
+          {
+            "lat": 38.797,
+            "lng": 22.536,
+            "label": "Thermopylae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "salamis",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **480 BCE**?",
+      "back": "Battle of Salamis",
+      "alternatives": [
+        "Salamis"
+      ],
+      "distractors": [
+        "Battle of Thermopylae",
+        "Battle of Marathon",
+        "Battle of Gaugamela"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "A Greek fleet lured the larger Persian fleet of Xerxes into the narrow strait between the island of Salamis and the Attic coast and destroyed much of it.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 37.94,
+            "lng": 23.55
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Strait of Salamis.",
+        "pins": [
+          {
+            "lat": 37.94,
+            "lng": 23.55,
+            "label": "Strait of Salamis"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaugamela",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **331 BCE**?",
+      "back": "Battle of Gaugamela",
+      "alternatives": [
+        "Gaugamela",
+        "Battle of Arbela"
+      ],
+      "distractors": [
+        "Battle of Cannae",
+        "Battle of Thermopylae",
+        "Battle of Salamis"
+      ],
+      "hint": "A battle.",
+      "explanation": "Alexander the Great defeated the Persian king Darius III on a plain in what is now northern Iraq, which sealed the fall of the Achaemenid Empire.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 36.36,
+            "lng": 43.25
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Gaugamela.",
+        "pins": [
+          {
+            "lat": 36.36,
+            "lng": 43.25,
+            "label": "Gaugamela"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cannae",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **216 BCE**?",
+      "back": "Battle of Cannae",
+      "alternatives": [
+        "Cannae"
+      ],
+      "distractors": [
+        "Battle of Gaugamela",
+        "Battle of Alesia",
+        "Battle of Actium"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Hannibal's Carthaginian army encircled and destroyed a much larger Roman army near Cannae in southern Italy, one of the worst defeats in Roman history.",
+      "map": {
+        "alt": "A world map with a pin in Italy.",
+        "pins": [
+          {
+            "lat": 41.304,
+            "lng": 16.133
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Cannae.",
+        "pins": [
+          {
+            "lat": 41.304,
+            "lng": 16.133,
+            "label": "Cannae"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alesia",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **52 BCE**?",
+      "back": "Battle of Alesia",
+      "alternatives": [
+        "Alesia",
+        "Siege of Alesia"
+      ],
+      "distractors": [
+        "Battle of Actium",
+        "Battle of the Teutoburg Forest",
+        "Siege of Jerusalem (70 CE)"
+      ],
+      "hint": "A siege.",
+      "explanation": "Julius Caesar besieged the Gallic leader Vercingetorix in the hill fort of Alesia in central Gaul and beat a Gallic relief army, ending serious Gallic resistance to Rome.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 47.538,
+            "lng": 4.5
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Alesia.",
+        "pins": [
+          {
+            "lat": 47.538,
+            "lng": 4.5,
+            "label": "Alesia"
+          }
+        ]
+      }
+    },
+    {
+      "id": "caesar-assassination",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **44 BCE**?",
+      "back": "Assassination of Julius Caesar",
+      "alternatives": [
+        "Murder of Julius Caesar",
+        "Assassination of Caesar",
+        "Caesar's assassination",
+        "Ides of March"
+      ],
+      "distractors": [
+        "Gunpowder Plot",
+        "Assassination of Abraham Lincoln",
+        "Assassination of Archduke Franz Ferdinand"
+      ],
+      "hint": "A political assassination.",
+      "explanation": "A group of senators stabbed Julius Caesar to death on the Ides of March in a hall beside the Theatre of Pompey in Rome.",
+      "map": {
+        "alt": "A world map with a pin in Italy.",
+        "pins": [
+          {
+            "lat": 41.8957,
+            "lng": 12.4768
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Rome.",
+        "pins": [
+          {
+            "lat": 41.8957,
+            "lng": 12.4768,
+            "label": "Rome"
+          }
+        ]
+      }
+    },
+    {
+      "id": "actium",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **31 BCE**?",
+      "back": "Battle of Actium",
+      "alternatives": [
+        "Actium"
+      ],
+      "distractors": [
+        "Battle of Alesia",
+        "Battle of the Teutoburg Forest",
+        "Siege of Jerusalem (70 CE)"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "Octavian's fleet defeated the navy of Mark Antony and Cleopatra off the western coast of Greece, which left him master of the Roman world.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 38.94,
+            "lng": 20.73
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Actium.",
+        "pins": [
+          {
+            "lat": 38.94,
+            "lng": 20.73,
+            "label": "Actium"
+          }
+        ]
+      }
+    },
+    {
+      "id": "teutoburg",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **9 CE**?",
+      "back": "Battle of the Teutoburg Forest",
+      "alternatives": [
+        "Teutoburg Forest",
+        "Battle of Teutoburg Forest",
+        "Varus Battle"
+      ],
+      "distractors": [
+        "Battle of Alesia",
+        "Battle of Actium",
+        "Siege of Jerusalem (70 CE)"
+      ],
+      "hint": "An ambush.",
+      "explanation": "Germanic tribes under Arminius ambushed and wiped out three Roman legions led by Varus, which ended Roman expansion east of the Rhine.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 52.405,
+            "lng": 8.125
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Kalkriese.",
+        "pins": [
+          {
+            "lat": 52.405,
+            "lng": 8.125,
+            "label": "Kalkriese"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jerusalem-70",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **70 CE**?",
+      "back": "Siege of Jerusalem (70 CE)",
+      "alternatives": [
+        "Siege of Jerusalem 70",
+        "Destruction of the Second Temple",
+        "Destruction of the Temple",
+        "Siege of Jerusalem (70)"
+      ],
+      "distractors": [
+        "Battle of the Teutoburg Forest",
+        "Battle of Actium",
+        "Battle of Alesia"
+      ],
+      "hint": "A siege.",
+      "explanation": "Roman legions under Titus took Jerusalem after a siege of several months and destroyed the Second Temple, crushing the Jewish revolt.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 31.778,
+            "lng": 35.235
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Jerusalem.",
+        "pins": [
+          {
+            "lat": 31.778,
+            "lng": 35.235,
+            "label": "Jerusalem"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vesuvius",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **79 CE**?",
+      "back": "Eruption of Mount Vesuvius",
+      "alternatives": [
+        "Vesuvius",
+        "Eruption of Vesuvius",
+        "Mount Vesuvius eruption",
+        "Eruption of Mount Vesuvius in 79",
+        "Eruption of Vesuvius in 79"
+      ],
+      "distractors": [
+        "1556 Shaanxi earthquake",
+        "Great Fire of London",
+        "1755 Lisbon earthquake"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A volcanic eruption.",
+      "explanation": "The eruption buried the Roman towns of Pompeii and Herculaneum near the Bay of Naples under ash and pumice.",
+      "map": {
+        "alt": "A world map with a pin in Italy.",
+        "pins": [
+          {
+            "lat": 40.821,
+            "lng": 14.426
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Mount Vesuvius.",
+        "pins": [
+          {
+            "lat": 40.821,
+            "lng": 14.426,
+            "label": "Mount Vesuvius"
+          }
+        ]
+      }
+    },
+    {
+      "id": "red-cliffs",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **208 CE**?",
+      "back": "Battle of Red Cliffs",
+      "alternatives": [
+        "Red Cliffs",
+        "Battle of Chibi",
+        "Chibi"
+      ],
+      "distractors": [
+        "Battle of the Milvian Bridge",
+        "Siege of Jerusalem (70 CE)",
+        "Battle of the Teutoburg Forest"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "The warlords Sun Quan and Liu Bei beat the much larger fleet of Cao Cao on the Yangtze river, which kept China divided into three kingdoms.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 29.72,
+            "lng": 113.88
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Red Cliffs (Chibi).",
+        "pins": [
+          {
+            "lat": 29.72,
+            "lng": 113.88,
+            "label": "Red Cliffs (Chibi)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "milvian-bridge",
+      "type": "card",
+      "section": "antiquity",
+      "front": "Which event took place here in **312 CE**?",
+      "back": "Battle of the Milvian Bridge",
+      "alternatives": [
+        "Milvian Bridge"
+      ],
+      "distractors": [
+        "Battle of Red Cliffs",
+        "Siege of Jerusalem (70 CE)",
+        "Battle of the Teutoburg Forest"
+      ],
+      "hint": "A battle.",
+      "explanation": "Constantine defeated his rival Maxentius at a bridge over the Tiber just north of Rome and went on to favour Christianity.",
+      "map": {
+        "alt": "A world map with a pin in Italy.",
+        "pins": [
+          {
+            "lat": 41.9314,
+            "lng": 12.4714
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Milvian Bridge.",
+        "pins": [
+          {
+            "lat": 41.9314,
+            "lng": 12.4714,
+            "label": "Milvian Bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "badr",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **624**?",
+      "back": "Battle of Badr",
+      "alternatives": [
+        "Badr"
+      ],
+      "distractors": [
+        "Battle of Karbala",
+        "Battle of the Milvian Bridge",
+        "Battle of Red Cliffs"
+      ],
+      "hint": "A battle.",
+      "explanation": "The first major battle between the Muslims of Medina under Muhammad and the Quraysh of Mecca was fought near the wells of Badr in western Arabia.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 23.74,
+            "lng": 38.78
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Badr.",
+        "pins": [
+          {
+            "lat": 23.74,
+            "lng": 38.78,
+            "label": "Badr"
+          }
+        ]
+      }
+    },
+    {
+      "id": "karbala",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **680**?",
+      "back": "Battle of Karbala",
+      "alternatives": [
+        "Karbala"
+      ],
+      "distractors": [
+        "Battle of Badr",
+        "Battle of the Milvian Bridge",
+        "Battle of Hastings"
+      ],
+      "hint": "A battle.",
+      "explanation": "Husayn ibn Ali, a grandson of Muhammad, and his small band of followers were killed by the army of the Umayyad caliph Yazid at Karbala in present-day Iraq, an event central to Shia Islam.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 32.616,
+            "lng": 44.024
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Karbala.",
+        "pins": [
+          {
+            "lat": 32.616,
+            "lng": 44.024,
+            "label": "Karbala"
+          }
+        ]
+      }
+    },
+    {
+      "id": "treaty-verdun",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **843**?",
+      "back": "Treaty of Verdun",
+      "alternatives": [
+        "Treaty of Verdun (843)",
+        "Treaty of Verdun 843"
+      ],
+      "distractors": [
+        "Congress of Vienna",
+        "Convention of Kanagawa",
+        "Treaty of Shimonoseki"
+      ],
+      "hint": "A treaty.",
+      "explanation": "Charlemagne's three surviving grandsons divided the Carolingian empire into a western, a middle and an eastern kingdom, in a treaty signed at Verdun in north-eastern France.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 49.16,
+            "lng": 5.385
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Verdun.",
+        "pins": [
+          {
+            "lat": 49.16,
+            "lng": 5.385,
+            "label": "Verdun"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hastings",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1066**?",
+      "back": "Battle of Hastings",
+      "alternatives": [
+        "Hastings"
+      ],
+      "distractors": [
+        "Battle of Manzikert",
+        "Siege of Jerusalem (1099)",
+        "Battle of Dan-no-ura"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "William of Normandy defeated King Harold II of England on Senlac Hill, at the site of today's town of Battle, and was crowned king of England at Christmas.",
+      "map": {
+        "alt": "A world map with a pin in the British Isles.",
+        "pins": [
+          {
+            "lat": 50.914,
+            "lng": 0.488
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Battle (Hastings).",
+        "pins": [
+          {
+            "lat": 50.914,
+            "lng": 0.488,
+            "label": "Battle (Hastings)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "manzikert",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1071**?",
+      "back": "Battle of Manzikert",
+      "alternatives": [
+        "Manzikert",
+        "Malazgirt"
+      ],
+      "distractors": [
+        "Battle of Hastings",
+        "Siege of Jerusalem (1099)",
+        "Battle of Hattin"
+      ],
+      "hint": "A battle.",
+      "explanation": "Seljuk Turks under Alp Arslan defeated and captured the Byzantine emperor Romanos IV in eastern Anatolia, which opened the region to Turkish settlement.",
+      "map": {
+        "alt": "A world map with a pin in Turkey.",
+        "pins": [
+          {
+            "lat": 39.144,
+            "lng": 42.539
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Manzikert.",
+        "pins": [
+          {
+            "lat": 39.144,
+            "lng": 42.539,
+            "label": "Manzikert"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jerusalem-1099",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1099**?",
+      "back": "Siege of Jerusalem (1099)",
+      "alternatives": [
+        "Siege of Jerusalem 1099",
+        "Capture of Jerusalem",
+        "First Crusade capture of Jerusalem"
+      ],
+      "distractors": [
+        "Battle of Manzikert",
+        "Battle of Hastings",
+        "Battle of Dan-no-ura"
+      ],
+      "hint": "A siege.",
+      "explanation": "The crusaders of the First Crusade stormed Jerusalem after a siege of about five weeks and founded the Kingdom of Jerusalem.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 31.778,
+            "lng": 35.235
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Jerusalem.",
+        "pins": [
+          {
+            "lat": 31.778,
+            "lng": 35.235,
+            "label": "Jerusalem"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dan-no-ura",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1185**?",
+      "back": "Battle of Dan-no-ura",
+      "alternatives": [
+        "Dan-no-ura",
+        "Dannoura",
+        "Dan no Ura"
+      ],
+      "distractors": [
+        "Battle of Hattin",
+        "Battle of Las Navas de Tolosa",
+        "Siege of Baghdad (1258)"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "In a sea battle in the Kanmon Strait the Minamoto clan destroyed the Taira clan, ending the Genpei War and paving the way for the first shogunate.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 33.96,
+            "lng": 130.93
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Dan-no-ura.",
+        "pins": [
+          {
+            "lat": 33.96,
+            "lng": 130.93,
+            "label": "Dan-no-ura"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hattin",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1187**?",
+      "back": "Battle of Hattin",
+      "alternatives": [
+        "Hattin",
+        "Horns of Hattin"
+      ],
+      "distractors": [
+        "Battle of Dan-no-ura",
+        "Battle of Las Navas de Tolosa",
+        "Siege of Baghdad (1258)"
+      ],
+      "hint": "A battle.",
+      "explanation": "Saladin destroyed the army of the Crusader Kingdom of Jerusalem near the Sea of Galilee and recaptured Jerusalem a few months later.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 32.8,
+            "lng": 35.45
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Horns of Hattin.",
+        "pins": [
+          {
+            "lat": 32.8,
+            "lng": 35.45,
+            "label": "Horns of Hattin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "las-navas",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1212**?",
+      "back": "Battle of Las Navas de Tolosa",
+      "alternatives": [
+        "Las Navas de Tolosa"
+      ],
+      "distractors": [
+        "Battle of Dan-no-ura",
+        "Battle of Ain Jalut",
+        "Battle of Hattin"
+      ],
+      "hint": "A battle.",
+      "explanation": "A coalition of Christian kingdoms led by Alfonso VIII of Castile defeated the Almohad caliphate in the Sierra Morena in southern Spain, a turning point of the Reconquista.",
+      "map": {
+        "alt": "A world map with a pin in the Iberian Peninsula.",
+        "pins": [
+          {
+            "lat": 38.29,
+            "lng": -3.58
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Las Navas de Tolosa.",
+        "pins": [
+          {
+            "lat": 38.29,
+            "lng": -3.58,
+            "label": "Las Navas de Tolosa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "baghdad-1258",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1258**?",
+      "back": "Siege of Baghdad (1258)",
+      "alternatives": [
+        "Siege of Baghdad",
+        "Fall of Baghdad",
+        "Sack of Baghdad",
+        "Siege of Baghdad 1258"
+      ],
+      "distractors": [
+        "Mongol invasions of Japan",
+        "Battle of Ain Jalut",
+        "Battle of Hattin"
+      ],
+      "hint": "A siege.",
+      "explanation": "A Mongol army under Hulagu Khan took and sacked Baghdad and killed the last Abbasid caliph in Baghdad, ending the Abbasid caliphate.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 33.31,
+            "lng": 44.36
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Baghdad.",
+        "pins": [
+          {
+            "lat": 33.31,
+            "lng": 44.36,
+            "label": "Baghdad"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ain-jalut",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1260**?",
+      "back": "Battle of Ain Jalut",
+      "alternatives": [
+        "Ain Jalut",
+        "Ayn Jalut"
+      ],
+      "distractors": [
+        "Siege of Baghdad (1258)",
+        "Mongol invasions of Japan",
+        "Battle of Las Navas de Tolosa"
+      ],
+      "hint": "A battle.",
+      "explanation": "The Egyptian Mamluks defeated a Mongol army in the Jezreel Valley, the first major defeat of the Mongols in the Middle East.",
+      "map": {
+        "alt": "A world map with a pin in the Middle East.",
+        "pins": [
+          {
+            "lat": 32.55,
+            "lng": 35.36
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Ain Jalut.",
+        "pins": [
+          {
+            "lat": 32.55,
+            "lng": 35.36,
+            "label": "Ain Jalut"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mongol-japan",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1274**?",
+      "back": "Mongol invasions of Japan",
+      "alternatives": [
+        "Mongol invasion of Japan",
+        "Mongol invasions",
+        "Kamikaze"
+      ],
+      "distractors": [
+        "Battle of Ain Jalut",
+        "Siege of Baghdad (1258)",
+        "Battle of Las Navas de Tolosa"
+      ],
+      "hint": "A failed invasion.",
+      "explanation": "Kublai Khan's fleets landed at Hakata Bay in northern Kyushu in 1274 and again in 1281 but were driven off, and the storm that wrecked the second fleet became known as the divine wind, kamikaze.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 33.65,
+            "lng": 130.35
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Hakata Bay.",
+        "pins": [
+          {
+            "lat": 33.65,
+            "lng": 130.35,
+            "label": "Hakata Bay"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kulikovo",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1380**?",
+      "back": "Battle of Kulikovo",
+      "alternatives": [
+        "Kulikovo",
+        "Kulikovo Field"
+      ],
+      "distractors": [
+        "Battle of Agincourt",
+        "Battle of Grunwald",
+        "Siege of Orléans"
+      ],
+      "hint": "A battle.",
+      "explanation": "Grand Prince Dmitry of Moscow defeated a Mongol-Tatar army under Mamai on the upper Don, the first big Russian victory over the Golden Horde.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 53.65,
+            "lng": 38.65
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Kulikovo Field.",
+        "pins": [
+          {
+            "lat": 53.65,
+            "lng": 38.65,
+            "label": "Kulikovo Field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grunwald",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1410**?",
+      "back": "Battle of Grunwald",
+      "alternatives": [
+        "Grunwald",
+        "Battle of Tannenberg (1410)"
+      ],
+      "distractors": [
+        "Battle of Agincourt",
+        "Siege of Orléans",
+        "Battle of Kulikovo"
+      ],
+      "hint": "A battle.",
+      "explanation": "A Polish-Lithuanian army under King Władysław II Jagiełło and Grand Duke Vytautas crushed the Teutonic Knights in one of the largest battles of medieval Europe.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 53.485,
+            "lng": 20.124
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Grunwald.",
+        "pins": [
+          {
+            "lat": 53.485,
+            "lng": 20.124,
+            "label": "Grunwald"
+          }
+        ]
+      }
+    },
+    {
+      "id": "agincourt",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1415**?",
+      "back": "Battle of Agincourt",
+      "alternatives": [
+        "Agincourt",
+        "Azincourt"
+      ],
+      "distractors": [
+        "Battle of Grunwald",
+        "Siege of Orléans",
+        "Battle of Kulikovo"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Henry V's outnumbered English army, mostly longbowmen, defeated a much larger French army on a muddy field in northern France.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 50.462,
+            "lng": 2.14
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Agincourt.",
+        "pins": [
+          {
+            "lat": 50.462,
+            "lng": 2.14,
+            "label": "Agincourt"
+          }
+        ]
+      }
+    },
+    {
+      "id": "orleans",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1428-1429**?",
+      "back": "Siege of Orléans",
+      "alternatives": [
+        "Orléans",
+        "Orleans",
+        "Siege of Orleans"
+      ],
+      "distractors": [
+        "Battle of Agincourt",
+        "Battle of Grunwald",
+        "Fall of Constantinople"
+      ],
+      "hint": "A siege.",
+      "explanation": "Joan of Arc led the French relief of Orléans, which the English had besieged since October 1428, and lifted the siege in May 1429.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 47.9,
+            "lng": 1.9
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Orléans.",
+        "pins": [
+          {
+            "lat": 47.9,
+            "lng": 1.9,
+            "label": "Orléans"
+          }
+        ]
+      }
+    },
+    {
+      "id": "constantinople",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1453**?",
+      "back": "Fall of Constantinople",
+      "alternatives": [
+        "Siege of Constantinople",
+        "Conquest of Constantinople",
+        "Fall of Constantinople (1453)"
+      ],
+      "distractors": [
+        "Battle of Agincourt",
+        "Battle of Bosworth Field",
+        "Siege of Orléans"
+      ],
+      "hint": "A siege.",
+      "explanation": "Ottoman forces under Sultan Mehmed II took Constantinople on 29 May after a siege of about seven weeks, ending the Byzantine Empire; the city, now Istanbul, became the Ottoman capital.",
+      "map": {
+        "alt": "A world map with a pin in Turkey.",
+        "pins": [
+          {
+            "lat": 41.012,
+            "lng": 28.945
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Constantinople.",
+        "pins": [
+          {
+            "lat": 41.012,
+            "lng": 28.945,
+            "label": "Constantinople"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bosworth",
+      "type": "card",
+      "section": "middle-ages",
+      "front": "Which event took place here in **1485**?",
+      "back": "Battle of Bosworth Field",
+      "alternatives": [
+        "Bosworth Field",
+        "Battle of Bosworth",
+        "Bosworth"
+      ],
+      "distractors": [
+        "Fall of Constantinople",
+        "Battle of Diu",
+        "Battle of Mactan"
+      ],
+      "hint": "A battle.",
+      "explanation": "Henry Tudor defeated and killed King Richard III in Leicestershire, ending the Wars of the Roses and beginning the Tudor dynasty.",
+      "map": {
+        "alt": "A world map with a pin in the British Isles.",
+        "pins": [
+          {
+            "lat": 52.58,
+            "lng": -1.42
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Bosworth Field.",
+        "pins": [
+          {
+            "lat": 52.58,
+            "lng": -1.42,
+            "label": "Bosworth Field"
+          }
+        ]
+      }
+    },
+    {
+      "id": "diu",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1509**?",
+      "back": "Battle of Diu",
+      "alternatives": [
+        "Diu"
+      ],
+      "distractors": [
+        "Battle of Mactan",
+        "Battle of Bosworth Field",
+        "Fall of Tenochtitlan"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "A Portuguese fleet defeated a combined Egyptian, Gujarati and Calicut fleet off Diu on the Indian coast, securing Portuguese control of the Indian Ocean trade routes.",
+      "map": {
+        "alt": "A world map with a pin in South Asia.",
+        "pins": [
+          {
+            "lat": 20.71,
+            "lng": 70.99
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Diu.",
+        "pins": [
+          {
+            "lat": 20.71,
+            "lng": 70.99,
+            "label": "Diu"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tenochtitlan",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1521**?",
+      "back": "Fall of Tenochtitlan",
+      "alternatives": [
+        "Siege of Tenochtitlan",
+        "Conquest of Tenochtitlan",
+        "Fall of Tenochtitlán"
+      ],
+      "distractors": [
+        "Battle of Cajamarca",
+        "Battle of Diu",
+        "Battle of Mactan"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A siege.",
+      "explanation": "Hernán Cortés and his Spanish and indigenous allies captured the Aztec capital Tenochtitlan after a siege of about three months; Mexico City was later built on its ruins.",
+      "map": {
+        "alt": "A world map with a pin in Mexico.",
+        "pins": [
+          {
+            "lat": 19.435,
+            "lng": -99.132
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Tenochtitlan.",
+        "pins": [
+          {
+            "lat": 19.435,
+            "lng": -99.132,
+            "label": "Tenochtitlan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mactan",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1521**?",
+      "back": "Battle of Mactan",
+      "alternatives": [
+        "Mactan"
+      ],
+      "distractors": [
+        "Fall of Tenochtitlan",
+        "Battle of Diu",
+        "Battle of Cajamarca"
+      ],
+      "hint": "A battle.",
+      "explanation": "Ferdinand Magellan was killed by warriors of the chief Lapulapu on the shore of Mactan island in the Philippines, during the first voyage round the world.",
+      "map": {
+        "alt": "A world map with a pin in South-East Asia.",
+        "pins": [
+          {
+            "lat": 10.31,
+            "lng": 124.0
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Mactan.",
+        "pins": [
+          {
+            "lat": 10.31,
+            "lng": 124.0,
+            "label": "Mactan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "panipat-1526",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1526**?",
+      "back": "Battle of Panipat (1526)",
+      "alternatives": [
+        "First Battle of Panipat",
+        "Battle of Panipat",
+        "Panipat"
+      ],
+      "distractors": [
+        "Battle of Mactan",
+        "Fall of Tenochtitlan",
+        "Battle of Diu"
+      ],
+      "hint": "A battle.",
+      "explanation": "Babur's smaller army, with firearms and artillery, defeated the Sultan of Delhi Ibrahim Lodi at Panipat and founded the Mughal Empire.",
+      "map": {
+        "alt": "A world map with a pin in South Asia.",
+        "pins": [
+          {
+            "lat": 29.39,
+            "lng": 76.97
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Panipat.",
+        "pins": [
+          {
+            "lat": 29.39,
+            "lng": 76.97,
+            "label": "Panipat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cajamarca",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1532**?",
+      "back": "Battle of Cajamarca",
+      "alternatives": [
+        "Cajamarca",
+        "Capture of Atahualpa"
+      ],
+      "distractors": [
+        "Battle of Diu",
+        "Battle of Panipat (1526)",
+        "Fall of Tenochtitlan"
+      ],
+      "hint": "A battle.",
+      "explanation": "Francisco Pizarro's roughly 170 Spaniards captured the Inca emperor Atahualpa in the main square of Cajamarca, which began the Spanish conquest of the Inca Empire.",
+      "map": {
+        "alt": "A world map with a pin in South America.",
+        "pins": [
+          {
+            "lat": -7.16,
+            "lng": -78.51
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Cajamarca.",
+        "pins": [
+          {
+            "lat": -7.16,
+            "lng": -78.51,
+            "label": "Cajamarca"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shaanxi-1556",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1556**?",
+      "back": "1556 Shaanxi earthquake",
+      "alternatives": [
+        "Shaanxi earthquake",
+        "Jiajing earthquake",
+        "Great Shaanxi earthquake",
+        "Huaxian earthquake"
+      ],
+      "distractors": [
+        "Great Fire of London",
+        "1755 Lisbon earthquake",
+        "1815 eruption of Mount Tambora"
+      ],
+      "hint": "An earthquake.",
+      "explanation": "The deadliest earthquake on record struck the Wei river valley in Shaanxi province on 23 January and killed an estimated 830,000 people, many of them in cave dwellings dug into the loess.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 34.5,
+            "lng": 109.7
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Hua County.",
+        "pins": [
+          {
+            "lat": 34.5,
+            "lng": 109.7,
+            "label": "Hua County"
+          }
+        ]
+      }
+    },
+    {
+      "id": "malta-1565",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1565**?",
+      "back": "Great Siege of Malta",
+      "alternatives": [
+        "Siege of Malta",
+        "Siege of Malta 1565",
+        "Great Siege of Malta (1565)"
+      ],
+      "distractors": [
+        "Battle of Lepanto",
+        "Battle of Alcácer Quibir",
+        "Battle of Sekigahara"
+      ],
+      "hint": "A siege.",
+      "explanation": "The Knights of St John and the Maltese held the island's fortified harbour against a huge Ottoman fleet and army for almost four months, until relief arrived.",
+      "map": {
+        "alt": "A world map with a pin in the central Mediterranean.",
+        "pins": [
+          {
+            "lat": 35.89,
+            "lng": 14.52
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Valletta, Malta.",
+        "pins": [
+          {
+            "lat": 35.89,
+            "lng": 14.52,
+            "label": "Valletta, Malta"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lepanto",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1571**?",
+      "back": "Battle of Lepanto",
+      "alternatives": [
+        "Lepanto"
+      ],
+      "distractors": [
+        "Great Siege of Malta",
+        "Battle of Alcácer Quibir",
+        "Battle of Sekigahara"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "The Holy League, a Christian fleet led by Spain, Venice and the Pope, crushed the Ottoman navy at the entrance to the Gulf of Patras in Greece, one of the largest galley battles in history.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 38.33,
+            "lng": 21.12
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Gulf of Patras.",
+        "pins": [
+          {
+            "lat": 38.33,
+            "lng": 21.12,
+            "label": "Gulf of Patras"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alcacer-quibir",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1578**?",
+      "back": "Battle of Alcácer Quibir",
+      "alternatives": [
+        "Alcácer Quibir",
+        "Alcacer Quibir",
+        "Battle of Alcazarquivir",
+        "Battle of the Three Kings",
+        "Battle of Ksar el-Kebir"
+      ],
+      "distractors": [
+        "Battle of Lepanto",
+        "Great Siege of Malta",
+        "Battle of Sekigahara"
+      ],
+      "hint": "A battle.",
+      "explanation": "King Sebastian of Portugal died with much of his nobility fighting the Moroccan army near Ksar el-Kebir, after which Portugal fell under Spanish rule.",
+      "map": {
+        "alt": "A world map with a pin in North Africa.",
+        "pins": [
+          {
+            "lat": 35.02,
+            "lng": -5.9
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Alcácer Quibir.",
+        "pins": [
+          {
+            "lat": 35.02,
+            "lng": -5.9,
+            "label": "Alcácer Quibir"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sekigahara",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1600**?",
+      "back": "Battle of Sekigahara",
+      "alternatives": [
+        "Sekigahara"
+      ],
+      "distractors": [
+        "Battle of Alcácer Quibir",
+        "Battle of Lepanto",
+        "Great Siege of Malta"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Tokugawa Ieyasu defeated the western coalition of warlords at Sekigahara, which led to the Tokugawa shogunate and some 250 years of peace in Japan.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 35.366,
+            "lng": 136.46
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Sekigahara.",
+        "pins": [
+          {
+            "lat": 35.366,
+            "lng": 136.46,
+            "label": "Sekigahara"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gunpowder-plot",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1605**?",
+      "back": "Gunpowder Plot",
+      "alternatives": [
+        "Gunpowder Treason Plot",
+        "Guy Fawkes Plot",
+        "The Gunpowder Plot"
+      ],
+      "distractors": [
+        "Assassination of Abraham Lincoln",
+        "Assassination of Archduke Franz Ferdinand",
+        "Beer Hall Putsch"
+      ],
+      "hint": "A failed plot.",
+      "explanation": "Guy Fawkes and a group of English Catholic conspirators planned to blow up the House of Lords at the Palace of Westminster in London but were discovered on 5 November.",
+      "map": {
+        "alt": "A world map with a pin in the British Isles.",
+        "pins": [
+          {
+            "lat": 51.4995,
+            "lng": -0.1248
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Westminster.",
+        "pins": [
+          {
+            "lat": 51.4995,
+            "lng": -0.1248,
+            "label": "Westminster"
+          }
+        ]
+      }
+    },
+    {
+      "id": "great-fire-london",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1666**?",
+      "back": "Great Fire of London",
+      "alternatives": [
+        "Fire of London",
+        "The Great Fire of London"
+      ],
+      "distractors": [
+        "1755 Lisbon earthquake",
+        "1556 Shaanxi earthquake",
+        "1815 eruption of Mount Tambora"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A city fire.",
+      "explanation": "A fire that began in a bakery on Pudding Lane destroyed most of the medieval City of London, including St Paul's Cathedral, in September.",
+      "map": {
+        "alt": "A world map with a pin in the British Isles.",
+        "pins": [
+          {
+            "lat": 51.5085,
+            "lng": -0.086
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Pudding Lane.",
+        "pins": [
+          {
+            "lat": 51.5085,
+            "lng": -0.086,
+            "label": "Pudding Lane"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vienna-1683",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1683**?",
+      "back": "Battle of Vienna",
+      "alternatives": [
+        "Siege of Vienna",
+        "Relief of Vienna",
+        "Second Siege of Vienna",
+        "Battle of Vienna (1683)",
+        "Battle of Kahlenberg"
+      ],
+      "distractors": [
+        "Battle of Poltava",
+        "Battle of Culloden",
+        "Battle of the Plains of Abraham"
+      ],
+      "hint": "A battle.",
+      "explanation": "A relief army led by King John III Sobieski of Poland broke the Ottoman siege of Vienna from the Kahlenberg hills, ending the Ottoman advance in central Europe.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 48.274,
+            "lng": 16.341
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Kahlenberg.",
+        "pins": [
+          {
+            "lat": 48.274,
+            "lng": 16.341,
+            "label": "Kahlenberg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "poltava",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1709**?",
+      "back": "Battle of Poltava",
+      "alternatives": [
+        "Poltava"
+      ],
+      "distractors": [
+        "Battle of Vienna",
+        "Battle of Culloden",
+        "Battle of Plassey"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Peter the Great's Russian army decisively defeated Charles XII of Sweden near Poltava in present-day Ukraine, ending Sweden's role as a great power.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 49.63,
+            "lng": 34.56
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Poltava.",
+        "pins": [
+          {
+            "lat": 49.63,
+            "lng": 34.56,
+            "label": "Poltava"
+          }
+        ]
+      }
+    },
+    {
+      "id": "culloden",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1746**?",
+      "back": "Battle of Culloden",
+      "alternatives": [
+        "Culloden"
+      ],
+      "distractors": [
+        "Battle of Plassey",
+        "Battle of the Plains of Abraham",
+        "Siege of Yorktown"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "The army of the Duke of Cumberland crushed the Jacobite army of Bonnie Prince Charlie on Culloden Moor near Inverness in Scotland.",
+      "map": {
+        "alt": "A world map with a pin in the British Isles.",
+        "pins": [
+          {
+            "lat": 57.48,
+            "lng": -4.09
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Culloden Moor.",
+        "pins": [
+          {
+            "lat": 57.48,
+            "lng": -4.09,
+            "label": "Culloden Moor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lisbon-earthquake",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1755**?",
+      "back": "1755 Lisbon earthquake",
+      "alternatives": [
+        "Lisbon earthquake",
+        "Great Lisbon earthquake"
+      ],
+      "distractors": [
+        "1815 eruption of Mount Tambora",
+        "Great Fire of London",
+        "1883 eruption of Krakatoa"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "An earthquake.",
+      "explanation": "On All Saints' Day an earthquake, a tsunami and fires destroyed most of Lisbon and killed tens of thousands of people, and shook Enlightenment Europe.",
+      "map": {
+        "alt": "A world map with a pin in the Iberian Peninsula.",
+        "pins": [
+          {
+            "lat": 38.72,
+            "lng": -9.14
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Lisbon.",
+        "pins": [
+          {
+            "lat": 38.72,
+            "lng": -9.14,
+            "label": "Lisbon"
+          }
+        ]
+      }
+    },
+    {
+      "id": "plassey",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1757**?",
+      "back": "Battle of Plassey",
+      "alternatives": [
+        "Plassey",
+        "Palashi",
+        "Battle of Palashi"
+      ],
+      "distractors": [
+        "Battle of Culloden",
+        "Battle of the Plains of Abraham",
+        "Siege of Yorktown"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Robert Clive's East India Company troops defeated the Nawab of Bengal, helped by the betrayal of his commander Mir Jafar, and began British rule in India.",
+      "map": {
+        "alt": "A world map with a pin in South Asia.",
+        "pins": [
+          {
+            "lat": 23.783,
+            "lng": 88.25
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Plassey.",
+        "pins": [
+          {
+            "lat": 23.783,
+            "lng": 88.25,
+            "label": "Plassey"
+          }
+        ]
+      }
+    },
+    {
+      "id": "plains-of-abraham",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1759**?",
+      "back": "Battle of the Plains of Abraham",
+      "alternatives": [
+        "Plains of Abraham",
+        "Battle of Quebec (1759)",
+        "Battle of Quebec"
+      ],
+      "distractors": [
+        "Battles of Lexington and Concord",
+        "Battle of Plassey",
+        "Battle of Culloden"
+      ],
+      "hint": "A battle.",
+      "explanation": "British troops under General James Wolfe defeated the French under Montcalm in a short battle outside the walls of Quebec City; both commanders died.",
+      "map": {
+        "alt": "A world map with a pin in eastern Canada.",
+        "pins": [
+          {
+            "lat": 46.8,
+            "lng": -71.22
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Quebec City.",
+        "pins": [
+          {
+            "lat": 46.8,
+            "lng": -71.22,
+            "label": "Quebec City"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lexington-concord",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1775**?",
+      "back": "Battles of Lexington and Concord",
+      "alternatives": [
+        "Lexington and Concord",
+        "Battle of Lexington and Concord",
+        "Lexington",
+        "Concord"
+      ],
+      "distractors": [
+        "Siege of Yorktown",
+        "Battle of Waterloo",
+        "Battle of Culloden"
+      ],
+      "hint": "The first battles of a war.",
+      "explanation": "The first shots of the American Revolutionary War were fired at Lexington and Concord in Massachusetts when British troops marched out of Boston to seize colonial arms.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 42.447,
+            "lng": -71.227
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Lexington.",
+        "pins": [
+          {
+            "lat": 42.447,
+            "lng": -71.227,
+            "label": "Lexington"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yorktown",
+      "type": "card",
+      "section": "early-modern",
+      "front": "Which event took place here in **1781**?",
+      "back": "Siege of Yorktown",
+      "alternatives": [
+        "Yorktown",
+        "Battle of Yorktown"
+      ],
+      "distractors": [
+        "Battles of Lexington and Concord",
+        "Battle of the Plains of Abraham",
+        "Battle of Austerlitz"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A siege.",
+      "explanation": "A combined American and French army, backed by a French fleet, forced Lord Cornwallis to surrender his British army in Virginia, which ended the main fighting of the American Revolutionary War.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 37.239,
+            "lng": -76.51
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Yorktown.",
+        "pins": [
+          {
+            "lat": 37.239,
+            "lng": -76.51,
+            "label": "Yorktown"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trafalgar",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1805**?",
+      "back": "Battle of Trafalgar",
+      "alternatives": [
+        "Trafalgar",
+        "Cape Trafalgar"
+      ],
+      "distractors": [
+        "Battle of Borodino",
+        "Battle of Austerlitz",
+        "Siege of Yorktown"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "Admiral Nelson's Royal Navy fleet destroyed the combined French and Spanish fleet off the south-west coast of Spain; Nelson was killed in the battle.",
+      "map": {
+        "alt": "A world map with a pin in the Iberian Peninsula.",
+        "pins": [
+          {
+            "lat": 36.17,
+            "lng": -6.2
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Cape Trafalgar.",
+        "pins": [
+          {
+            "lat": 36.17,
+            "lng": -6.2,
+            "label": "Cape Trafalgar"
+          }
+        ]
+      }
+    },
+    {
+      "id": "austerlitz",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1805**?",
+      "back": "Battle of Austerlitz",
+      "alternatives": [
+        "Austerlitz",
+        "Battle of the Three Emperors",
+        "Slavkov"
+      ],
+      "distractors": [
+        "Battle of Trafalgar",
+        "Battle of Ayacucho",
+        "Battles of Lexington and Concord"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Napoleon defeated a larger Russian and Austrian army near the Moravian town of Austerlitz, today Slavkov u Brna in the Czech Republic, often seen as his greatest victory.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 49.13,
+            "lng": 16.77
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Austerlitz.",
+        "pins": [
+          {
+            "lat": 49.13,
+            "lng": 16.77,
+            "label": "Austerlitz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "grito-de-dolores",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1810**?",
+      "back": "Grito de Dolores",
+      "alternatives": [
+        "Cry of Dolores",
+        "El Grito de Dolores",
+        "Cry of Independence"
+      ],
+      "distractors": [
+        "Eureka Rebellion",
+        "Paris Commune",
+        "October Revolution"
+      ],
+      "hint": "A call to revolt.",
+      "explanation": "The priest Miguel Hidalgo rang the church bell of the town of Dolores and called on the people to rise against Spanish rule, which started the Mexican War of Independence.",
+      "map": {
+        "alt": "A world map with a pin in Mexico.",
+        "pins": [
+          {
+            "lat": 21.156,
+            "lng": -100.933
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Dolores Hidalgo.",
+        "pins": [
+          {
+            "lat": 21.156,
+            "lng": -100.933,
+            "label": "Dolores Hidalgo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "borodino",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1812**?",
+      "back": "Battle of Borodino",
+      "alternatives": [
+        "Borodino"
+      ],
+      "distractors": [
+        "Battle of Waterloo",
+        "Battle of Trafalgar",
+        "Battle of Austerlitz"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Napoleon's Grande Armée and the Russian army of Kutuzov fought the bloodiest single day of the Napoleonic Wars west of Moscow, after which the French entered an abandoned Moscow.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 55.52,
+            "lng": 35.82
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Borodino.",
+        "pins": [
+          {
+            "lat": 55.52,
+            "lng": 35.82,
+            "label": "Borodino"
+          }
+        ]
+      }
+    },
+    {
+      "id": "congress-vienna",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1814-1815**?",
+      "back": "Congress of Vienna",
+      "alternatives": [
+        "Vienna Congress"
+      ],
+      "distractors": [
+        "Convention of Kanagawa",
+        "Treaty of Shimonoseki",
+        "Armistice of Compiègne"
+      ],
+      "hint": "A peace conference.",
+      "explanation": "Diplomats of the European powers met in Vienna to redraw the map of Europe and restore the balance of power after the defeat of Napoleon.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 48.208,
+            "lng": 16.37
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Vienna.",
+        "pins": [
+          {
+            "lat": 48.208,
+            "lng": 16.37,
+            "label": "Vienna"
+          }
+        ]
+      }
+    },
+    {
+      "id": "waterloo",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1815**?",
+      "back": "Battle of Waterloo",
+      "alternatives": [
+        "Waterloo"
+      ],
+      "distractors": [
+        "Battle of Borodino",
+        "Battle of Ayacucho",
+        "Battle of Trafalgar"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Napoleon's final defeat by the armies of Wellington and Blücher took place on 18 June south of Brussels, in present-day Belgium, and ended his return to power.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 50.68,
+            "lng": 4.41
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Waterloo.",
+        "pins": [
+          {
+            "lat": 50.68,
+            "lng": 4.41,
+            "label": "Waterloo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tambora",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1815**?",
+      "back": "1815 eruption of Mount Tambora",
+      "alternatives": [
+        "Tambora",
+        "Eruption of Mount Tambora",
+        "Mount Tambora eruption",
+        "Tambora eruption",
+        "Eruption of Tambora"
+      ],
+      "distractors": [
+        "1883 eruption of Krakatoa",
+        "1755 Lisbon earthquake",
+        "1906 San Francisco earthquake"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A volcanic eruption.",
+      "explanation": "The largest volcanic eruption in recorded history, on the island of Sumbawa in Indonesia, killed tens of thousands and cooled the climate, so that 1816 became the year without a summer.",
+      "map": {
+        "alt": "A world map with a pin in South-East Asia.",
+        "pins": [
+          {
+            "lat": -8.25,
+            "lng": 117.99
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Mount Tambora.",
+        "pins": [
+          {
+            "lat": -8.25,
+            "lng": 117.99,
+            "label": "Mount Tambora"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ayacucho",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1824**?",
+      "back": "Battle of Ayacucho",
+      "alternatives": [
+        "Ayacucho"
+      ],
+      "distractors": [
+        "Battle of the Alamo",
+        "Battle of Waterloo",
+        "Battle of Borodino"
+      ],
+      "hint": "A battle.",
+      "explanation": "Antonio José de Sucre's patriot army defeated the Spanish royalist army in the Peruvian Andes, the decisive battle of the South American wars of independence.",
+      "map": {
+        "alt": "A world map with a pin in South America.",
+        "pins": [
+          {
+            "lat": -13.06,
+            "lng": -74.14
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Ayacucho.",
+        "pins": [
+          {
+            "lat": -13.06,
+            "lng": -74.14,
+            "label": "Ayacucho"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alamo",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1836**?",
+      "back": "Battle of the Alamo",
+      "alternatives": [
+        "The Alamo",
+        "Alamo",
+        "Siege of the Alamo"
+      ],
+      "distractors": [
+        "Battle of Waterloo",
+        "Battle of Gettysburg",
+        "Battle of Fort Sumter"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A siege.",
+      "explanation": "Mexican troops under Santa Anna stormed the old mission in San Antonio and killed its Texan defenders, including Davy Crockett and Jim Bowie, giving the Texas revolt the rallying cry 'Remember the Alamo'.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 29.426,
+            "lng": -98.486
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled San Antonio.",
+        "pins": [
+          {
+            "lat": 29.426,
+            "lng": -98.486,
+            "label": "San Antonio"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kanagawa",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1854**?",
+      "back": "Convention of Kanagawa",
+      "alternatives": [
+        "Treaty of Kanagawa",
+        "Kanagawa",
+        "Perry Convention"
+      ],
+      "distractors": [
+        "Congress of Vienna",
+        "Treaty of Shimonoseki",
+        "Armistice of Compiègne"
+      ],
+      "hint": "A treaty.",
+      "explanation": "Under the guns of Commodore Perry's US Navy squadron, Japan signed a treaty near today's Yokohama that opened the ports of Shimoda and Hakodate and ended more than two centuries of near-total isolation.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 35.45,
+            "lng": 139.64
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Kanagawa (Yokohama).",
+        "pins": [
+          {
+            "lat": 35.45,
+            "lng": 139.64,
+            "label": "Kanagawa (Yokohama)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eureka",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1854**?",
+      "back": "Eureka Rebellion",
+      "alternatives": [
+        "Eureka Stockade",
+        "Battle of the Eureka Stockade"
+      ],
+      "distractors": [
+        "Paris Commune",
+        "Grito de Dolores",
+        "Jallianwala Bagh massacre"
+      ],
+      "hint": "An uprising.",
+      "explanation": "Gold miners at Ballarat in Victoria rose up against licence fees and were crushed at the Eureka Stockade by troops, an episode remembered as a founding moment of Australian democracy.",
+      "map": {
+        "alt": "A world map with a pin in Australia.",
+        "pins": [
+          {
+            "lat": -37.56,
+            "lng": 143.87
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Ballarat.",
+        "pins": [
+          {
+            "lat": -37.56,
+            "lng": 143.87,
+            "label": "Ballarat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fort-sumter",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1861**?",
+      "back": "Battle of Fort Sumter",
+      "alternatives": [
+        "Fort Sumter",
+        "Attack on Fort Sumter"
+      ],
+      "distractors": [
+        "Battle of the Little Bighorn",
+        "Battle of Gettysburg",
+        "Battle of the Alamo"
+      ],
+      "hint": "The first battle of a war.",
+      "explanation": "Confederate artillery bombarded the Union-held fort in Charleston harbour in South Carolina; its surrender on 13 April marked the start of the American Civil War.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 32.752,
+            "lng": -79.875
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Fort Sumter.",
+        "pins": [
+          {
+            "lat": 32.752,
+            "lng": -79.875,
+            "label": "Fort Sumter"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gettysburg",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1863**?",
+      "back": "Battle of Gettysburg",
+      "alternatives": [
+        "Gettysburg"
+      ],
+      "distractors": [
+        "Battle of the Alamo",
+        "Battle of Fort Sumter",
+        "Battle of Adwa"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Union forces under General Meade turned back Robert E. Lee's invasion of the North in three days of fighting in Pennsylvania, often seen as the turning point of the American Civil War.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 39.81,
+            "lng": -77.23
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Gettysburg.",
+        "pins": [
+          {
+            "lat": 39.81,
+            "lng": -77.23,
+            "label": "Gettysburg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lincoln-assassination",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1865**?",
+      "back": "Assassination of Abraham Lincoln",
+      "alternatives": [
+        "Assassination of Lincoln",
+        "Lincoln assassination",
+        "Murder of Abraham Lincoln",
+        "Assassination of President Lincoln"
+      ],
+      "distractors": [
+        "Assassination of Archduke Franz Ferdinand",
+        "Beer Hall Putsch",
+        "Assassination of Mahatma Gandhi"
+      ],
+      "hint": "A political assassination.",
+      "explanation": "John Wilkes Booth shot President Lincoln at Ford's Theatre in Washington, D.C. on 14 April, and Lincoln died the next morning.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 38.8967,
+            "lng": -77.0258
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Ford's Theatre.",
+        "pins": [
+          {
+            "lat": 38.8967,
+            "lng": -77.0258,
+            "label": "Ford's Theatre"
+          }
+        ]
+      }
+    },
+    {
+      "id": "paris-commune",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1871**?",
+      "back": "Paris Commune",
+      "alternatives": [
+        "The Paris Commune",
+        "Commune of Paris"
+      ],
+      "distractors": [
+        "Wuchang Uprising",
+        "Eureka Rebellion",
+        "October Revolution"
+      ],
+      "hint": "A revolutionary government.",
+      "explanation": "After the Franco-Prussian War radical Parisians seized the capital and ran it as a revolutionary government for about two months, until the French army crushed it in 'Bloody Week'.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 48.8566,
+            "lng": 2.3522
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Paris.",
+        "pins": [
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris"
+          }
+        ]
+      }
+    },
+    {
+      "id": "little-bighorn",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1876**?",
+      "back": "Battle of the Little Bighorn",
+      "alternatives": [
+        "Little Bighorn",
+        "Battle of Little Bighorn",
+        "Custer's Last Stand"
+      ],
+      "distractors": [
+        "Battle of Isandlwana",
+        "Battle of Omdurman",
+        "Battle of the Somme"
+      ],
+      "hint": "A battle.",
+      "explanation": "Lakota, Northern Cheyenne and Arapaho warriors wiped out five companies of George Custer's 7th Cavalry in Montana, the greatest victory of the Plains Indians over the US Army.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 45.57,
+            "lng": -107.43
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Little Bighorn.",
+        "pins": [
+          {
+            "lat": 45.57,
+            "lng": -107.43,
+            "label": "Little Bighorn"
+          }
+        ]
+      }
+    },
+    {
+      "id": "isandlwana",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1879**?",
+      "back": "Battle of Isandlwana",
+      "alternatives": [
+        "Isandlwana",
+        "Isandhlwana"
+      ],
+      "distractors": [
+        "Battle of the Little Bighorn",
+        "Battle of Omdurman",
+        "Gallipoli Campaign"
+      ],
+      "hint": "A battle.",
+      "explanation": "A Zulu army of some 20,000 warriors overran a British column in what is now KwaZulu-Natal in South Africa, the worst defeat of the British Army by an indigenous force.",
+      "map": {
+        "alt": "A world map with a pin in southern Africa.",
+        "pins": [
+          {
+            "lat": -28.352,
+            "lng": 30.652
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Isandlwana.",
+        "pins": [
+          {
+            "lat": -28.352,
+            "lng": 30.652,
+            "label": "Isandlwana"
+          }
+        ]
+      }
+    },
+    {
+      "id": "krakatoa",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1883**?",
+      "back": "1883 eruption of Krakatoa",
+      "alternatives": [
+        "Krakatoa",
+        "Krakatau",
+        "Eruption of Krakatoa",
+        "Krakatoa eruption",
+        "1883 Krakatoa eruption"
+      ],
+      "distractors": [
+        "1906 San Francisco earthquake",
+        "Sinking of the Titanic",
+        "Hindenburg disaster"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A volcanic eruption.",
+      "explanation": "The volcanic island of Krakatoa in the Sunda Strait in Indonesia exploded, causing tsunamis that killed more than 30,000 people; the bang was heard thousands of kilometres away.",
+      "map": {
+        "alt": "A world map with a pin in South-East Asia.",
+        "pins": [
+          {
+            "lat": -6.1,
+            "lng": 105.42
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Krakatoa.",
+        "pins": [
+          {
+            "lat": -6.1,
+            "lng": 105.42,
+            "label": "Krakatoa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shimonoseki",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1895**?",
+      "back": "Treaty of Shimonoseki",
+      "alternatives": [
+        "Shimonoseki"
+      ],
+      "distractors": [
+        "Armistice of Compiègne",
+        "Convention of Kanagawa",
+        "Munich Agreement"
+      ],
+      "hint": "A treaty.",
+      "explanation": "China signed the peace treaty that ended the First Sino-Japanese War, ceding Taiwan to Japan and recognising the independence of Korea.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 33.958,
+            "lng": 130.941
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Shimonoseki.",
+        "pins": [
+          {
+            "lat": 33.958,
+            "lng": 130.941,
+            "label": "Shimonoseki"
+          }
+        ]
+      }
+    },
+    {
+      "id": "adwa",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1896**?",
+      "back": "Battle of Adwa",
+      "alternatives": [
+        "Adwa",
+        "Adowa",
+        "Battle of Adowa"
+      ],
+      "distractors": [
+        "Battle of Verdun",
+        "Battle of Jutland",
+        "Battle of the Little Bighorn"
+      ],
+      "hint": "A battle.",
+      "explanation": "Emperor Menelik II's Ethiopian army defeated an invading Italian force at Adwa in northern Ethiopia and secured Ethiopia's independence while most of Africa was being colonised.",
+      "map": {
+        "alt": "A world map with a pin in East Africa.",
+        "pins": [
+          {
+            "lat": 14.15,
+            "lng": 38.9
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Adwa.",
+        "pins": [
+          {
+            "lat": 14.15,
+            "lng": 38.9,
+            "label": "Adwa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "omdurman",
+      "type": "card",
+      "section": "nineteenth",
+      "front": "Which event took place here in **1898**?",
+      "back": "Battle of Omdurman",
+      "alternatives": [
+        "Omdurman"
+      ],
+      "distractors": [
+        "Battle of Adwa",
+        "Battle of Verdun",
+        "Battle of the Somme"
+      ],
+      "hint": "A battle.",
+      "explanation": "A British-Egyptian army under Kitchener, with machine guns and gunboats, destroyed the Mahdist army outside Omdurman in Sudan, ending the Mahdist state.",
+      "map": {
+        "alt": "A world map with a pin in North Africa.",
+        "pins": [
+          {
+            "lat": 15.75,
+            "lng": 32.5
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Omdurman.",
+        "pins": [
+          {
+            "lat": 15.75,
+            "lng": 32.5,
+            "label": "Omdurman"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sf-1906",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1906**?",
+      "back": "1906 San Francisco earthquake",
+      "alternatives": [
+        "San Francisco earthquake",
+        "Great San Francisco earthquake"
+      ],
+      "distractors": [
+        "Sinking of the Titanic",
+        "1883 eruption of Krakatoa",
+        "Atomic bombings of Hiroshima and Nagasaki"
+      ],
+      "hint": "An earthquake.",
+      "explanation": "An earthquake of magnitude about 7.9 and the fires that followed destroyed much of San Francisco on 18 April and killed about 3,000 people.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 37.78,
+            "lng": -122.45
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled San Francisco.",
+        "pins": [
+          {
+            "lat": 37.78,
+            "lng": -122.45,
+            "label": "San Francisco"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wuchang",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1911**?",
+      "back": "Wuchang Uprising",
+      "alternatives": [
+        "Wuchang",
+        "Wuchang Uprising of 1911"
+      ],
+      "distractors": [
+        "October Revolution",
+        "Jallianwala Bagh massacre",
+        "Warsaw Uprising"
+      ],
+      "hint": "An uprising.",
+      "explanation": "A mutiny of army units in Wuchang, today part of Wuhan, on 10 October started the revolution that overthrew the Qing dynasty and led to the Republic of China.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 30.55,
+            "lng": 114.31
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Wuchang.",
+        "pins": [
+          {
+            "lat": 30.55,
+            "lng": 114.31,
+            "label": "Wuchang"
+          }
+        ]
+      }
+    },
+    {
+      "id": "titanic",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1912**?",
+      "back": "Sinking of the Titanic",
+      "alternatives": [
+        "Titanic",
+        "RMS Titanic",
+        "Sinking of the RMS Titanic"
+      ],
+      "distractors": [
+        "1906 San Francisco earthquake",
+        "Bombing of Guernica",
+        "Hindenburg disaster"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A shipwreck.",
+      "explanation": "The liner Titanic struck an iceberg on her maiden voyage from Southampton to New York and sank in the North Atlantic with the loss of more than 1,500 lives.",
+      "map": {
+        "alt": "A world map with a pin in the North Atlantic.",
+        "pins": [
+          {
+            "lat": 41.73,
+            "lng": -49.95
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Titanic wreck site.",
+        "pins": [
+          {
+            "lat": 41.73,
+            "lng": -49.95,
+            "label": "Titanic wreck site"
+          }
+        ]
+      }
+    },
+    {
+      "id": "franz-ferdinand",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1914**?",
+      "back": "Assassination of Archduke Franz Ferdinand",
+      "alternatives": [
+        "Assassination of Franz Ferdinand",
+        "Franz Ferdinand assassination",
+        "Sarajevo assassination",
+        "Assassination at Sarajevo"
+      ],
+      "distractors": [
+        "Beer Hall Putsch",
+        "Assassination of Mahatma Gandhi",
+        "Assassination of Martin Luther King Jr."
+      ],
+      "hint": "A political assassination.",
+      "explanation": "Gavrilo Princip shot the heir to the Austro-Hungarian throne and his wife Sophie in Sarajevo on 28 June, the spark that set off the First World War.",
+      "map": {
+        "alt": "A world map with a pin in south-eastern Europe.",
+        "pins": [
+          {
+            "lat": 43.8582,
+            "lng": 18.4287
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Sarajevo.",
+        "pins": [
+          {
+            "lat": 43.8582,
+            "lng": 18.4287,
+            "label": "Sarajevo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gallipoli",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1915-1916**?",
+      "back": "Gallipoli Campaign",
+      "alternatives": [
+        "Gallipoli",
+        "Battle of Gallipoli",
+        "Dardanelles Campaign"
+      ],
+      "distractors": [
+        "Battle of Verdun",
+        "Battle of Jutland",
+        "Battle of the Somme"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A campaign.",
+      "explanation": "Allied troops, including many Australians and New Zealanders, landed on the Gallipoli peninsula in Turkey to open the Dardanelles but were stuck for eight months and finally withdrawn.",
+      "map": {
+        "alt": "A world map with a pin in Turkey.",
+        "pins": [
+          {
+            "lat": 40.25,
+            "lng": 26.28
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Gallipoli.",
+        "pins": [
+          {
+            "lat": 40.25,
+            "lng": 26.28,
+            "label": "Gallipoli"
+          }
+        ]
+      }
+    },
+    {
+      "id": "verdun",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1916**?",
+      "back": "Battle of Verdun",
+      "alternatives": [
+        "Verdun"
+      ],
+      "distractors": [
+        "Gallipoli Campaign",
+        "Battle of Midway",
+        "Attack on Pearl Harbor"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "French and German armies fought for ten months around the fortress city of Verdun in north-eastern France, the longest battle of the First World War, with hundreds of thousands of casualties.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 49.18,
+            "lng": 5.4
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Verdun.",
+        "pins": [
+          {
+            "lat": 49.18,
+            "lng": 5.4,
+            "label": "Verdun"
+          }
+        ]
+      }
+    },
+    {
+      "id": "somme",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1916**?",
+      "back": "Battle of the Somme",
+      "alternatives": [
+        "Somme",
+        "Battle of the Somme (1916)"
+      ],
+      "distractors": [
+        "Battle of Jutland",
+        "Gallipoli Campaign",
+        "Battle of Westerplatte"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "A British and French offensive in northern France; the British Army suffered about 57,000 casualties on the first day, 1 July, and gained little ground.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 50.05,
+            "lng": 2.69
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Somme.",
+        "pins": [
+          {
+            "lat": 50.05,
+            "lng": 2.69,
+            "label": "Somme"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jutland",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1916**?",
+      "back": "Battle of Jutland",
+      "alternatives": [
+        "Jutland",
+        "Skagerrak"
+      ],
+      "distractors": [
+        "Gallipoli Campaign",
+        "Battle of Verdun",
+        "Attack on Pearl Harbor"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "The British Grand Fleet and the German High Seas Fleet clashed in the North Sea off Denmark in the largest naval battle of the First World War, after which the German fleet never again challenged British control of the seas.",
+      "map": {
+        "alt": "A world map with a pin in northern Europe.",
+        "pins": [
+          {
+            "lat": 56.7,
+            "lng": 5.9
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled North Sea.",
+        "pins": [
+          {
+            "lat": 56.7,
+            "lng": 5.9,
+            "label": "North Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "october-revolution",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1917**?",
+      "back": "October Revolution",
+      "alternatives": [
+        "Russian October Revolution",
+        "Bolshevik Revolution",
+        "Storming of the Winter Palace"
+      ],
+      "distractors": [
+        "Jallianwala Bagh massacre",
+        "Wuchang Uprising",
+        "Sharpeville massacre"
+      ],
+      "hint": "A revolution.",
+      "explanation": "The Bolsheviks under Lenin seized power in Petrograd, today Saint Petersburg, by taking the Winter Palace and arresting the Provisional Government.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 59.94,
+            "lng": 30.315
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Winter Palace.",
+        "pins": [
+          {
+            "lat": 59.94,
+            "lng": 30.315,
+            "label": "Winter Palace"
+          }
+        ]
+      }
+    },
+    {
+      "id": "compiegne",
+      "type": "card",
+      "section": "ww1",
+      "front": "Which event took place here in **1918**?",
+      "back": "Armistice of Compiègne",
+      "alternatives": [
+        "Armistice of 11 November 1918",
+        "Armistice with Germany",
+        "Compiègne Armistice",
+        "Armistice of 1918",
+        "Armistice of Compiegne"
+      ],
+      "distractors": [
+        "Treaty of Shimonoseki",
+        "Munich Agreement",
+        "Potsdam Conference"
+      ],
+      "hint": "An armistice.",
+      "explanation": "Germany signed the armistice that ended the fighting of the First World War in a railway carriage in the forest of Compiègne in northern France; it took effect at 11 a.m. on 11 November.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 49.425,
+            "lng": 2.912
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Compiègne forest.",
+        "pins": [
+          {
+            "lat": 49.425,
+            "lng": 2.912,
+            "label": "Compiègne forest"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jallianwala",
+      "type": "card",
+      "section": "interwar",
+      "front": "Which event took place here in **1919**?",
+      "back": "Jallianwala Bagh massacre",
+      "alternatives": [
+        "Amritsar massacre",
+        "Jallianwala Bagh"
+      ],
+      "distractors": [
+        "October Revolution",
+        "Wuchang Uprising",
+        "Warsaw Uprising"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A massacre.",
+      "explanation": "Troops under the British General Dyer fired without warning into a large unarmed crowd in an enclosed garden in Amritsar and killed hundreds, which hardened Indian opposition to British rule.",
+      "map": {
+        "alt": "A world map with a pin in South Asia.",
+        "pins": [
+          {
+            "lat": 31.6206,
+            "lng": 74.88
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Jallianwala Bagh.",
+        "pins": [
+          {
+            "lat": 31.6206,
+            "lng": 74.88,
+            "label": "Jallianwala Bagh"
+          }
+        ]
+      }
+    },
+    {
+      "id": "beer-hall-putsch",
+      "type": "card",
+      "section": "interwar",
+      "front": "Which event took place here in **1923**?",
+      "back": "Beer Hall Putsch",
+      "alternatives": [
+        "Munich Putsch",
+        "Hitler Putsch",
+        "Hitler-Putsch",
+        "Buergerbraeukeller Putsch"
+      ],
+      "distractors": [
+        "Assassination of Archduke Franz Ferdinand",
+        "Assassination of Mahatma Gandhi",
+        "Assassination of John F. Kennedy"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A failed coup.",
+      "explanation": "Adolf Hitler and his Nazi followers tried to seize power in Bavaria from a beer hall in Munich; the coup was put down the next day and Hitler was jailed.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 48.1298,
+            "lng": 11.5925
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Munich.",
+        "pins": [
+          {
+            "lat": 48.1298,
+            "lng": 11.5925,
+            "label": "Munich"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reichstag-fire",
+      "type": "card",
+      "section": "interwar",
+      "front": "Which event took place here in **1933**?",
+      "back": "Reichstag fire",
+      "alternatives": [
+        "The Reichstag fire"
+      ],
+      "distractors": [
+        "Hindenburg disaster",
+        "Sinking of the Titanic",
+        "Bombing of Guernica"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A fire.",
+      "explanation": "A fire destroyed the debating chamber of the German parliament building in Berlin on 27 February; the Nazis blamed the communists and used it to suspend civil rights.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 52.5186,
+            "lng": 13.3762
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Reichstag.",
+        "pins": [
+          {
+            "lat": 52.5186,
+            "lng": 13.3762,
+            "label": "Reichstag"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hindenburg",
+      "type": "card",
+      "section": "interwar",
+      "front": "Which event took place here in **1937**?",
+      "back": "Hindenburg disaster",
+      "alternatives": [
+        "Hindenburg",
+        "Hindenburg airship disaster"
+      ],
+      "distractors": [
+        "Trinity test",
+        "Reichstag fire",
+        "Sinking of the Titanic"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "An airship disaster.",
+      "explanation": "The German passenger airship Hindenburg burst into flames while landing at Lakehurst in New Jersey, killing 36 people and ending the age of the passenger airship.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 40.03,
+            "lng": -74.35
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Lakehurst.",
+        "pins": [
+          {
+            "lat": 40.03,
+            "lng": -74.35,
+            "label": "Lakehurst"
+          }
+        ]
+      }
+    },
+    {
+      "id": "guernica",
+      "type": "card",
+      "section": "interwar",
+      "front": "Which event took place here in **1937**?",
+      "back": "Bombing of Guernica",
+      "alternatives": [
+        "Guernica",
+        "Bombing of Gernika",
+        "Gernika"
+      ],
+      "distractors": [
+        "Hindenburg disaster",
+        "Atomic bombings of Hiroshima and Nagasaki",
+        "Reichstag fire"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "An air raid.",
+      "explanation": "German and Italian aircraft supporting Franco bombed the Basque town of Gernika in the Spanish Civil War, an attack that inspired Picasso's painting 'Guernica'.",
+      "map": {
+        "alt": "A world map with a pin in the Iberian Peninsula.",
+        "pins": [
+          {
+            "lat": 43.314,
+            "lng": -2.679
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Gernika.",
+        "pins": [
+          {
+            "lat": 43.314,
+            "lng": -2.679,
+            "label": "Gernika"
+          }
+        ]
+      }
+    },
+    {
+      "id": "munich-agreement",
+      "type": "card",
+      "section": "interwar",
+      "front": "Which event took place here in **1938**?",
+      "back": "Munich Agreement",
+      "alternatives": [
+        "Munich Pact",
+        "Munich Treaty"
+      ],
+      "distractors": [
+        "Potsdam Conference",
+        "Molotov–Ribbentrop Pact",
+        "Charter of the United Nations"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A treaty.",
+      "explanation": "Britain, France, Italy and Germany agreed in Munich to let Germany annex the Sudetenland from Czechoslovakia, without asking Czechoslovakia, in an attempt to appease Hitler.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 48.1451,
+            "lng": 11.5671
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Munich.",
+        "pins": [
+          {
+            "lat": 48.1451,
+            "lng": 11.5671,
+            "label": "Munich"
+          }
+        ]
+      }
+    },
+    {
+      "id": "molotov-ribbentrop",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1939**?",
+      "back": "Molotov–Ribbentrop Pact",
+      "alternatives": [
+        "Molotov-Ribbentrop Pact",
+        "Molotov Ribbentrop Pact",
+        "Hitler-Stalin Pact",
+        "Nazi-Soviet Pact",
+        "German-Soviet Non-Aggression Pact"
+      ],
+      "distractors": [
+        "Potsdam Conference",
+        "Munich Agreement",
+        "Charter of the United Nations"
+      ],
+      "hint": "A treaty.",
+      "explanation": "Germany and the Soviet Union signed a non-aggression pact in Moscow whose secret protocol divided Poland and eastern Europe between them, days before Germany invaded Poland.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 55.752,
+            "lng": 37.6175
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Moscow.",
+        "pins": [
+          {
+            "lat": 55.752,
+            "lng": 37.6175,
+            "label": "Moscow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "westerplatte",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1939**?",
+      "back": "Battle of Westerplatte",
+      "alternatives": [
+        "Westerplatte"
+      ],
+      "distractors": [
+        "Dunkirk evacuation",
+        "Siege of Leningrad",
+        "Battle of Inchon"
+      ],
+      "hint": "A battle.",
+      "explanation": "On 1 September the German battleship Schleswig-Holstein opened fire on a Polish military depot at Westerplatte near Danzig, today Gdańsk, one of the first actions of the Second World War in Europe.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 54.4036,
+            "lng": 18.6692
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Westerplatte.",
+        "pins": [
+          {
+            "lat": 54.4036,
+            "lng": 18.6692,
+            "label": "Westerplatte"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dunkirk",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1940**?",
+      "back": "Dunkirk evacuation",
+      "alternatives": [
+        "Dunkirk",
+        "Operation Dynamo",
+        "Evacuation of Dunkirk",
+        "Dunkerque"
+      ],
+      "distractors": [
+        "Battle of Westerplatte",
+        "Siege of Leningrad",
+        "Battle of Inchon"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "An evacuation.",
+      "explanation": "More than 330,000 Allied soldiers were taken off the beaches and harbour of Dunkirk in northern France in about nine days, by warships and hundreds of small civilian boats.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 51.05,
+            "lng": 2.37
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Dunkirk.",
+        "pins": [
+          {
+            "lat": 51.05,
+            "lng": 2.37,
+            "label": "Dunkirk"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pearl-harbor",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1941**?",
+      "back": "Attack on Pearl Harbor",
+      "alternatives": [
+        "Pearl Harbor",
+        "Pearl Harbour",
+        "Attack on Pearl Harbour"
+      ],
+      "distractors": [
+        "Siege of Leningrad",
+        "Battle of Inchon",
+        "Second Battle of El Alamein"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A surprise attack.",
+      "explanation": "Japanese carrier aircraft attacked the US Pacific Fleet at its base on Oahu in Hawaii on 7 December, killing more than 2,400 Americans and bringing the United States into the Second World War.",
+      "map": {
+        "alt": "A world map with a pin in Hawaii.",
+        "pins": [
+          {
+            "lat": 21.36,
+            "lng": -157.97
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Pearl Harbor.",
+        "pins": [
+          {
+            "lat": 21.36,
+            "lng": -157.97,
+            "label": "Pearl Harbor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "leningrad",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1941-1944**?",
+      "back": "Siege of Leningrad",
+      "alternatives": [
+        "Leningrad",
+        "Blockade of Leningrad"
+      ],
+      "distractors": [
+        "Battle of Westerplatte",
+        "Battle of Iwo Jima",
+        "Normandy landings"
+      ],
+      "hint": "A siege.",
+      "explanation": "German and Finnish forces surrounded Leningrad, today Saint Petersburg, for almost 900 days, and hundreds of thousands of its civilians starved to death.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 59.934,
+            "lng": 30.335
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Leningrad.",
+        "pins": [
+          {
+            "lat": 59.934,
+            "lng": 30.335,
+            "label": "Leningrad"
+          }
+        ]
+      }
+    },
+    {
+      "id": "midway",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1942**?",
+      "back": "Battle of Midway",
+      "alternatives": [
+        "Midway"
+      ],
+      "distractors": [
+        "Second Battle of El Alamein",
+        "Siege of Leningrad",
+        "Battle of Stalingrad"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A naval battle.",
+      "explanation": "US carrier aircraft sank four Japanese aircraft carriers near Midway Atoll in the Pacific, a turning point of the war against Japan.",
+      "map": {
+        "alt": "A world map with a pin in the North Pacific.",
+        "pins": [
+          {
+            "lat": 28.21,
+            "lng": -177.38
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Midway Atoll.",
+        "pins": [
+          {
+            "lat": 28.21,
+            "lng": -177.38,
+            "label": "Midway Atoll"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stalingrad",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1942-1943**?",
+      "back": "Battle of Stalingrad",
+      "alternatives": [
+        "Stalingrad"
+      ],
+      "distractors": [
+        "Battle of Midway",
+        "Attack on Pearl Harbor",
+        "Second Battle of El Alamein"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "The Soviet Red Army encircled and destroyed the German 6th Army in the ruins of Stalingrad on the Volga, a turning point on the Eastern Front; the city is now called Volgograd.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 48.708,
+            "lng": 44.513
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Stalingrad.",
+        "pins": [
+          {
+            "lat": 48.708,
+            "lng": 44.513,
+            "label": "Stalingrad"
+          }
+        ]
+      }
+    },
+    {
+      "id": "el-alamein",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1942**?",
+      "back": "Second Battle of El Alamein",
+      "alternatives": [
+        "El Alamein",
+        "Battle of El Alamein",
+        "Alamein"
+      ],
+      "distractors": [
+        "Siege of Leningrad",
+        "Normandy landings",
+        "Battle of Inchon"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Montgomery's British Eighth Army broke through the Axis lines at El Alamein in Egypt, ending the Axis threat to the Suez Canal.",
+      "map": {
+        "alt": "A world map with a pin in North Africa.",
+        "pins": [
+          {
+            "lat": 30.833,
+            "lng": 28.95
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled El Alamein.",
+        "pins": [
+          {
+            "lat": 30.833,
+            "lng": 28.95,
+            "label": "El Alamein"
+          }
+        ]
+      }
+    },
+    {
+      "id": "normandy",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1944**?",
+      "back": "Normandy landings",
+      "alternatives": [
+        "D-Day",
+        "Operation Overlord",
+        "Normandy invasion",
+        "Landings in Normandy"
+      ],
+      "distractors": [
+        "Battle of Berlin",
+        "Battle of Iwo Jima",
+        "Attack on Pearl Harbor"
+      ],
+      "hint": "An invasion.",
+      "explanation": "On 6 June, American, British and Canadian troops landed on five beaches on the Normandy coast of France, opening the Western Front of the Second World War.",
+      "map": {
+        "alt": "A world map with a pin in western Europe.",
+        "pins": [
+          {
+            "lat": 49.345,
+            "lng": -0.75
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Normandy.",
+        "pins": [
+          {
+            "lat": 49.345,
+            "lng": -0.75,
+            "label": "Normandy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "warsaw-uprising",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1944**?",
+      "back": "Warsaw Uprising",
+      "alternatives": [
+        "Uprising in Warsaw"
+      ],
+      "distractors": [
+        "October Revolution",
+        "Sharpeville massacre",
+        "Soweto uprising"
+      ],
+      "hint": "An uprising.",
+      "explanation": "The Polish Home Army rose against the German occupiers of Warsaw on 1 August; the Red Army waited across the Vistula, and after 63 days the uprising was crushed and the city largely destroyed.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 52.23,
+            "lng": 21.01
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Warsaw.",
+        "pins": [
+          {
+            "lat": 52.23,
+            "lng": 21.01,
+            "label": "Warsaw"
+          }
+        ]
+      }
+    },
+    {
+      "id": "berlin-1945",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1945**?",
+      "back": "Battle of Berlin",
+      "alternatives": [
+        "Berlin"
+      ],
+      "distractors": [
+        "Second Battle of El Alamein",
+        "Battle of Dien Bien Phu",
+        "Attack on Pearl Harbor"
+      ],
+      "hint": "A battle.",
+      "explanation": "Soviet forces encircled and stormed the German capital in April and May; Hitler killed himself in his bunker and Germany surrendered a few days later.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 52.52,
+            "lng": 13.38
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Berlin.",
+        "pins": [
+          {
+            "lat": 52.52,
+            "lng": 13.38,
+            "label": "Berlin"
+          }
+        ]
+      }
+    },
+    {
+      "id": "iwo-jima",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1945**?",
+      "back": "Battle of Iwo Jima",
+      "alternatives": [
+        "Iwo Jima"
+      ],
+      "distractors": [
+        "Second Battle of El Alamein",
+        "Attack on Pearl Harbor",
+        "Battle of Berlin"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "US Marines took the volcanic island of Iwo Jima from its Japanese defenders in five weeks of fighting; the photograph of the flag raising on Mount Suribachi became famous.",
+      "map": {
+        "alt": "A world map with a pin in the western Pacific.",
+        "pins": [
+          {
+            "lat": 24.78,
+            "lng": 141.32
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Iwo Jima.",
+        "pins": [
+          {
+            "lat": 24.78,
+            "lng": 141.32,
+            "label": "Iwo Jima"
+          }
+        ]
+      }
+    },
+    {
+      "id": "potsdam",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1945**?",
+      "back": "Potsdam Conference",
+      "alternatives": [
+        "Potsdam"
+      ],
+      "distractors": [
+        "Charter of the United Nations",
+        "Munich Agreement",
+        "Molotov–Ribbentrop Pact"
+      ],
+      "hint": "A summit.",
+      "explanation": "Truman, Stalin and Churchill, later Attlee, met at Cecilienhof Palace near Berlin to settle the postwar order in Europe, and issued the Potsdam Declaration calling on Japan to surrender.",
+      "map": {
+        "alt": "A world map with a pin in central Europe.",
+        "pins": [
+          {
+            "lat": 52.419,
+            "lng": 13.071
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Potsdam.",
+        "pins": [
+          {
+            "lat": 52.419,
+            "lng": 13.071,
+            "label": "Potsdam"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trinity",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1945**?",
+      "back": "Trinity test",
+      "alternatives": [
+        "Trinity",
+        "Trinity nuclear test"
+      ],
+      "distractors": [
+        "Hindenburg disaster",
+        "Chernobyl disaster",
+        "Atomic bombings of Hiroshima and Nagasaki"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A test.",
+      "explanation": "The first nuclear weapon was detonated on 16 July in the desert of New Mexico, as the first test of the Manhattan Project's atomic bomb.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 33.6773,
+            "lng": -106.4754
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Trinity site.",
+        "pins": [
+          {
+            "lat": 33.6773,
+            "lng": -106.4754,
+            "label": "Trinity site"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hiroshima-nagasaki",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place at these places in **1945**?",
+      "back": "Atomic bombings of Hiroshima and Nagasaki",
+      "alternatives": [
+        "Hiroshima and Nagasaki",
+        "Bombing of Hiroshima and Nagasaki",
+        "Atomic bombing of Hiroshima and Nagasaki",
+        "Hiroshima",
+        "Nagasaki"
+      ],
+      "distractors": [
+        "Bombing of Guernica",
+        "Trinity test",
+        "Attack on Pearl Harbor"
+      ],
+      "hint": "Two bombings.",
+      "explanation": "The United States dropped atomic bombs on the Japanese cities of Hiroshima on 6 August and Nagasaki on 9 August, killing well over 100,000 people; Japan surrendered days later.",
+      "map": {
+        "alt": "A world map with pins in East Asia.",
+        "pins": [
+          {
+            "lat": 34.39,
+            "lng": 132.45
+          },
+          {
+            "lat": 32.77,
+            "lng": 129.86
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with pins labelled Hiroshima and Nagasaki.",
+        "pins": [
+          {
+            "lat": 34.39,
+            "lng": 132.45,
+            "label": "Hiroshima"
+          },
+          {
+            "lat": 32.77,
+            "lng": 129.86,
+            "label": "Nagasaki"
+          }
+        ]
+      }
+    },
+    {
+      "id": "un-charter",
+      "type": "card",
+      "section": "ww2",
+      "front": "Which event took place here in **1945**?",
+      "back": "Charter of the United Nations",
+      "alternatives": [
+        "United Nations Charter",
+        "UN Charter",
+        "Signing of the UN Charter",
+        "Signing of the United Nations Charter"
+      ],
+      "distractors": [
+        "Munich Agreement",
+        "Molotov–Ribbentrop Pact",
+        "Potsdam Conference"
+      ],
+      "hint": "A founding document.",
+      "explanation": "Delegates of 50 nations signed the founding charter of the United Nations on 26 June at the San Francisco Conference.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 37.7788,
+            "lng": -122.4204
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled San Francisco.",
+        "pins": [
+          {
+            "lat": 37.7788,
+            "lng": -122.4204,
+            "label": "San Francisco"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gandhi-assassination",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1948**?",
+      "back": "Assassination of Mahatma Gandhi",
+      "alternatives": [
+        "Assassination of Gandhi",
+        "Gandhi assassination",
+        "Murder of Gandhi",
+        "Assassination of Mohandas Gandhi"
+      ],
+      "distractors": [
+        "Assassination of John F. Kennedy",
+        "Assassination of Martin Luther King Jr.",
+        "Assassination of Archduke Franz Ferdinand"
+      ],
+      "hint": "A political assassination.",
+      "explanation": "Gandhi was shot dead by the Hindu nationalist Nathuram Godse on his way to a prayer meeting at Birla House in New Delhi on 30 January.",
+      "map": {
+        "alt": "A world map with a pin in South Asia.",
+        "pins": [
+          {
+            "lat": 28.6,
+            "lng": 77.22
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled New Delhi.",
+        "pins": [
+          {
+            "lat": 28.6,
+            "lng": 77.22,
+            "label": "New Delhi"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inchon",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1950**?",
+      "back": "Battle of Inchon",
+      "alternatives": [
+        "Inchon",
+        "Incheon",
+        "Inchon Landing",
+        "Incheon Landing",
+        "Battle of Incheon"
+      ],
+      "distractors": [
+        "Battle of Dien Bien Phu",
+        "Battle of Berlin",
+        "Battle of Iwo Jima"
+      ],
+      "hint": "A landing.",
+      "explanation": "General MacArthur's surprise landing at the Korean port of Incheon in September cut off the North Korean army and turned the course of the Korean War.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 37.47,
+            "lng": 126.6
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Incheon.",
+        "pins": [
+          {
+            "lat": 37.47,
+            "lng": 126.6,
+            "label": "Incheon"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dien-bien-phu",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1954**?",
+      "back": "Battle of Dien Bien Phu",
+      "alternatives": [
+        "Dien Bien Phu",
+        "Điện Biên Phủ",
+        "Dienbienphu"
+      ],
+      "distractors": [
+        "Battle of Westerplatte",
+        "Normandy landings",
+        "Battle of Berlin"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A battle.",
+      "explanation": "Viet Minh forces under Võ Nguyên Giáp besieged and overran the French garrison in a remote valley in north-western Vietnam, which ended French colonial rule in Indochina.",
+      "map": {
+        "alt": "A world map with a pin in South-East Asia.",
+        "pins": [
+          {
+            "lat": 21.386,
+            "lng": 103.023
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Dien Bien Phu.",
+        "pins": [
+          {
+            "lat": 21.386,
+            "lng": 103.023,
+            "label": "Dien Bien Phu"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sharpeville",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1960**?",
+      "back": "Sharpeville massacre",
+      "alternatives": [
+        "Sharpeville"
+      ],
+      "distractors": [
+        "Soweto uprising",
+        "Warsaw Uprising",
+        "Jallianwala Bagh massacre"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A massacre.",
+      "explanation": "South African police opened fire on a crowd protesting against the apartheid pass laws in the township of Sharpeville and killed 69 people.",
+      "map": {
+        "alt": "A world map with a pin in southern Africa.",
+        "pins": [
+          {
+            "lat": -26.683,
+            "lng": 27.867
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Sharpeville.",
+        "pins": [
+          {
+            "lat": -26.683,
+            "lng": 27.867,
+            "label": "Sharpeville"
+          }
+        ]
+      }
+    },
+    {
+      "id": "valdivia-1960",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1960**?",
+      "back": "1960 Valdivia earthquake",
+      "alternatives": [
+        "Valdivia earthquake",
+        "Great Chilean earthquake",
+        "1960 Chile earthquake"
+      ],
+      "distractors": [
+        "1964 Alaska earthquake",
+        "1980 eruption of Mount St. Helens",
+        "Bombing of Guernica"
+      ],
+      "hint": "An earthquake.",
+      "explanation": "The strongest earthquake ever recorded, of magnitude 9.5, struck southern Chile on 22 May; its tsunami crossed the Pacific and also hit Hawaii and Japan.",
+      "map": {
+        "alt": "A world map with a pin in South America.",
+        "pins": [
+          {
+            "lat": -38.24,
+            "lng": -73.05
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Epicentre near Lumaco.",
+        "pins": [
+          {
+            "lat": -38.24,
+            "lng": -73.05,
+            "label": "Epicentre near Lumaco"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bay-of-pigs",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1961**?",
+      "back": "Bay of Pigs invasion",
+      "alternatives": [
+        "Bay of Pigs",
+        "Playa Girón",
+        "Bahía de Cochinos"
+      ],
+      "distractors": [
+        "Battle of Inchon",
+        "Battle of Iwo Jima",
+        "Battle of Midway"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "An invasion.",
+      "explanation": "About 1,400 Cuban exiles, trained and backed by the CIA, landed at the Bay of Pigs on Cuba's south coast and were defeated within three days by Fidel Castro's forces.",
+      "map": {
+        "alt": "A world map with a pin in the Caribbean.",
+        "pins": [
+          {
+            "lat": 22.08,
+            "lng": -81.07
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Bay of Pigs.",
+        "pins": [
+          {
+            "lat": 22.08,
+            "lng": -81.07,
+            "label": "Bay of Pigs"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jfk",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1963**?",
+      "back": "Assassination of John F. Kennedy",
+      "alternatives": [
+        "JFK assassination",
+        "Assassination of JFK",
+        "Kennedy assassination",
+        "Assassination of President Kennedy",
+        "John F. Kennedy assassination"
+      ],
+      "distractors": [
+        "Assassination of Mahatma Gandhi",
+        "Assassination of Martin Luther King Jr.",
+        "Beer Hall Putsch"
+      ],
+      "hint": "A political assassination.",
+      "explanation": "President Kennedy was shot dead while riding in an open car through Dealey Plaza in Dallas, Texas, on 22 November.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 32.7792,
+            "lng": -96.8089
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Dallas.",
+        "pins": [
+          {
+            "lat": 32.7792,
+            "lng": -96.8089,
+            "label": "Dallas"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alaska-1964",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1964**?",
+      "back": "1964 Alaska earthquake",
+      "alternatives": [
+        "Great Alaska earthquake",
+        "Good Friday earthquake",
+        "Alaska earthquake",
+        "1964 Alaska great earthquake and tsunami"
+      ],
+      "distractors": [
+        "Chernobyl disaster",
+        "1960 Valdivia earthquake",
+        "1980 eruption of Mount St. Helens"
+      ],
+      "hint": "An earthquake.",
+      "explanation": "A magnitude 9.2 earthquake, the strongest in US history, struck Prince William Sound on Good Friday and caused tsunamis along the Pacific coast.",
+      "map": {
+        "alt": "A world map with a pin in north-western North America.",
+        "pins": [
+          {
+            "lat": 61.05,
+            "lng": -147.48
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Prince William Sound.",
+        "pins": [
+          {
+            "lat": 61.05,
+            "lng": -147.48,
+            "label": "Prince William Sound"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mlk-assassination",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1968**?",
+      "back": "Assassination of Martin Luther King Jr.",
+      "alternatives": [
+        "Assassination of Martin Luther King",
+        "Martin Luther King assassination",
+        "Assassination of MLK",
+        "MLK assassination"
+      ],
+      "distractors": [
+        "Assassination of Mahatma Gandhi",
+        "Assassination of John F. Kennedy",
+        "Beer Hall Putsch"
+      ],
+      "hint": "A political assassination.",
+      "explanation": "The civil rights leader was shot on the balcony of the Lorraine Motel in Memphis, Tennessee, on 4 April, where he had come to support striking sanitation workers.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 35.1389,
+            "lng": -90.058
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Memphis.",
+        "pins": [
+          {
+            "lat": 35.1389,
+            "lng": -90.058,
+            "label": "Memphis"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fall-of-saigon",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1975**?",
+      "back": "Fall of Saigon",
+      "alternatives": [
+        "Saigon",
+        "Fall of Saigon 1975"
+      ],
+      "distractors": [
+        "Raid on Entebbe",
+        "Attack on Pearl Harbor",
+        "Battle of Berlin"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "The end of a war.",
+      "explanation": "North Vietnamese tanks rolled into the South Vietnamese capital on 30 April, ending the Vietnam War; Saigon was soon renamed Ho Chi Minh City.",
+      "map": {
+        "alt": "A world map with a pin in South-East Asia.",
+        "pins": [
+          {
+            "lat": 10.777,
+            "lng": 106.6955
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Saigon.",
+        "pins": [
+          {
+            "lat": 10.777,
+            "lng": 106.6955,
+            "label": "Saigon"
+          }
+        ]
+      }
+    },
+    {
+      "id": "entebbe",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1976**?",
+      "back": "Raid on Entebbe",
+      "alternatives": [
+        "Entebbe raid",
+        "Operation Entebbe",
+        "Operation Thunderbolt",
+        "Entebbe"
+      ],
+      "distractors": [
+        "Bay of Pigs invasion",
+        "Battle of Dien Bien Phu",
+        "Fall of Saigon"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A rescue raid.",
+      "explanation": "Israeli commandos flew some 4,000 kilometres to Entebbe airport in Uganda and freed hostages of a hijacked Air France plane in a raid of about 90 minutes.",
+      "map": {
+        "alt": "A world map with a pin in East Africa.",
+        "pins": [
+          {
+            "lat": 0.0446,
+            "lng": 32.4435
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Entebbe.",
+        "pins": [
+          {
+            "lat": 0.0446,
+            "lng": 32.4435,
+            "label": "Entebbe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "soweto",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1976**?",
+      "back": "Soweto uprising",
+      "alternatives": [
+        "Soweto",
+        "Soweto riots"
+      ],
+      "distractors": [
+        "Warsaw Uprising",
+        "1989 Tiananmen Square protests",
+        "Sharpeville massacre"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "An uprising.",
+      "explanation": "Thousands of Black schoolchildren marching in Soweto, near Johannesburg, against being taught in Afrikaans were met by police gunfire on 16 June, which set off protests across South Africa.",
+      "map": {
+        "alt": "A world map with a pin in southern Africa.",
+        "pins": [
+          {
+            "lat": -26.27,
+            "lng": 27.86
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Soweto.",
+        "pins": [
+          {
+            "lat": -26.27,
+            "lng": 27.86,
+            "label": "Soweto"
+          }
+        ]
+      }
+    },
+    {
+      "id": "camp-david",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1978**?",
+      "back": "Camp David Accords",
+      "alternatives": [
+        "Camp David",
+        "Camp David Agreement"
+      ],
+      "distractors": [
+        "Molotov–Ribbentrop Pact",
+        "Potsdam Conference",
+        "Charter of the United Nations"
+      ],
+      "hint": "A peace agreement.",
+      "explanation": "Egypt's President Sadat and Israel's Prime Minister Begin, with US President Carter, agreed at the presidential retreat in Maryland on a framework for peace that led to the 1979 Egypt-Israel peace treaty.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 39.648,
+            "lng": -77.465
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Camp David.",
+        "pins": [
+          {
+            "lat": 39.648,
+            "lng": -77.465,
+            "label": "Camp David"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mount-st-helens",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1980**?",
+      "back": "1980 eruption of Mount St. Helens",
+      "alternatives": [
+        "Mount St. Helens",
+        "Mount St Helens",
+        "Mount Saint Helens",
+        "Mount St. Helens eruption",
+        "1980 eruption of Mount St Helens"
+      ],
+      "distractors": [
+        "Chernobyl disaster",
+        "1960 Valdivia earthquake",
+        "Atomic bombings of Hiroshima and Nagasaki"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A volcanic eruption.",
+      "explanation": "On 18 May the volcano in Washington state erupted after a huge landslide, killing 57 people in the deadliest and most destructive volcanic event in US history.",
+      "map": {
+        "alt": "A world map with a pin in the United States.",
+        "pins": [
+          {
+            "lat": 46.1912,
+            "lng": -122.1944
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Mount St. Helens.",
+        "pins": [
+          {
+            "lat": 46.1912,
+            "lng": -122.1944,
+            "label": "Mount St. Helens"
+          }
+        ]
+      }
+    },
+    {
+      "id": "chernobyl",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1986**?",
+      "back": "Chernobyl disaster",
+      "alternatives": [
+        "Chernobyl",
+        "Chernobyl nuclear disaster",
+        "Chornobyl disaster",
+        "Chornobyl"
+      ],
+      "distractors": [
+        "1980 eruption of Mount St. Helens",
+        "1964 Alaska earthquake",
+        "2004 Indian Ocean earthquake and tsunami"
+      ],
+      "exercises": [
+        "flip",
+        "choice",
+        "type"
+      ],
+      "hint": "A nuclear accident.",
+      "explanation": "Reactor 4 of the Chernobyl nuclear power plant exploded during a test on 26 April, in what is now northern Ukraine, and spread radioactive fallout across Europe.",
+      "map": {
+        "alt": "A world map with a pin in eastern Europe.",
+        "pins": [
+          {
+            "lat": 51.3894,
+            "lng": 30.0994
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Chernobyl.",
+        "pins": [
+          {
+            "lat": 51.3894,
+            "lng": 30.0994,
+            "label": "Chernobyl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tiananmen",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **1989**?",
+      "back": "1989 Tiananmen Square protests",
+      "alternatives": [
+        "Tiananmen Square protests",
+        "Tiananmen Square",
+        "Tiananmen",
+        "Tiananmen Square massacre",
+        "Tiananmen Square protests of 1989",
+        "Tiananmen protests"
+      ],
+      "distractors": [
+        "Soweto uprising",
+        "Warsaw Uprising",
+        "Sharpeville massacre"
+      ],
+      "hint": "Mass protests.",
+      "explanation": "Student-led demonstrations calling for reform filled Tiananmen Square in Beijing for weeks, until the army cleared the square and the surrounding streets by force on 3 and 4 June.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 39.9087,
+            "lng": 116.3975
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Tiananmen Square.",
+        "pins": [
+          {
+            "lat": 39.9087,
+            "lng": 116.3975,
+            "label": "Tiananmen Square"
+          }
+        ]
+      }
+    },
+    {
+      "id": "indian-ocean-2004",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **2004**?",
+      "back": "2004 Indian Ocean earthquake and tsunami",
+      "alternatives": [
+        "2004 Indian Ocean earthquake",
+        "Boxing Day tsunami",
+        "2004 Indian Ocean tsunami",
+        "Indian Ocean tsunami",
+        "Asian tsunami",
+        "Indian Ocean earthquake"
+      ],
+      "distractors": [
+        "2008 Sichuan earthquake",
+        "Chernobyl disaster",
+        "1980 eruption of Mount St. Helens"
+      ],
+      "hint": "An earthquake and tsunami.",
+      "explanation": "A magnitude 9.1 earthquake off the west coast of Sumatra on 26 December caused a tsunami that killed about 230,000 people around the Indian Ocean.",
+      "map": {
+        "alt": "A world map with a pin in South-East Asia.",
+        "pins": [
+          {
+            "lat": 3.295,
+            "lng": 95.982
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Epicentre off Sumatra.",
+        "pins": [
+          {
+            "lat": 3.295,
+            "lng": 95.982,
+            "label": "Epicentre off Sumatra"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sichuan-2008",
+      "type": "card",
+      "section": "postwar",
+      "front": "Which event took place here in **2008**?",
+      "back": "2008 Sichuan earthquake",
+      "alternatives": [
+        "Sichuan earthquake",
+        "Wenchuan earthquake",
+        "2008 Wenchuan earthquake"
+      ],
+      "distractors": [
+        "2004 Indian Ocean earthquake and tsunami",
+        "Chernobyl disaster",
+        "1964 Alaska earthquake"
+      ],
+      "hint": "An earthquake.",
+      "explanation": "A magnitude 7.9 earthquake in the mountains of Sichuan province in China on 12 May killed nearly 70,000 people.",
+      "map": {
+        "alt": "A world map with a pin in East Asia.",
+        "pins": [
+          {
+            "lat": 31.0,
+            "lng": 103.35
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a pin labelled Wenchuan.",
+        "pins": [
+          {
+            "lat": 31.0,
+            "lng": 103.35,
+            "label": "Wenchuan"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-franz-ferdinand",
+      "type": "text",
+      "section": "where",
+      "question": "In which city was Archduke Franz Ferdinand, heir to the Austro-Hungarian throne, assassinated on 28 June 1914?",
+      "answers": [
+        "Sarajevo"
+      ],
+      "explanation": "Gavrilo Princip shot him near the Latin Bridge in Sarajevo, today the capital of Bosnia and Herzegovina.",
+      "answerMap": {
+        "alt": "A world map with a pin at Sarajevo.",
+        "pins": [
+          {
+            "lat": 43.8582,
+            "lng": 18.4287,
+            "label": "Sarajevo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-lincoln-assassination",
+      "type": "text",
+      "section": "where",
+      "question": "In which city was US President Abraham Lincoln shot in April 1865?",
+      "answers": [
+        "Washington, D.C.",
+        "Washington",
+        "Washington DC",
+        "Washington D.C.",
+        "Washington, DC"
+      ],
+      "explanation": "Lincoln was shot at Ford's Theatre, about a kilometre from the White House, and died the next morning.",
+      "answerMap": {
+        "alt": "A world map with a pin at Washington, D.C..",
+        "pins": [
+          {
+            "lat": 38.8967,
+            "lng": -77.0258,
+            "label": "Washington, D.C."
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-jfk",
+      "type": "text",
+      "section": "where",
+      "question": "In which US city was President John F. Kennedy shot in November 1963?",
+      "answers": [
+        "Dallas"
+      ],
+      "explanation": "Kennedy was killed in an open car in Dealey Plaza in Dallas, Texas.",
+      "answerMap": {
+        "alt": "A world map with a pin at Dallas.",
+        "pins": [
+          {
+            "lat": 32.7792,
+            "lng": -96.8089,
+            "label": "Dallas"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-mlk-assassination",
+      "type": "text",
+      "section": "where",
+      "question": "In which Tennessee city was Martin Luther King Jr. shot in April 1968?",
+      "answers": [
+        "Memphis"
+      ],
+      "explanation": "King was shot on the balcony of the Lorraine Motel in Memphis, where he supported a strike of sanitation workers.",
+      "answerMap": {
+        "alt": "A world map with a pin at Memphis.",
+        "pins": [
+          {
+            "lat": 35.1389,
+            "lng": -90.058,
+            "label": "Memphis"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-un-charter",
+      "type": "text",
+      "section": "where",
+      "question": "In which US city was the Charter of the United Nations signed in June 1945?",
+      "answers": [
+        "San Francisco"
+      ],
+      "explanation": "The charter was signed at the end of the United Nations Conference on International Organization in San Francisco.",
+      "answerMap": {
+        "alt": "A world map with a pin at San Francisco.",
+        "pins": [
+          {
+            "lat": 37.7788,
+            "lng": -122.4204,
+            "label": "San Francisco"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-molotov-ribbentrop",
+      "type": "text",
+      "section": "where",
+      "question": "In which city did the German and Soviet foreign ministers sign a non-aggression pact in August 1939?",
+      "answers": [
+        "Moscow",
+        "Moskva"
+      ],
+      "explanation": "Ribbentrop flew to Moscow, where the pact was signed in the Kremlin on the night of 23 August.",
+      "answerMap": {
+        "alt": "A world map with a pin at Moscow.",
+        "pins": [
+          {
+            "lat": 55.752,
+            "lng": 37.6175,
+            "label": "Moscow"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-beer-hall-putsch",
+      "type": "text",
+      "section": "where",
+      "question": "In which German city did Hitler try to seize power in November 1923?",
+      "answers": [
+        "Munich",
+        "München"
+      ],
+      "explanation": "The putsch began in a beer hall in Munich and was crushed the next day in front of the Feldherrnhalle.",
+      "answerMap": {
+        "alt": "A world map with a pin at Munich.",
+        "pins": [
+          {
+            "lat": 48.1298,
+            "lng": 11.5925,
+            "label": "Munich"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-chernobyl",
+      "type": "text",
+      "section": "where",
+      "question": "In which present-day country is the Chernobyl nuclear power plant, site of the 1986 disaster?",
+      "answers": [
+        "Ukraine"
+      ],
+      "explanation": "The plant lies near the town of Pripyat in northern Ukraine, which was part of the Soviet Union in 1986.",
+      "answerMap": {
+        "alt": "A world map with a pin at Chernobyl.",
+        "pins": [
+          {
+            "lat": 51.3894,
+            "lng": 30.0994,
+            "label": "Chernobyl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-krakatoa",
+      "type": "text",
+      "section": "where",
+      "question": "In which present-day country is the volcano Krakatoa, which exploded in 1883?",
+      "answers": [
+        "Indonesia"
+      ],
+      "explanation": "Krakatoa is a volcanic island in the Sunda Strait between Java and Sumatra.",
+      "answerMap": {
+        "alt": "A world map with a pin at Krakatoa.",
+        "pins": [
+          {
+            "lat": -6.1,
+            "lng": 105.42,
+            "label": "Krakatoa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-tambora",
+      "type": "text",
+      "section": "where",
+      "question": "On which Indonesian island is Mount Tambora, which erupted in 1815?",
+      "answers": [
+        "Sumbawa"
+      ],
+      "explanation": "Mount Tambora is on the island of Sumbawa, east of Java and Bali.",
+      "answerMap": {
+        "alt": "A world map with a pin at Mount Tambora.",
+        "pins": [
+          {
+            "lat": -8.25,
+            "lng": 117.99,
+            "label": "Mount Tambora"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-waterloo",
+      "type": "text",
+      "section": "where",
+      "question": "In which present-day country was Napoleon defeated at Waterloo in 1815?",
+      "answers": [
+        "Belgium",
+        "Belgique",
+        "België"
+      ],
+      "explanation": "Waterloo is a town south of Brussels in Belgium, which was then part of the United Kingdom of the Netherlands.",
+      "answerMap": {
+        "alt": "A world map with a pin at Waterloo.",
+        "pins": [
+          {
+            "lat": 50.68,
+            "lng": 4.41,
+            "label": "Waterloo"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-trafalgar",
+      "type": "text",
+      "section": "where",
+      "question": "Off the coast of which country did Nelson win the Battle of Trafalgar in 1805?",
+      "answers": [
+        "Spain",
+        "España"
+      ],
+      "explanation": "Cape Trafalgar lies on the Atlantic coast of Spain, between Cádiz and the Strait of Gibraltar.",
+      "answerMap": {
+        "alt": "A world map with a pin at Cape Trafalgar.",
+        "pins": [
+          {
+            "lat": 36.17,
+            "lng": -6.2,
+            "label": "Cape Trafalgar"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-gettysburg",
+      "type": "text",
+      "section": "where",
+      "question": "In which US state was the Battle of Gettysburg fought in July 1863?",
+      "answers": [
+        "Pennsylvania"
+      ],
+      "explanation": "Gettysburg is a town in southern Pennsylvania, about 80 kilometres north-west of Baltimore.",
+      "answerMap": {
+        "alt": "A world map with a pin at Gettysburg.",
+        "pins": [
+          {
+            "lat": 39.81,
+            "lng": -77.23,
+            "label": "Gettysburg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-little-bighorn",
+      "type": "text",
+      "section": "where",
+      "question": "In which US state was Custer's last stand against the Lakota and Cheyenne fought in 1876?",
+      "answers": [
+        "Montana"
+      ],
+      "explanation": "The battlefield lies on the Little Bighorn River in south-eastern Montana.",
+      "answerMap": {
+        "alt": "A world map with a pin at Little Bighorn.",
+        "pins": [
+          {
+            "lat": 45.57,
+            "lng": -107.43,
+            "label": "Little Bighorn"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-alamo",
+      "type": "text",
+      "section": "where",
+      "question": "In which Texas city did the defenders of the Alamo mission make their stand in 1836?",
+      "answers": [
+        "San Antonio"
+      ],
+      "explanation": "The old Spanish mission, now a museum, stands in the centre of San Antonio.",
+      "answerMap": {
+        "alt": "A world map with a pin at San Antonio.",
+        "pins": [
+          {
+            "lat": 29.426,
+            "lng": -98.486,
+            "label": "San Antonio"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-gallipoli",
+      "type": "text",
+      "section": "where",
+      "question": "In which present-day country is the Gallipoli peninsula, scene of the Allied landings of 1915?",
+      "answers": [
+        "Turkey",
+        "Türkiye",
+        "Turkiye"
+      ],
+      "explanation": "The peninsula forms the north-western shore of the Dardanelles in European Turkey.",
+      "answerMap": {
+        "alt": "A world map with a pin at Gallipoli.",
+        "pins": [
+          {
+            "lat": 40.25,
+            "lng": 26.28,
+            "label": "Gallipoli"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-entebbe",
+      "type": "text",
+      "section": "where",
+      "question": "In which African country did the 1976 hostage rescue raid at Entebbe airport take place?",
+      "answers": [
+        "Uganda"
+      ],
+      "explanation": "Entebbe lies on the shore of Lake Victoria, close to Uganda's capital Kampala.",
+      "answerMap": {
+        "alt": "A world map with a pin at Entebbe.",
+        "pins": [
+          {
+            "lat": 0.0446,
+            "lng": 32.4435,
+            "label": "Entebbe"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-mount-st-helens",
+      "type": "text",
+      "section": "where",
+      "question": "In which US state is Mount St. Helens, which erupted in May 1980?",
+      "answers": [
+        "Washington",
+        "Washington State"
+      ],
+      "explanation": "The volcano lies in the Cascade Range in the south-west of Washington state.",
+      "answerMap": {
+        "alt": "A world map with a pin at Mount St. Helens.",
+        "pins": [
+          {
+            "lat": 46.1912,
+            "lng": -122.1944,
+            "label": "Mount St. Helens"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-soweto",
+      "type": "text",
+      "section": "where",
+      "question": "Soweto, where the 1976 school uprising began, is a township of which large South African city?",
+      "answers": [
+        "Johannesburg",
+        "Joburg"
+      ],
+      "explanation": "Soweto lies south-west of Johannesburg; its name comes from South Western Townships.",
+      "answerMap": {
+        "alt": "A world map with a pin at Soweto.",
+        "pins": [
+          {
+            "lat": -26.27,
+            "lng": 27.86,
+            "label": "Soweto"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-leningrad",
+      "type": "text",
+      "section": "where",
+      "question": "By what name is the city of Leningrad, besieged from 1941 to 1944, known today?",
+      "answers": [
+        "Saint Petersburg",
+        "St Petersburg",
+        "St. Petersburg",
+        "Petersburg",
+        "Saint-Petersburg",
+        "Sankt Petersburg",
+        "Sankt-Peterburg"
+      ],
+      "explanation": "The city was founded in 1703 as Saint Petersburg, was called Petrograd and then Leningrad, and took its first name back in 1991.",
+      "answerMap": {
+        "alt": "A world map with a pin at Saint Petersburg.",
+        "pins": [
+          {
+            "lat": 59.934,
+            "lng": 30.335,
+            "label": "Saint Petersburg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-fall-of-saigon",
+      "type": "text",
+      "section": "where",
+      "question": "By what name is the city of Saigon, which fell in April 1975, known today?",
+      "answers": [
+        "Ho Chi Minh City",
+        "Ho Chi Minh",
+        "Thanh pho Ho Chi Minh",
+        "HCMC"
+      ],
+      "explanation": "Saigon was renamed Ho Chi Minh City in 1976; many people still use the old name.",
+      "answerMap": {
+        "alt": "A world map with a pin at Ho Chi Minh City.",
+        "pins": [
+          {
+            "lat": 10.777,
+            "lng": 106.6955,
+            "label": "Ho Chi Minh City"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-stalingrad",
+      "type": "text",
+      "section": "where",
+      "question": "By what name is the city of Stalingrad, where a major battle was fought in 1942 and 1943, known today?",
+      "answers": [
+        "Volgograd"
+      ],
+      "explanation": "The city on the Volga was called Tsaritsyn, then Stalingrad, and has been Volgograd since 1961.",
+      "answerMap": {
+        "alt": "A world map with a pin at Volgograd.",
+        "pins": [
+          {
+            "lat": 48.708,
+            "lng": 44.513,
+            "label": "Volgograd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-trinity",
+      "type": "text",
+      "section": "where",
+      "question": "In which US state was the first atomic bomb exploded in July 1945?",
+      "answers": [
+        "New Mexico"
+      ],
+      "explanation": "The test site lies in the desert about 100 kilometres north-west of Alamogordo, New Mexico.",
+      "answerMap": {
+        "alt": "A world map with a pin at Trinity site.",
+        "pins": [
+          {
+            "lat": 33.6773,
+            "lng": -106.4754,
+            "label": "Trinity site"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-tiananmen",
+      "type": "text",
+      "section": "where",
+      "question": "In which city is Tiananmen Square, the site of the large protests of spring 1989?",
+      "answers": [
+        "Beijing",
+        "Peking"
+      ],
+      "explanation": "The square lies in the centre of Beijing, in front of the Forbidden City.",
+      "answerMap": {
+        "alt": "A world map with a pin at Tiananmen Square.",
+        "pins": [
+          {
+            "lat": 39.9087,
+            "lng": 116.3975,
+            "label": "Tiananmen Square"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-adwa",
+      "type": "text",
+      "section": "where",
+      "question": "In which country did Emperor Menelik II defeat an Italian army at Adwa in 1896?",
+      "answers": [
+        "Ethiopia"
+      ],
+      "explanation": "Adwa is a town in the Tigray highlands in the north of Ethiopia.",
+      "answerMap": {
+        "alt": "A world map with a pin at Adwa.",
+        "pins": [
+          {
+            "lat": 14.15,
+            "lng": 38.9,
+            "label": "Adwa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-omdurman",
+      "type": "text",
+      "section": "where",
+      "question": "Omdurman, where Kitchener defeated the Mahdists in 1898, lies across the Nile from which capital city?",
+      "answers": [
+        "Khartoum"
+      ],
+      "explanation": "Omdurman is today part of the Khartoum metropolitan area in Sudan, at the junction of the Blue and White Nile.",
+      "answerMap": {
+        "alt": "A world map with a pin at Omdurman.",
+        "pins": [
+          {
+            "lat": 15.75,
+            "lng": 32.5,
+            "label": "Omdurman"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-isandlwana",
+      "type": "text",
+      "section": "where",
+      "question": "In which country is Isandlwana, where a Zulu army destroyed a British column in 1879?",
+      "answers": [
+        "South Africa",
+        "Republic of South Africa"
+      ],
+      "explanation": "Isandlwana is a hill in the province of KwaZulu-Natal, in the east of South Africa.",
+      "answerMap": {
+        "alt": "A world map with a pin at Isandlwana.",
+        "pins": [
+          {
+            "lat": -28.352,
+            "lng": 30.652,
+            "label": "Isandlwana"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-wuchang",
+      "type": "text",
+      "section": "where",
+      "question": "Wuchang, where the uprising of October 1911 began, is now part of which large Chinese city?",
+      "answers": [
+        "Wuhan"
+      ],
+      "explanation": "Wuchang lies on the south bank of the Yangtze and joined Hankou and Hanyang in 1927 to form Wuhan.",
+      "answerMap": {
+        "alt": "A world map with a pin at Wuchang.",
+        "pins": [
+          {
+            "lat": 30.55,
+            "lng": 114.31,
+            "label": "Wuchang"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-dien-bien-phu",
+      "type": "text",
+      "section": "where",
+      "question": "In which country is Dien Bien Phu, where the French army was defeated in 1954?",
+      "answers": [
+        "Vietnam",
+        "Viet Nam"
+      ],
+      "explanation": "The valley lies in the north-west of Vietnam, near the border with Laos.",
+      "answerMap": {
+        "alt": "A world map with a pin at Dien Bien Phu.",
+        "pins": [
+          {
+            "lat": 21.386,
+            "lng": 103.023,
+            "label": "Dien Bien Phu"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-plassey",
+      "type": "text",
+      "section": "where",
+      "question": "In which Indian state lies Plassey, where Robert Clive won his famous victory in 1757?",
+      "answers": [
+        "West Bengal"
+      ],
+      "explanation": "Plassey, in Bengali Palashi, lies in the Nadia district of West Bengal, on the Bhagirathi river.",
+      "answerMap": {
+        "alt": "A world map with a pin at Plassey.",
+        "pins": [
+          {
+            "lat": 23.783,
+            "lng": 88.25,
+            "label": "Plassey"
+          }
+        ]
+      }
+    },
+    {
+      "id": "where-diu",
+      "type": "text",
+      "section": "where",
+      "question": "Diu, off which a Portuguese fleet won a naval battle in 1509, lies off the coast of which present-day country?",
+      "answers": [
+        "India"
+      ],
+      "explanation": "Diu is a small island off the coast of Gujarat in western India and was a Portuguese possession until 1961.",
+      "answerMap": {
+        "alt": "A world map with a pin at Diu.",
+        "pins": [
+          {
+            "lat": 20.71,
+            "lng": 70.99,
+            "label": "Diu"
+          }
+        ]
+      }
+    }
+  ]
+}
