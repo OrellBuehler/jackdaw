@@ -110,9 +110,7 @@ internal object PackCombiner {
         val fields = LinkedHashMap<String, JsonElement>(root)
         fields["items"] = JsonArray(rawItems + added)
         if (addedSections.isNotEmpty()) fields["sections"] = JsonArray(rawSections + addedSections)
-        val declared = (root["version"] as? JsonPrimitive)?.content?.toIntOrNull() ?: 1
-        val needsFigures = picked.any { it.second.figure != null || it.second.answerFigure != null }
-        if (needsFigures && declared < 2) fields["version"] = JsonPrimitive(2)
+        FormatVersion.raised(root, rawItems + added)?.let { fields["version"] = it }
         val source = pretty.encodeToString(JsonElement.serializer(), JsonObject(fields))
         return Outcome.Merged(source, title, items, added.size, duplicates, addedSections.size, other.pack.title)
     }
