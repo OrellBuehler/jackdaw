@@ -1,0 +1,5717 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 3,
+  "id": "com.github.orellbuehler.jackdaw.examples.lives-on-the-map",
+  "title": "Lives on the Map",
+  "description": "123 famous people, from Alexander the Great to Pelé, known by two places only: where they were born and where they died. A line on the map joins the two, labelled with the years; name the person. Rulers, leaders, scientists, writers and artists, as multiple choice, flip cards and typed answers.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://www.wikidata.org",
+  "tags": [
+    "history",
+    "geography",
+    "maps",
+    "people",
+    "biography"
+  ],
+  "icon": "🧭",
+  "color": "#6D28D9",
+  "revision": 1,
+  "created": "2026-11-25",
+  "updated": "2026-11-25",
+  "sections": [
+    {
+      "id": "rulers",
+      "title": "Rulers and conquerors",
+      "description": "Emperors, kings and sultans, from Alexander to Elizabeth II."
+    },
+    {
+      "id": "leaders",
+      "title": "Statesmen, rebels and reformers",
+      "description": "Presidents, revolutionaries and moral leaders."
+    },
+    {
+      "id": "science",
+      "title": "Scientists, thinkers and explorers",
+      "description": "Astronomers, inventors, philosophers and navigators."
+    },
+    {
+      "id": "writers",
+      "title": "Writers",
+      "description": "Poets, novelists and playwrights."
+    },
+    {
+      "id": "arts",
+      "title": "Artists, composers and entertainers",
+      "description": "Painters, musicians, film stars and athletes."
+    }
+  ],
+  "study": {
+    "order": "sequential",
+    "newPerSession": 8,
+    "ignoreDiacritics": true,
+    "exercises": {
+      "card": [
+        "flip",
+        "choice",
+        "type"
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "alexander-the-great",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Alexander the Great",
+      "alternatives": [
+        "Alexander III of Macedon",
+        "Alexander III",
+        "Alexander of Macedon",
+        "Alexander"
+      ],
+      "hint": "A king of ancient Macedon.",
+      "explanation": "King of Macedon who conquered the Persian Empire and created an empire stretching from Greece to India. Born in Pella in Macedonia, died in Babylon.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the Balkans (born 356 BCE) to the place of death in the Middle East (died 323 BCE).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.7611,
+            "lng": 22.5239,
+            "label": "b. 356 BCE"
+          },
+          {
+            "lat": 32.5363,
+            "lng": 44.4209,
+            "label": "d. 323 BCE"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Pella, 356 BCE to Babylon, 323 BCE.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.7611,
+            "lng": 22.5239,
+            "label": "Pella, 356 BCE"
+          },
+          {
+            "lat": 32.5363,
+            "lng": 44.4209,
+            "label": "Babylon, 323 BCE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "augustus",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Augustus",
+      "alternatives": [
+        "Octavian",
+        "Caesar Augustus",
+        "Gaius Octavius",
+        "Octavianus",
+        "Emperor Augustus"
+      ],
+      "hint": "The first Roman emperor.",
+      "explanation": "The first Roman emperor, who ended the civil wars and ruled for over 40 years. Born in Rome, died in Nola near Naples.",
+      "map": {
+        "alt": "A world map with a line between two places in Italy: the birthplace (born 63 BCE) and the place of death (died 14 CE).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.8902,
+            "lng": 12.4922,
+            "label": "b. 63 BCE"
+          },
+          {
+            "lat": 40.9262,
+            "lng": 14.5272,
+            "label": "d. 14 CE"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Rome, 63 BCE to Nola, 14 CE.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.8902,
+            "lng": 12.4922,
+            "label": "Rome, 63 BCE"
+          },
+          {
+            "lat": 40.9262,
+            "lng": 14.5272,
+            "label": "Nola, 14 CE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "constantine",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Constantine the Great",
+      "alternatives": [
+        "Constantine",
+        "Constantine I",
+        "Constantinus"
+      ],
+      "hint": "A Roman emperor of the 4th century.",
+      "explanation": "Roman emperor who ended the persecution of Christians and founded Constantinople as a new capital. Born in Naissus, today Niš in Serbia, died in near Nicomedia, today İzmit in Turkey.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in south-eastern Europe (born c. 272) to the place of death in Turkey (died 337).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.3209,
+            "lng": 21.8958,
+            "label": "b. c. 272"
+          },
+          {
+            "lat": 40.7669,
+            "lng": 29.9169,
+            "label": "d. 337"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Naissus (Niš), c. 272 to Nicomedia (İzmit), 337.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.3209,
+            "lng": 21.8958,
+            "label": "Naissus (Niš), c. 272"
+          },
+          {
+            "lat": 40.7669,
+            "lng": 29.9169,
+            "label": "Nicomedia (İzmit), 337"
+          }
+        ]
+      }
+    },
+    {
+      "id": "muhammad",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Muhammad",
+      "alternatives": [
+        "Prophet Muhammad",
+        "Mohammed",
+        "Mohammad",
+        "Muhammad ibn Abdullah",
+        "The Prophet Muhammad"
+      ],
+      "hint": "The prophet of a world religion.",
+      "explanation": "The prophet of Islam, who united much of Arabia under the new faith in the last years of his life. Born in Mecca, died in Medina.",
+      "map": {
+        "alt": "A world map with a line between two places in the Middle East: the birthplace (born c. 570) and the place of death (died 632).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 21.4225,
+            "lng": 39.8262,
+            "label": "b. c. 570"
+          },
+          {
+            "lat": 24.4672,
+            "lng": 39.6111,
+            "label": "d. 632"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Mecca, c. 570 to Medina, 632.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 21.4225,
+            "lng": 39.8262,
+            "label": "Mecca, c. 570"
+          },
+          {
+            "lat": 24.4672,
+            "lng": 39.6111,
+            "label": "Medina, 632"
+          }
+        ]
+      }
+    },
+    {
+      "id": "saladin",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Saladin",
+      "alternatives": [
+        "Salah ad-Din",
+        "Salah al-Din",
+        "Salahuddin",
+        "Saladin the Great"
+      ],
+      "hint": "A Muslim sultan of the time of the crusades.",
+      "explanation": "Muslim sultan of Egypt and Syria who united the region against the crusaders and retook Jerusalem in 1187. Born in Tikrit in Iraq, died in Damascus.",
+      "map": {
+        "alt": "A world map with a line between two places in the Middle East: the birthplace (born c. 1137) and the place of death (died 1193).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 34.6,
+            "lng": 43.68,
+            "label": "b. c. 1137"
+          },
+          {
+            "lat": 33.5138,
+            "lng": 36.2765,
+            "label": "d. 1193"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Tikrit, c. 1137 to Damascus, 1193.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 34.6,
+            "lng": 43.68,
+            "label": "Tikrit, c. 1137"
+          },
+          {
+            "lat": 33.5138,
+            "lng": 36.2765,
+            "label": "Damascus, 1193"
+          }
+        ]
+      }
+    },
+    {
+      "id": "william-the-conqueror",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "William the Conqueror",
+      "alternatives": [
+        "William I",
+        "William I of England",
+        "William of Normandy",
+        "William the Bastard"
+      ],
+      "hint": "A medieval duke who became a king.",
+      "explanation": "Duke of Normandy who won the Battle of Hastings and became king of England in 1066. Born in Falaise in Normandy, died in Rouen.",
+      "map": {
+        "alt": "A world map with a line between two places in western Europe: the birthplace (born c. 1028) and the place of death (died 1087).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.8946,
+            "lng": -0.1983,
+            "label": "b. c. 1028"
+          },
+          {
+            "lat": 49.4432,
+            "lng": 1.0993,
+            "label": "d. 1087"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Falaise, c. 1028 to Rouen, 1087.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.8946,
+            "lng": -0.1983,
+            "label": "Falaise, c. 1028"
+          },
+          {
+            "lat": 49.4432,
+            "lng": 1.0993,
+            "label": "Rouen, 1087"
+          }
+        ]
+      }
+    },
+    {
+      "id": "joan-of-arc",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Joan of Arc",
+      "alternatives": [
+        "Jeanne d'Arc",
+        "Saint Joan",
+        "Joan d'Arc"
+      ],
+      "hint": "A young French woman of the Hundred Years' War.",
+      "explanation": "French peasant girl who led armies against the English in the Hundred Years' War and was burned at the stake as a heretic. Born in Domrémy in north-eastern France, died in Rouen.",
+      "map": {
+        "alt": "A world map with a line between two places in western Europe: the birthplace (born c. 1412) and the place of death (died 1431).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.4417,
+            "lng": 5.6717,
+            "label": "b. c. 1412"
+          },
+          {
+            "lat": 49.4432,
+            "lng": 1.0993,
+            "label": "d. 1431"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Domrémy, c. 1412 to Rouen, 1431.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.4417,
+            "lng": 5.6717,
+            "label": "Domrémy, c. 1412"
+          },
+          {
+            "lat": 49.4432,
+            "lng": 1.0993,
+            "label": "Rouen, 1431"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mehmed-ii",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Mehmed II",
+      "alternatives": [
+        "Mehmed the Conqueror",
+        "Mehmet II",
+        "Mehmet the Conqueror",
+        "Fatih Sultan Mehmet",
+        "Mehmed Fatih"
+      ],
+      "hint": "An Ottoman sultan.",
+      "explanation": "Ottoman sultan who conquered Constantinople in 1453 at the age of 21. Born in Edirne, died in near Gebze in Turkey.",
+      "map": {
+        "alt": "A world map with a line between two places in Turkey: the birthplace (born 1432) and the place of death (died 1481).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.6772,
+            "lng": 26.5557,
+            "label": "b. 1432"
+          },
+          {
+            "lat": 40.8,
+            "lng": 29.43,
+            "label": "d. 1481"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Edirne, 1432 to Gebze, 1481.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.6772,
+            "lng": 26.5557,
+            "label": "Edirne, 1432"
+          },
+          {
+            "lat": 40.8,
+            "lng": 29.43,
+            "label": "Gebze, 1481"
+          }
+        ]
+      }
+    },
+    {
+      "id": "suleiman",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Suleiman the Magnificent",
+      "alternatives": [
+        "Suleiman I",
+        "Suleiman",
+        "Suleyman the Magnificent",
+        "Süleyman the Magnificent",
+        "Suleyman I",
+        "Süleyman I",
+        "Suleyman"
+      ],
+      "hint": "An Ottoman sultan.",
+      "explanation": "Ottoman sultan under whom the empire reached the height of its power; he died during a siege in Hungary. Born in Trabzon, died in Szigetvár in Hungary.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in Turkey (born 1494) to the place of death in central Europe (died 1566).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.0027,
+            "lng": 39.7168,
+            "label": "b. 1494"
+          },
+          {
+            "lat": 46.0485,
+            "lng": 17.8,
+            "label": "d. 1566"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Trabzon, 1494 to Szigetvár, 1566.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.0027,
+            "lng": 39.7168,
+            "label": "Trabzon, 1494"
+          },
+          {
+            "lat": 46.0485,
+            "lng": 17.8,
+            "label": "Szigetvár, 1566"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charles-v",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Charles V",
+      "alternatives": [
+        "Charles V, Holy Roman Emperor",
+        "Emperor Charles V",
+        "Charles I of Spain",
+        "Carlos V",
+        "Karl V",
+        "Charles the Fifth"
+      ],
+      "hint": "A Habsburg ruler of the 16th century.",
+      "explanation": "Holy Roman Emperor and king of Spain who ruled an empire on which 'the sun never set' and finally withdrew to a monastery. Born in Ghent, died in the monastery of Yuste in Spain.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1500) to the place of death in the Iberian Peninsula (died 1558).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.0543,
+            "lng": 3.7174,
+            "label": "b. 1500"
+          },
+          {
+            "lat": 40.12,
+            "lng": -5.75,
+            "label": "d. 1558"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Ghent, 1500 to Yuste monastery, 1558.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.0543,
+            "lng": 3.7174,
+            "label": "Ghent, 1500"
+          },
+          {
+            "lat": 40.12,
+            "lng": -5.75,
+            "label": "Yuste monastery, 1558"
+          }
+        ]
+      }
+    },
+    {
+      "id": "peter-the-great",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Peter the Great",
+      "alternatives": [
+        "Peter I",
+        "Peter I of Russia",
+        "Peter the First"
+      ],
+      "hint": "A tsar of Russia.",
+      "explanation": "Russian tsar who modernised Russia along Western lines and founded Saint Petersburg. Born in Moscow, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1672) and the place of death (died 1725).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7558,
+            "lng": 37.6173,
+            "label": "b. 1672"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1725"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Moscow, 1672 to Saint Petersburg, 1725.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7558,
+            "lng": 37.6173,
+            "label": "Moscow, 1672"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1725"
+          }
+        ]
+      }
+    },
+    {
+      "id": "catherine-the-great",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Catherine the Great",
+      "alternatives": [
+        "Catherine II",
+        "Catherine II of Russia",
+        "Empress Catherine II"
+      ],
+      "hint": "An empress of Russia.",
+      "explanation": "German-born empress of Russia who expanded the empire and corresponded with Voltaire and Diderot. Born in Stettin, today Szczecin in Poland, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1729) to the place of death in eastern Europe (died 1796).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.4285,
+            "lng": 14.5528,
+            "label": "b. 1729"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1796"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Stettin (Szczecin), 1729 to Saint Petersburg, 1796.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.4285,
+            "lng": 14.5528,
+            "label": "Stettin (Szczecin), 1729"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1796"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marie-antoinette",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Marie Antoinette",
+      "alternatives": [
+        "Marie-Antoinette",
+        "Queen Marie Antoinette"
+      ],
+      "hint": "A queen of France.",
+      "explanation": "Austrian-born queen of France who was guillotined during the French Revolution. Born in Vienna, died in Paris.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1755) to the place of death in western Europe (died 1793).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "b. 1755"
+          },
+          {
+            "lat": 48.8656,
+            "lng": 2.3212,
+            "label": "d. 1793"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Vienna, 1755 to Paris, 1793.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "Vienna, 1755"
+          },
+          {
+            "lat": 48.8656,
+            "lng": 2.3212,
+            "label": "Paris, 1793"
+          }
+        ]
+      }
+    },
+    {
+      "id": "napoleon",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Napoleon Bonaparte",
+      "alternatives": [
+        "Napoleon",
+        "Napoleon I",
+        "Bonaparte",
+        "Napoléon",
+        "Napoléon Bonaparte",
+        "Napoleon Buonaparte"
+      ],
+      "hint": "A French general who became emperor.",
+      "explanation": "French general who made himself emperor of the French and conquered much of Europe before his defeat at Waterloo and exile. Born in Ajaccio on Corsica, died in Longwood on Saint Helena.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the western Mediterranean (born 1769) to the place of death in the South Atlantic (died 1821).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.9192,
+            "lng": 8.7386,
+            "label": "b. 1769"
+          },
+          {
+            "lat": -15.96,
+            "lng": -5.69,
+            "label": "d. 1821"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Ajaccio, Corsica, 1769 to Longwood, Saint Helena, 1821.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.9192,
+            "lng": 8.7386,
+            "label": "Ajaccio, Corsica, 1769"
+          },
+          {
+            "lat": -15.96,
+            "lng": -5.69,
+            "label": "Longwood, Saint Helena, 1821"
+          }
+        ]
+      }
+    },
+    {
+      "id": "queen-victoria",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Queen Victoria",
+      "alternatives": [
+        "Victoria",
+        "Queen Victoria of the United Kingdom",
+        "Alexandrina Victoria"
+      ],
+      "hint": "A British queen of the 19th century.",
+      "explanation": "Queen of the United Kingdom for 63 years and empress of India, who gave her name to an age. Born in Kensington Palace in London, died in Osborne House on the Isle of Wight.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1819) and the place of death (died 1901).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5058,
+            "lng": -0.1877,
+            "label": "b. 1819"
+          },
+          {
+            "lat": 50.7578,
+            "lng": -1.2958,
+            "label": "d. 1901"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Kensington Palace, 1819 to Osborne House, 1901.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5058,
+            "lng": -0.1877,
+            "label": "Kensington Palace, 1819"
+          },
+          {
+            "lat": 50.7578,
+            "lng": -1.2958,
+            "label": "Osborne House, 1901"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nicholas-ii",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Nicholas II of Russia",
+      "alternatives": [
+        "Nicholas II",
+        "Tsar Nicholas II",
+        "Tsar Nicholas",
+        "Nikolai II",
+        "Nicholas the Second"
+      ],
+      "hint": "The last tsar of Russia.",
+      "explanation": "The last tsar of Russia, who abdicated in 1917 and was executed with his family by the Bolsheviks. Born in Tsarskoye Selo near Saint Petersburg, died in Yekaterinburg.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1868) and the place of death (died 1918).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.7156,
+            "lng": 30.3947,
+            "label": "b. 1868"
+          },
+          {
+            "lat": 56.8431,
+            "lng": 60.6454,
+            "label": "d. 1918"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Tsarskoye Selo, 1868 to Yekaterinburg, 1918.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.7156,
+            "lng": 30.3947,
+            "label": "Tsarskoye Selo, 1868"
+          },
+          {
+            "lat": 56.8431,
+            "lng": 60.6454,
+            "label": "Yekaterinburg, 1918"
+          }
+        ]
+      }
+    },
+    {
+      "id": "elizabeth-ii",
+      "type": "card",
+      "section": "rulers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Elizabeth II",
+      "alternatives": [
+        "Queen Elizabeth II",
+        "Elizabeth the Second",
+        "Queen Elizabeth"
+      ],
+      "hint": "A British queen of the 20th and 21st centuries.",
+      "explanation": "Queen of the United Kingdom from 1952 to 2022, the longest-reigning British monarch. Born in Mayfair in London, died in Balmoral Castle in Scotland.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1926) and the place of death (died 2022).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5115,
+            "lng": -0.1445,
+            "label": "b. 1926"
+          },
+          {
+            "lat": 57.0396,
+            "lng": -3.2318,
+            "label": "d. 2022"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from London, 1926 to Balmoral Castle, 2022.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5115,
+            "lng": -0.1445,
+            "label": "London, 1926"
+          },
+          {
+            "lat": 57.0396,
+            "lng": -3.2318,
+            "label": "Balmoral Castle, 2022"
+          }
+        ]
+      }
+    },
+    {
+      "id": "abraham-lincoln",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Abraham Lincoln",
+      "alternatives": [
+        "Lincoln",
+        "Abe Lincoln",
+        "President Lincoln"
+      ],
+      "hint": "A US president of the 19th century.",
+      "explanation": "16th president of the United States, who led the Union through the Civil War and abolished slavery. Born in Hodgenville in Kentucky, died in Washington, D.C..",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1809) and the place of death (died 1865).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 37.5334,
+            "lng": -85.7392,
+            "label": "b. 1809"
+          },
+          {
+            "lat": 38.8967,
+            "lng": -77.0258,
+            "label": "d. 1865"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Hodgenville, 1809 to Washington, D.C., 1865.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 37.5334,
+            "lng": -85.7392,
+            "label": "Hodgenville, 1809"
+          },
+          {
+            "lat": 38.8967,
+            "lng": -77.0258,
+            "label": "Washington, D.C., 1865"
+          }
+        ]
+      }
+    },
+    {
+      "id": "benjamin-franklin",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Benjamin Franklin",
+      "alternatives": [
+        "Franklin",
+        "Ben Franklin"
+      ],
+      "hint": "An American Founding Father and scientist.",
+      "explanation": "American printer, scientist and diplomat, one of the Founding Fathers, who investigated lightning and electricity. Born in Boston, died in Philadelphia.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1706) and the place of death (died 1790).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.3601,
+            "lng": -71.0589,
+            "label": "b. 1706"
+          },
+          {
+            "lat": 39.9526,
+            "lng": -75.1652,
+            "label": "d. 1790"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Boston, 1706 to Philadelphia, 1790.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.3601,
+            "lng": -71.0589,
+            "label": "Boston, 1706"
+          },
+          {
+            "lat": 39.9526,
+            "lng": -75.1652,
+            "label": "Philadelphia, 1790"
+          }
+        ]
+      }
+    },
+    {
+      "id": "simon-bolivar",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Simón Bolívar",
+      "alternatives": [
+        "Simon Bolivar",
+        "Bolívar",
+        "Bolivar",
+        "El Libertador"
+      ],
+      "hint": "A liberator of South America.",
+      "explanation": "Venezuelan general who led several South American countries to independence from Spain. Born in Caracas, died in Santa Marta in Colombia.",
+      "map": {
+        "alt": "A world map with a line between two places in South America: the birthplace (born 1783) and the place of death (died 1830).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 10.4806,
+            "lng": -66.9036,
+            "label": "b. 1783"
+          },
+          {
+            "lat": 11.2236,
+            "lng": -74.1869,
+            "label": "d. 1830"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Caracas, 1783 to Santa Marta, 1830.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 10.4806,
+            "lng": -66.9036,
+            "label": "Caracas, 1783"
+          },
+          {
+            "lat": 11.2236,
+            "lng": -74.1869,
+            "label": "Santa Marta, 1830"
+          }
+        ]
+      }
+    },
+    {
+      "id": "garibaldi",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Giuseppe Garibaldi",
+      "alternatives": [
+        "Garibaldi"
+      ],
+      "hint": "An Italian general of the 19th century.",
+      "explanation": "Italian general whose volunteer 'Redshirts' conquered Sicily and southern Italy in 1860, a key step towards Italian unification. Born in Nice, died in the island of Caprera.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1807) to the place of death in the Mediterranean (died 1882).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7102,
+            "lng": 7.262,
+            "label": "b. 1807"
+          },
+          {
+            "lat": 41.2,
+            "lng": 9.43,
+            "label": "d. 1882"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Nice, 1807 to Caprera, 1882.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7102,
+            "lng": 7.262,
+            "label": "Nice, 1807"
+          },
+          {
+            "lat": 41.2,
+            "lng": 9.43,
+            "label": "Caprera, 1882"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lenin",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Vladimir Lenin",
+      "alternatives": [
+        "Lenin",
+        "Vladimir Ilyich Lenin",
+        "Vladimir Ulyanov",
+        "Vladimir Ilich Lenin"
+      ],
+      "hint": "A Russian revolutionary.",
+      "explanation": "Russian revolutionary who led the Bolsheviks in the October Revolution of 1917 and headed the first Soviet government. Born in Simbirsk, today Ulyanovsk, died in Gorki near Moscow.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1870) and the place of death (died 1924).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.3282,
+            "lng": 48.3866,
+            "label": "b. 1870"
+          },
+          {
+            "lat": 55.43,
+            "lng": 37.76,
+            "label": "d. 1924"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Simbirsk (Ulyanovsk), 1870 to Gorki, 1924.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.3282,
+            "lng": 48.3866,
+            "label": "Simbirsk (Ulyanovsk), 1870"
+          },
+          {
+            "lat": 55.43,
+            "lng": 37.76,
+            "label": "Gorki, 1924"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ataturk",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Atatürk",
+      "alternatives": [
+        "Mustafa Kemal Atatürk",
+        "Mustafa Kemal Ataturk",
+        "Mustafa Kemal",
+        "Kemal Atatürk",
+        "Ataturk",
+        "Kemal Ataturk"
+      ],
+      "hint": "The founder of a modern republic.",
+      "explanation": "Founder and first president of the Republic of Turkey, who modernised the country after the First World War. Born in Salonica, today Thessaloniki in Greece, died in Istanbul.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in south-eastern Europe (born c. 1881) to the place of death in Turkey (died 1938).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.6401,
+            "lng": 22.9444,
+            "label": "b. c. 1881"
+          },
+          {
+            "lat": 41.0392,
+            "lng": 29.0006,
+            "label": "d. 1938"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Salonica (Thessaloniki) to Istanbul, 1938.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.6401,
+            "lng": 22.9444,
+            "label": "Salonica (Thessaloniki)"
+          },
+          {
+            "lat": 41.0392,
+            "lng": 29.0006,
+            "label": "Istanbul, 1938"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sun-yat-sen",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Sun Yat-sen",
+      "alternatives": [
+        "Sun Zhongshan",
+        "Sun Yixian",
+        "Sun Yatsen",
+        "Sun Yat Sen",
+        "Sun Wen"
+      ],
+      "hint": "A Chinese revolutionary.",
+      "explanation": "Chinese revolutionary who became the first provisional president of the Republic of China in 1912 and is called the father of the nation. Born in Cuiheng near Guangzhou, died in Beijing.",
+      "map": {
+        "alt": "A world map with a line between two places in East Asia: the birthplace (born 1866) and the place of death (died 1925).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 22.44,
+            "lng": 113.53,
+            "label": "b. 1866"
+          },
+          {
+            "lat": 39.9138,
+            "lng": 116.4161,
+            "label": "d. 1925"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Cuiheng, 1866 to Beijing, 1925.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 22.44,
+            "lng": 113.53,
+            "label": "Cuiheng, 1866"
+          },
+          {
+            "lat": 39.9138,
+            "lng": 116.4161,
+            "label": "Beijing, 1925"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gandhi",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Mahatma Gandhi",
+      "alternatives": [
+        "Gandhi",
+        "Mohandas Gandhi",
+        "Mohandas Karamchand Gandhi",
+        "Mohandas K. Gandhi"
+      ],
+      "hint": "A leader of India's independence movement.",
+      "explanation": "Indian lawyer and leader of the non-violent campaign for India's independence from British rule. Born in Porbandar in Gujarat, died in New Delhi.",
+      "map": {
+        "alt": "A world map with a line between two places in South Asia: the birthplace (born 1869) and the place of death (died 1948).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 21.6417,
+            "lng": 69.6293,
+            "label": "b. 1869"
+          },
+          {
+            "lat": 28.6,
+            "lng": 77.22,
+            "label": "d. 1948"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Porbandar, 1869 to New Delhi, 1948.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 21.6417,
+            "lng": 69.6293,
+            "label": "Porbandar, 1869"
+          },
+          {
+            "lat": 28.6,
+            "lng": 77.22,
+            "label": "New Delhi, 1948"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nehru",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Jawaharlal Nehru",
+      "alternatives": [
+        "Nehru",
+        "Pandit Nehru",
+        "Jawahar Lal Nehru"
+      ],
+      "hint": "A prime minister of a large South Asian country.",
+      "explanation": "The first prime minister of independent India, who led the country from 1947 until his death. Born in Allahabad, today Prayagraj, died in New Delhi.",
+      "map": {
+        "alt": "A world map with a line between two places in South Asia: the birthplace (born 1889) and the place of death (died 1964).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 25.4358,
+            "lng": 81.8463,
+            "label": "b. 1889"
+          },
+          {
+            "lat": 28.6139,
+            "lng": 77.209,
+            "label": "d. 1964"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Allahabad (Prayagraj), 1889 to New Delhi, 1964.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 25.4358,
+            "lng": 81.8463,
+            "label": "Allahabad (Prayagraj), 1889"
+          },
+          {
+            "lat": 28.6139,
+            "lng": 77.209,
+            "label": "New Delhi, 1964"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ho-chi-minh",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Ho Chi Minh",
+      "alternatives": [
+        "Uncle Ho",
+        "Nguyen Ai Quoc",
+        "Hồ Chí Minh"
+      ],
+      "hint": "A leader of an Asian independence movement.",
+      "explanation": "Vietnamese communist revolutionary who led the independence movement and became president of North Vietnam. Born in Kim Liên in central Vietnam, died in Hanoi.",
+      "map": {
+        "alt": "A world map with a line between two places in South-East Asia: the birthplace (born 1890) and the place of death (died 1969).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 18.68,
+            "lng": 105.51,
+            "label": "b. 1890"
+          },
+          {
+            "lat": 21.0285,
+            "lng": 105.8542,
+            "label": "d. 1969"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Kim Liên, 1890 to Hanoi, 1969.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 18.68,
+            "lng": 105.51,
+            "label": "Kim Liên, 1890"
+          },
+          {
+            "lat": 21.0285,
+            "lng": 105.8542,
+            "label": "Hanoi, 1969"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mao-zedong",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Mao Zedong",
+      "alternatives": [
+        "Mao",
+        "Mao Tse-tung",
+        "Mao Tse Tung",
+        "Mao Tsetung",
+        "Chairman Mao"
+      ],
+      "hint": "A Chinese communist leader.",
+      "explanation": "Chinese communist leader who proclaimed the People's Republic of China in 1949 and ruled until his death. Born in Shaoshan in Hunan, died in Beijing.",
+      "map": {
+        "alt": "A world map with a line between two places in East Asia: the birthplace (born 1893) and the place of death (died 1976).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 27.9167,
+            "lng": 112.5333,
+            "label": "b. 1893"
+          },
+          {
+            "lat": 39.9122,
+            "lng": 116.3806,
+            "label": "d. 1976"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Shaoshan, 1893 to Beijing, 1976.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 27.9167,
+            "lng": 112.5333,
+            "label": "Shaoshan, 1893"
+          },
+          {
+            "lat": 39.9122,
+            "lng": 116.3806,
+            "label": "Beijing, 1976"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nelson-mandela",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Nelson Mandela",
+      "alternatives": [
+        "Mandela",
+        "Madiba",
+        "Nelson Rolihlahla Mandela"
+      ],
+      "hint": "A South African president.",
+      "explanation": "South African anti-apartheid leader who spent 27 years in prison and became the country's first Black president in 1994. Born in Mvezo in the Eastern Cape, died in Johannesburg.",
+      "map": {
+        "alt": "A world map with a line between two places in southern Africa: the birthplace (born 1918) and the place of death (died 2013).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -31.96,
+            "lng": 28.51,
+            "label": "b. 1918"
+          },
+          {
+            "lat": -26.1596,
+            "lng": 28.054,
+            "label": "d. 2013"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Mvezo, 1918 to Houghton, Johannesburg, 2013.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -31.96,
+            "lng": 28.51,
+            "label": "Mvezo, 1918"
+          },
+          {
+            "lat": -26.1596,
+            "lng": 28.054,
+            "label": "Houghton, Johannesburg, 2013"
+          }
+        ]
+      }
+    },
+    {
+      "id": "martin-luther-king",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Martin Luther King Jr.",
+      "alternatives": [
+        "Martin Luther King",
+        "Martin Luther King Jr",
+        "MLK",
+        "Dr. King",
+        "Martin Luther King, Jr."
+      ],
+      "hint": "A leader of the American civil rights movement.",
+      "explanation": "American Baptist minister and the leading figure of the civil rights movement, famous for his 'I Have a Dream' speech. Born in Atlanta, died in Memphis.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1929) and the place of death (died 1968).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 33.749,
+            "lng": -84.388,
+            "label": "b. 1929"
+          },
+          {
+            "lat": 35.15,
+            "lng": -90.05,
+            "label": "d. 1968"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Atlanta, 1929 to Memphis, 1968.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 33.749,
+            "lng": -84.388,
+            "label": "Atlanta, 1929"
+          },
+          {
+            "lat": 35.15,
+            "lng": -90.05,
+            "label": "Memphis, 1968"
+          }
+        ]
+      }
+    },
+    {
+      "id": "john-f-kennedy",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "John F. Kennedy",
+      "alternatives": [
+        "JFK",
+        "John Kennedy",
+        "John F Kennedy",
+        "Kennedy",
+        "President Kennedy"
+      ],
+      "hint": "A US president of the 20th century.",
+      "explanation": "35th president of the United States, the youngest man ever elected to the office, who was assassinated in 1963. Born in Brookline near Boston, died in Dallas.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1917) and the place of death (died 1963).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.3318,
+            "lng": -71.1212,
+            "label": "b. 1917"
+          },
+          {
+            "lat": 32.8137,
+            "lng": -96.8399,
+            "label": "d. 1963"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Brookline, 1917 to Dallas, 1963.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.3318,
+            "lng": -71.1212,
+            "label": "Brookline, 1917"
+          },
+          {
+            "lat": 32.8137,
+            "lng": -96.8399,
+            "label": "Dallas, 1963"
+          }
+        ]
+      }
+    },
+    {
+      "id": "franklin-roosevelt",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Franklin D. Roosevelt",
+      "alternatives": [
+        "FDR",
+        "Franklin Roosevelt",
+        "Franklin Delano Roosevelt",
+        "Roosevelt",
+        "President Roosevelt"
+      ],
+      "hint": "A US president of the 20th century.",
+      "explanation": "The only US president elected four times, who led the country through the Great Depression and most of the Second World War. Born in Hyde Park in New York State, died in Warm Springs in Georgia.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1882) and the place of death (died 1945).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.7837,
+            "lng": -73.9335,
+            "label": "b. 1882"
+          },
+          {
+            "lat": 32.8895,
+            "lng": -84.6811,
+            "label": "d. 1945"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Hyde Park, 1882 to Warm Springs, 1945.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.7837,
+            "lng": -73.9335,
+            "label": "Hyde Park, 1882"
+          },
+          {
+            "lat": 32.8895,
+            "lng": -84.6811,
+            "label": "Warm Springs, 1945"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charles-de-gaulle",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Charles de Gaulle",
+      "alternatives": [
+        "De Gaulle",
+        "General de Gaulle"
+      ],
+      "hint": "A French general and president.",
+      "explanation": "French general who led the Free French in the Second World War and later founded the Fifth Republic as its first president. Born in Lille, died in Colombey-les-Deux-Églises.",
+      "map": {
+        "alt": "A world map with a line between two places in western Europe: the birthplace (born 1890) and the place of death (died 1970).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.6292,
+            "lng": 3.0573,
+            "label": "b. 1890"
+          },
+          {
+            "lat": 48.3333,
+            "lng": 4.8833,
+            "label": "d. 1970"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Lille, 1890 to Colombey-les-Deux-Églises.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.6292,
+            "lng": 3.0573,
+            "label": "Lille, 1890"
+          },
+          {
+            "lat": 48.3333,
+            "lng": 4.8833,
+            "label": "Colombey-les-Deux-Églises"
+          }
+        ]
+      }
+    },
+    {
+      "id": "che-guevara",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Che Guevara",
+      "alternatives": [
+        "Che",
+        "Ernesto Guevara",
+        "Ernesto Che Guevara",
+        "Guevara"
+      ],
+      "hint": "A Latin American revolutionary.",
+      "explanation": "Argentine-born revolutionary who fought alongside Fidel Castro in Cuba and was killed in Bolivia. Born in Rosario in Argentina, died in La Higuera in Bolivia.",
+      "map": {
+        "alt": "A world map with a line between two places in South America: the birthplace (born 1928) and the place of death (died 1967).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -32.9442,
+            "lng": -60.6505,
+            "label": "b. 1928"
+          },
+          {
+            "lat": -18.7,
+            "lng": -64.1,
+            "label": "d. 1967"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Rosario, 1928 to La Higuera, 1967.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -32.9442,
+            "lng": -60.6505,
+            "label": "Rosario, 1928"
+          },
+          {
+            "lat": -18.7,
+            "lng": -64.1,
+            "label": "La Higuera, 1967"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kwame-nkrumah",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Kwame Nkrumah",
+      "alternatives": [
+        "Nkrumah"
+      ],
+      "hint": "An African independence leader.",
+      "explanation": "Leader of Ghana's independence from Britain in 1957 and its first prime minister and president. Born in Nkroful in Ghana, died in Bucharest in Romania.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in West Africa (born 1909) to the place of death in south-eastern Europe (died 1972).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 4.9,
+            "lng": -2.1,
+            "label": "b. 1909"
+          },
+          {
+            "lat": 44.4268,
+            "lng": 26.1025,
+            "label": "d. 1972"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Nkroful, 1909 to Bucharest, 1972.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 4.9,
+            "lng": -2.1,
+            "label": "Nkroful, 1909"
+          },
+          {
+            "lat": 44.4268,
+            "lng": 26.1025,
+            "label": "Bucharest, 1972"
+          }
+        ]
+      }
+    },
+    {
+      "id": "desmond-tutu",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Desmond Tutu",
+      "alternatives": [
+        "Tutu",
+        "Archbishop Tutu",
+        "Desmond Mpilo Tutu"
+      ],
+      "hint": "A South African archbishop.",
+      "explanation": "South African archbishop and anti-apartheid campaigner who chaired the Truth and Reconciliation Commission. Born in Klerksdorp in South Africa, died in Cape Town.",
+      "map": {
+        "alt": "A world map with a line between two places in southern Africa: the birthplace (born 1931) and the place of death (died 2021).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -26.8523,
+            "lng": 26.6663,
+            "label": "b. 1931"
+          },
+          {
+            "lat": -33.9249,
+            "lng": 18.4241,
+            "label": "d. 2021"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Klerksdorp, 1931 to Cape Town, 2021.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -26.8523,
+            "lng": 26.6663,
+            "label": "Klerksdorp, 1931"
+          },
+          {
+            "lat": -33.9249,
+            "lng": 18.4241,
+            "label": "Cape Town, 2021"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kofi-annan",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Kofi Annan",
+      "alternatives": [
+        "Annan",
+        "Kofi Atta Annan"
+      ],
+      "hint": "A diplomat from Africa.",
+      "explanation": "Ghanaian diplomat who was Secretary-General of the United Nations from 1997 to 2006 and won the Nobel Peace Prize. Born in Kumasi in Ghana, died in Bern in Switzerland.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in West Africa (born 1938) to the place of death in central Europe (died 2018).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 6.6885,
+            "lng": -1.6244,
+            "label": "b. 1938"
+          },
+          {
+            "lat": 46.948,
+            "lng": 7.4474,
+            "label": "d. 2018"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Kumasi, 1938 to Bern, 2018.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 6.6885,
+            "lng": -1.6244,
+            "label": "Kumasi, 1938"
+          },
+          {
+            "lat": 46.948,
+            "lng": 7.4474,
+            "label": "Bern, 2018"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mother-teresa",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Mother Teresa",
+      "alternatives": [
+        "Saint Teresa of Calcutta",
+        "Teresa of Calcutta",
+        "Mother Teresa of Calcutta",
+        "Anjezë Gonxhe Bojaxhiu"
+      ],
+      "hint": "A Catholic nun who helped the poor.",
+      "explanation": "Catholic nun who founded the Missionaries of Charity and devoted her life to the poor and dying of Kolkata. Born in Skopje, died in Kolkata.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in south-eastern Europe (born 1910) to the place of death in South Asia (died 1997).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.9981,
+            "lng": 21.4254,
+            "label": "b. 1910"
+          },
+          {
+            "lat": 22.5726,
+            "lng": 88.3639,
+            "label": "d. 1997"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Skopje, 1910 to Kolkata, 1997.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.9981,
+            "lng": 21.4254,
+            "label": "Skopje, 1910"
+          },
+          {
+            "lat": 22.5726,
+            "lng": 88.3639,
+            "label": "Kolkata, 1997"
+          }
+        ]
+      }
+    },
+    {
+      "id": "john-paul-ii",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "John Paul II",
+      "alternatives": [
+        "Pope John Paul II",
+        "Saint John Paul II",
+        "Karol Wojtyła",
+        "Karol Wojtyla"
+      ],
+      "hint": "A pope of the 20th century.",
+      "explanation": "Polish pope, the first non-Italian in 455 years, who led the Catholic Church from 1978 to 2005. Born in Wadowice in Poland, died in Vatican City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1920) to the place of death in Italy (died 2005).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.8836,
+            "lng": 19.4933,
+            "label": "b. 1920"
+          },
+          {
+            "lat": 41.9029,
+            "lng": 12.4534,
+            "label": "d. 2005"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Wadowice, 1920 to Vatican City, 2005.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.8836,
+            "lng": 19.4933,
+            "label": "Wadowice, 1920"
+          },
+          {
+            "lat": 41.9029,
+            "lng": 12.4534,
+            "label": "Vatican City, 2005"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pope-francis",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Pope Francis",
+      "alternatives": [
+        "Francis",
+        "Jorge Mario Bergoglio",
+        "Bergoglio"
+      ],
+      "hint": "A pope of the 21st century.",
+      "explanation": "The first pope from the Americas, from Argentina, who led the Catholic Church from 2013 to 2025. Born in Buenos Aires, died in Vatican City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in South America (born 1936) to the place of death in Italy (died 2025).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -34.6279,
+            "lng": -58.4586,
+            "label": "b. 1936"
+          },
+          {
+            "lat": 41.9029,
+            "lng": 12.4534,
+            "label": "d. 2025"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Buenos Aires, 1936 to Vatican City, 2025.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -34.6279,
+            "lng": -58.4586,
+            "label": "Buenos Aires, 1936"
+          },
+          {
+            "lat": 41.9029,
+            "lng": 12.4534,
+            "label": "Vatican City, 2025"
+          }
+        ]
+      }
+    },
+    {
+      "id": "winston-churchill",
+      "type": "card",
+      "section": "leaders",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Winston Churchill",
+      "alternatives": [
+        "Churchill",
+        "Sir Winston Churchill",
+        "Winston Spencer Churchill"
+      ],
+      "hint": "A British prime minister.",
+      "explanation": "British prime minister who led the country through the Second World War. Born in Blenheim Palace in Oxfordshire, died in London.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1874) and the place of death (died 1965).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.8414,
+            "lng": -1.3619,
+            "label": "b. 1874"
+          },
+          {
+            "lat": 51.5013,
+            "lng": -0.1853,
+            "label": "d. 1965"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Blenheim Palace, 1874 to London, 1965.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.8414,
+            "lng": -1.3619,
+            "label": "Blenheim Palace, 1874"
+          },
+          {
+            "lat": 51.5013,
+            "lng": -0.1853,
+            "label": "London, 1965"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aristotle",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Aristotle",
+      "alternatives": [
+        "Aristoteles"
+      ],
+      "hint": "A philosopher of ancient Greece.",
+      "explanation": "Greek philosopher, pupil of Plato and teacher of Alexander the Great, who wrote on logic, biology and politics. Born in Stagira in northern Greece, died in Chalcis on the island of Euboea.",
+      "map": {
+        "alt": "A world map with a line between two places in south-eastern Europe: the birthplace (born 384 BCE) and the place of death (died 322 BCE).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.5917,
+            "lng": 23.7889,
+            "label": "b. 384 BCE"
+          },
+          {
+            "lat": 38.4636,
+            "lng": 23.5997,
+            "label": "d. 322 BCE"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Stagira, 384 BCE to Chalcis, 322 BCE.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.5917,
+            "lng": 23.7889,
+            "label": "Stagira, 384 BCE"
+          },
+          {
+            "lat": 38.4636,
+            "lng": 23.5997,
+            "label": "Chalcis, 322 BCE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "avicenna",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Avicenna",
+      "alternatives": [
+        "Ibn Sina",
+        "Ibn Sīnā",
+        "Abu Ali Sina",
+        "Abu Ali al-Husayn ibn Sina"
+      ],
+      "hint": "A Persian physician and philosopher.",
+      "explanation": "Persian physician and philosopher whose 'Canon of Medicine' was a standard medical text in Europe and the Islamic world for centuries. Born in Afshana near Bukhara, died in Hamadan in Iran.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in Central Asia (born 980) to the place of death in the Middle East (died 1037).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.77,
+            "lng": 64.43,
+            "label": "b. 980"
+          },
+          {
+            "lat": 34.7989,
+            "lng": 48.5146,
+            "label": "d. 1037"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from near Bukhara, 980 to Hamadan, 1037.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.77,
+            "lng": 64.43,
+            "label": "near Bukhara, 980"
+          },
+          {
+            "lat": 34.7989,
+            "lng": 48.5146,
+            "label": "Hamadan, 1037"
+          }
+        ]
+      }
+    },
+    {
+      "id": "averroes",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Averroes",
+      "alternatives": [
+        "Ibn Rushd",
+        "Averroës",
+        "Abu al-Walid Muhammad ibn Rushd"
+      ],
+      "hint": "A philosopher of medieval Spain.",
+      "explanation": "Andalusian philosopher and judge whose commentaries on Aristotle shaped medieval European thought. Born in Córdoba in Spain, died in Marrakesh in Morocco.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the Iberian Peninsula (born 1126) to the place of death in North Africa (died 1198).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 37.8882,
+            "lng": -4.7794,
+            "label": "b. 1126"
+          },
+          {
+            "lat": 31.6295,
+            "lng": -7.9811,
+            "label": "d. 1198"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Córdoba, 1126 to Marrakesh, 1198.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 37.8882,
+            "lng": -4.7794,
+            "label": "Córdoba, 1126"
+          },
+          {
+            "lat": 31.6295,
+            "lng": -7.9811,
+            "label": "Marrakesh, 1198"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ibn-khaldun",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Ibn Khaldun",
+      "alternatives": [
+        "Ibn Khaldoun",
+        "Abd al-Rahman ibn Khaldun"
+      ],
+      "hint": "A historian of the Arab world.",
+      "explanation": "Arab historian from Tunis whose 'Muqaddimah' is a pioneering work on the philosophy of history and sociology. Born in Tunis, died in Cairo.",
+      "map": {
+        "alt": "A world map with a line between two places in North Africa: the birthplace (born 1332) and the place of death (died 1406).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 36.8065,
+            "lng": 10.1815,
+            "label": "b. 1332"
+          },
+          {
+            "lat": 30.0444,
+            "lng": 31.2357,
+            "label": "d. 1406"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Tunis, 1332 to Cairo, 1406.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 36.8065,
+            "lng": 10.1815,
+            "label": "Tunis, 1332"
+          },
+          {
+            "lat": 30.0444,
+            "lng": 31.2357,
+            "label": "Cairo, 1406"
+          }
+        ]
+      }
+    },
+    {
+      "id": "erasmus",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Erasmus",
+      "alternatives": [
+        "Desiderius Erasmus",
+        "Erasmus of Rotterdam"
+      ],
+      "hint": "A Dutch humanist scholar.",
+      "explanation": "Dutch humanist and scholar who edited the Greek New Testament and wrote 'In Praise of Folly'. Born in Rotterdam, died in Basel in Switzerland.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born c. 1466) to the place of death in central Europe (died 1536).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.9225,
+            "lng": 4.4792,
+            "label": "b. c. 1466"
+          },
+          {
+            "lat": 47.5596,
+            "lng": 7.5886,
+            "label": "d. 1536"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Rotterdam, c. 1466 to Basel, 1536.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.9225,
+            "lng": 4.4792,
+            "label": "Rotterdam, c. 1466"
+          },
+          {
+            "lat": 47.5596,
+            "lng": 7.5886,
+            "label": "Basel, 1536"
+          }
+        ]
+      }
+    },
+    {
+      "id": "copernicus",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Nicolaus Copernicus",
+      "alternatives": [
+        "Copernicus",
+        "Nicolaus Kopernikus",
+        "Mikołaj Kopernik",
+        "Mikolaj Kopernik",
+        "Kopernikus"
+      ],
+      "hint": "An astronomer of the Renaissance.",
+      "explanation": "Polish astronomer who proposed that the Earth and the other planets orbit the Sun. Born in Toruń in Poland, died in Frombork in Poland.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1473) and the place of death (died 1543).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.0138,
+            "lng": 18.5984,
+            "label": "b. 1473"
+          },
+          {
+            "lat": 54.3567,
+            "lng": 19.6747,
+            "label": "d. 1543"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Toruń, 1473 to Frombork, 1543.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.0138,
+            "lng": 18.5984,
+            "label": "Toruń, 1473"
+          },
+          {
+            "lat": 54.3567,
+            "lng": 19.6747,
+            "label": "Frombork, 1543"
+          }
+        ]
+      }
+    },
+    {
+      "id": "columbus",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Christopher Columbus",
+      "alternatives": [
+        "Columbus",
+        "Cristoforo Colombo",
+        "Cristóbal Colón",
+        "Cristobal Colon"
+      ],
+      "hint": "An explorer who sailed for Spain.",
+      "explanation": "Italian navigator who reached the Americas in 1492 on voyages sponsored by Spain. Born in Genoa, died in Valladolid in Spain.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in Italy (born c. 1451) to the place of death in the Iberian Peninsula (died 1506).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.4056,
+            "lng": 8.9463,
+            "label": "b. c. 1451"
+          },
+          {
+            "lat": 41.6523,
+            "lng": -4.7245,
+            "label": "d. 1506"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Genoa, c. 1451 to Valladolid, 1506.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.4056,
+            "lng": 8.9463,
+            "label": "Genoa, c. 1451"
+          },
+          {
+            "lat": 41.6523,
+            "lng": -4.7245,
+            "label": "Valladolid, 1506"
+          }
+        ]
+      }
+    },
+    {
+      "id": "galileo",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Galileo Galilei",
+      "alternatives": [
+        "Galileo"
+      ],
+      "hint": "An Italian astronomer and physicist.",
+      "explanation": "Italian astronomer who discovered Jupiter's four large moons with a telescope and defended the Copernican system. Born in Pisa, died in Arcetri near Florence.",
+      "map": {
+        "alt": "A world map with a line between two places in Italy: the birthplace (born 1564) and the place of death (died 1642).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7228,
+            "lng": 10.4017,
+            "label": "b. 1564"
+          },
+          {
+            "lat": 43.75,
+            "lng": 11.25,
+            "label": "d. 1642"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Pisa, 1564 to Arcetri, 1642.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7228,
+            "lng": 10.4017,
+            "label": "Pisa, 1564"
+          },
+          {
+            "lat": 43.75,
+            "lng": 11.25,
+            "label": "Arcetri, 1642"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kepler",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Johannes Kepler",
+      "alternatives": [
+        "Kepler"
+      ],
+      "hint": "A German astronomer.",
+      "explanation": "German astronomer who discovered that the planets move in ellipses around the Sun. Born in Weil der Stadt in Germany, died in Regensburg.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1571) and the place of death (died 1630).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.75,
+            "lng": 8.8667,
+            "label": "b. 1571"
+          },
+          {
+            "lat": 49.0134,
+            "lng": 12.1016,
+            "label": "d. 1630"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Weil der Stadt, 1571 to Regensburg, 1630.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.75,
+            "lng": 8.8667,
+            "label": "Weil der Stadt, 1571"
+          },
+          {
+            "lat": 49.0134,
+            "lng": 12.1016,
+            "label": "Regensburg, 1630"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tycho-brahe",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Tycho Brahe",
+      "alternatives": [
+        "Tycho",
+        "Tyge Brahe"
+      ],
+      "hint": "A Danish astronomer.",
+      "explanation": "Danish nobleman and astronomer whose precise observations of the planets allowed Kepler to work out his laws. Born in Knutstorp in Scania, died in Prague.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in northern Europe (born 1546) to the place of death in central Europe (died 1601).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.98,
+            "lng": 13.0,
+            "label": "b. 1546"
+          },
+          {
+            "lat": 50.0755,
+            "lng": 14.4378,
+            "label": "d. 1601"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Knutstorp, 1546 to Prague, 1601.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.98,
+            "lng": 13.0,
+            "label": "Knutstorp, 1546"
+          },
+          {
+            "lat": 50.0755,
+            "lng": 14.4378,
+            "label": "Prague, 1601"
+          }
+        ]
+      }
+    },
+    {
+      "id": "descartes",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "René Descartes",
+      "alternatives": [
+        "Rene Descartes",
+        "Descartes",
+        "Cartesius"
+      ],
+      "hint": "A French philosopher and mathematician.",
+      "explanation": "French philosopher and mathematician known for the saying 'I think, therefore I am'. Born in La Haye en Touraine in France, died in Stockholm.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1596) to the place of death in northern Europe (died 1650).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.9667,
+            "lng": 0.7833,
+            "label": "b. 1596"
+          },
+          {
+            "lat": 59.3293,
+            "lng": 18.0686,
+            "label": "d. 1650"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from La Haye (Descartes), 1596 to Stockholm, 1650.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.9667,
+            "lng": 0.7833,
+            "label": "La Haye (Descartes), 1596"
+          },
+          {
+            "lat": 59.3293,
+            "lng": 18.0686,
+            "label": "Stockholm, 1650"
+          }
+        ]
+      }
+    },
+    {
+      "id": "isaac-newton",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Isaac Newton",
+      "alternatives": [
+        "Newton",
+        "Sir Isaac Newton"
+      ],
+      "hint": "An English physicist and mathematician.",
+      "explanation": "English mathematician and physicist who formulated the laws of motion and universal gravitation. Born in Woolsthorpe in Lincolnshire, died in Kensington in London.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1643) and the place of death (died 1727).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.8106,
+            "lng": -0.629,
+            "label": "b. 1643"
+          },
+          {
+            "lat": 51.4983,
+            "lng": -0.192,
+            "label": "d. 1727"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Woolsthorpe, 1643 to Kensington, London, 1727.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.8106,
+            "lng": -0.629,
+            "label": "Woolsthorpe, 1643"
+          },
+          {
+            "lat": 51.4983,
+            "lng": -0.192,
+            "label": "Kensington, London, 1727"
+          }
+        ]
+      }
+    },
+    {
+      "id": "linnaeus",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Carl Linnaeus",
+      "alternatives": [
+        "Linnaeus",
+        "Carolus Linnaeus",
+        "Carl von Linné",
+        "Linné",
+        "Carl Linné",
+        "Linne"
+      ],
+      "hint": "A Swedish naturalist.",
+      "explanation": "Swedish botanist who devised the modern system of naming plants and animals with two Latin names. Born in Råshult in Småland, died in Uppsala.",
+      "map": {
+        "alt": "A world map with a line between two places in northern Europe: the birthplace (born 1707) and the place of death (died 1778).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 56.6177,
+            "lng": 14.1197,
+            "label": "b. 1707"
+          },
+          {
+            "lat": 59.8586,
+            "lng": 17.6389,
+            "label": "d. 1778"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Råshult, 1707 to Uppsala, 1778.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 56.6177,
+            "lng": 14.1197,
+            "label": "Råshult, 1707"
+          },
+          {
+            "lat": 59.8586,
+            "lng": 17.6389,
+            "label": "Uppsala, 1778"
+          }
+        ]
+      }
+    },
+    {
+      "id": "euler",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Leonhard Euler",
+      "alternatives": [
+        "Euler"
+      ],
+      "hint": "A Swiss mathematician.",
+      "explanation": "Swiss mathematician who made fundamental discoveries in calculus, graph theory and mechanics, and spent much of his life in Russia. Born in Basel, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1707) to the place of death in eastern Europe (died 1783).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.5596,
+            "lng": 7.5886,
+            "label": "b. 1707"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1783"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Basel, 1707 to Saint Petersburg, 1783.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.5596,
+            "lng": 7.5886,
+            "label": "Basel, 1707"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1783"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charles-darwin",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Charles Darwin",
+      "alternatives": [
+        "Darwin"
+      ],
+      "hint": "An English naturalist.",
+      "explanation": "English naturalist who proposed the theory of evolution by natural selection in 'On the Origin of Species'. Born in Shrewsbury, died in Down House in Kent.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1809) and the place of death (died 1882).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.7077,
+            "lng": -2.7536,
+            "label": "b. 1809"
+          },
+          {
+            "lat": 51.3313,
+            "lng": 0.0524,
+            "label": "d. 1882"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Shrewsbury, 1809 to Down House, 1882.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.7077,
+            "lng": -2.7536,
+            "label": "Shrewsbury, 1809"
+          },
+          {
+            "lat": 51.3313,
+            "lng": 0.0524,
+            "label": "Down House, 1882"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pasteur",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Louis Pasteur",
+      "alternatives": [
+        "Pasteur"
+      ],
+      "hint": "A French chemist and microbiologist.",
+      "explanation": "French chemist who developed vaccines against rabies and anthrax and showed that germs cause disease; pasteurisation is named after him. Born in Dole in eastern France, died in Marnes-la-Coquette near Paris.",
+      "map": {
+        "alt": "A world map with a line between two places in western Europe: the birthplace (born 1822) and the place of death (died 1895).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.0919,
+            "lng": 5.4903,
+            "label": "b. 1822"
+          },
+          {
+            "lat": 48.8333,
+            "lng": 2.1833,
+            "label": "d. 1895"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Dole, 1822 to Marnes-la-Coquette, 1895.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.0919,
+            "lng": 5.4903,
+            "label": "Dole, 1822"
+          },
+          {
+            "lat": 48.8333,
+            "lng": 2.1833,
+            "label": "Marnes-la-Coquette, 1895"
+          }
+        ]
+      }
+    },
+    {
+      "id": "florence-nightingale",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Florence Nightingale",
+      "alternatives": [
+        "Nightingale"
+      ],
+      "hint": "A British nurse.",
+      "explanation": "British nurse who reformed hospital care during the Crimean War and founded modern nursing. Born in Florence, died in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in Italy (born 1820) to the place of death in the British Isles (died 1910).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7696,
+            "lng": 11.2558,
+            "label": "b. 1820"
+          },
+          {
+            "lat": 51.5085,
+            "lng": -0.1498,
+            "label": "d. 1910"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Florence, 1820 to London, 1910.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7696,
+            "lng": 11.2558,
+            "label": "Florence, 1820"
+          },
+          {
+            "lat": 51.5085,
+            "lng": -0.1498,
+            "label": "London, 1910"
+          }
+        ]
+      }
+    },
+    {
+      "id": "roentgen",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Wilhelm Röntgen",
+      "alternatives": [
+        "Wilhelm Roentgen",
+        "Wilhelm Conrad Röntgen",
+        "Wilhelm Conrad Roentgen",
+        "Röntgen",
+        "Roentgen",
+        "Rontgen",
+        "Wilhelm Rontgen"
+      ],
+      "hint": "A German physicist.",
+      "explanation": "German physicist who discovered X-rays in 1895 and won the first Nobel Prize in Physics. Born in Lennep, today part of Remscheid, died in Munich.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1845) to the place of death in central Europe (died 1923).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.19,
+            "lng": 7.25,
+            "label": "b. 1845"
+          },
+          {
+            "lat": 48.1351,
+            "lng": 11.582,
+            "label": "d. 1923"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Lennep, 1845 to Munich, 1923.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.19,
+            "lng": 7.25,
+            "label": "Lennep, 1845"
+          },
+          {
+            "lat": 48.1351,
+            "lng": 11.582,
+            "label": "Munich, 1923"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mendeleev",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Dmitri Mendeleev",
+      "alternatives": [
+        "Dmitri Mendeleyev",
+        "Dmitry Mendeleev",
+        "Mendeleev",
+        "Mendeleyev",
+        "Dmitri Ivanovich Mendeleev"
+      ],
+      "hint": "A Russian chemist.",
+      "explanation": "Russian chemist who devised the periodic table of the elements. Born in Tobolsk in Siberia, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in Siberia (born 1834) to the place of death in eastern Europe (died 1907).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 58.2,
+            "lng": 68.25,
+            "label": "b. 1834"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1907"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Tobolsk, 1834 to Saint Petersburg, 1907.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 58.2,
+            "lng": 68.25,
+            "label": "Tobolsk, 1834"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1907"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alexander-graham-bell",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Alexander Graham Bell",
+      "alternatives": [
+        "Graham Bell",
+        "Alexander Bell",
+        "Bell"
+      ],
+      "hint": "A Scottish-born inventor.",
+      "explanation": "Scottish-born inventor of the telephone, who later lived in the United States and Canada. Born in Edinburgh, died in Beinn Bhreagh in Nova Scotia.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1847) to the place of death in eastern Canada (died 1922).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.9533,
+            "lng": -3.1883,
+            "label": "b. 1847"
+          },
+          {
+            "lat": 46.1167,
+            "lng": -60.75,
+            "label": "d. 1922"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Edinburgh, 1847 to Beinn Bhreagh, 1922.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.9533,
+            "lng": -3.1883,
+            "label": "Edinburgh, 1847"
+          },
+          {
+            "lat": 46.1167,
+            "lng": -60.75,
+            "label": "Beinn Bhreagh, 1922"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edison",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Thomas Edison",
+      "alternatives": [
+        "Thomas Alva Edison",
+        "Edison",
+        "Thomas A. Edison"
+      ],
+      "hint": "An American inventor.",
+      "explanation": "American inventor who developed the phonograph and a practical electric light bulb and set up the first industrial research laboratory. Born in Milan in Ohio, died in West Orange in New Jersey.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1847) and the place of death (died 1931).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.297,
+            "lng": -82.6024,
+            "label": "b. 1847"
+          },
+          {
+            "lat": 40.7868,
+            "lng": -74.239,
+            "label": "d. 1931"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Milan, Ohio, 1847 to West Orange, New Jersey, 1931.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.297,
+            "lng": -82.6024,
+            "label": "Milan, Ohio, 1847"
+          },
+          {
+            "lat": 40.7868,
+            "lng": -74.239,
+            "label": "West Orange, New Jersey, 1931"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tesla",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Nikola Tesla",
+      "alternatives": [
+        "Tesla"
+      ],
+      "hint": "An inventor and electrical engineer.",
+      "explanation": "Inventor and engineer born in what is now Croatia who developed alternating-current electric systems in the United States. Born in Smiljan in Croatia, died in New York City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in south-eastern Europe (born 1856) to the place of death in the United States (died 1943).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.5667,
+            "lng": 15.3167,
+            "label": "b. 1856"
+          },
+          {
+            "lat": 40.7539,
+            "lng": -73.9937,
+            "label": "d. 1943"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Smiljan, 1856 to New York City, 1943.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.5667,
+            "lng": 15.3167,
+            "label": "Smiljan, 1856"
+          },
+          {
+            "lat": 40.7539,
+            "lng": -73.9937,
+            "label": "New York City, 1943"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marie-curie",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Marie Curie",
+      "alternatives": [
+        "Marie Skłodowska-Curie",
+        "Marie Sklodowska-Curie",
+        "Maria Skłodowska",
+        "Madame Curie",
+        "Curie",
+        "Skłodowska-Curie",
+        "Sklodowska-Curie"
+      ],
+      "hint": "A physicist and chemist who won two Nobel Prizes.",
+      "explanation": "Polish-French physicist and chemist who discovered polonium and radium and won Nobel Prizes in both physics and chemistry. Born in Warsaw, died in Passy in the French Alps.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1867) to the place of death in western Europe (died 1934).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.2297,
+            "lng": 21.0122,
+            "label": "b. 1867"
+          },
+          {
+            "lat": 45.92,
+            "lng": 6.69,
+            "label": "d. 1934"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Warsaw, 1867 to Passy, 1934.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.2297,
+            "lng": 21.0122,
+            "label": "Warsaw, 1867"
+          },
+          {
+            "lat": 45.92,
+            "lng": 6.69,
+            "label": "Passy, 1934"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ernest-rutherford",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Ernest Rutherford",
+      "alternatives": [
+        "Rutherford",
+        "Lord Rutherford"
+      ],
+      "hint": "A physicist from New Zealand.",
+      "explanation": "New Zealand-born physicist who discovered the atomic nucleus. Born in Brightwater in New Zealand, died in Cambridge.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in New Zealand (born 1871) to the place of death in the British Isles (died 1937).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -41.3667,
+            "lng": 173.1167,
+            "label": "b. 1871"
+          },
+          {
+            "lat": 52.2053,
+            "lng": 0.1218,
+            "label": "d. 1937"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Brightwater, 1871 to Cambridge, 1937.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -41.3667,
+            "lng": 173.1167,
+            "label": "Brightwater, 1871"
+          },
+          {
+            "lat": 52.2053,
+            "lng": 0.1218,
+            "label": "Cambridge, 1937"
+          }
+        ]
+      }
+    },
+    {
+      "id": "albert-einstein",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Albert Einstein",
+      "alternatives": [
+        "Einstein"
+      ],
+      "hint": "A German-born physicist.",
+      "explanation": "German-born physicist who developed the theories of relativity and won the Nobel Prize in Physics in 1921. Born in Ulm in Germany, died in Princeton in New Jersey.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1879) to the place of death in the United States (died 1955).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.4011,
+            "lng": 9.9876,
+            "label": "b. 1879"
+          },
+          {
+            "lat": 40.3573,
+            "lng": -74.6672,
+            "label": "d. 1955"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Ulm, 1879 to Princeton, 1955.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.4011,
+            "lng": 9.9876,
+            "label": "Ulm, 1879"
+          },
+          {
+            "lat": 40.3573,
+            "lng": -74.6672,
+            "label": "Princeton, 1955"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sigmund-freud",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Sigmund Freud",
+      "alternatives": [
+        "Freud"
+      ],
+      "hint": "The founder of psychoanalysis.",
+      "explanation": "Austrian neurologist who founded psychoanalysis and fled to London after the Nazi annexation of Austria. Born in Freiberg in Moravia, today Příbor in Czechia, died in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1856) to the place of death in the British Isles (died 1939).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.6404,
+            "lng": 18.144,
+            "label": "b. 1856"
+          },
+          {
+            "lat": 51.5555,
+            "lng": -0.1789,
+            "label": "d. 1939"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Freiberg (Příbor), 1856 to London, 1939.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.6404,
+            "lng": 18.144,
+            "label": "Freiberg (Příbor), 1856"
+          },
+          {
+            "lat": 51.5555,
+            "lng": -0.1789,
+            "label": "London, 1939"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alan-turing",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Alan Turing",
+      "alternatives": [
+        "Turing",
+        "Alan Mathison Turing"
+      ],
+      "hint": "A British mathematician and codebreaker.",
+      "explanation": "British mathematician who helped break German codes in the Second World War and laid the foundations of computer science. Born in Maida Vale in London, died in Wilmslow in Cheshire.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1912) and the place of death (died 1954).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.53,
+            "lng": -0.19,
+            "label": "b. 1912"
+          },
+          {
+            "lat": 53.3254,
+            "lng": -2.2331,
+            "label": "d. 1954"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Maida Vale, London, 1912 to Wilmslow, 1954.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.53,
+            "lng": -0.19,
+            "label": "Maida Vale, London, 1912"
+          },
+          {
+            "lat": 53.3254,
+            "lng": -2.2331,
+            "label": "Wilmslow, 1954"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yuri-gagarin",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Yuri Gagarin",
+      "alternatives": [
+        "Gagarin",
+        "Yuri Alekseyevich Gagarin",
+        "Juri Gagarin",
+        "Yury Gagarin"
+      ],
+      "hint": "A Soviet cosmonaut.",
+      "explanation": "Soviet cosmonaut who became the first human in space in 1961. Born in Klushino near Smolensk, died in near Novosyolovo, east of Moscow.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1934) and the place of death (died 1968).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7511,
+            "lng": 34.8872,
+            "label": "b. 1934"
+          },
+          {
+            "lat": 56.0,
+            "lng": 39.0,
+            "label": "d. 1968"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Klushino, 1934 to near Novosyolovo, 1968.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7511,
+            "lng": 34.8872,
+            "label": "Klushino, 1934"
+          },
+          {
+            "lat": 56.0,
+            "lng": 39.0,
+            "label": "near Novosyolovo, 1968"
+          }
+        ]
+      }
+    },
+    {
+      "id": "james-cook",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "James Cook",
+      "alternatives": [
+        "Captain Cook",
+        "Captain James Cook",
+        "Cook"
+      ],
+      "hint": "A British navigator.",
+      "explanation": "British navigator who mapped the east coast of Australia and the coasts of New Zealand and was killed in Hawaii. Born in Marton in Yorkshire, died in Kealakekua Bay in Hawaii.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1728) to the place of death in Hawaii (died 1779).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.5333,
+            "lng": -1.2167,
+            "label": "b. 1728"
+          },
+          {
+            "lat": 19.4783,
+            "lng": -155.9283,
+            "label": "d. 1779"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Marton, 1728 to Kealakekua Bay, 1779.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.5333,
+            "lng": -1.2167,
+            "label": "Marton, 1728"
+          },
+          {
+            "lat": 19.4783,
+            "lng": -155.9283,
+            "label": "Kealakekua Bay, 1779"
+          }
+        ]
+      }
+    },
+    {
+      "id": "francis-drake",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Francis Drake",
+      "alternatives": [
+        "Sir Francis Drake",
+        "Drake"
+      ],
+      "hint": "An English sea captain of the 16th century.",
+      "explanation": "English sea captain who sailed round the world in 1577-1580 and fought the Spanish Armada. Born in Tavistock in Devon, died in at sea off Portobelo in Panama.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born c. 1540) to the place of death in the Caribbean coast of Central America (died 1596).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.5435,
+            "lng": -4.1445,
+            "label": "b. c. 1540"
+          },
+          {
+            "lat": 9.55,
+            "lng": -79.66,
+            "label": "d. 1596"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Tavistock, c. 1540 to off Portobelo, 1596.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.5435,
+            "lng": -4.1445,
+            "label": "Tavistock, c. 1540"
+          },
+          {
+            "lat": 9.55,
+            "lng": -79.66,
+            "label": "off Portobelo, 1596"
+          }
+        ]
+      }
+    },
+    {
+      "id": "karl-marx",
+      "type": "card",
+      "section": "science",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Karl Marx",
+      "alternatives": [
+        "Marx"
+      ],
+      "hint": "A German philosopher and economist.",
+      "explanation": "German philosopher and economist whose writings, including 'The Communist Manifesto' and 'Das Kapital', founded Marxism. Born in Trier in Germany, died in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1818) to the place of death in the British Isles (died 1883).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.7499,
+            "lng": 6.6371,
+            "label": "b. 1818"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "d. 1883"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Trier, 1818 to London, 1883.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.7499,
+            "lng": 6.6371,
+            "label": "Trier, 1818"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "London, 1883"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dante",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Dante Alighieri",
+      "alternatives": [
+        "Dante"
+      ],
+      "hint": "An Italian poet of the Middle Ages.",
+      "explanation": "Italian poet of the 'Divine Comedy', who died in exile. Born in Florence, died in Ravenna.",
+      "map": {
+        "alt": "A world map with a line between two places in Italy: the birthplace (born 1265) and the place of death (died 1321).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7696,
+            "lng": 11.2558,
+            "label": "b. 1265"
+          },
+          {
+            "lat": 44.4184,
+            "lng": 12.2035,
+            "label": "d. 1321"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Florence, 1265 to Ravenna, 1321.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7696,
+            "lng": 11.2558,
+            "label": "Florence, 1265"
+          },
+          {
+            "lat": 44.4184,
+            "lng": 12.2035,
+            "label": "Ravenna, 1321"
+          }
+        ]
+      }
+    },
+    {
+      "id": "goethe",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Johann Wolfgang von Goethe",
+      "alternatives": [
+        "Goethe",
+        "Johann Wolfgang Goethe"
+      ],
+      "hint": "A German poet and dramatist.",
+      "explanation": "German poet and dramatist, author of 'Faust' and 'The Sorrows of Young Werther'. Born in Frankfurt, died in Weimar.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1749) and the place of death (died 1832).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.1109,
+            "lng": 8.6821,
+            "label": "b. 1749"
+          },
+          {
+            "lat": 50.9795,
+            "lng": 11.3235,
+            "label": "d. 1832"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Frankfurt, 1749 to Weimar, 1832.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.1109,
+            "lng": 8.6821,
+            "label": "Frankfurt, 1749"
+          },
+          {
+            "lat": 50.9795,
+            "lng": 11.3235,
+            "label": "Weimar, 1832"
+          }
+        ]
+      }
+    },
+    {
+      "id": "byron",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Lord Byron",
+      "alternatives": [
+        "Byron",
+        "George Gordon Byron",
+        "George Byron",
+        "George Gordon, Lord Byron"
+      ],
+      "hint": "A British Romantic poet.",
+      "explanation": "British Romantic poet who died of fever in Greece while supporting the Greek struggle for independence. Born in London, died in Missolonghi in Greece.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1788) to the place of death in south-eastern Europe (died 1824).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "b. 1788"
+          },
+          {
+            "lat": 38.3664,
+            "lng": 21.4281,
+            "label": "d. 1824"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from London, 1788 to Missolonghi, 1824.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "London, 1788"
+          },
+          {
+            "lat": 38.3664,
+            "lng": 21.4281,
+            "label": "Missolonghi, 1824"
+          }
+        ]
+      }
+    },
+    {
+      "id": "edgar-allan-poe",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Edgar Allan Poe",
+      "alternatives": [
+        "Edgar Poe",
+        "Poe"
+      ],
+      "hint": "An American writer of dark tales and poems.",
+      "explanation": "American writer of macabre tales and poems such as 'The Raven' and 'The Tell-Tale Heart', and a pioneer of detective fiction. Born in Boston, died in Baltimore.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1809) and the place of death (died 1849).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.3601,
+            "lng": -71.0589,
+            "label": "b. 1809"
+          },
+          {
+            "lat": 39.2904,
+            "lng": -76.6122,
+            "label": "d. 1849"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Boston, 1809 to Baltimore, 1849.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.3601,
+            "lng": -71.0589,
+            "label": "Boston, 1809"
+          },
+          {
+            "lat": 39.2904,
+            "lng": -76.6122,
+            "label": "Baltimore, 1849"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charles-dickens",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Charles Dickens",
+      "alternatives": [
+        "Dickens"
+      ],
+      "hint": "An English novelist of the 19th century.",
+      "explanation": "English novelist of 'Oliver Twist', 'David Copperfield' and 'A Christmas Carol'. Born in Landport in Portsmouth, died in Gad's Hill Place in Kent.",
+      "map": {
+        "alt": "A world map with a line between two places in the British Isles: the birthplace (born 1812) and the place of death (died 1870).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.8,
+            "lng": -1.07,
+            "label": "b. 1812"
+          },
+          {
+            "lat": 51.4,
+            "lng": 0.48,
+            "label": "d. 1870"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Portsmouth, 1812 to Gad's Hill Place, 1870.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.8,
+            "lng": -1.07,
+            "label": "Portsmouth, 1812"
+          },
+          {
+            "lat": 51.4,
+            "lng": 0.48,
+            "label": "Gad's Hill Place, 1870"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tolstoy",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Leo Tolstoy",
+      "alternatives": [
+        "Lev Tolstoy",
+        "Leo Nikolayevich Tolstoy",
+        "Tolstoy",
+        "Lev Nikolayevich Tolstoy",
+        "Lew Tolstoi",
+        "Leo Tolstoi"
+      ],
+      "hint": "A Russian novelist.",
+      "explanation": "Russian novelist of 'War and Peace' and 'Anna Karenina'. Born in Yasnaya Polyana south of Moscow, died in Astapovo railway station.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1828) and the place of death (died 1910).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.0719,
+            "lng": 37.5266,
+            "label": "b. 1828"
+          },
+          {
+            "lat": 53.2,
+            "lng": 39.5,
+            "label": "d. 1910"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Yasnaya Polyana, 1828 to Astapovo, 1910.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.0719,
+            "lng": 37.5266,
+            "label": "Yasnaya Polyana, 1828"
+          },
+          {
+            "lat": 53.2,
+            "lng": 39.5,
+            "label": "Astapovo, 1910"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dostoevsky",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Fyodor Dostoevsky",
+      "alternatives": [
+        "Fyodor Dostoyevsky",
+        "Dostoevsky",
+        "Dostoyevsky",
+        "Fyodor Mikhailovich Dostoevsky",
+        "Fjodor Dostojewski",
+        "Dostojewski"
+      ],
+      "hint": "A Russian novelist.",
+      "explanation": "Russian novelist of 'Crime and Punishment' and 'The Brothers Karamazov'. Born in Moscow, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1821) and the place of death (died 1881).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7558,
+            "lng": 37.6173,
+            "label": "b. 1821"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1881"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Moscow, 1821 to Saint Petersburg, 1881.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7558,
+            "lng": 37.6173,
+            "label": "Moscow, 1821"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1881"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pushkin",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Alexander Pushkin",
+      "alternatives": [
+        "Aleksandr Pushkin",
+        "Pushkin",
+        "Alexandr Pushkin"
+      ],
+      "hint": "A Russian poet.",
+      "explanation": "Russian poet regarded as the founder of modern Russian literature, who died after a duel. Born in Moscow, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1799) and the place of death (died 1837).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7558,
+            "lng": 37.6173,
+            "label": "b. 1799"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1837"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Moscow, 1799 to Saint Petersburg, 1837.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.7558,
+            "lng": 37.6173,
+            "label": "Moscow, 1799"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1837"
+          }
+        ]
+      }
+    },
+    {
+      "id": "chekhov",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Anton Chekhov",
+      "alternatives": [
+        "Chekhov",
+        "Anton Pavlovich Chekhov",
+        "Tchekhov"
+      ],
+      "hint": "A Russian playwright and short-story writer.",
+      "explanation": "Russian playwright and short-story writer, author of 'The Seagull' and 'Uncle Vanya', who died of tuberculosis in a German spa town. Born in Taganrog on the Sea of Azov, died in Badenweiler in Germany.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in eastern Europe (born 1860) to the place of death in central Europe (died 1904).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.2362,
+            "lng": 38.8969,
+            "label": "b. 1860"
+          },
+          {
+            "lat": 47.804,
+            "lng": 7.67,
+            "label": "d. 1904"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Taganrog, 1860 to Badenweiler, 1904.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.2362,
+            "lng": 38.8969,
+            "label": "Taganrog, 1860"
+          },
+          {
+            "lat": 47.804,
+            "lng": 7.67,
+            "label": "Badenweiler, 1904"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jules-verne",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Jules Verne",
+      "alternatives": [
+        "Verne"
+      ],
+      "hint": "A French author of adventure novels.",
+      "explanation": "French author of the adventure novels 'Twenty Thousand Leagues Under the Seas' and 'Around the World in Eighty Days'. Born in Nantes, died in Amiens.",
+      "map": {
+        "alt": "A world map with a line between two places in western Europe: the birthplace (born 1828) and the place of death (died 1905).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.2184,
+            "lng": -1.5536,
+            "label": "b. 1828"
+          },
+          {
+            "lat": 49.8942,
+            "lng": 2.2957,
+            "label": "d. 1905"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Nantes, 1828 to Amiens, 1905.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.2184,
+            "lng": -1.5536,
+            "label": "Nantes, 1828"
+          },
+          {
+            "lat": 49.8942,
+            "lng": 2.2957,
+            "label": "Amiens, 1905"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mark-twain",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Mark Twain",
+      "alternatives": [
+        "Samuel Clemens",
+        "Samuel Langhorne Clemens",
+        "Twain"
+      ],
+      "hint": "An American humorist and novelist.",
+      "explanation": "American author of 'The Adventures of Tom Sawyer' and 'Adventures of Huckleberry Finn'. Born in Florida in Missouri, died in Redding in Connecticut.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1835) and the place of death (died 1910).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.4936,
+            "lng": -91.7826,
+            "label": "b. 1835"
+          },
+          {
+            "lat": 41.3,
+            "lng": -73.39,
+            "label": "d. 1910"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Florida, Missouri, 1835 to Redding, Connecticut, 1910.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.4936,
+            "lng": -91.7826,
+            "label": "Florida, Missouri, 1835"
+          },
+          {
+            "lat": 41.3,
+            "lng": -73.39,
+            "label": "Redding, Connecticut, 1910"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oscar-wilde",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Oscar Wilde",
+      "alternatives": [
+        "Wilde"
+      ],
+      "hint": "An Irish playwright and wit.",
+      "explanation": "Irish playwright and wit, author of 'The Picture of Dorian Gray' and 'The Importance of Being Earnest', who died in exile in Paris. Born in Dublin, died in Paris.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1854) to the place of death in western Europe (died 1900).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.3498,
+            "lng": -6.2603,
+            "label": "b. 1854"
+          },
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "d. 1900"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Dublin, 1854 to Paris, 1900.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.3498,
+            "lng": -6.2603,
+            "label": "Dublin, 1854"
+          },
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris, 1900"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kipling",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Rudyard Kipling",
+      "alternatives": [
+        "Kipling"
+      ],
+      "hint": "A British author born in India.",
+      "explanation": "British author of 'The Jungle Book' and 'Kim', born in India. Born in Bombay, today Mumbai, died in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in South Asia (born 1865) to the place of death in the British Isles (died 1936).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 18.9438,
+            "lng": 72.8353,
+            "label": "b. 1865"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "d. 1936"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Bombay (Mumbai), 1865 to London, 1936.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 18.9438,
+            "lng": 72.8353,
+            "label": "Bombay (Mumbai), 1865"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "London, 1936"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stevenson",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Robert Louis Stevenson",
+      "alternatives": [
+        "R. L. Stevenson",
+        "RLS",
+        "Stevenson",
+        "R.L. Stevenson"
+      ],
+      "hint": "A Scottish author of adventure stories.",
+      "explanation": "Scottish author of 'Treasure Island' and 'Strange Case of Dr Jekyll and Mr Hyde', who spent his last years in Samoa. Born in Edinburgh, died in Vailima near Apia in Samoa.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1850) to the place of death in the South Pacific (died 1894).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.9533,
+            "lng": -3.1883,
+            "label": "b. 1850"
+          },
+          {
+            "lat": -13.85,
+            "lng": -171.74,
+            "label": "d. 1894"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Edinburgh, 1850 to Vailima, Samoa, 1894.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.9533,
+            "lng": -3.1883,
+            "label": "Edinburgh, 1850"
+          },
+          {
+            "lat": -13.85,
+            "lng": -171.74,
+            "label": "Vailima, Samoa, 1894"
+          }
+        ]
+      }
+    },
+    {
+      "id": "james-joyce",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "James Joyce",
+      "alternatives": [
+        "Joyce"
+      ],
+      "hint": "An Irish novelist who lived in exile.",
+      "explanation": "Irish novelist of 'Ulysses', who lived most of his life abroad, in Trieste, Paris and Zurich. Born in Rathgar in Dublin, died in Zurich.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1882) to the place of death in central Europe (died 1941).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.3125,
+            "lng": -6.2744,
+            "label": "b. 1882"
+          },
+          {
+            "lat": 47.3769,
+            "lng": 8.5417,
+            "label": "d. 1941"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Rathgar, 1882 to Zurich, 1941.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.3125,
+            "lng": -6.2744,
+            "label": "Rathgar, 1882"
+          },
+          {
+            "lat": 47.3769,
+            "lng": 8.5417,
+            "label": "Zurich, 1941"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kafka",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Franz Kafka",
+      "alternatives": [
+        "Kafka"
+      ],
+      "hint": "A writer from Prague.",
+      "explanation": "Prague-born writer of 'The Trial' and 'The Metamorphosis', who died of tuberculosis near Vienna. Born in Prague, died in Kierling near Vienna.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1883) and the place of death (died 1924).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.0755,
+            "lng": 14.4378,
+            "label": "b. 1883"
+          },
+          {
+            "lat": 48.3167,
+            "lng": 16.3167,
+            "label": "d. 1924"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Prague, 1883 to Kierling, 1924.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.0755,
+            "lng": 14.4378,
+            "label": "Prague, 1883"
+          },
+          {
+            "lat": 48.3167,
+            "lng": 16.3167,
+            "label": "Kierling, 1924"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stefan-zweig",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Stefan Zweig",
+      "alternatives": [
+        "Zweig"
+      ],
+      "hint": "An Austrian writer who fled the Nazis.",
+      "explanation": "Austrian writer who fled the Nazis and died in exile in Brazil. Born in Vienna, died in Petrópolis in Brazil.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1881) to the place of death in South America (died 1942).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "b. 1881"
+          },
+          {
+            "lat": -22.5112,
+            "lng": -43.1779,
+            "label": "d. 1942"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Vienna, 1881 to Petrópolis, 1942.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "Vienna, 1881"
+          },
+          {
+            "lat": -22.5112,
+            "lng": -43.1779,
+            "label": "Petrópolis, 1942"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nabokov",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Vladimir Nabokov",
+      "alternatives": [
+        "Nabokov"
+      ],
+      "hint": "A Russian-born novelist.",
+      "explanation": "Russian-born novelist of 'Lolita', who lived in exile in Germany, France, the United States and Switzerland. Born in Saint Petersburg, died in Montreux in Switzerland.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in eastern Europe (born 1899) to the place of death in western Europe (died 1977).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "b. 1899"
+          },
+          {
+            "lat": 46.4312,
+            "lng": 6.9107,
+            "label": "d. 1977"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Saint Petersburg, 1899 to Montreux, 1977.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1899"
+          },
+          {
+            "lat": 46.4312,
+            "lng": 6.9107,
+            "label": "Montreux, 1977"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hemingway",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Ernest Hemingway",
+      "alternatives": [
+        "Hemingway"
+      ],
+      "hint": "An American novelist and Nobel laureate.",
+      "explanation": "American novelist of 'The Old Man and the Sea' and 'A Farewell to Arms', Nobel Prize in Literature 1954. Born in Oak Park in Illinois, died in Ketchum in Idaho.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1899) and the place of death (died 1961).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.885,
+            "lng": -87.7845,
+            "label": "b. 1899"
+          },
+          {
+            "lat": 43.6807,
+            "lng": -114.3637,
+            "label": "d. 1961"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Oak Park, Illinois, 1899 to Ketchum, Idaho, 1961.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.885,
+            "lng": -87.7845,
+            "label": "Oak Park, Illinois, 1899"
+          },
+          {
+            "lat": 43.6807,
+            "lng": -114.3637,
+            "label": "Ketchum, Idaho, 1961"
+          }
+        ]
+      }
+    },
+    {
+      "id": "orwell",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "George Orwell",
+      "alternatives": [
+        "Eric Blair",
+        "Eric Arthur Blair",
+        "Orwell"
+      ],
+      "hint": "A British author born in India.",
+      "explanation": "British author of 'Animal Farm' and 'Nineteen Eighty-Four', born in India. Born in Motihari in India, died in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in South Asia (born 1903) to the place of death in the British Isles (died 1950).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 26.6489,
+            "lng": 84.9167,
+            "label": "b. 1903"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "d. 1950"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Motihari, 1903 to London, 1950.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 26.6489,
+            "lng": 84.9167,
+            "label": "Motihari, 1903"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "London, 1950"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tolkien",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "J. R. R. Tolkien",
+      "alternatives": [
+        "J.R.R. Tolkien",
+        "JRR Tolkien",
+        "John Ronald Reuel Tolkien",
+        "Tolkien",
+        "J R R Tolkien"
+      ],
+      "hint": "An English author born in southern Africa.",
+      "explanation": "English author of 'The Hobbit' and 'The Lord of the Rings', born in South Africa. Born in Bloemfontein in South Africa, died in Bournemouth.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in southern Africa (born 1892) to the place of death in the British Isles (died 1973).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -29.0852,
+            "lng": 26.1596,
+            "label": "b. 1892"
+          },
+          {
+            "lat": 50.7192,
+            "lng": -1.8808,
+            "label": "d. 1973"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Bloemfontein, 1892 to Bournemouth, 1973.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -29.0852,
+            "lng": 26.1596,
+            "label": "Bloemfontein, 1892"
+          },
+          {
+            "lat": 50.7192,
+            "lng": -1.8808,
+            "label": "Bournemouth, 1973"
+          }
+        ]
+      }
+    },
+    {
+      "id": "neruda",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Pablo Neruda",
+      "alternatives": [
+        "Neruda",
+        "Ricardo Eliécer Neftalí Reyes Basoalto"
+      ],
+      "hint": "A Chilean poet.",
+      "explanation": "Chilean poet and diplomat, winner of the Nobel Prize in Literature in 1971. Born in Parral in Chile, died in Santiago.",
+      "map": {
+        "alt": "A world map with a line between two places in South America: the birthplace (born 1904) and the place of death (died 1973).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -36.1439,
+            "lng": -71.8239,
+            "label": "b. 1904"
+          },
+          {
+            "lat": -33.4489,
+            "lng": -70.6693,
+            "label": "d. 1973"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Parral, 1904 to Santiago, 1973.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -36.1439,
+            "lng": -71.8239,
+            "label": "Parral, 1904"
+          },
+          {
+            "lat": -33.4489,
+            "lng": -70.6693,
+            "label": "Santiago, 1973"
+          }
+        ]
+      }
+    },
+    {
+      "id": "borges",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Jorge Luis Borges",
+      "alternatives": [
+        "Borges"
+      ],
+      "hint": "An Argentine writer.",
+      "explanation": "Argentine writer of labyrinthine short stories such as 'The Library of Babel', who died in Switzerland. Born in Buenos Aires, died in Geneva.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in South America (born 1899) to the place of death in western Europe (died 1986).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -34.6037,
+            "lng": -58.3816,
+            "label": "b. 1899"
+          },
+          {
+            "lat": 46.2044,
+            "lng": 6.1432,
+            "label": "d. 1986"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Buenos Aires, 1899 to Geneva, 1986.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -34.6037,
+            "lng": -58.3816,
+            "label": "Buenos Aires, 1899"
+          },
+          {
+            "lat": 46.2044,
+            "lng": 6.1432,
+            "label": "Geneva, 1986"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gibran",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Kahlil Gibran",
+      "alternatives": [
+        "Khalil Gibran",
+        "Gibran Khalil Gibran",
+        "Gibran"
+      ],
+      "hint": "A Lebanese-American poet and painter.",
+      "explanation": "Lebanese-American poet and painter, author of 'The Prophet'. Born in Bsharri in Lebanon, died in New York City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the Middle East (born 1883) to the place of death in the United States (died 1931).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 34.25,
+            "lng": 36.0167,
+            "label": "b. 1883"
+          },
+          {
+            "lat": 40.7128,
+            "lng": -74.006,
+            "label": "d. 1931"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Bsharri, 1883 to New York City, 1931.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 34.25,
+            "lng": 36.0167,
+            "label": "Bsharri, 1883"
+          },
+          {
+            "lat": 40.7128,
+            "lng": -74.006,
+            "label": "New York City, 1931"
+          }
+        ]
+      }
+    },
+    {
+      "id": "anne-frank",
+      "type": "card",
+      "section": "writers",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Anne Frank",
+      "alternatives": [
+        "Annelies Marie Frank"
+      ],
+      "hint": "A young diarist of the Second World War.",
+      "explanation": "German-born Jewish girl whose diary, written in hiding in Amsterdam, became one of the best-known books about the Holocaust. Born in Frankfurt, died in the Bergen-Belsen camp in northern Germany.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1929) and the place of death (died 1945).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.1109,
+            "lng": 8.6821,
+            "label": "b. 1929"
+          },
+          {
+            "lat": 52.7573,
+            "lng": 9.9078,
+            "label": "d. 1945"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Frankfurt, 1929 to Bergen-Belsen, 1945.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.1109,
+            "lng": 8.6821,
+            "label": "Frankfurt, 1929"
+          },
+          {
+            "lat": 52.7573,
+            "lng": 9.9078,
+            "label": "Bergen-Belsen, 1945"
+          }
+        ]
+      }
+    },
+    {
+      "id": "leonardo",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Leonardo da Vinci",
+      "alternatives": [
+        "Leonardo",
+        "Da Vinci"
+      ],
+      "hint": "An Italian painter, inventor and scientist.",
+      "explanation": "Italian painter, inventor and scientist who painted the 'Mona Lisa' and 'The Last Supper'. Born in Vinci in Tuscany, died in Amboise in France.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in Italy (born 1452) to the place of death in western Europe (died 1519).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7833,
+            "lng": 10.9333,
+            "label": "b. 1452"
+          },
+          {
+            "lat": 47.4136,
+            "lng": 0.9822,
+            "label": "d. 1519"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Vinci, 1452 to Amboise, 1519.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.7833,
+            "lng": 10.9333,
+            "label": "Vinci, 1452"
+          },
+          {
+            "lat": 47.4136,
+            "lng": 0.9822,
+            "label": "Amboise, 1519"
+          }
+        ]
+      }
+    },
+    {
+      "id": "michelangelo",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Michelangelo",
+      "alternatives": [
+        "Michelangelo Buonarroti",
+        "Michelangelo di Lodovico Buonarroti Simoni"
+      ],
+      "hint": "An Italian sculptor, painter and architect.",
+      "explanation": "Italian sculptor, painter and architect who carved the 'David' and painted the ceiling of the Sistine Chapel. Born in Caprese in Tuscany, died in Rome.",
+      "map": {
+        "alt": "A world map with a line between two places in Italy: the birthplace (born 1475) and the place of death (died 1564).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.6403,
+            "lng": 11.9928,
+            "label": "b. 1475"
+          },
+          {
+            "lat": 41.9029,
+            "lng": 12.4964,
+            "label": "d. 1564"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Caprese, 1475 to Rome, 1564.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.6403,
+            "lng": 11.9928,
+            "label": "Caprese, 1475"
+          },
+          {
+            "lat": 41.9029,
+            "lng": 12.4964,
+            "label": "Rome, 1564"
+          }
+        ]
+      }
+    },
+    {
+      "id": "el-greco",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "El Greco",
+      "alternatives": [
+        "Doménikos Theotokópoulos",
+        "Domenikos Theotokopoulos",
+        "Greco"
+      ],
+      "hint": "A Greek-born painter of the Spanish Renaissance.",
+      "explanation": "Greek-born painter of the Spanish Renaissance, known for his elongated figures, who worked in Toledo. Born in Candia, today Heraklion on Crete, died in Toledo in Spain.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in south-eastern Europe (born 1541) to the place of death in the Iberian Peninsula (died 1614).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 35.3387,
+            "lng": 25.1442,
+            "label": "b. 1541"
+          },
+          {
+            "lat": 39.8628,
+            "lng": -4.0273,
+            "label": "d. 1614"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Candia (Heraklion), 1541 to Toledo, 1614.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 35.3387,
+            "lng": 25.1442,
+            "label": "Candia (Heraklion), 1541"
+          },
+          {
+            "lat": 39.8628,
+            "lng": -4.0273,
+            "label": "Toledo, 1614"
+          }
+        ]
+      }
+    },
+    {
+      "id": "goya",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Francisco Goya",
+      "alternatives": [
+        "Francisco de Goya",
+        "Goya",
+        "Francisco José de Goya"
+      ],
+      "hint": "A Spanish painter.",
+      "explanation": "Spanish painter of 'The Third of May 1808', who died in exile in France. Born in Fuendetodos in Aragon, died in Bordeaux.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the Iberian Peninsula (born 1746) to the place of death in western Europe (died 1828).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.3167,
+            "lng": -0.9333,
+            "label": "b. 1746"
+          },
+          {
+            "lat": 44.8378,
+            "lng": -0.5792,
+            "label": "d. 1828"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Fuendetodos, 1746 to Bordeaux, 1828.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.3167,
+            "lng": -0.9333,
+            "label": "Fuendetodos, 1746"
+          },
+          {
+            "lat": 44.8378,
+            "lng": -0.5792,
+            "label": "Bordeaux, 1828"
+          }
+        ]
+      }
+    },
+    {
+      "id": "van-gogh",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Vincent van Gogh",
+      "alternatives": [
+        "Van Gogh",
+        "Vincent Willem van Gogh"
+      ],
+      "hint": "A Dutch painter.",
+      "explanation": "Dutch painter of 'The Starry Night' and 'Sunflowers', who sold hardly any paintings in his lifetime. Born in Zundert in the Netherlands, died in Auvers-sur-Oise near Paris.",
+      "map": {
+        "alt": "A world map with a line between two places in western Europe: the birthplace (born 1853) and the place of death (died 1890).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4667,
+            "lng": 4.6667,
+            "label": "b. 1853"
+          },
+          {
+            "lat": 49.0717,
+            "lng": 2.1675,
+            "label": "d. 1890"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Zundert, 1853 to Auvers-sur-Oise, 1890.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4667,
+            "lng": 4.6667,
+            "label": "Zundert, 1853"
+          },
+          {
+            "lat": 49.0717,
+            "lng": 2.1675,
+            "label": "Auvers-sur-Oise, 1890"
+          }
+        ]
+      }
+    },
+    {
+      "id": "picasso",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Pablo Picasso",
+      "alternatives": [
+        "Picasso"
+      ],
+      "hint": "A Spanish painter who worked in France.",
+      "explanation": "Spanish painter and co-founder of Cubism, who painted 'Guernica'. Born in Málaga in Spain, died in Mougins in southern France.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the Iberian Peninsula (born 1881) to the place of death in western Europe (died 1973).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 36.7213,
+            "lng": -4.4214,
+            "label": "b. 1881"
+          },
+          {
+            "lat": 43.6,
+            "lng": 6.99,
+            "label": "d. 1973"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Málaga, 1881 to Mougins, 1973.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 36.7213,
+            "lng": -4.4214,
+            "label": "Málaga, 1881"
+          },
+          {
+            "lat": 43.6,
+            "lng": 6.99,
+            "label": "Mougins, 1973"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gauguin",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Paul Gauguin",
+      "alternatives": [
+        "Gauguin"
+      ],
+      "hint": "A French post-impressionist painter.",
+      "explanation": "French post-impressionist painter who left Europe for Tahiti and the Marquesas Islands. Born in Paris, died in Atuona on Hiva Oa in French Polynesia.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1848) to the place of death in the South Pacific (died 1903).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "b. 1848"
+          },
+          {
+            "lat": -9.8,
+            "lng": -139.03,
+            "label": "d. 1903"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Paris, 1848 to Atuona, Hiva Oa, 1903.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris, 1848"
+          },
+          {
+            "lat": -9.8,
+            "lng": -139.03,
+            "label": "Atuona, Hiva Oa, 1903"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bach",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Johann Sebastian Bach",
+      "alternatives": [
+        "J. S. Bach",
+        "JS Bach",
+        "J.S. Bach",
+        "Bach"
+      ],
+      "hint": "A German Baroque composer.",
+      "explanation": "German Baroque composer of the Brandenburg Concertos, the Mass in B minor and the Well-Tempered Clavier. Born in Eisenach, died in Leipzig.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1685) and the place of death (died 1750).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.9747,
+            "lng": 10.3228,
+            "label": "b. 1685"
+          },
+          {
+            "lat": 51.3397,
+            "lng": 12.3731,
+            "label": "d. 1750"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Eisenach, 1685 to Leipzig, 1750.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.9747,
+            "lng": 10.3228,
+            "label": "Eisenach, 1685"
+          },
+          {
+            "lat": 51.3397,
+            "lng": 12.3731,
+            "label": "Leipzig, 1750"
+          }
+        ]
+      }
+    },
+    {
+      "id": "handel",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "George Frideric Handel",
+      "alternatives": [
+        "Handel",
+        "Händel",
+        "George Frederick Handel",
+        "Georg Friedrich Händel",
+        "Georg Friedrich Handel",
+        "George Frederic Handel"
+      ],
+      "hint": "A Baroque composer who made his career in England.",
+      "explanation": "German-born Baroque composer who made his career in London, composer of the 'Messiah' and the 'Water Music'. Born in Halle in Germany, died in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1685) to the place of death in the British Isles (died 1759).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4969,
+            "lng": 11.9688,
+            "label": "b. 1685"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "d. 1759"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Halle, 1685 to London, 1759.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4969,
+            "lng": 11.9688,
+            "label": "Halle, 1685"
+          },
+          {
+            "lat": 51.5074,
+            "lng": -0.1278,
+            "label": "London, 1759"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mozart",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Wolfgang Amadeus Mozart",
+      "alternatives": [
+        "Mozart",
+        "Wolfgang Mozart",
+        "W. A. Mozart"
+      ],
+      "hint": "An Austrian composer of the 18th century.",
+      "explanation": "Austrian composer of 'The Magic Flute' and 'Don Giovanni', a child prodigy who died aged 35. Born in Salzburg, died in Vienna.",
+      "map": {
+        "alt": "A world map with a line between two places in central Europe: the birthplace (born 1756) and the place of death (died 1791).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.8095,
+            "lng": 13.055,
+            "label": "b. 1756"
+          },
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "d. 1791"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Salzburg, 1756 to Vienna, 1791.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.8095,
+            "lng": 13.055,
+            "label": "Salzburg, 1756"
+          },
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "Vienna, 1791"
+          }
+        ]
+      }
+    },
+    {
+      "id": "beethoven",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Ludwig van Beethoven",
+      "alternatives": [
+        "Beethoven"
+      ],
+      "hint": "A German composer who went deaf.",
+      "explanation": "German composer of nine symphonies who kept composing after he went deaf. Born in Bonn, died in Vienna.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in western Europe (born 1770) to the place of death in central Europe (died 1827).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.7374,
+            "lng": 7.0982,
+            "label": "b. 1770"
+          },
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "d. 1827"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Bonn, 1770 to Vienna, 1827.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.7374,
+            "lng": 7.0982,
+            "label": "Bonn, 1770"
+          },
+          {
+            "lat": 48.2082,
+            "lng": 16.3738,
+            "label": "Vienna, 1827"
+          }
+        ]
+      }
+    },
+    {
+      "id": "chopin",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Frédéric Chopin",
+      "alternatives": [
+        "Frederic Chopin",
+        "Fryderyk Chopin",
+        "Chopin",
+        "Frédéric François Chopin"
+      ],
+      "hint": "A Polish composer and pianist.",
+      "explanation": "Polish composer and pianist who spent his last years in Paris, famous for his nocturnes and polonaises. Born in Żelazowa Wola near Warsaw, died in Paris.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1810) to the place of death in western Europe (died 1849).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.2231,
+            "lng": 20.2603,
+            "label": "b. 1810"
+          },
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "d. 1849"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Żelazowa Wola, 1810 to Paris, 1849.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.2231,
+            "lng": 20.2603,
+            "label": "Żelazowa Wola, 1810"
+          },
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris, 1849"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wagner",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Richard Wagner",
+      "alternatives": [
+        "Wagner"
+      ],
+      "hint": "A German opera composer.",
+      "explanation": "German composer of the 'Ring' cycle of operas, who founded the Bayreuth Festival. Born in Leipzig, died in Venice.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1813) to the place of death in Italy (died 1883).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.3397,
+            "lng": 12.3731,
+            "label": "b. 1813"
+          },
+          {
+            "lat": 45.4408,
+            "lng": 12.3155,
+            "label": "d. 1883"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Leipzig, 1813 to Venice, 1883.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.3397,
+            "lng": 12.3731,
+            "label": "Leipzig, 1813"
+          },
+          {
+            "lat": 45.4408,
+            "lng": 12.3155,
+            "label": "Venice, 1883"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tchaikovsky",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Pyotr Ilyich Tchaikovsky",
+      "alternatives": [
+        "Peter Tchaikovsky",
+        "Pyotr Tchaikovsky",
+        "Tchaikovsky",
+        "Piotr Ilitch Tchaïkovski",
+        "Pyotr Ilich Tchaikovsky",
+        "Pyotr Il'yich Tchaikovsky",
+        "Tschaikowski"
+      ],
+      "hint": "A Russian composer of ballets.",
+      "explanation": "Russian composer of 'Swan Lake', 'The Nutcracker' and the '1812 Overture'. Born in Votkinsk in the Urals, died in Saint Petersburg.",
+      "map": {
+        "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1840) and the place of death (died 1893).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 57.0524,
+            "lng": 54.0007,
+            "label": "b. 1840"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "d. 1893"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Votkinsk, 1840 to Saint Petersburg, 1893.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 57.0524,
+            "lng": 54.0007,
+            "label": "Votkinsk, 1840"
+          },
+          {
+            "lat": 59.9343,
+            "lng": 30.3351,
+            "label": "Saint Petersburg, 1893"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stravinsky",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Igor Stravinsky",
+      "alternatives": [
+        "Stravinsky"
+      ],
+      "hint": "A Russian-born composer.",
+      "explanation": "Russian-born composer of 'The Rite of Spring', who spent his last decades in the United States. Born in Oranienbaum near Saint Petersburg, died in New York City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in eastern Europe (born 1882) to the place of death in the United States (died 1971).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.9167,
+            "lng": 29.7667,
+            "label": "b. 1882"
+          },
+          {
+            "lat": 40.7128,
+            "lng": -74.006,
+            "label": "d. 1971"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Oranienbaum, 1882 to New York City, 1971.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.9167,
+            "lng": 29.7667,
+            "label": "Oranienbaum, 1882"
+          },
+          {
+            "lat": 40.7128,
+            "lng": -74.006,
+            "label": "New York City, 1971"
+          }
+        ]
+      }
+    },
+    {
+      "id": "chaplin",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Charlie Chaplin",
+      "alternatives": [
+        "Charles Chaplin",
+        "Sir Charles Chaplin",
+        "Chaplin",
+        "Charles Spencer Chaplin"
+      ],
+      "hint": "An English comedian and film-maker.",
+      "explanation": "English comedian and film-maker of 'The Tramp', 'City Lights' and 'Modern Times'. Born in Walworth in London, died in Corsier-sur-Vevey in Switzerland.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1889) to the place of death in western Europe (died 1977).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4849,
+            "lng": -0.0951,
+            "label": "b. 1889"
+          },
+          {
+            "lat": 46.465,
+            "lng": 6.845,
+            "label": "d. 1977"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Walworth, London, 1889 to Corsier-sur-Vevey, 1977.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4849,
+            "lng": -0.0951,
+            "label": "Walworth, London, 1889"
+          },
+          {
+            "lat": 46.465,
+            "lng": 6.845,
+            "label": "Corsier-sur-Vevey, 1977"
+          }
+        ]
+      }
+    },
+    {
+      "id": "walt-disney",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Walt Disney",
+      "alternatives": [
+        "Walter Elias Disney",
+        "Disney",
+        "Walter Disney"
+      ],
+      "hint": "An American animator.",
+      "explanation": "American animator who created Mickey Mouse and founded Disneyland. Born in Chicago, died in Burbank in California.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1901) and the place of death (died 1966).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.8781,
+            "lng": -87.6298,
+            "label": "b. 1901"
+          },
+          {
+            "lat": 34.1808,
+            "lng": -118.309,
+            "label": "d. 1966"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Chicago, 1901 to Burbank, 1966.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.8781,
+            "lng": -87.6298,
+            "label": "Chicago, 1901"
+          },
+          {
+            "lat": 34.1808,
+            "lng": -118.309,
+            "label": "Burbank, 1966"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marlene-dietrich",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Marlene Dietrich",
+      "alternatives": [
+        "Dietrich"
+      ],
+      "hint": "A German-American actress and singer.",
+      "explanation": "German-American actress and singer of 'The Blue Angel', who left Nazi Germany. Born in Schöneberg in Berlin, died in Paris.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in central Europe (born 1901) to the place of death in western Europe (died 1992).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.4833,
+            "lng": 13.35,
+            "label": "b. 1901"
+          },
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "d. 1992"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Schöneberg, Berlin, 1901 to Paris, 1992.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.4833,
+            "lng": 13.35,
+            "label": "Schöneberg, Berlin, 1901"
+          },
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris, 1992"
+          }
+        ]
+      }
+    },
+    {
+      "id": "louis-armstrong",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Louis Armstrong",
+      "alternatives": [
+        "Satchmo",
+        "Armstrong",
+        "Louis Daniel Armstrong"
+      ],
+      "hint": "An American jazz trumpeter.",
+      "explanation": "American jazz trumpeter and singer, nicknamed Satchmo. Born in New Orleans, died in Queens in New York City.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1901) and the place of death (died 1971).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 29.9511,
+            "lng": -90.0715,
+            "label": "b. 1901"
+          },
+          {
+            "lat": 40.75,
+            "lng": -73.86,
+            "label": "d. 1971"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from New Orleans, 1901 to Queens, New York, 1971.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 29.9511,
+            "lng": -90.0715,
+            "label": "New Orleans, 1901"
+          },
+          {
+            "lat": 40.75,
+            "lng": -73.86,
+            "label": "Queens, New York, 1971"
+          }
+        ]
+      }
+    },
+    {
+      "id": "freddie-mercury",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Freddie Mercury",
+      "alternatives": [
+        "Mercury",
+        "Farrokh Bulsara"
+      ],
+      "hint": "The singer of a British rock band.",
+      "explanation": "Lead singer of the band Queen, born on Zanzibar. Born in Zanzibar, died in Kensington in London.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in East Africa (born 1946) to the place of death in the British Isles (died 1991).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -6.1659,
+            "lng": 39.2026,
+            "label": "b. 1946"
+          },
+          {
+            "lat": 51.5,
+            "lng": -0.2,
+            "label": "d. 1991"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Zanzibar, 1946 to Kensington, London, 1991.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -6.1659,
+            "lng": 39.2026,
+            "label": "Zanzibar, 1946"
+          },
+          {
+            "lat": 51.5,
+            "lng": -0.2,
+            "label": "Kensington, London, 1991"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bob-marley",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Bob Marley",
+      "alternatives": [
+        "Marley",
+        "Robert Nesta Marley"
+      ],
+      "hint": "A Jamaican reggae musician.",
+      "explanation": "Jamaican singer and songwriter who brought reggae to a worldwide audience. Born in Nine Mile in Jamaica, died in Miami.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the Caribbean (born 1945) to the place of death in the United States (died 1981).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 18.3,
+            "lng": -77.1,
+            "label": "b. 1945"
+          },
+          {
+            "lat": 25.7617,
+            "lng": -80.1918,
+            "label": "d. 1981"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Nine Mile, 1945 to Miami, 1981.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 18.3,
+            "lng": -77.1,
+            "label": "Nine Mile, 1945"
+          },
+          {
+            "lat": 25.7617,
+            "lng": -80.1918,
+            "label": "Miami, 1981"
+          }
+        ]
+      }
+    },
+    {
+      "id": "john-lennon",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "John Lennon",
+      "alternatives": [
+        "Lennon",
+        "John Winston Lennon"
+      ],
+      "hint": "A member of a British band of the 1960s.",
+      "explanation": "English singer and songwriter, co-founder of the Beatles, who was shot dead outside his home in New York. Born in Liverpool, died in New York City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1940) to the place of death in the United States (died 1980).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.4084,
+            "lng": -2.9916,
+            "label": "b. 1940"
+          },
+          {
+            "lat": 40.7767,
+            "lng": -73.9762,
+            "label": "d. 1980"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Liverpool, 1940 to New York City, 1980.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.4084,
+            "lng": -2.9916,
+            "label": "Liverpool, 1940"
+          },
+          {
+            "lat": 40.7767,
+            "lng": -73.9762,
+            "label": "New York City, 1980"
+          }
+        ]
+      }
+    },
+    {
+      "id": "david-bowie",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "David Bowie",
+      "alternatives": [
+        "Bowie",
+        "David Robert Jones"
+      ],
+      "hint": "An English rock musician.",
+      "explanation": "English singer, songwriter and actor known for 'Space Oddity' and his stage persona Ziggy Stardust. Born in Brixton in London, died in New York City.",
+      "map": {
+        "alt": "A world map with a line from the birthplace in the British Isles (born 1947) to the place of death in the United States (died 2016).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4613,
+            "lng": -0.1156,
+            "label": "b. 1947"
+          },
+          {
+            "lat": 40.7234,
+            "lng": -73.9965,
+            "label": "d. 2016"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Brixton, London, 1947 to New York City, 2016.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.4613,
+            "lng": -0.1156,
+            "label": "Brixton, London, 1947"
+          },
+          {
+            "lat": 40.7234,
+            "lng": -73.9965,
+            "label": "New York City, 2016"
+          }
+        ]
+      }
+    },
+    {
+      "id": "michael-jackson",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Michael Jackson",
+      "alternatives": [
+        "Michael Joseph Jackson",
+        "MJ"
+      ],
+      "hint": "An American pop star.",
+      "explanation": "American singer and dancer, the 'King of Pop', whose album 'Thriller' is among the best-selling ever. Born in Gary in Indiana, died in Los Angeles.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1958) and the place of death (died 2009).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.5934,
+            "lng": -87.3464,
+            "label": "b. 1958"
+          },
+          {
+            "lat": 34.0522,
+            "lng": -118.2437,
+            "label": "d. 2009"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Gary, Indiana, 1958 to Los Angeles, 2009.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.5934,
+            "lng": -87.3464,
+            "label": "Gary, Indiana, 1958"
+          },
+          {
+            "lat": 34.0522,
+            "lng": -118.2437,
+            "label": "Los Angeles, 2009"
+          }
+        ]
+      }
+    },
+    {
+      "id": "muhammad-ali",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Muhammad Ali",
+      "alternatives": [
+        "Cassius Clay",
+        "Cassius Marcellus Clay",
+        "Ali",
+        "Cassius Marcellus Clay Jr."
+      ],
+      "hint": "An American heavyweight boxer.",
+      "explanation": "American boxer who won the heavyweight world title three times and called himself 'The Greatest'. Born in Louisville in Kentucky, died in Scottsdale in Arizona.",
+      "map": {
+        "alt": "A world map with a line between two places in the United States: the birthplace (born 1942) and the place of death (died 2016).",
+        "line": true,
+        "pins": [
+          {
+            "lat": 38.2527,
+            "lng": -85.7585,
+            "label": "b. 1942"
+          },
+          {
+            "lat": 33.4942,
+            "lng": -111.9261,
+            "label": "d. 2016"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Louisville, 1942 to Scottsdale, 2016.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 38.2527,
+            "lng": -85.7585,
+            "label": "Louisville, 1942"
+          },
+          {
+            "lat": 33.4942,
+            "lng": -111.9261,
+            "label": "Scottsdale, 2016"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pele",
+      "type": "card",
+      "section": "arts",
+      "front": "Who was born at the first pin and died at the second?",
+      "back": "Pelé",
+      "alternatives": [
+        "Pele",
+        "Edson Arantes do Nascimento"
+      ],
+      "hint": "A Brazilian footballer.",
+      "explanation": "Brazilian footballer who won the World Cup three times. Born in Três Corações in Minas Gerais, died in São Paulo.",
+      "map": {
+        "alt": "A world map with a line between two places in South America: the birthplace (born 1940) and the place of death (died 2022).",
+        "line": true,
+        "pins": [
+          {
+            "lat": -21.6956,
+            "lng": -45.2547,
+            "label": "b. 1940"
+          },
+          {
+            "lat": -23.5505,
+            "lng": -46.6333,
+            "label": "d. 2022"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A world map with a line from Três Corações, 1940 to São Paulo, 2022.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -21.6956,
+            "lng": -45.2547,
+            "label": "Três Corações, 1940"
+          },
+          {
+            "lat": -23.5505,
+            "lng": -46.6333,
+            "label": "São Paulo, 2022"
+          }
+        ]
+      }
+    }
+  ]
+}

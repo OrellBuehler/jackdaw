@@ -1,0 +1,4367 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
+  "format": "jackdaw-pack",
+  "version": 3,
+  "id": "com.github.orellbuehler.jackdaw.examples.rivers-on-the-map",
+  "title": "Rivers on the Map",
+  "description": "78 of the world's great rivers, by continent. A line on the map joins the source to the mouth: name the river, with alternative spellings such as Rhein, Donau or Tajo accepted. The explanation gives the countries and the length, and a last chapter asks into which sea 30 of them flow.",
+  "language": "en",
+  "author": "Jackdaw project",
+  "license": "CC0-1.0",
+  "source": "https://www.wikidata.org",
+  "tags": [
+    "geography",
+    "maps",
+    "rivers",
+    "world"
+  ],
+  "icon": "🏞️",
+  "color": "#0369A1",
+  "revision": 1,
+  "created": "2026-11-25",
+  "updated": "2026-11-25",
+  "sections": [
+    {
+      "id": "europe-west",
+      "title": "Western and Southern Europe",
+      "description": "From the Alps and the Pyrenees to the Thames and the Shannon."
+    },
+    {
+      "id": "europe-east",
+      "title": "Central, Northern and Eastern Europe",
+      "description": "From the Danube and the Elbe to the Volga."
+    },
+    {
+      "id": "siberia",
+      "title": "Siberia and the Russian Far East",
+      "description": "The great rivers that flow north and east across Russia."
+    },
+    {
+      "id": "asia-east",
+      "title": "East and Southeast Asia",
+      "description": "From the Tibetan Plateau to the Pacific."
+    },
+    {
+      "id": "asia-south",
+      "title": "South and West Asia",
+      "description": "Rivers of the Indian subcontinent and the Middle East."
+    },
+    {
+      "id": "africa",
+      "title": "Africa",
+      "description": "The Nile and five more."
+    },
+    {
+      "id": "north-america",
+      "title": "North America",
+      "description": "From the Rockies to the Atlantic, the Pacific and the Arctic."
+    },
+    {
+      "id": "south-america",
+      "title": "South America",
+      "description": "The Amazon and its neighbours."
+    },
+    {
+      "id": "oceania",
+      "title": "Australia and New Zealand",
+      "description": "The longest rivers of Australia and New Zealand."
+    },
+    {
+      "id": "seas",
+      "title": "Where do they end?",
+      "description": "Name the sea, gulf or ocean at the mouth."
+    }
+  ],
+  "study": {
+    "order": "sequential",
+    "newPerSession": 8,
+    "ignoreDiacritics": true,
+    "exercises": {
+      "card": [
+        "flip",
+        "choice",
+        "type"
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "rhine",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Rhine",
+      "alternatives": [
+        "Rhein",
+        "River Rhine",
+        "The Rhine",
+        "Rhin"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises from Lake Toma in the Swiss Alps and ends in the North Sea near Rotterdam. It flows through Switzerland, Liechtenstein, Austria, Germany, France and the Netherlands and is about 1,230 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.62,
+            "lng": 8.67,
+            "label": "Source"
+          },
+          {
+            "lat": 51.98,
+            "lng": 4.1,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Rhine from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.62,
+            "lng": 8.67,
+            "label": "Source"
+          },
+          {
+            "lat": 51.98,
+            "lng": 4.1,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rhone",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Rhône",
+      "alternatives": [
+        "Rhone",
+        "River Rhone",
+        "Rhône River",
+        "Rhone River"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at the Rhône Glacier in the Swiss Alps and ends in the Mediterranean Sea in the Camargue. It flows through Switzerland and France, past Geneva, Lyon and Avignon and is about 810 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.61,
+            "lng": 8.4,
+            "label": "Source"
+          },
+          {
+            "lat": 43.33,
+            "lng": 4.84,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Rhône from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.61,
+            "lng": 8.4,
+            "label": "Source"
+          },
+          {
+            "lat": 43.33,
+            "lng": 4.84,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "seine",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Seine",
+      "alternatives": [
+        "River Seine",
+        "La Seine",
+        "The Seine"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises on the plateau of Langres in eastern France and ends in the English Channel near Le Havre. It flows through France, through Troyes, Paris and Rouen and is about 780 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.49,
+            "lng": 4.72,
+            "label": "Source"
+          },
+          {
+            "lat": 49.43,
+            "lng": 0.2,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Seine from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.49,
+            "lng": 4.72,
+            "label": "Source"
+          },
+          {
+            "lat": 49.43,
+            "lng": 0.2,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "loire",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Loire",
+      "alternatives": [
+        "River Loire",
+        "La Loire",
+        "The Loire"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Mont Gerbier de Jonc in the Massif Central and ends in the Bay of Biscay at Saint-Nazaire. It flows through France, through Nevers, Orléans, Tours and Nantes and is about 1,010 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.84,
+            "lng": 4.22,
+            "label": "Source"
+          },
+          {
+            "lat": 47.28,
+            "lng": -2.2,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Loire from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.84,
+            "lng": 4.22,
+            "label": "Source"
+          },
+          {
+            "lat": 47.28,
+            "lng": -2.2,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "garonne",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Garonne",
+      "alternatives": [
+        "River Garonne",
+        "La Garonne",
+        "The Garonne",
+        "Garona"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Val d'Aran in the Spanish Pyrenees and ends where it joins the Dordogne to form the Gironde estuary. It flows through Spain and France, through Toulouse and Bordeaux and is about 530 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.6,
+            "lng": 0.95,
+            "label": "Source"
+          },
+          {
+            "lat": 45.03,
+            "lng": -0.55,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Garonne from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.6,
+            "lng": 0.95,
+            "label": "Source"
+          },
+          {
+            "lat": 45.03,
+            "lng": -0.55,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ebro",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Ebro",
+      "alternatives": [
+        "River Ebro",
+        "The Ebro"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Fontibre in the Cantabrian Mountains and ends in the Mediterranean Sea in the Ebro Delta. It flows through Spain, through Zaragoza and is about 930 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.0,
+            "lng": -4.32,
+            "label": "Source"
+          },
+          {
+            "lat": 40.72,
+            "lng": 0.87,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Ebro from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.0,
+            "lng": -4.32,
+            "label": "Source"
+          },
+          {
+            "lat": 40.72,
+            "lng": 0.87,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "douro",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Douro",
+      "alternatives": [
+        "Duero",
+        "River Douro",
+        "River Duero",
+        "The Douro"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Picos de Urbión in northern Spain and ends in the Atlantic Ocean at Porto. It flows through Spain and Portugal, through Porto and is about 900 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.99,
+            "lng": -2.88,
+            "label": "Source"
+          },
+          {
+            "lat": 41.14,
+            "lng": -8.67,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Douro from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 41.99,
+            "lng": -2.88,
+            "label": "Source"
+          },
+          {
+            "lat": 41.14,
+            "lng": -8.67,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tagus",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Tagus",
+      "alternatives": [
+        "Tajo",
+        "Tejo",
+        "River Tagus",
+        "Rio Tejo",
+        "The Tagus"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Montes Universales in eastern Spain and ends in the Atlantic Ocean at Lisbon. It flows through Spain and Portugal, through Toledo and Lisbon and is about 1,010 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.35,
+            "lng": -1.62,
+            "label": "Source"
+          },
+          {
+            "lat": 38.68,
+            "lng": -9.3,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Tagus from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.35,
+            "lng": -1.62,
+            "label": "Source"
+          },
+          {
+            "lat": 38.68,
+            "lng": -9.3,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "guadalquivir",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Guadalquivir",
+      "alternatives": [
+        "River Guadalquivir",
+        "The Guadalquivir"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Sierra de Cazorla in Andalusia and ends in the Gulf of Cádiz at Sanlúcar de Barrameda. It flows through Spain, through Córdoba and Seville and is about 660 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 37.9,
+            "lng": -2.9,
+            "label": "Source"
+          },
+          {
+            "lat": 36.78,
+            "lng": -6.35,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Guadalquivir from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 37.9,
+            "lng": -2.9,
+            "label": "Source"
+          },
+          {
+            "lat": 36.78,
+            "lng": -6.35,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "po",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Po",
+      "alternatives": [
+        "River Po",
+        "The Po",
+        "Fiume Po"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises on Monte Viso in the Cottian Alps and ends in the Adriatic Sea in the Po Delta. It flows through Italy, through Turin and is about 650 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.7,
+            "lng": 7.09,
+            "label": "Source"
+          },
+          {
+            "lat": 44.95,
+            "lng": 12.5,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Po from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.7,
+            "lng": 7.09,
+            "label": "Source"
+          },
+          {
+            "lat": 44.95,
+            "lng": 12.5,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "adige",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Adige",
+      "alternatives": [
+        "River Adige",
+        "Etsch",
+        "The Adige"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises near the Reschen Pass in the Alps and ends in the Adriatic Sea south of Venice. It flows through Italy, through Bolzano, Trento and Verona and is about 410 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.85,
+            "lng": 10.5,
+            "label": "Source"
+          },
+          {
+            "lat": 45.15,
+            "lng": 12.3,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Adige from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.85,
+            "lng": 10.5,
+            "label": "Source"
+          },
+          {
+            "lat": 45.15,
+            "lng": 12.3,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arno",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Arno",
+      "alternatives": [
+        "River Arno",
+        "The Arno"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises on Monte Falterona in the Apennines and ends in the Ligurian Sea. It flows through Italy, through Florence and Pisa and is about 240 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.85,
+            "lng": 11.7,
+            "label": "Source"
+          },
+          {
+            "lat": 43.68,
+            "lng": 10.28,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Arno from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 43.85,
+            "lng": 11.7,
+            "label": "Source"
+          },
+          {
+            "lat": 43.68,
+            "lng": 10.28,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "thames",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Thames",
+      "alternatives": [
+        "River Thames",
+        "The Thames"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises near Kemble in the Cotswolds and ends in the Thames Estuary and the North Sea. It flows through England, through Oxford, Reading and London and is about 350 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.66,
+            "lng": -2.02,
+            "label": "Source"
+          },
+          {
+            "lat": 51.5,
+            "lng": 0.72,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Thames from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.66,
+            "lng": -2.02,
+            "label": "Source"
+          },
+          {
+            "lat": 51.5,
+            "lng": 0.72,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shannon",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Shannon",
+      "alternatives": [
+        "River Shannon",
+        "The Shannon",
+        "Sionainn"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at the Shannon Pot in County Cavan and ends in the Atlantic Ocean at the end of the Shannon Estuary. It flows through Ireland, through Lough Derg and Limerick and is about 360 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.25,
+            "lng": -7.92,
+            "label": "Source"
+          },
+          {
+            "lat": 52.58,
+            "lng": -9.8,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Shannon from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.25,
+            "lng": -7.92,
+            "label": "Source"
+          },
+          {
+            "lat": 52.58,
+            "lng": -9.8,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "moselle",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Moselle",
+      "alternatives": [
+        "Mosel",
+        "River Moselle",
+        "The Moselle"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Vosges Mountains at the Col de Bussang and ends where it joins the Rhine at Koblenz. It flows through France, Luxembourg and Germany, through Metz and Trier and is about 550 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.89,
+            "lng": 6.88,
+            "label": "Source"
+          },
+          {
+            "lat": 50.36,
+            "lng": 7.6,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Moselle from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.89,
+            "lng": 6.88,
+            "label": "Source"
+          },
+          {
+            "lat": 50.36,
+            "lng": 7.6,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "main",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Main",
+      "alternatives": [
+        "River Main",
+        "Der Main",
+        "Main River"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises near Kulmbach, where the Red Main and the White Main meet and ends where it joins the Rhine at Mainz. It flows through Germany, through Würzburg and Frankfurt and is about 520 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.1,
+            "lng": 11.43,
+            "label": "Source"
+          },
+          {
+            "lat": 50.0,
+            "lng": 8.28,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Main from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.1,
+            "lng": 11.43,
+            "label": "Source"
+          },
+          {
+            "lat": 50.0,
+            "lng": 8.28,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "neckar",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Neckar",
+      "alternatives": [
+        "River Neckar",
+        "Der Neckar"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Black Forest near Villingen-Schwenningen and ends where it joins the Rhine at Mannheim. It flows through Germany, through Stuttgart and Heidelberg and is about 360 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.03,
+            "lng": 8.53,
+            "label": "Source"
+          },
+          {
+            "lat": 49.49,
+            "lng": 8.47,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Neckar from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.03,
+            "lng": 8.53,
+            "label": "Source"
+          },
+          {
+            "lat": 49.49,
+            "lng": 8.47,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marne",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Marne",
+      "alternatives": [
+        "River Marne",
+        "La Marne",
+        "The Marne"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises on the plateau of Langres in eastern France and ends where it joins the Seine near Paris. It flows through France, through Châlons-en-Champagne and Meaux and is about 510 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.8,
+            "lng": 5.35,
+            "label": "Source"
+          },
+          {
+            "lat": 48.82,
+            "lng": 2.41,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Marne from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.8,
+            "lng": 5.35,
+            "label": "Source"
+          },
+          {
+            "lat": 48.82,
+            "lng": 2.41,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scheldt",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Scheldt",
+      "alternatives": [
+        "Schelde",
+        "Escaut",
+        "River Scheldt",
+        "The Scheldt"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in northern France near Saint-Quentin and ends in the North Sea at Vlissingen. It flows through France, Belgium and the Netherlands, through Antwerp and is about 355 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.0,
+            "lng": 3.3,
+            "label": "Source"
+          },
+          {
+            "lat": 51.45,
+            "lng": 3.57,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Scheldt from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.0,
+            "lng": 3.3,
+            "label": "Source"
+          },
+          {
+            "lat": 51.45,
+            "lng": 3.57,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aare",
+      "type": "card",
+      "section": "europe-west",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Aare",
+      "alternatives": [
+        "Aar",
+        "River Aare",
+        "The Aare"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at the Aare glaciers in the Bernese Alps and ends where it joins the Rhine near Koblenz in Switzerland. It flows through Switzerland, through Interlaken and Bern and is about 290 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.57,
+            "lng": 8.2,
+            "label": "Source"
+          },
+          {
+            "lat": 47.61,
+            "lng": 8.22,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Aare from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.57,
+            "lng": 8.2,
+            "label": "Source"
+          },
+          {
+            "lat": 47.61,
+            "lng": 8.22,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "danube",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Danube",
+      "alternatives": [
+        "Donau",
+        "River Danube",
+        "The Danube",
+        "Dunav",
+        "Duna"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Donaueschingen in the Black Forest and ends in the Black Sea in the Danube Delta. It flows through ten countries, among them Germany, Austria, Slovakia, Hungary, Serbia and Romania, past Vienna, Budapest and Belgrade and is about 2,850 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.95,
+            "lng": 8.5,
+            "label": "Source"
+          },
+          {
+            "lat": 45.2,
+            "lng": 29.7,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Danube from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.95,
+            "lng": 8.5,
+            "label": "Source"
+          },
+          {
+            "lat": 45.2,
+            "lng": 29.7,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "elbe",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Elbe",
+      "alternatives": [
+        "Labe",
+        "River Elbe",
+        "The Elbe"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Giant Mountains of Czechia and ends in the North Sea near Cuxhaven. It flows through Czechia and Germany, through Dresden, Magdeburg and Hamburg and is about 1,090 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.77,
+            "lng": 15.55,
+            "label": "Source"
+          },
+          {
+            "lat": 53.89,
+            "lng": 8.7,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Elbe from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.77,
+            "lng": 15.55,
+            "label": "Source"
+          },
+          {
+            "lat": 53.89,
+            "lng": 8.7,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vltava",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Vltava",
+      "alternatives": [
+        "Moldau",
+        "River Vltava",
+        "The Vltava"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Bohemian Forest and ends where it joins the Elbe at Mělník. It flows through Czechia, through Český Krumlov and Prague and is about 430 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.97,
+            "lng": 13.55,
+            "label": "Source"
+          },
+          {
+            "lat": 50.35,
+            "lng": 14.48,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Vltava from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.97,
+            "lng": 13.55,
+            "label": "Source"
+          },
+          {
+            "lat": 50.35,
+            "lng": 14.48,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "weser",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Weser",
+      "alternatives": [
+        "River Weser",
+        "Die Weser",
+        "The Weser"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Hann. Münden, where the Werra and the Fulda meet and ends in the North Sea at Bremerhaven. It flows through Germany, through Bremen and is about 450 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.42,
+            "lng": 9.64,
+            "label": "Source"
+          },
+          {
+            "lat": 53.55,
+            "lng": 8.55,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Weser from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.42,
+            "lng": 9.64,
+            "label": "Source"
+          },
+          {
+            "lat": 53.55,
+            "lng": 8.55,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oder",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Oder",
+      "alternatives": [
+        "Odra",
+        "River Oder",
+        "The Oder"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Oder Mountains in Czechia and ends in the Szczecin Lagoon and the Baltic Sea. It flows through Czechia, Poland and Germany, through Wrocław and is about 850 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.6,
+            "lng": 17.5,
+            "label": "Source"
+          },
+          {
+            "lat": 53.77,
+            "lng": 14.55,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Oder from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.6,
+            "lng": 17.5,
+            "label": "Source"
+          },
+          {
+            "lat": 53.77,
+            "lng": 14.55,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vistula",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Vistula",
+      "alternatives": [
+        "Wisła",
+        "Wisla",
+        "River Vistula",
+        "The Vistula",
+        "Weichsel"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises on Barania Góra in the Beskid Mountains and ends in the Gulf of Gdańsk in the Baltic Sea. It flows through Poland, through Kraków, Warsaw and Toruń and is about 1,050 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.61,
+            "lng": 19.0,
+            "label": "Source"
+          },
+          {
+            "lat": 54.35,
+            "lng": 18.95,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Vistula from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.61,
+            "lng": 19.0,
+            "label": "Source"
+          },
+          {
+            "lat": 54.35,
+            "lng": 18.95,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inn",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Inn",
+      "alternatives": [
+        "River Inn",
+        "The Inn"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at the Lunghinsee near the Maloja Pass in Switzerland and ends where it joins the Danube at Passau. It flows through Switzerland, Austria and Germany, through Innsbruck and is about 520 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.4,
+            "lng": 9.7,
+            "label": "Source"
+          },
+          {
+            "lat": 48.57,
+            "lng": 13.47,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Inn from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.4,
+            "lng": 9.7,
+            "label": "Source"
+          },
+          {
+            "lat": 48.57,
+            "lng": 13.47,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "drava",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Drava",
+      "alternatives": [
+        "Drau",
+        "Dráva",
+        "River Drava",
+        "The Drava"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises near Innichen in the Italian Alps and ends where it joins the Danube near Osijek. It flows through Italy, Austria, Slovenia and Croatia and is about 720 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.73,
+            "lng": 12.28,
+            "label": "Source"
+          },
+          {
+            "lat": 45.56,
+            "lng": 18.93,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Drava from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 46.73,
+            "lng": 12.28,
+            "label": "Source"
+          },
+          {
+            "lat": 45.56,
+            "lng": 18.93,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tisza",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Tisza",
+      "alternatives": [
+        "Tisa",
+        "Theiss",
+        "River Tisza",
+        "The Tisza"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Rakhiv in the Carpathians in Ukraine and ends where it joins the Danube in Serbia. It flows through Ukraine, Hungary and Serbia, along the borders of Romania and Slovakia and is about 970 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.06,
+            "lng": 24.2,
+            "label": "Source"
+          },
+          {
+            "lat": 45.15,
+            "lng": 20.28,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Tisza from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.06,
+            "lng": 24.2,
+            "label": "Source"
+          },
+          {
+            "lat": 45.15,
+            "lng": 20.28,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "prut",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Prut",
+      "alternatives": [
+        "Pruth",
+        "River Prut",
+        "The Prut"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Carpathians in Ukraine and ends where it joins the Danube near Giurgiulești. It flows through Ukraine, Moldova and Romania and is about 950 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.15,
+            "lng": 24.5,
+            "label": "Source"
+          },
+          {
+            "lat": 45.47,
+            "lng": 28.2,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Prut from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.15,
+            "lng": 24.5,
+            "label": "Source"
+          },
+          {
+            "lat": 45.47,
+            "lng": 28.2,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "daugava",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Daugava",
+      "alternatives": [
+        "Western Dvina",
+        "Zapadnaya Dvina",
+        "River Daugava",
+        "The Daugava"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Valdai Hills in Russia and ends in the Gulf of Riga in the Baltic Sea. It flows through Russia, Belarus and Latvia, through Riga and is about 1,020 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 56.9,
+            "lng": 32.5,
+            "label": "Source"
+          },
+          {
+            "lat": 57.06,
+            "lng": 24.0,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Daugava from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 56.9,
+            "lng": 32.5,
+            "label": "Source"
+          },
+          {
+            "lat": 57.06,
+            "lng": 24.0,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dniester",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Dniester",
+      "alternatives": [
+        "Dnister",
+        "Dniestr",
+        "Nistru",
+        "River Dniester",
+        "The Dniester"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Carpathians in Ukraine and ends in the Dniester Estuary on the Black Sea. It flows through Ukraine and Moldova and is about 1,350 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.2,
+            "lng": 22.9,
+            "label": "Source"
+          },
+          {
+            "lat": 46.3,
+            "lng": 30.3,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Dniester from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 49.2,
+            "lng": 22.9,
+            "label": "Source"
+          },
+          {
+            "lat": 46.3,
+            "lng": 30.3,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnieper",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Dnieper",
+      "alternatives": [
+        "Dnipro",
+        "Dniepr",
+        "Dnepr",
+        "River Dnieper",
+        "The Dnieper"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Valdai Hills in Russia and ends in the Black Sea near Kherson. It flows through Russia, Belarus and Ukraine, through Smolensk, Kyiv and Dnipro and is about 2,200 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.87,
+            "lng": 33.72,
+            "label": "Source"
+          },
+          {
+            "lat": 46.5,
+            "lng": 32.3,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Dnieper from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 55.87,
+            "lng": 33.72,
+            "label": "Source"
+          },
+          {
+            "lat": 46.5,
+            "lng": 32.3,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "don",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Don",
+      "alternatives": [
+        "River Don",
+        "The Don",
+        "Don River"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises near Novomoskovsk south of Moscow and ends in the Sea of Azov. It flows through Russia, through Voronezh and Rostov-on-Don and is about 1,870 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.0,
+            "lng": 38.3,
+            "label": "Source"
+          },
+          {
+            "lat": 47.1,
+            "lng": 39.2,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Don from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 54.0,
+            "lng": 38.3,
+            "label": "Source"
+          },
+          {
+            "lat": 47.1,
+            "lng": 39.2,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "volga",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Volga",
+      "alternatives": [
+        "River Volga",
+        "The Volga",
+        "Wolga"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises in the Valdai Hills north-west of Moscow and ends in the Caspian Sea, the largest lake in the world. It flows through Russia, through Tver, Nizhny Novgorod, Kazan, Samara, Volgograd and Astrakhan and is about 3,530 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 57.25,
+            "lng": 32.47,
+            "label": "Source"
+          },
+          {
+            "lat": 45.7,
+            "lng": 47.9,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Volga from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 57.25,
+            "lng": 32.47,
+            "label": "Source"
+          },
+          {
+            "lat": 45.7,
+            "lng": 47.9,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "northern-dvina",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Northern Dvina",
+      "alternatives": [
+        "Severnaya Dvina",
+        "Northern Dwina"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Veliky Ustyug, where the Sukhona and the Vychegda meet and ends in the White Sea. It flows through north-western Russia, through Kotlas and Arkhangelsk and is about 740 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 60.77,
+            "lng": 46.3,
+            "label": "Source"
+          },
+          {
+            "lat": 64.55,
+            "lng": 40.5,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Northern Dvina from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 60.77,
+            "lng": 46.3,
+            "label": "Source"
+          },
+          {
+            "lat": 64.55,
+            "lng": 40.5,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "glomma",
+      "type": "card",
+      "section": "europe-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Glomma",
+      "alternatives": [
+        "Glåma",
+        "Glaama",
+        "Glommen"
+      ],
+      "hint": "A river in Europe.",
+      "explanation": "It rises at Lake Aursunden in central Norway and ends in the Skagerrak at Fredrikstad. It flows through Norway, through Kongsvinger and Sarpsborg and is about 620 km long.",
+      "map": {
+        "alt": "A map of Europe with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 62.57,
+            "lng": 11.83,
+            "label": "Source"
+          },
+          {
+            "lat": 59.2,
+            "lng": 10.95,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Europe with the course of the Glomma from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 62.57,
+            "lng": 11.83,
+            "label": "Source"
+          },
+          {
+            "lat": 59.2,
+            "lng": 10.95,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ob",
+      "type": "card",
+      "section": "siberia",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Ob",
+      "alternatives": [
+        "Ob River",
+        "Obi",
+        "River Ob",
+        "The Ob"
+      ],
+      "hint": "A river in northern Asia.",
+      "explanation": "It rises where the Biya and the Katun meet near Biysk in the Altai and ends in the Gulf of Ob and the Kara Sea. It flows through Russia, through Novosibirsk and is about 3,650 km long.",
+      "map": {
+        "alt": "A map of northern Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.45,
+            "lng": 85.08,
+            "label": "Source"
+          },
+          {
+            "lat": 66.5,
+            "lng": 71.4,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of northern Asia with the course of the Ob from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 52.45,
+            "lng": 85.08,
+            "label": "Source"
+          },
+          {
+            "lat": 66.5,
+            "lng": 71.4,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yenisei",
+      "type": "card",
+      "section": "siberia",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Yenisei",
+      "alternatives": [
+        "Yenisey",
+        "Yenisei River",
+        "Jenissei",
+        "River Yenisei"
+      ],
+      "hint": "A river in northern Asia.",
+      "explanation": "It rises at Kyzyl, where the Bii-Khem and the Kaa-Khem meet and ends in the Yenisei Gulf and the Kara Sea. It flows through Russia, through Krasnoyarsk and is about 3,490 km long.",
+      "map": {
+        "alt": "A map of northern Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.72,
+            "lng": 94.45,
+            "label": "Source"
+          },
+          {
+            "lat": 71.8,
+            "lng": 82.7,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of northern Asia with the course of the Yenisei from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.72,
+            "lng": 94.45,
+            "label": "Source"
+          },
+          {
+            "lat": 71.8,
+            "lng": 82.7,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lena",
+      "type": "card",
+      "section": "siberia",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Lena",
+      "alternatives": [
+        "Lena River",
+        "River Lena",
+        "The Lena"
+      ],
+      "hint": "A river in northern Asia.",
+      "explanation": "It rises in the Baikal Mountains close to Lake Baikal and ends in the Laptev Sea in the Lena Delta. It flows through Russia, through Yakutsk and is about 4,290 km long.",
+      "map": {
+        "alt": "A map of northern Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.93,
+            "lng": 108.15,
+            "label": "Source"
+          },
+          {
+            "lat": 72.4,
+            "lng": 126.7,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of northern Asia with the course of the Lena from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.93,
+            "lng": 108.15,
+            "label": "Source"
+          },
+          {
+            "lat": 72.4,
+            "lng": 126.7,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amur",
+      "type": "card",
+      "section": "siberia",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Amur",
+      "alternatives": [
+        "Amur River",
+        "Heilong Jiang",
+        "Heilongjiang",
+        "River Amur",
+        "The Amur"
+      ],
+      "hint": "A river in northern Asia.",
+      "explanation": "It rises where the Shilka and the Argun meet on the Russian-Chinese border and ends in the Strait of Tartary at the Sea of Okhotsk. It flows through the border of Russia and China, through Khabarovsk and is about 2,820 km long.",
+      "map": {
+        "alt": "A map of northern Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.33,
+            "lng": 121.55,
+            "label": "Source"
+          },
+          {
+            "lat": 52.9,
+            "lng": 141.1,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of northern Asia with the course of the Amur from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 53.33,
+            "lng": 121.55,
+            "label": "Source"
+          },
+          {
+            "lat": 52.9,
+            "lng": 141.1,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "angara",
+      "type": "card",
+      "section": "siberia",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Angara",
+      "alternatives": [
+        "River Angara",
+        "The Angara"
+      ],
+      "hint": "A river in northern Asia.",
+      "explanation": "It rises at Lake Baikal, which it drains and ends where it joins the Yenisei. It flows through Russia, through Irkutsk and Bratsk and is about 1,780 km long.",
+      "map": {
+        "alt": "A map of northern Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.86,
+            "lng": 104.83,
+            "label": "Source"
+          },
+          {
+            "lat": 58.07,
+            "lng": 93.03,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of northern Asia with the course of the Angara from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.86,
+            "lng": 104.83,
+            "label": "Source"
+          },
+          {
+            "lat": 58.07,
+            "lng": 93.03,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yangtze",
+      "type": "card",
+      "section": "asia-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Yangtze",
+      "alternatives": [
+        "Yangzi",
+        "Yangtze River",
+        "Chang Jiang",
+        "Changjiang",
+        "Yangtze Kiang"
+      ],
+      "hint": "A river in East and Southeast Asia.",
+      "explanation": "It rises in the Tanggula Mountains on the Tibetan Plateau and ends in the East China Sea at Shanghai. It flows through China, through Chongqing, Wuhan, Nanjing and Shanghai and is about 6,300 km long.",
+      "map": {
+        "alt": "A map of East and Southeast Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 33.43,
+            "lng": 91.17,
+            "label": "Source"
+          },
+          {
+            "lat": 31.4,
+            "lng": 121.95,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of East and Southeast Asia with the course of the Yangtze from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 33.43,
+            "lng": 91.17,
+            "label": "Source"
+          },
+          {
+            "lat": 31.4,
+            "lng": 121.95,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yellow-river",
+      "type": "card",
+      "section": "asia-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Yellow River",
+      "alternatives": [
+        "Huang He",
+        "Huanghe",
+        "Hwang Ho",
+        "The Yellow River"
+      ],
+      "hint": "A river in East and Southeast Asia.",
+      "explanation": "It rises in the Bayan Har Mountains on the Tibetan Plateau and ends in the Bohai Sea. It flows through northern China, past Lanzhou, Zhengzhou and Jinan and is about 5,460 km long.",
+      "map": {
+        "alt": "A map of East and Southeast Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 34.5,
+            "lng": 96.3,
+            "label": "Source"
+          },
+          {
+            "lat": 37.77,
+            "lng": 119.15,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of East and Southeast Asia with the course of the Yellow River from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 34.5,
+            "lng": 96.3,
+            "label": "Source"
+          },
+          {
+            "lat": 37.77,
+            "lng": 119.15,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mekong",
+      "type": "card",
+      "section": "asia-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Mekong",
+      "alternatives": [
+        "Mekong River",
+        "Mae Nam Khong",
+        "Lancang",
+        "The Mekong"
+      ],
+      "hint": "A river in East and Southeast Asia.",
+      "explanation": "It rises on the Tibetan Plateau and ends in the South China Sea in the Mekong Delta. It flows through China, Myanmar, Laos, Thailand, Cambodia and Vietnam and is about 4,350 km long.",
+      "map": {
+        "alt": "A map of East and Southeast Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 33.7,
+            "lng": 94.7,
+            "label": "Source"
+          },
+          {
+            "lat": 10.05,
+            "lng": 106.75,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of East and Southeast Asia with the course of the Mekong from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 33.7,
+            "lng": 94.7,
+            "label": "Source"
+          },
+          {
+            "lat": 10.05,
+            "lng": 106.75,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "irrawaddy",
+      "type": "card",
+      "section": "asia-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Irrawaddy",
+      "alternatives": [
+        "Irrawaddy River",
+        "Ayeyarwady",
+        "Ayeyarwaddy",
+        "Ayeyarwady River"
+      ],
+      "hint": "A river in East and Southeast Asia.",
+      "explanation": "It rises at Myitsone, where the Mali and the N'mai meet in northern Myanmar and ends in the Andaman Sea in the Irrawaddy Delta. It flows through Myanmar, through Mandalay and is about 2,200 km long.",
+      "map": {
+        "alt": "A map of East and Southeast Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 25.7,
+            "lng": 97.5,
+            "label": "Source"
+          },
+          {
+            "lat": 15.85,
+            "lng": 95.1,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of East and Southeast Asia with the course of the Irrawaddy from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 25.7,
+            "lng": 97.5,
+            "label": "Source"
+          },
+          {
+            "lat": 15.85,
+            "lng": 95.1,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yalu",
+      "type": "card",
+      "section": "asia-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Yalu",
+      "alternatives": [
+        "Yalu River",
+        "Amnok",
+        "Amnokgang",
+        "Yalu Jiang"
+      ],
+      "hint": "A river in East and Southeast Asia.",
+      "explanation": "It rises on Paektu Mountain on the border of China and North Korea and ends in Korea Bay. It flows through the border of China and North Korea and is about 800 km long.",
+      "map": {
+        "alt": "A map of East and Southeast Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.0,
+            "lng": 128.1,
+            "label": "Source"
+          },
+          {
+            "lat": 39.85,
+            "lng": 124.35,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of East and Southeast Asia with the course of the Yalu from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 42.0,
+            "lng": 128.1,
+            "label": "Source"
+          },
+          {
+            "lat": 39.85,
+            "lng": 124.35,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinano",
+      "type": "card",
+      "section": "asia-east",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Shinano",
+      "alternatives": [
+        "Shinano River",
+        "Chikuma",
+        "Chikuma River",
+        "Shinano-gawa"
+      ],
+      "hint": "A river in East and Southeast Asia.",
+      "explanation": "It rises on Mount Kobushi in central Japan and ends in the Sea of Japan at Niigata. It flows through Japan, through Nagano and Niigata prefectures and is about 370 km long.",
+      "map": {
+        "alt": "A map of East and Southeast Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 35.9,
+            "lng": 138.7,
+            "label": "Source"
+          },
+          {
+            "lat": 37.95,
+            "lng": 139.06,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of East and Southeast Asia with the course of the Shinano from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 35.9,
+            "lng": 138.7,
+            "label": "Source"
+          },
+          {
+            "lat": 37.95,
+            "lng": 139.06,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganges",
+      "type": "card",
+      "section": "asia-south",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Ganges",
+      "alternatives": [
+        "Ganga",
+        "River Ganges",
+        "The Ganges",
+        "Ganga River"
+      ],
+      "hint": "A river in South and West Asia.",
+      "explanation": "It rises at the Gangotri Glacier in the Himalayas and ends in the Bay of Bengal, in the Ganges Delta. It flows through India and Bangladesh, through Haridwar, Varanasi and Patna and is about 2,525 km long.",
+      "map": {
+        "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 30.93,
+            "lng": 79.08,
+            "label": "Source"
+          },
+          {
+            "lat": 21.7,
+            "lng": 90.3,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South and West Asia with the course of the Ganges from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 30.93,
+            "lng": 79.08,
+            "label": "Source"
+          },
+          {
+            "lat": 21.7,
+            "lng": 90.3,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "indus",
+      "type": "card",
+      "section": "asia-south",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Indus",
+      "alternatives": [
+        "Indus River",
+        "River Indus",
+        "The Indus"
+      ],
+      "hint": "A river in South and West Asia.",
+      "explanation": "It rises on the Tibetan Plateau near Mount Kailash and ends in the Arabian Sea south-east of Karachi. It flows through China, India and Pakistan and is about 3,180 km long.",
+      "map": {
+        "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 31.2,
+            "lng": 81.5,
+            "label": "Source"
+          },
+          {
+            "lat": 24.0,
+            "lng": 67.42,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South and West Asia with the course of the Indus from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 31.2,
+            "lng": 81.5,
+            "label": "Source"
+          },
+          {
+            "lat": 24.0,
+            "lng": 67.42,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "krishna",
+      "type": "card",
+      "section": "asia-south",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Krishna",
+      "alternatives": [
+        "Krishna River",
+        "Kistna",
+        "River Krishna",
+        "The Krishna"
+      ],
+      "hint": "A river in South and West Asia.",
+      "explanation": "It rises at Mahabaleshwar in the Western Ghats and ends in the Bay of Bengal. It flows through India, through Maharashtra, Karnataka, Telangana and Andhra Pradesh and is about 1,400 km long.",
+      "map": {
+        "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 17.92,
+            "lng": 73.65,
+            "label": "Source"
+          },
+          {
+            "lat": 15.73,
+            "lng": 80.93,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South and West Asia with the course of the Krishna from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 17.92,
+            "lng": 73.65,
+            "label": "Source"
+          },
+          {
+            "lat": 15.73,
+            "lng": 80.93,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "narmada",
+      "type": "card",
+      "section": "asia-south",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Narmada",
+      "alternatives": [
+        "Narmada River",
+        "Nerbudda",
+        "Narbada",
+        "River Narmada"
+      ],
+      "hint": "A river in South and West Asia.",
+      "explanation": "It rises at Amarkantak in central India and ends in the Gulf of Khambhat in the Arabian Sea. It flows through India, through Madhya Pradesh, Maharashtra and Gujarat and is about 1,310 km long.",
+      "map": {
+        "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 22.68,
+            "lng": 81.76,
+            "label": "Source"
+          },
+          {
+            "lat": 21.65,
+            "lng": 72.65,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South and West Asia with the course of the Narmada from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 22.68,
+            "lng": 81.76,
+            "label": "Source"
+          },
+          {
+            "lat": 21.65,
+            "lng": 72.65,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tigris",
+      "type": "card",
+      "section": "asia-south",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Tigris",
+      "alternatives": [
+        "River Tigris",
+        "The Tigris",
+        "Dijlah",
+        "Dicle"
+      ],
+      "hint": "A river in South and West Asia.",
+      "explanation": "It rises at Lake Hazar in eastern Turkey and ends where it meets the Euphrates to form the Shatt al-Arab. It flows through Turkey, Syria and Iraq, through Diyarbakır, Mosul and Baghdad and is about 1,750 km long.",
+      "map": {
+        "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 38.48,
+            "lng": 39.42,
+            "label": "Source"
+          },
+          {
+            "lat": 31.0,
+            "lng": 47.43,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South and West Asia with the course of the Tigris from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 38.48,
+            "lng": 39.42,
+            "label": "Source"
+          },
+          {
+            "lat": 31.0,
+            "lng": 47.43,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kizilirmak",
+      "type": "card",
+      "section": "asia-south",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Kızılırmak",
+      "alternatives": [
+        "Kizilirmak",
+        "Halys",
+        "Kizil Irmak",
+        "Kizilirmak River",
+        "Kızılırmak River"
+      ],
+      "hint": "A river in South and West Asia.",
+      "explanation": "It rises in the Kızıldağ mountains in central Turkey and ends in the Black Sea near Bafra. It flows through Turkey, through Sivas and is about 1,360 km long.",
+      "map": {
+        "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.85,
+            "lng": 38.3,
+            "label": "Source"
+          },
+          {
+            "lat": 41.7,
+            "lng": 36.0,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South and West Asia with the course of the Kızılırmak from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.85,
+            "lng": 38.3,
+            "label": "Source"
+          },
+          {
+            "lat": 41.7,
+            "lng": 36.0,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nile",
+      "type": "card",
+      "section": "africa",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Nile",
+      "alternatives": [
+        "River Nile",
+        "The Nile",
+        "Nil",
+        "Nile River"
+      ],
+      "hint": "A river in Africa.",
+      "explanation": "It rises in the highlands of Rwanda, whose water reaches Lake Victoria and ends in the Mediterranean Sea in the Nile Delta. It flows through Uganda, South Sudan, Sudan and Egypt, through Khartoum and Cairo and is about 6,650 km long.",
+      "map": {
+        "alt": "A map of Africa with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -2.3,
+            "lng": 29.35,
+            "label": "Source"
+          },
+          {
+            "lat": 31.55,
+            "lng": 31.1,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Africa with the course of the Nile from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -2.3,
+            "lng": 29.35,
+            "label": "Source"
+          },
+          {
+            "lat": 31.55,
+            "lng": 31.1,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "blue-nile",
+      "type": "card",
+      "section": "africa",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Blue Nile",
+      "alternatives": [
+        "Abay",
+        "Abbay",
+        "Blue Nile River",
+        "The Blue Nile"
+      ],
+      "hint": "A river in Africa.",
+      "explanation": "It rises at Lake Tana in the Ethiopian Highlands and ends where it meets the White Nile at Khartoum to form the Nile. It flows through Ethiopia and Sudan and is about 1,450 km long.",
+      "map": {
+        "alt": "A map of Africa with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 11.6,
+            "lng": 37.38,
+            "label": "Source"
+          },
+          {
+            "lat": 15.6,
+            "lng": 32.5,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Africa with the course of the Blue Nile from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 11.6,
+            "lng": 37.38,
+            "label": "Source"
+          },
+          {
+            "lat": 15.6,
+            "lng": 32.5,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "niger",
+      "type": "card",
+      "section": "africa",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Niger",
+      "alternatives": [
+        "Niger River",
+        "River Niger",
+        "The Niger"
+      ],
+      "hint": "A river in Africa.",
+      "explanation": "It rises in the Guinea Highlands only 250 km from the Atlantic coast and ends in the Gulf of Guinea in the Niger Delta. It flows through Guinea, Mali, Niger and Nigeria, through Bamako and Niamey and is about 4,180 km long.",
+      "map": {
+        "alt": "A map of Africa with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 9.05,
+            "lng": -10.68,
+            "label": "Source"
+          },
+          {
+            "lat": 4.3,
+            "lng": 6.1,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Africa with the course of the Niger from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 9.05,
+            "lng": -10.68,
+            "label": "Source"
+          },
+          {
+            "lat": 4.3,
+            "lng": 6.1,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "zambezi",
+      "type": "card",
+      "section": "africa",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Zambezi",
+      "alternatives": [
+        "Zambezi River",
+        "Zambesi",
+        "River Zambezi",
+        "The Zambezi"
+      ],
+      "hint": "A river in Africa.",
+      "explanation": "It rises at Kalene Hill in north-western Zambia and ends in the Indian Ocean in Mozambique. It flows through Zambia, Angola, Botswana, Zimbabwe and Mozambique, over the Victoria Falls and is about 2,570 km long.",
+      "map": {
+        "alt": "A map of Africa with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -11.37,
+            "lng": 24.31,
+            "label": "Source"
+          },
+          {
+            "lat": -18.57,
+            "lng": 36.47,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Africa with the course of the Zambezi from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -11.37,
+            "lng": 24.31,
+            "label": "Source"
+          },
+          {
+            "lat": -18.57,
+            "lng": 36.47,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "orange",
+      "type": "card",
+      "section": "africa",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Orange",
+      "alternatives": [
+        "Orange River",
+        "Senqu",
+        "Gariep",
+        "River Orange",
+        "The Orange"
+      ],
+      "hint": "A river in Africa.",
+      "explanation": "It rises in the Drakensberg Mountains in Lesotho and ends in the Atlantic Ocean at Alexander Bay. It flows through Lesotho, South Africa and Namibia and is about 2,200 km long.",
+      "map": {
+        "alt": "A map of Africa with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -28.75,
+            "lng": 28.88,
+            "label": "Source"
+          },
+          {
+            "lat": -28.63,
+            "lng": 16.45,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Africa with the course of the Orange from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -28.75,
+            "lng": 28.88,
+            "label": "Source"
+          },
+          {
+            "lat": -28.63,
+            "lng": 16.45,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gambia",
+      "type": "card",
+      "section": "africa",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Gambia",
+      "alternatives": [
+        "Gambia River",
+        "River Gambia",
+        "The Gambia"
+      ],
+      "hint": "A river in Africa.",
+      "explanation": "It rises in the Fouta Djallon highlands in Guinea and ends in the Atlantic Ocean at Banjul. It flows through Guinea, Senegal and The Gambia, through the whole of The Gambia and is about 1,120 km long.",
+      "map": {
+        "alt": "A map of Africa with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 11.4,
+            "lng": -12.2,
+            "label": "Source"
+          },
+          {
+            "lat": 13.45,
+            "lng": -16.6,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Africa with the course of the Gambia from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 11.4,
+            "lng": -12.2,
+            "label": "Source"
+          },
+          {
+            "lat": 13.45,
+            "lng": -16.6,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mississippi",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Mississippi",
+      "alternatives": [
+        "Mississippi River",
+        "River Mississippi",
+        "The Mississippi"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at Lake Itasca in Minnesota and ends in the Gulf of Mexico. It flows through the United States, through Minneapolis, St. Louis, Memphis and New Orleans and is about 3,770 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.24,
+            "lng": -95.21,
+            "label": "Source"
+          },
+          {
+            "lat": 29.15,
+            "lng": -89.25,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Mississippi from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 47.24,
+            "lng": -95.21,
+            "label": "Source"
+          },
+          {
+            "lat": 29.15,
+            "lng": -89.25,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ohio",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Ohio",
+      "alternatives": [
+        "Ohio River",
+        "River Ohio",
+        "The Ohio"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at Pittsburgh, where the Allegheny and the Monongahela meet and ends where it joins the Mississippi at Cairo, Illinois. It flows through the United States, through Cincinnati and Louisville and is about 1,580 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.44,
+            "lng": -80.01,
+            "label": "Source"
+          },
+          {
+            "lat": 37.0,
+            "lng": -89.13,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Ohio from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.44,
+            "lng": -80.01,
+            "label": "Source"
+          },
+          {
+            "lat": 37.0,
+            "lng": -89.13,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arkansas",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Arkansas",
+      "alternatives": [
+        "Arkansas River",
+        "River Arkansas",
+        "The Arkansas"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises in the Rocky Mountains of Colorado and ends where it joins the Mississippi in Arkansas. It flows through the United States, through Wichita, Tulsa and Little Rock and is about 2,360 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.25,
+            "lng": -106.3,
+            "label": "Source"
+          },
+          {
+            "lat": 33.75,
+            "lng": -91.07,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Arkansas from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.25,
+            "lng": -106.3,
+            "label": "Source"
+          },
+          {
+            "lat": 33.75,
+            "lng": -91.07,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "colorado-us",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Colorado River",
+      "alternatives": [
+        "Colorado",
+        "The Colorado River",
+        "Colorado River (US)",
+        "Rio Colorado"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at La Poudre Pass in the Rocky Mountains of Colorado and ends in the Gulf of California, which it now rarely reaches. It flows through the United States and Mexico, through the Grand Canyon and past the Hoover Dam and is about 2,330 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.47,
+            "lng": -105.82,
+            "label": "Source"
+          },
+          {
+            "lat": 31.8,
+            "lng": -114.8,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Colorado River from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 40.47,
+            "lng": -105.82,
+            "label": "Source"
+          },
+          {
+            "lat": 31.8,
+            "lng": -114.8,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "columbia",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Columbia River",
+      "alternatives": [
+        "Columbia",
+        "The Columbia River",
+        "Columbia River (US)"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at Columbia Lake in the Canadian Rockies and ends in the Pacific Ocean at Astoria. It flows through Canada and the United States, past Portland and is about 2,000 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.22,
+            "lng": -115.87,
+            "label": "Source"
+          },
+          {
+            "lat": 46.25,
+            "lng": -124.05,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Columbia River from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 50.22,
+            "lng": -115.87,
+            "label": "Source"
+          },
+          {
+            "lat": 46.25,
+            "lng": -124.05,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "snake",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Snake River",
+      "alternatives": [
+        "Snake",
+        "The Snake River"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises in Yellowstone National Park and ends where it joins the Columbia River in Washington State. It flows through the United States, through Idaho and Hells Canyon and is about 1,740 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.1,
+            "lng": -110.2,
+            "label": "Source"
+          },
+          {
+            "lat": 46.2,
+            "lng": -119.0,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Snake River from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.1,
+            "lng": -110.2,
+            "label": "Source"
+          },
+          {
+            "lat": 46.2,
+            "lng": -119.0,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tennessee",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Tennessee River",
+      "alternatives": [
+        "Tennessee",
+        "The Tennessee River"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at Knoxville, where the Holston and the French Broad meet and ends where it joins the Ohio River at Paducah. It flows through the United States, through Tennessee, Alabama and Kentucky and is about 1,050 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 35.96,
+            "lng": -83.89,
+            "label": "Source"
+          },
+          {
+            "lat": 37.07,
+            "lng": -88.56,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Tennessee River from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 35.96,
+            "lng": -83.89,
+            "label": "Source"
+          },
+          {
+            "lat": 37.07,
+            "lng": -88.56,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "potomac",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Potomac",
+      "alternatives": [
+        "Potomac River",
+        "River Potomac",
+        "The Potomac"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at the Fairfax Stone in West Virginia and ends in Chesapeake Bay. It flows through the United States, through Washington, D.C. and is about 650 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.19,
+            "lng": -79.49,
+            "label": "Source"
+          },
+          {
+            "lat": 38.04,
+            "lng": -76.32,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Potomac from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 39.19,
+            "lng": -79.49,
+            "label": "Source"
+          },
+          {
+            "lat": 38.04,
+            "lng": -76.32,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yukon",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Yukon",
+      "alternatives": [
+        "Yukon River",
+        "River Yukon",
+        "The Yukon"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises in the mountains of British Columbia near Atlin Lake and ends in the Bering Sea in the Yukon Delta. It flows through Canada and Alaska, through Whitehorse and Dawson City and is about 3,190 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.15,
+            "lng": -133.75,
+            "label": "Source"
+          },
+          {
+            "lat": 62.6,
+            "lng": -164.8,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Yukon from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 59.15,
+            "lng": -133.75,
+            "label": "Source"
+          },
+          {
+            "lat": 62.6,
+            "lng": -164.8,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mackenzie",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Mackenzie",
+      "alternatives": [
+        "Mackenzie River",
+        "River Mackenzie",
+        "The Mackenzie"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at Great Slave Lake in northern Canada and ends in the Beaufort Sea in the Mackenzie Delta. It flows through Canada, through the Northwest Territories and is about 1,740 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 61.4,
+            "lng": -117.7,
+            "label": "Source"
+          },
+          {
+            "lat": 69.2,
+            "lng": -135.1,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the Mackenzie from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 61.4,
+            "lng": -117.7,
+            "label": "Source"
+          },
+          {
+            "lat": 69.2,
+            "lng": -135.1,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "st-lawrence",
+      "type": "card",
+      "section": "north-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "St. Lawrence",
+      "alternatives": [
+        "Saint Lawrence",
+        "St. Lawrence River",
+        "St Lawrence",
+        "Saint Lawrence River",
+        "St Lawrence River",
+        "Saint-Laurent"
+      ],
+      "hint": "A river in North America.",
+      "explanation": "It rises at the outflow of Lake Ontario at Kingston and ends in the Gulf of St. Lawrence. It flows through Canada and the United States, through Montréal and Québec City and is about 1,200 km long.",
+      "map": {
+        "alt": "A map of North America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.15,
+            "lng": -76.5,
+            "label": "Source"
+          },
+          {
+            "lat": 49.32,
+            "lng": -67.37,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of North America with the course of the St. Lawrence from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 44.15,
+            "lng": -76.5,
+            "label": "Source"
+          },
+          {
+            "lat": 49.32,
+            "lng": -67.37,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amazon",
+      "type": "card",
+      "section": "south-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Amazon",
+      "alternatives": [
+        "Amazon River",
+        "Rio Amazonas",
+        "River Amazon",
+        "The Amazon",
+        "Amazonas"
+      ],
+      "hint": "A river in South America.",
+      "explanation": "It rises on Nevado Mismi in the Peruvian Andes and ends in the Atlantic Ocean at the equator. It flows through Peru, Colombia and Brazil, through Iquitos and Manaus and is about 6,400 km long.",
+      "map": {
+        "alt": "A map of South America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -15.52,
+            "lng": -71.69,
+            "label": "Source"
+          },
+          {
+            "lat": 0.4,
+            "lng": -49.8,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South America with the course of the Amazon from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -15.52,
+            "lng": -71.69,
+            "label": "Source"
+          },
+          {
+            "lat": 0.4,
+            "lng": -49.8,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "madeira",
+      "type": "card",
+      "section": "south-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Madeira",
+      "alternatives": [
+        "Madeira River",
+        "Rio Madeira",
+        "River Madeira",
+        "The Madeira"
+      ],
+      "hint": "A river in South America.",
+      "explanation": "It rises where the Beni and the Mamoré meet on the Bolivian-Brazilian border and ends where it joins the Amazon east of Manaus. It flows through Bolivia and Brazil, through Porto Velho and is about 3,250 km long.",
+      "map": {
+        "alt": "A map of South America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -10.39,
+            "lng": -65.38,
+            "label": "Source"
+          },
+          {
+            "lat": -3.38,
+            "lng": -58.77,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South America with the course of the Madeira from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -10.39,
+            "lng": -65.38,
+            "label": "Source"
+          },
+          {
+            "lat": -3.38,
+            "lng": -58.77,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sao-francisco",
+      "type": "card",
+      "section": "south-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "São Francisco",
+      "alternatives": [
+        "Sao Francisco",
+        "São Francisco River",
+        "Rio São Francisco",
+        "Rio Sao Francisco",
+        "Sao Francisco River"
+      ],
+      "hint": "A river in South America.",
+      "explanation": "It rises in the Serra da Canastra in Minas Gerais and ends in the Atlantic Ocean. It flows through Brazil, through Minas Gerais, Bahia and Pernambuco and is about 2,910 km long.",
+      "map": {
+        "alt": "A map of South America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -20.25,
+            "lng": -46.45,
+            "label": "Source"
+          },
+          {
+            "lat": -10.5,
+            "lng": -36.4,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South America with the course of the São Francisco from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -20.25,
+            "lng": -46.45,
+            "label": "Source"
+          },
+          {
+            "lat": -10.5,
+            "lng": -36.4,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "magdalena",
+      "type": "card",
+      "section": "south-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Magdalena",
+      "alternatives": [
+        "Magdalena River",
+        "Rio Magdalena",
+        "Río Magdalena",
+        "River Magdalena",
+        "The Magdalena"
+      ],
+      "hint": "A river in South America.",
+      "explanation": "It rises in the Colombian Andes and ends in the Caribbean Sea near Barranquilla. It flows through Colombia, past Neiva, Honda and Barrancabermeja and is about 1,530 km long.",
+      "map": {
+        "alt": "A map of South America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 1.9,
+            "lng": -76.6,
+            "label": "Source"
+          },
+          {
+            "lat": 11.1,
+            "lng": -74.85,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South America with the course of the Magdalena from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 1.9,
+            "lng": -76.6,
+            "label": "Source"
+          },
+          {
+            "lat": 11.1,
+            "lng": -74.85,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "iguazu",
+      "type": "card",
+      "section": "south-america",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Iguazu",
+      "alternatives": [
+        "Iguazu River",
+        "Iguaçu",
+        "Iguaçu River",
+        "Iguassu",
+        "Iguassu River",
+        "Rio Iguaçu",
+        "Río Iguazú"
+      ],
+      "hint": "A river in South America.",
+      "explanation": "It rises in the Serra do Mar near Curitiba in Brazil and ends where it joins the Paraná River at the border of Brazil, Argentina and Paraguay. It flows through Brazil and the border of Argentina, over the Iguazu Falls and is about 1,320 km long.",
+      "map": {
+        "alt": "A map of South America with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -25.4,
+            "lng": -49.1,
+            "label": "Source"
+          },
+          {
+            "lat": -25.6,
+            "lng": -54.57,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of South America with the course of the Iguazu from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -25.4,
+            "lng": -49.1,
+            "label": "Source"
+          },
+          {
+            "lat": -25.6,
+            "lng": -54.57,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "murray",
+      "type": "card",
+      "section": "oceania",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Murray",
+      "alternatives": [
+        "Murray River",
+        "River Murray",
+        "The Murray"
+      ],
+      "hint": "A river in Australia and New Zealand.",
+      "explanation": "It rises in the Australian Alps and ends in the Southern Ocean at Encounter Bay in South Australia. It flows through south-eastern Australia, along the border of New South Wales and Victoria and is about 2,510 km long.",
+      "map": {
+        "alt": "A map of Australia and New Zealand with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -36.75,
+            "lng": 148.15,
+            "label": "Source"
+          },
+          {
+            "lat": -35.55,
+            "lng": 138.88,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Australia and New Zealand with the course of the Murray from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -36.75,
+            "lng": 148.15,
+            "label": "Source"
+          },
+          {
+            "lat": -35.55,
+            "lng": 138.88,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "waikato",
+      "type": "card",
+      "section": "oceania",
+      "front": "Which river rises at the first pin and flows to the second?",
+      "back": "Waikato",
+      "alternatives": [
+        "Waikato River",
+        "River Waikato",
+        "The Waikato"
+      ],
+      "hint": "A river in Australia and New Zealand.",
+      "explanation": "It rises at the outflow of Lake Taupō on the North Island of New Zealand and ends in the Tasman Sea at Port Waikato. It flows through New Zealand, through Hamilton and is about 425 km long.",
+      "map": {
+        "alt": "A map of Australia and New Zealand with a line from the source of a river to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -38.69,
+            "lng": 176.08,
+            "label": "Source"
+          },
+          {
+            "lat": -37.39,
+            "lng": 174.74,
+            "label": "Mouth"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A map of Australia and New Zealand with the course of the Waikato from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -38.69,
+            "lng": 176.08,
+            "label": "Source"
+          },
+          {
+            "lat": -37.39,
+            "lng": 174.74,
+            "label": "Mouth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-danube",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Danube flow?",
+      "answers": [
+        "Black Sea",
+        "The Black Sea"
+      ],
+      "explanation": "The Danube ends in the Black Sea in the Danube Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Danube, labelled Black Sea.",
+        "pins": [
+          {
+            "lat": 45.2,
+            "lng": 29.7,
+            "label": "Black Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-volga",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Volga flow?",
+      "answers": [
+        "Caspian Sea",
+        "The Caspian Sea",
+        "Caspian"
+      ],
+      "explanation": "The Volga ends in the Caspian Sea, the largest lake in the world.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Volga, labelled Caspian Sea.",
+        "pins": [
+          {
+            "lat": 45.7,
+            "lng": 47.9,
+            "label": "Caspian Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-rhone",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Rhône flow?",
+      "answers": [
+        "Mediterranean Sea",
+        "The Mediterranean Sea",
+        "Mediterranean"
+      ],
+      "explanation": "The Rhône ends in the Mediterranean Sea in the Camargue.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Rhône, labelled Mediterranean Sea.",
+        "pins": [
+          {
+            "lat": 43.33,
+            "lng": 4.84,
+            "label": "Mediterranean Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-ebro",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Ebro flow?",
+      "answers": [
+        "Mediterranean Sea",
+        "The Mediterranean Sea",
+        "Mediterranean"
+      ],
+      "explanation": "The Ebro ends in the Mediterranean Sea in the Ebro Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Ebro, labelled Mediterranean Sea.",
+        "pins": [
+          {
+            "lat": 40.72,
+            "lng": 0.87,
+            "label": "Mediterranean Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-dnieper",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Dnieper flow?",
+      "answers": [
+        "Black Sea",
+        "The Black Sea"
+      ],
+      "explanation": "The Dnieper ends in the Black Sea near Kherson.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Dnieper, labelled Black Sea.",
+        "pins": [
+          {
+            "lat": 46.5,
+            "lng": 32.3,
+            "label": "Black Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-don",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Don flow?",
+      "answers": [
+        "Sea of Azov",
+        "The Sea of Azov",
+        "Azov Sea"
+      ],
+      "explanation": "The Don ends in the Sea of Azov.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Don, labelled Sea of Azov.",
+        "pins": [
+          {
+            "lat": 47.1,
+            "lng": 39.2,
+            "label": "Sea of Azov"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-vistula",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Vistula flow?",
+      "answers": [
+        "Baltic Sea",
+        "The Baltic Sea",
+        "Baltic"
+      ],
+      "explanation": "The Vistula ends in the Gulf of Gdańsk in the Baltic Sea.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Vistula, labelled Baltic Sea.",
+        "pins": [
+          {
+            "lat": 54.35,
+            "lng": 18.95,
+            "label": "Baltic Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-elbe",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Elbe flow?",
+      "answers": [
+        "North Sea",
+        "The North Sea"
+      ],
+      "explanation": "The Elbe ends in the North Sea near Cuxhaven.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Elbe, labelled North Sea.",
+        "pins": [
+          {
+            "lat": 53.89,
+            "lng": 8.7,
+            "label": "North Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-po",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Po flow?",
+      "answers": [
+        "Adriatic Sea",
+        "The Adriatic Sea",
+        "Adriatic"
+      ],
+      "explanation": "The Po ends in the Adriatic Sea in the Po Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Po, labelled Adriatic Sea.",
+        "pins": [
+          {
+            "lat": 44.95,
+            "lng": 12.5,
+            "label": "Adriatic Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-ob",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Ob flow?",
+      "answers": [
+        "Kara Sea",
+        "The Kara Sea"
+      ],
+      "explanation": "The Ob ends in the Gulf of Ob and the Kara Sea.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Ob, labelled Kara Sea.",
+        "pins": [
+          {
+            "lat": 66.5,
+            "lng": 71.4,
+            "label": "Kara Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-yenisei",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Yenisei flow?",
+      "answers": [
+        "Kara Sea",
+        "The Kara Sea"
+      ],
+      "explanation": "The Yenisei ends in the Yenisei Gulf and the Kara Sea.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Yenisei, labelled Kara Sea.",
+        "pins": [
+          {
+            "lat": 71.8,
+            "lng": 82.7,
+            "label": "Kara Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-lena",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Lena flow?",
+      "answers": [
+        "Laptev Sea",
+        "The Laptev Sea"
+      ],
+      "explanation": "The Lena ends in the Laptev Sea in the Lena Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Lena, labelled Laptev Sea.",
+        "pins": [
+          {
+            "lat": 72.4,
+            "lng": 126.7,
+            "label": "Laptev Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-yellow-river",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Yellow River flow?",
+      "answers": [
+        "Bohai Sea",
+        "The Bohai Sea",
+        "Bo Hai",
+        "Bohai Bay"
+      ],
+      "explanation": "The Yellow River ends in the Bohai Sea.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Yellow River, labelled Bohai Sea.",
+        "pins": [
+          {
+            "lat": 37.77,
+            "lng": 119.15,
+            "label": "Bohai Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-mekong",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Mekong flow?",
+      "answers": [
+        "South China Sea",
+        "The South China Sea"
+      ],
+      "explanation": "The Mekong ends in the South China Sea in the Mekong Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Mekong, labelled South China Sea.",
+        "pins": [
+          {
+            "lat": 10.05,
+            "lng": 106.75,
+            "label": "South China Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-irrawaddy",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Irrawaddy flow?",
+      "answers": [
+        "Andaman Sea",
+        "The Andaman Sea"
+      ],
+      "explanation": "The Irrawaddy ends in the Andaman Sea in the Irrawaddy Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Irrawaddy, labelled Andaman Sea.",
+        "pins": [
+          {
+            "lat": 15.85,
+            "lng": 95.1,
+            "label": "Andaman Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-ganges",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Ganges flow?",
+      "answers": [
+        "Bay of Bengal",
+        "The Bay of Bengal"
+      ],
+      "explanation": "The Ganges ends in the Bay of Bengal, in the Ganges Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Ganges, labelled Bay of Bengal.",
+        "pins": [
+          {
+            "lat": 21.7,
+            "lng": 90.3,
+            "label": "Bay of Bengal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-indus",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Indus flow?",
+      "answers": [
+        "Arabian Sea",
+        "The Arabian Sea"
+      ],
+      "explanation": "The Indus ends in the Arabian Sea south-east of Karachi.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Indus, labelled Arabian Sea.",
+        "pins": [
+          {
+            "lat": 24.0,
+            "lng": 67.42,
+            "label": "Arabian Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-nile",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Nile flow?",
+      "answers": [
+        "Mediterranean Sea",
+        "The Mediterranean Sea",
+        "Mediterranean"
+      ],
+      "explanation": "The Nile ends in the Mediterranean Sea in the Nile Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Nile, labelled Mediterranean Sea.",
+        "pins": [
+          {
+            "lat": 31.55,
+            "lng": 31.1,
+            "label": "Mediterranean Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-niger",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Niger flow?",
+      "answers": [
+        "Gulf of Guinea",
+        "The Gulf of Guinea"
+      ],
+      "explanation": "The Niger ends in the Gulf of Guinea in the Niger Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Niger, labelled Gulf of Guinea.",
+        "pins": [
+          {
+            "lat": 4.3,
+            "lng": 6.1,
+            "label": "Gulf of Guinea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-mississippi",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Mississippi flow?",
+      "answers": [
+        "Gulf of Mexico",
+        "The Gulf of Mexico"
+      ],
+      "explanation": "The Mississippi ends in the Gulf of Mexico.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Mississippi, labelled Gulf of Mexico.",
+        "pins": [
+          {
+            "lat": 29.15,
+            "lng": -89.25,
+            "label": "Gulf of Mexico"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-colorado-us",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Colorado River flow?",
+      "answers": [
+        "Gulf of California",
+        "The Gulf of California",
+        "Sea of Cortez"
+      ],
+      "explanation": "The Colorado River ends in the Gulf of California, which it now rarely reaches.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Colorado River, labelled Gulf of California.",
+        "pins": [
+          {
+            "lat": 31.8,
+            "lng": -114.8,
+            "label": "Gulf of California"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-yukon",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Yukon flow?",
+      "answers": [
+        "Bering Sea",
+        "The Bering Sea"
+      ],
+      "explanation": "The Yukon ends in the Bering Sea in the Yukon Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Yukon, labelled Bering Sea.",
+        "pins": [
+          {
+            "lat": 62.6,
+            "lng": -164.8,
+            "label": "Bering Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-mackenzie",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Mackenzie flow?",
+      "answers": [
+        "Beaufort Sea",
+        "The Beaufort Sea"
+      ],
+      "explanation": "The Mackenzie ends in the Beaufort Sea in the Mackenzie Delta.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Mackenzie, labelled Beaufort Sea.",
+        "pins": [
+          {
+            "lat": 69.2,
+            "lng": -135.1,
+            "label": "Beaufort Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-guadalquivir",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Guadalquivir flow?",
+      "answers": [
+        "Gulf of Cádiz",
+        "The Gulf of Cádiz",
+        "Gulf of Cadiz"
+      ],
+      "explanation": "The Guadalquivir ends in the Gulf of Cádiz at Sanlúcar de Barrameda.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Guadalquivir, labelled Gulf of Cádiz.",
+        "pins": [
+          {
+            "lat": 36.78,
+            "lng": -6.35,
+            "label": "Gulf of Cádiz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-yangtze",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Yangtze flow?",
+      "answers": [
+        "East China Sea",
+        "The East China Sea"
+      ],
+      "explanation": "The Yangtze ends in the East China Sea at Shanghai.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Yangtze, labelled East China Sea.",
+        "pins": [
+          {
+            "lat": 31.4,
+            "lng": 121.95,
+            "label": "East China Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-murray",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Murray flow?",
+      "answers": [
+        "Southern Ocean",
+        "The Southern Ocean"
+      ],
+      "explanation": "The Murray ends in the Southern Ocean at Encounter Bay in South Australia.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Murray, labelled Southern Ocean.",
+        "pins": [
+          {
+            "lat": -35.55,
+            "lng": 138.88,
+            "label": "Southern Ocean"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-waikato",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Waikato flow?",
+      "answers": [
+        "Tasman Sea",
+        "The Tasman Sea"
+      ],
+      "explanation": "The Waikato ends in the Tasman Sea at Port Waikato.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Waikato, labelled Tasman Sea.",
+        "pins": [
+          {
+            "lat": -37.39,
+            "lng": 174.74,
+            "label": "Tasman Sea"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-zambezi",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Zambezi flow?",
+      "answers": [
+        "Indian Ocean",
+        "The Indian Ocean",
+        "Indian"
+      ],
+      "explanation": "The Zambezi ends in the Indian Ocean in Mozambique.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Zambezi, labelled Indian Ocean.",
+        "pins": [
+          {
+            "lat": -18.57,
+            "lng": 36.47,
+            "label": "Indian Ocean"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-seine",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Seine flow?",
+      "answers": [
+        "English Channel",
+        "The English Channel",
+        "The Channel",
+        "Channel",
+        "La Manche"
+      ],
+      "explanation": "The Seine ends in the English Channel near Le Havre.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Seine, labelled English Channel.",
+        "pins": [
+          {
+            "lat": 49.43,
+            "lng": 0.2,
+            "label": "English Channel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sea-rhine",
+      "type": "text",
+      "section": "seas",
+      "question": "Into which sea, gulf or ocean does the Rhine flow?",
+      "answers": [
+        "North Sea",
+        "The North Sea"
+      ],
+      "explanation": "The Rhine ends in the North Sea near Rotterdam.",
+      "answerMap": {
+        "alt": "A map with a pin at the mouth of the Rhine, labelled North Sea.",
+        "pins": [
+          {
+            "lat": 51.98,
+            "lng": 4.1,
+            "label": "North Sea"
+          }
+        ]
+      }
+    }
+  ]
+}
