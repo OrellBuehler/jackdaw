@@ -7,6 +7,7 @@ import ch.orellbuehler.jackdaw.format.AuthoringPrompt
 import ch.orellbuehler.jackdaw.format.ImportError
 import ch.orellbuehler.jackdaw.format.ImportErrorCode
 import ch.orellbuehler.jackdaw.format.ItemType
+import ch.orellbuehler.jackdaw.format.PackCombiner
 import ch.orellbuehler.jackdaw.format.PackEditor
 import ch.orellbuehler.jackdaw.format.PackReader
 import ch.orellbuehler.jackdaw.format.PackUrl
@@ -15,7 +16,9 @@ import ch.orellbuehler.jackdaw.format.Study
 import ch.orellbuehler.jackdaw.samples.Catalog
 import ch.orellbuehler.jackdaw.samples.Samples
 import ch.orellbuehler.jackdaw.store.AppSettings
+import ch.orellbuehler.jackdaw.store.CombinePreview
 import ch.orellbuehler.jackdaw.store.Env
+import ch.orellbuehler.jackdaw.store.ImportCounts
 import ch.orellbuehler.jackdaw.store.ImportPreview
 import ch.orellbuehler.jackdaw.store.ImportResult
 import ch.orellbuehler.jackdaw.store.ItemSummary
@@ -210,6 +213,42 @@ class JackdawSdk internal constructor(
             edit(PackEditor.withInfo(source, title, descriptionText) ?: return@withContext missingPack())
         }
 
+    suspend fun previewCombine(
+        packId: String,
+        otherPackId: String,
+    ): CombinePreview =
+        withContext(dispatcher) {
+            when (val outcome = combined(packId, otherPackId)) {
+                is PackCombiner.Outcome.Failed -> CombinePreview.Invalid(outcome.error)
+                is PackCombiner.Outcome.Merged ->
+                    CombinePreview.Valid(outcome.otherTitle, outcome.addedCount, outcome.duplicateCount, outcome.sectionCount)
+            }
+        }
+
+    suspend fun combinePacks(
+        packId: String,
+        otherPackId: String,
+    ): ImportResult =
+        withContext(dispatcher) {
+            when (val outcome = combined(packId, otherPackId)) {
+                is PackCombiner.Outcome.Failed -> ImportResult.Failure(outcome.error)
+                is PackCombiner.Outcome.Merged ->
+                    if (outcome.addedCount == 0) {
+                        ImportResult.Success(
+                            packId = packId,
+                            title = outcome.title,
+                            itemCount = outcome.itemCount,
+                            skippedCount = 0,
+                            isUpdate = true,
+                            counts = ImportCounts(0, outcome.itemCount, 0, 0),
+                            warnings = emptyList(),
+                        )
+                    } else {
+                        edit(outcome.source)
+                    }
+            }
+        }
+
     suspend fun deletePack(packId: String) {
         withContext(dispatcher) { packStore.delete(packId) }
     }
@@ -333,6 +372,20 @@ class JackdawSdk internal constructor(
     private fun missingPack() = ImportResult.Failure(ImportError(ImportErrorCode.PACK_MISSING, "The pack is no longer installed."))
 
     private fun invalidItem(message: String) = ImportResult.Failure(ImportError(ImportErrorCode.ITEM_INVALID, message))
+
+    private fun combined(
+        packId: String,
+        otherPackId: String,
+    ): PackCombiner.Outcome {
+        val source = packStore.source(packId) ?: return PackCombiner.Outcome.Failed(missingPack().error)
+        val other = packStore.source(otherPackId) ?: return PackCombiner.Outcome.Failed(missingPack().error)
+        val outcome = PackCombiner.combine(source, other)
+        if (outcome is PackCombiner.Outcome.Merged && outcome.addedCount > 0) {
+            val read = PackReader.read(outcome.source)
+            if (read is ReadResult.Rejected) return PackCombiner.Outcome.Failed(read.error)
+        }
+        return outcome
+    }
 
     private fun edit(source: String): ImportResult = install(source, allowDowngrade = true, edited = true)
 
