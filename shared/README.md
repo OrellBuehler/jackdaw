@@ -57,6 +57,16 @@ Create exactly one instance per process and keep it alive (application scope). O
 | `saveItem(packId, itemId, json)` | `ImportResult` | Replaces the item (`itemId = null`: appends a new one). The pack is validated as a whole; an item the reader would skip or change is refused with `ITEM_INVALID` and the reader's message. An item with a figure raises the pack to `"version": 2`. |
 | `deleteItem(packId, itemId)` | `ImportResult` | The last item cannot be deleted (`NO_VALID_ITEMS`). |
 | `updatePackInfo(packId, title, descriptionText)` | `ImportResult` | Changes title and description in the pack source. |
+| `previewCombine(packId, otherPackId)` | `CombinePreview` | What combining would do, writes nothing: `Valid(otherTitle, addedCount, duplicateCount, sectionCount)` or `Invalid(error)` (`PACK_MISSING`, or the reader's error when the result would not be a valid pack, for example `TOO_MANY_ITEMS`). |
+| `combinePacks(packId, otherPackId)` | `ImportResult` | Adds the other pack's items that are not duplicates to `packId` (see below). With nothing to add it succeeds without writing (`counts.addedItems == 0`). |
+
+**Combining.** `combinePacks` builds the combined pack source and installs it as an edit of `packId` (same path as `saveItem`: progress kept by item id, edited mark, one pack record in sync). The other pack stays installed and untouched. Rules (`format/PackCombiner.kt`):
+
+- A duplicate is an item with the same `type` and exactly the same other properties as an item already in the pack (ignoring `id`, `section`, `tags` and the order of properties; no normalisation). Items of the other pack that repeat an earlier one of it are duplicates too.
+- Added items come after the pack's own items, in the other pack's order, and start as new. The pack's `study` hints and metadata stay the pack's own: added cards follow its `reversible`, `exercises` and `ignoreDiacritics`.
+- An item id that the pack already uses becomes `<id>-<16 hex digits>` (FNV-1a of the other pack's id and the item id, id cut to fit 64 characters), so two devices that combine the same packs get the same ids.
+- A section of the other pack comes along when an added item uses it. A section id that exists with the same title is reused; with another title the section gets a new derived id the same way. Items naming an unknown section stay ungrouped.
+- `version` becomes 2 when an added item has a figure. The result must read back as a valid pack, otherwise nothing is written.
 
 Editing rewrites the stored pack source and installs it like an import (same progress rules), then marks the pack `PackSummary.edited`. An import over an edited pack says so in `ImportPreview.Valid.overwritesEdits` and clears the mark. Archive, link, the edited mark and groups are stored per device (`Library.sq`) and are not synced.
 | `samplePacks()` | `List<SamplePack>` | Bundled packs (from `format/examples`). Not suspending. |
