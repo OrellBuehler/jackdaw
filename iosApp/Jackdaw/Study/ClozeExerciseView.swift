@@ -2,15 +2,15 @@ import SwiftUI
 
 private enum ClozeToken {
     case word(AttributedString)
-    case gap(index: Int, hint: String?)
+    case gap(index: Int, hint: String?, keyboard: AnswerKeyboardInfo)
 }
 
 private func clozeLines(_ segments: [ClozeSegmentInfo]) -> [[ClozeToken]] {
     var lines: [[ClozeToken]] = [[]]
     for segment in segments {
         switch segment {
-        case .gap(let index, let hint):
-            lines[lines.count - 1].append(.gap(index: index, hint: hint))
+        case .gap(let index, let hint, let keyboard):
+            lines[lines.count - 1].append(.gap(index: index, hint: hint, keyboard: keyboard))
         case .text(let text):
             for span in text.spans {
                 let parts = span.text.components(separatedBy: "\n")
@@ -86,6 +86,32 @@ struct ClozeExerciseView: View {
             _ = try? await Task.sleep(nanoseconds: 400_000_000)
             focusedGap = 0
         }
+        .toolbar {
+            if feedback == nil && focusedGapUsesNumberPad {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    if let index = focusedGap, index + 1 < answers.count {
+                        Button("study.keyboard.next") {
+                            advance(from: index)
+                        }
+                    } else {
+                        Button("common.done") {
+                            focusedGap = nil
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var focusedGapUsesNumberPad: Bool {
+        guard let index = focusedGap else { return false }
+        for segment in current.exercise.segments {
+            if case .gap(let gapIndex, _, let keyboard) = segment, gapIndex == index {
+                return keyboard == .integer
+            }
+        }
+        return false
     }
 
     private var textCard: some View {
@@ -121,13 +147,13 @@ struct ClozeExerciseView: View {
             Text(text)
                 .font(.brand(.title3, weight: .medium))
                 .foregroundStyle(Brand.text)
-        case .gap(let index, let hint):
-            gapView(index: index, hint: hint)
+        case .gap(let index, let hint, let keyboard):
+            gapView(index: index, hint: hint, keyboard: keyboard)
         }
     }
 
     @ViewBuilder
-    private func gapView(index: Int, hint: String?) -> some View {
+    private func gapView(index: Int, hint: String?, keyboard: AnswerKeyboardInfo) -> some View {
         if let result = feedback?.gapResults.first(where: { $0.index == index }) {
             resultPill(result)
         } else if index >= 0 && index < answers.count {
@@ -137,6 +163,7 @@ struct ClozeExerciseView: View {
                 .multilineTextAlignment(.center)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
+                .keyboardType(keyboard.keyboardType)
                 .submitLabel(index == answers.count - 1 ? .done : .next)
                 .focused($focusedGap, equals: index)
                 .onSubmit {

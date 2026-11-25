@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct ExerciseScaffold<Content: View, Bar: View>: View {
     let current: StudyCurrent
@@ -217,6 +218,16 @@ struct GradeBar: View {
         case .hard: return Brand.flame
         case .good: return Brand.success
         case .easy: return Brand.accent
+        }
+    }
+}
+
+extension AnswerKeyboardInfo {
+    var keyboardType: UIKeyboardType {
+        switch self {
+        case .text: return .default
+        case .integer: return .numberPad
+        case .decimal: return .numbersAndPunctuation
         }
     }
 }
