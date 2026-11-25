@@ -210,6 +210,24 @@ final class SDKClient: @unchecked Sendable {
         }
     }
 
+    func previewCombine(_ packId: String, with otherPackId: String) async -> CombineOutcome {
+        do {
+            let preview = try await sdk.previewCombine(packId: packId, otherPackId: otherPackId)
+            return ImportAdapter.combineOutcome(preview)
+        } catch {
+            return .invalid(ImportIssue(kind: .other, message: error.localizedDescription))
+        }
+    }
+
+    func combinePacks(_ packId: String, with otherPackId: String) async -> ImportOutcome {
+        do {
+            let result = try await sdk.combinePacks(packId: packId, otherPackId: otherPackId)
+            return ImportAdapter.outcome(result)
+        } catch {
+            return .failure(ImportIssue(kind: .other, message: error.localizedDescription))
+        }
+    }
+
     func previewSession(_ request: StudyRequest) async -> SessionPreviewInfo {
         do {
             let preview = try await sdk.previewSession(packId: request.packId, config: Mapping.kotlinConfig(request))

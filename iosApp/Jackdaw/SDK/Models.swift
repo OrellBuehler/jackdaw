@@ -312,6 +312,18 @@ enum PreviewOutcome: Sendable {
     case invalid(ImportIssue)
 }
 
+struct CombinePreviewInfo: Hashable, Sendable {
+    let otherTitle: String
+    let addedCount: Int
+    let duplicateCount: Int
+    let sectionCount: Int
+}
+
+enum CombineOutcome: Sendable {
+    case valid(CombinePreviewInfo)
+    case invalid(ImportIssue)
+}
+
 struct ImportDoneInfo: Hashable, Sendable {
     let packId: String
     let title: String
