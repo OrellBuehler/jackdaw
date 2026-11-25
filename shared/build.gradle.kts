@@ -110,6 +110,38 @@ abstract class GenerateFormatResources : DefaultTask() {
     }
 }
 
+abstract class GenerateWorldData : DefaultTask() {
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val dataFile: RegularFileProperty
+
+    @get:OutputDirectory
+    abstract val output: DirectoryProperty
+
+    @TaskAction
+    fun generate() {
+        val text = dataFile.get().asFile.readText()
+        val target = File(output.get().asFile, "ch/orellbuehler/jackdaw/format/GeneratedWorld.kt")
+        target.parentFile.mkdirs()
+        // A JVM string constant holds at most 65,535 bytes: the data is written as several shorter literals.
+        val chunks = text.chunked(20_000)
+        target.writeText(
+            buildString {
+                appendLine("// Generated from shared/data/world-50m.txt by the generateWorldData Gradle task. Do not edit.")
+                appendLine("package ch.orellbuehler.jackdaw.format")
+                appendLine()
+                appendLine("internal val GENERATED_WORLD_CHUNKS: Array<String> =")
+                appendLine("    arrayOf(")
+                chunks.forEach { chunk ->
+                    require(chunk.all { it == '\n' || it.code in 0x20..0x7e } && chunk.none { it == '"' || it == '\\' || it == '$' })
+                    appendLine("        \"${chunk.replace("\n", "\\n")}\",")
+                }
+                appendLine("    )")
+            },
+        )
+    }
+}
+
 val generateFormatResources =
     tasks.register<GenerateFormatResources>("generateFormatResources") {
         examplesDir.set(rootProject.layout.projectDirectory.dir("format/examples"))
@@ -118,6 +150,12 @@ val generateFormatResources =
         promptFile.set(rootProject.layout.projectDirectory.file("format/prompt.txt"))
         mainOutput.set(layout.buildDirectory.dir("generated/formatResources/commonMain/kotlin"))
         testOutput.set(layout.buildDirectory.dir("generated/formatResources/commonTest/kotlin"))
+    }
+
+val generateWorldData =
+    tasks.register<GenerateWorldData>("generateWorldData") {
+        dataFile.set(layout.projectDirectory.file("data/world-50m.txt"))
+        output.set(layout.buildDirectory.dir("generated/worldData/commonMain/kotlin"))
     }
 
 kotlin {
@@ -141,6 +179,7 @@ kotlin {
     sourceSets {
         commonMain {
             kotlin.srcDir(generateFormatResources.flatMap { it.mainOutput })
+            kotlin.srcDir(generateWorldData.flatMap { it.output })
         }
         commonTest {
             kotlin.srcDir(generateFormatResources.flatMap { it.testOutput })

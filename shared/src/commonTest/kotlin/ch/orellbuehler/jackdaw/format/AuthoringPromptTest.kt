@@ -36,7 +36,9 @@ class AuthoringPromptTest {
         assertEquals(7, typeLines(text).size)
         assertTrue("\n\nTEXT RULES\n" in text)
         assertFalse("\n\n\n" in text)
+        assertFalse("\"map\"" in text || "MAPS" in text)
         assertTrue("\nFIGURES (" in prompt(figures = true))
+        assertTrue("\nMAPS (" in prompt(figures = true))
     }
 
     @Test

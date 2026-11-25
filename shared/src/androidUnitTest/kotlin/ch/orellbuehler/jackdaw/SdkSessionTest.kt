@@ -34,12 +34,12 @@ class SdkSessionTest {
             fixture.importOk(sample("format-tour"))
             val id = prefix + "format-tour"
             val learner = ScriptedLearner()
-            val session = sdk.startSession(id, SessionConfig.learn().withNewLimit(13).withSize(13))
+            val session = sdk.startSession(id, SessionConfig.learn().withNewLimit(15).withSize(15))
             val summary = learner.run(session)
-            assertEquals(13, summary.total)
-            assertEquals(13, summary.answered)
+            assertEquals(15, summary.total)
+            assertEquals(15, summary.answered)
             assertTrue(summary.wrong > 0 && summary.retries > 0)
-            assertTrue(summary.newFacets == 13)
+            assertTrue(summary.newFacets == 15)
             val kinds = learner.asked.map { it::class }.toSet()
             assertEquals(
                 setOf(
@@ -57,7 +57,7 @@ class SdkSessionTest {
             assertTrue(items.none { it.status == ItemStatus.NEW })
             assertTrue(items.any { it.status == ItemStatus.LEARNING })
             assertEquals(summary.wrong, items.count { it.facets.size == 1 && it.status == ItemStatus.LEARNING })
-            assertEquals(13, sdk.observeStats().first().reviewsToday)
+            assertEquals(15, sdk.observeStats().first().reviewsToday)
         }
 
     @Test

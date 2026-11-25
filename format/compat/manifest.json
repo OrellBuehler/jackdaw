@@ -11,6 +11,12 @@
       "revision": "2.0",
       "sha256": "02d561dc698f7ab9d7d3ae7db6545034f6feff86a75a2b0b463b647f4c850630",
       "items": 7
+    },
+    {
+      "file": "3.0-maps.jackdaw",
+      "revision": "3.0",
+      "sha256": "cee0418e4b505ea3625ef71df8133e6be26b0fbdd396b7990dd711d47d959354",
+      "items": 7
     }
   ]
 }

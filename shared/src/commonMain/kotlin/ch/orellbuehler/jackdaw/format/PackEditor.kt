@@ -10,6 +10,7 @@ internal object PackEditor {
     const val NEW_ITEM = "{\n    \"id\": \"new-item\",\n    \"type\": \"card\",\n    \"front\": \"\",\n    \"back\": \"\"\n}"
     private val pretty = Json { prettyPrint = true }
     private val figureKeys = listOf("figure", "answerFigure")
+    private val mapKeys = listOf("map", "answerMap")
 
     fun item(
         source: String,
@@ -77,7 +78,16 @@ internal object PackEditor {
         fields["items"] = JsonArray(items)
         val declared = (root["version"] as? JsonPrimitive)?.content?.toIntOrNull() ?: 1
         val needsFigures = items.any { item -> item is JsonObject && figureKeys.any { it in item } }
-        if (needsFigures && declared < 2) fields["version"] = JsonPrimitive(2)
+        val needsMaps = items.any { item -> item is JsonObject && mapKeys.any { it in item } }
+        val needed =
+            if (needsMaps) {
+                3
+            } else if (needsFigures) {
+                2
+            } else {
+                1
+            }
+        if (declared < needed) fields["version"] = JsonPrimitive(needed)
         return pretty.encodeToString(JsonElement.serializer(), JsonObject(fields))
     }
 

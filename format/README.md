@@ -1,6 +1,6 @@
 # Jackdaw Pack Format
 
-**Format version 2** · specification revision 2.0 (2026-11-24)
+**Format version 3** · specification revision 3.0 (2026-11-25)
 
 A **Jackdaw pack** is a single UTF-8 JSON file that describes a learning dataset: foreign-language vocabulary, history facts, exam questions, interview preparation, anything you can ask a question about. The Jackdaw app imports packs, schedules the learning (spaced repetition) and keeps the learning progress. The file format is open and documented so that people, scripts and AI assistants can create packs without the app.
 
@@ -95,7 +95,7 @@ The top level of the file is one JSON object.
 |---|---|---|---|---|
 | `$schema` | string | no | | URL of the JSON Schema. Lets editors validate and complete. Ignored by readers. |
 | `format` | string | **yes** | | Constant `"jackdaw-pack"`. |
-| `version` | integer | **yes** | | Format version: the lowest one that has everything the pack uses ([section 14](#14-versioning-policy)). `1`, or `2` for a pack with figures ([8.4](#84-figures)). |
+| `version` | integer | **yes** | | Format version: the lowest one that has everything the pack uses ([section 14](#14-versioning-policy)). `1`; `2` for a pack with figures ([8.4](#84-figures)); `3` for a pack with maps ([8.5](#85-maps)). |
 | `id` | string | **yes** | | Stable, globally unique identifier of the pack ([4.1](#41-identifiers)). |
 | `title` | string | **yes** | | Name of the pack. Plain text, one line, 1 to 200 characters. |
 | `description` | string | no | | What the pack covers. Plain text, newlines allowed, at most 2000 characters. |
@@ -224,6 +224,8 @@ The scheduling algorithm (intervals, ease, lapses) is deliberately not configura
 | `explanation` | rich text | no | Shown **after answering**: why the answer is right, background, an example. |
 | `figure` | figure | no | A drawing shown **with the question** ([8.4](#84-figures)). *Version 2.* |
 | `answerFigure` | figure | no | A drawing shown **after answering**, in place of `figure` ([8.4](#84-figures)). *Version 2.* |
+| `map` | map | no | Places on a world map shown **with the question** ([8.5](#85-maps)). Not together with `figure`. *Version 3.* |
+| `answerMap` | map | no | Places on a world map shown **after answering**, in place of `map` or `figure` ([8.5](#85-maps)). Not together with `answerFigure`. *Version 3.* |
 
 Items of an unknown `type` are skipped by readers ([section 10](#10-compatibility-and-extensibility)).
 
@@ -446,7 +448,7 @@ Every string in a pack is either **plain text** or **rich text**.
 - **Plain text** is taken literally. No character has a special meaning, not even the backslash. Plain text properties: `title`, `description`, `author`, `license`, section `title` and `description`, `tags`, and the answer lists `alternatives`, `frontAlternatives` and `answers`.
 - **Rich text** supports the tiny inline markup of [8.2](#82-inline-markup). All other string properties that are shown to the learner are rich text: `front`, `back`, `distractors`, `frontDistractors`, `question`, option `text`, `statement`, `prompt`, `sequence` entries, `answer`, `keyPoints`, `hint`, `explanation`, and the text of a `cloze` item outside of its gaps.
 
-There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text. A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)), never embedded in text. Photos and audio are not part of the format; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
+There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text. A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)) and places as a map ([8.5](#85-maps)), never embedded in text. Photos and audio are not part of the format; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
 
 A newline is the character U+000A, written `\n` in JSON. Readers normalise `\r\n` and `\r` to U+000A before interpreting rich text. Rich text may contain several lines; single-line properties (titles, ids, answers) SHOULD NOT contain newlines.
 
@@ -559,6 +561,62 @@ A writer MUST additionally produce well-formed XML. A reader need not verify tha
 
 **A pack with a figure is a version 2 pack.** A writer MUST declare `"version": 2` as soon as one item has a `figure` or an `answerFigure`, so that an app without figures asks for an update instead of showing questions with the drawing missing. A pack without figures stays `"version": 1` and opens in every app. Readers are forgiving here as everywhere: a reader that supports version 2 draws the figures of a pack whatever version it declares.
 
+### 8.5 Maps
+
+*Format version 3. A pack with a map declares `"version": 3`; an app that only reads version 1 or 2 does not import it and asks the user to update ([section 14](#14-versioning-policy)).*
+
+A map shows where something happened or lies: the place of a battle, where a person was born and died, where a river rises and where it ends. The pack contains **only the places**. The map itself is not part of the pack: the app draws its own built-in world map and puts the pins on it. A map is an object:
+
+| Property | Type | Required | Default | Description |
+|---|---|---|---|---|
+| `pins` | array of pins | **yes** | | The places: 1 to 20 pins. |
+| `line` | boolean | no | `false` | When `true` the pins are connected in array order with a line that shows the direction (birth to death, source to mouth, route of a journey). |
+| `alt` | plain text | recommended (the schema requires it) | | What the map shows, for screen readers and for apps that cannot draw it. At most 500 characters. |
+
+A **pin** is an object:
+
+| Property | Type | Required | Description |
+|---|---|---|---|
+| `lat` | number | **yes** | Latitude in decimal degrees (WGS 84), from -90 to 90, positive north. |
+| `lng` | number | **yes** | Longitude in decimal degrees, from -180 to 180, positive east. |
+| `label` | plain text | no | A short name shown next to the pin. The schema allows 60 characters; an app may show less (the Jackdaw apps show the first 30). Shown literally, no markup. |
+
+`lat` and `lng` must be JSON numbers (not strings, not `true`). Two or three decimals (about 100 m) are plenty; more are allowed. `180` and `-180` are the same meridian.
+
+```json item
+{
+  "id": "napoleon-exile",
+  "type": "text",
+  "question": "On which island did Napoleon die in exile in 1821?",
+  "answers": ["Saint Helena", "St. Helena"],
+  "answerMap": {
+    "alt": "A map of the Atlantic: Napoleon was born in Ajaccio on Corsica and died on Saint Helena, far off the coast of Africa.",
+    "line": true,
+    "pins": [
+      { "lat": 41.92, "lng": 8.74, "label": "Ajaccio" },
+      { "lat": -15.96, "lng": -5.71, "label": "Saint Helena" }
+    ]
+  }
+}
+```
+
+**Where it is shown.** Exactly like a figure ([8.4](#84-figures)): `map` is shown with the question, above the prompt, and stays visible after answering; `answerMap` replaces what the question side showed (a `map` or a `figure`) once the learner has answered. An item with only `answerMap` shows a map only after answering ("Where was the Battle of Waterloo?"). For reversible cards the maps are the same in both directions. A `map` must not give away the answer of its own question: put the labelled map into `answerMap`.
+
+**A map and a figure on the same side.** An item has at most one drawing per side: `figure` or `map`, and `answerFigure` or `answerMap`. A `figure` with an `answerMap` is fine (the figure is replaced by the map after answering), and so is a `map` with an `answerFigure`. The schema rejects `figure` together with `map`, and `answerFigure` together with `answerMap`. A reader keeps the figure, ignores the map of that side and warns ([section 11](#11-what-a-reader-does-with-invalid-input)).
+
+**What the app draws.** The look is up to the app; what a writer can rely on:
+
+- A built-in world map with the land, the coasts and the country borders of today's world, without names. It is the same for every pack and is not part of the file. Borders are those of today: a map shows *where*, it does not show historical borders, so do not ask a question that depends on them.
+- The view is framed by the app so that **every pin is visible**, with enough of the surrounding geography to recognise the region. A single pin is not zoomed in to one coastline: the view shows a region at least about 40 degrees of longitude wide. Pins that lie far apart give a larger view, up to the whole world. Pins on both sides of the 180th meridian are framed the short way round (Fiji and Samoa give a small view, not one that spans the globe). The map uses the Web Mercator projection; a pin north of about 85 or south of about -85 degrees is drawn at that latitude.
+- Each pin is a clearly visible dot, with its `label` next to it where there is room. Pins that are close together keep their labels apart.
+- With `line` the pins are connected in array order with straight lines (in the projection of the map, not along the shortest path on the globe), with a small arrow that shows the direction. A `line` with a single pin draws nothing extra.
+- The map is drawn on a transparent background and readable in light and dark mode. There is no interaction.
+- An app that cannot draw the map shows `alt`.
+
+**Invalid maps.** A reader never fails because of a map. A `map` or `answerMap` that is not an object, has no `pins` array or no valid pin left is ignored and the item is imported without it. A pin that is not an object or has a `lat` or `lng` that is missing, not a JSON number (including `NaN` and infinity) or out of range is dropped, the other pins stay; more than 20 pins: the first 20 valid ones are used. A `line` that is not a boolean, an `alt` that is not text, and a `label` that is not text are ignored. All of this produces a warning ([section 11](#11-what-a-reader-does-with-invalid-input)). The `map` vectors of [`test-vectors.json`](test-vectors.json) give the expected result for each case; a reader MUST reproduce them.
+
+**A pack with a map is a version 3 pack.** A writer MUST declare `"version": 3` as soon as one item has a `map` or an `answerMap`, so that an app without maps asks for an update instead of showing questions with the map missing. A pack without maps stays at version 1 or 2 and opens in every app that reads that version. Readers are forgiving here as everywhere: a reader that supports version 3 draws the maps of a pack whatever version it declares.
+
 ---
 
 ## 9. Answer matching
@@ -645,6 +703,10 @@ Readers MUST NOT crash, hang or run out of memory on invalid files. They apply t
 | An optional property has the wrong JSON type or an invalid value (including `icon`, `color`, dates, `exercises`) | **Ignore that property** (treat it as absent), warn. |
 | Entries of an array are invalid (for example a number inside `alternatives`) | **Drop those entries**; if none are left treat the property as absent. |
 | A `figure` or `answerFigure` is not an object, has no `svg` string, or its `svg` breaks a rule of [8.4](#84-figures) | **Ignore that property**: the item is imported without that figure, warn. |
+| A `map` or `answerMap` is not an object, has no `pins` array, or no valid pin is left ([8.5](#85-maps)) | **Ignore that property**: the item is imported without that map, warn. |
+| A pin of a map is not an object, or its `lat` or `lng` is missing, not a number or out of range; more than 20 pins | **Drop that pin** (the first 20 valid pins are used), warn. |
+| The `line`, `alt` or a pin's `label` of a map has the wrong type | **Ignore that property**, warn. |
+| An item has a `figure` and a `map` (or an `answerFigure` and an `answerMap`) | **Keep the figure, ignore the map**, warn. |
 | A section is not an object, lacks `id` or `title`, or has a duplicate `id` (first wins) | **Drop that section**, warn. |
 | An item names a `section` that does not exist | Treat the item as **ungrouped**, warn. |
 | Unknown properties or unknown item types | Ignore / skip as described in [section 10](#10-compatibility-and-extensibility). |
@@ -666,6 +728,9 @@ A reader can be built in this order: (1) parse the JSON, tolerating a BOM; (2) c
 | Text properties (`front`, `back`, `question`, `text`, `explanation`, ...) | 4,000 characters |
 | Answers, alternatives | 500 characters each |
 | `svg` of a figure | 200,000 characters (most figures need less than 5,000) |
+| Pins of a map | 20 |
+| `label` of a pin | 60 characters |
+| `alt` of a figure or a map | 500 characters |
 | `title` | 200 characters |
 | `description` | 2,000 characters |
 | Options of a `choice` item | 10 |
@@ -691,7 +756,8 @@ There are three layers:
    - every typed answer is non-empty after normalisation;
    - `order` entries are different from each other;
    - every figure passes the rules of [8.4](#84-figures) and is well-formed XML;
-   - `version` is the lowest version that has everything the pack uses (`2` with figures, otherwise `1`);
+   - every map has 1 to 20 pins with `lat` and `lng` in range, and no item has a figure and a map on the same side ([8.5](#85-maps));
+   - `version` is the lowest version that has everything the pack uses (`3` with maps, `2` with figures, otherwise `1`);
    - the JSON has no duplicate property names within an object.
 3. **Reader behaviour** ([section 11](#11-what-a-reader-does-with-invalid-input)): what the app does with whatever it receives.
 
@@ -709,14 +775,14 @@ Any other JSON Schema 2020-12 validator (for example `ajv`) can check layer 1.
 
 ## 14. Versioning policy
 
-- `version` is the version of the format, an integer. This specification describes versions 1 and 2.
-- **A pack declares the lowest version that has everything it uses.** A pack without figures is `"version": 1` and opens in every app; a pack with a figure is `"version": 2`.
-- **What the learner would miss gets a new version:** an addition that changes what the learner sees or is asked (figures, a new item type, a new exercise kind) increases `version`. An app that does not know that version rejects the pack and asks the user to update ([section 10](#10-compatibility-and-extensibility)), instead of showing a pack with parts missing.
+- `version` is the version of the format, an integer. This specification describes versions 1, 2 and 3.
+- **A pack declares the lowest version that has everything it uses.** A pack without figures and maps is `"version": 1` and opens in every app; a pack with a figure is `"version": 2`; a pack with a map is `"version": 3`.
+- **What the learner would miss gets a new version:** an addition that changes what the learner sees or is asked (figures, maps, a new item type, a new exercise kind) increases `version`. An app that does not know that version rejects the pack and asks the user to update ([section 10](#10-compatibility-and-extensibility)), instead of showing a pack with parts missing.
 - **What can be ignored does not:** a new optional property that an older app can leave out without the learner noticing (metadata, information for tools) keeps the version. Readers cope with it through the rules of [section 10](#10-compatibility-and-extensibility).
 - **Breaking changes increase `version`** as well: removing or renaming a property, changing the meaning or default of a property, making an optional property required, changing the rules for ids, normalisation or grading. A pack that needs a breaking feature declares the higher version, and older apps reject it with a clear message.
 - A reader that supports version N MUST also read all earlier versions.
-- **Compatibility promise.** A pack that is valid under any version stays valid, and keeps its meaning, under every later version. Each version says where it adds something ("version 2") and adds a frozen pack to [`compat/`](compat/) that uses it. The validator checks that the frozen packs are unchanged and still valid, and the reference reader is tested to import them without skipping anything.
-- Version history: **1** first release. **2** figures (`figure`, `answerFigure`, [8.4](#84-figures)).
+- **Compatibility promise.** A pack that is valid under any version stays valid, and keeps its meaning, under every later version. Each version says where it adds something ("version 3") and adds a frozen pack to [`compat/`](compat/) that uses it. The validator checks that the frozen packs are unchanged and still valid, and the reference reader is tested to import them without skipping anything.
+- Version history: **1** first release. **2** figures (`figure`, `answerFigure`, [8.4](#84-figures)). **3** maps (`map`, `answerMap`, [8.5](#85-maps)).
 - The JSON Schema describes every version and checks that a pack does not use more than the version it declares.
 - Editorial and clarifying changes of this document only change the *specification revision* shown at the top.
 
@@ -728,6 +794,7 @@ A pack is untrusted input, possibly written by a stranger or generated by a prog
 
 - Render all text as text. Never interpret it as HTML, a URL to open, a file path or code. Do not turn text into links automatically.
 - **Figures are the one place where pack content reaches a renderer.** Apply the rules of [8.4](#84-figures) when importing, and do not rely on them alone: draw the SVG in a renderer that has scripting disabled, cannot reach the network, the file system or other app content, and cannot navigate (in a web view: JavaScript off, network loads blocked, a content security policy of `default-src 'none'; style-src 'unsafe-inline'`, no handling of links). Bound the size of the figure on screen.
+- A map ([8.5](#85-maps)) is data, not a drawing: the app turns the pins into a picture with its own code and its own map data, and escapes every label. Treat `label` and `alt` as plain text like any other.
 - Do not fetch `source` or any other URL automatically.
 - Bound the memory and time used for parsing (file size, nesting depth, number of items, length of strings) as in [section 12](#12-limits-and-size-guidance). Use a JSON parser with a nesting limit.
 - Importing a pack never executes anything and never needs permissions beyond reading the file.
@@ -744,7 +811,7 @@ This pack uses every property of the format and every item type. It is also stor
 {
   "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "format": "jackdaw-pack",
-  "version": 2,
+  "version": 3,
   "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
   "title": "Jackdaw Format Tour",
   "description": "A complete example that uses every property of the format and every item type. It doubles as a small quiz about the format itself.",
@@ -755,9 +822,9 @@ This pack uses every property of the format and every item type. It is also stor
   "tags": ["jackdaw", "format", "example"],
   "icon": "🧭",
   "color": "#7C3AED",
-  "revision": 4,
+  "revision": 5,
   "created": "2026-11-01T09:00:00Z",
-  "updated": "2026-11-20T14:30:00+01:00",
+  "updated": "2026-11-25T10:00:00+01:00",
   "sections": [
     {"id": "basics", "title": "Basics", "description": "Files, ids and updates."},
     {"id": "item-types", "title": "Item types", "description": "How the seven item types are written."}
@@ -912,6 +979,39 @@ This pack uses every property of the format and every item type. It is also stor
         "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 80'><rect x='4' y='4' width='232' height='72' rx='12' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='40' cy='40' r='12' fill='#7C5CFF'><animate attributeName='cx' values='40;200;40' dur='4s' repeatCount='indefinite'/></circle></svg>"
       },
       "explanation": "`figure` is shown with the question, `answerFigure` after answering. Both are self-contained SVG and may be animated."
+    },
+    {
+      "id": "map-pins",
+      "type": "text",
+      "section": "item-types",
+      "question": "What is the maximum number of pins in one map?",
+      "answers": ["20", "twenty"],
+      "map": {
+        "alt": "A world map with pins at Paris, Berlin and Rome.",
+        "pins": [
+          {"lat": 48.86, "lng": 2.35, "label": "Paris"},
+          {"lat": 52.52, "lng": 13.4, "label": "Berlin"},
+          {"lat": 41.9, "lng": 12.5, "label": "Rome"}
+        ]
+      },
+      "explanation": "A map stores only the places. The app draws its own world map, frames it so that every pin is visible and puts the pins on it."
+    },
+    {
+      "id": "map-line",
+      "type": "text",
+      "section": "item-types",
+      "caseSensitive": true,
+      "question": "Which property of a map connects its pins in array order, for example from the source of a river to its mouth?",
+      "answers": ["line"],
+      "answerMap": {
+        "alt": "The Rhine: a line from its source in the Swiss Alps to its mouth on the North Sea in the Netherlands.",
+        "line": true,
+        "pins": [
+          {"lat": 46.62, "lng": 8.67, "label": "Source"},
+          {"lat": 51.98, "lng": 4.12, "label": "Mouth"}
+        ]
+      },
+      "explanation": "`line` is a boolean. `answerMap` is shown after answering, in place of `map`, like `answerFigure`."
     }
   ]
 }
@@ -944,7 +1044,7 @@ More examples in [`examples/`](examples/): [`spanish-basics.jackdaw`](examples/s
 
 **Can an item have several typed answers, like "name three causes"?** Not as one `text` item. Use `open` with `keyPoints`, a `cloze` with several gaps, or one `text` item per fact.
 
-**Is there matching of pairs, drawing, audio or images?** Drawings yes: any item can show an SVG figure ([8.4](#84-figures)), which makes the pack a version 2 pack. Matching of pairs, drawing by the learner, photos and audio are not part of the format. Pairs are best as separate `card` items (the app builds multiple choice from them).
+**Is there matching of pairs, drawing, audio or images?** Drawings yes: any item can show an SVG figure ([8.4](#84-figures)), which makes the pack a version 2 pack. Places on a world map too: a `map` with pins ([8.5](#85-maps)), which makes it a version 3 pack. Matching of pairs, drawing by the learner, photos and audio are not part of the format. Pairs are best as separate `card` items (the app builds multiple choice from them).
 
 **How do I mark a formula or code?** Use backticks: `` `E = mc^2` ``. Everything is plain Unicode text; there is no math typesetting.
 

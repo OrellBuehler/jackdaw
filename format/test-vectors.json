@@ -1,5 +1,5 @@
 {
-  "description": "Conformance vectors for the Jackdaw pack format, versions 1 and 2. A reader must reproduce every 'expected', 'result', 'spans', 'segments', 'valid' and 'aspectRatio' value. See README.md sections 'Text markup', 'Cloze gaps', 'Figures' and 'Answer matching'. 'normalize' is the answer normal form; 'match' compares a typed answer with an accepted answer; 'markup' is the rich text tokenizer (style '' = plain, b = bold, i = italic, c = code); 'cloze' splits cloze text into raw rich-text segments (t) and parsed gaps (g). 'figure' says whether a reader accepts the SVG of a figure and, if so, the width divided by the height of its viewBox. Flags that are not listed are false.",
+  "description": "Conformance vectors for the Jackdaw pack format, versions 1 to 3. A reader must reproduce every 'expected', 'result', 'spans', 'segments', 'valid' and 'aspectRatio' value. See README.md sections 'Text markup', 'Cloze gaps', 'Figures', 'Maps' and 'Answer matching'. 'normalize' is the answer normal form; 'match' compares a typed answer with an accepted answer; 'markup' is the rich text tokenizer (style '' = plain, b = bold, i = italic, c = code); 'cloze' splits cloze text into raw rich-text segments (t) and parsed gaps (g). 'figure' says whether a reader accepts the SVG of a figure and, if so, the width divided by the height of its viewBox. 'map' gives the value of a map property (any JSON) and what a reader makes of it: 'expected' is null when the whole property is ignored, otherwise the pins that stay as [lat, lng, label or null] in their order (at most 20, invalid ones dropped), 'line' and 'alt' (null when absent or ignored). Flags that are not listed are false.",
   "normalize": [
     {"input": "Hello", "expected": "hello", "note": "case-insensitive by default"},
     {"input": "Na", "expected": "Na", "caseSensitive": true, "note": "caseSensitive keeps case"},
@@ -145,5 +145,36 @@
     {"svg": "<!DOCTYPE svg [<!ENTITY a 'b'>]><svg viewBox='0 0 10 10'/>", "valid": false, "note": "DOCTYPE and entities"},
     {"svg": "<svg viewBox='0 0 10 10'><?xml-stylesheet href='#a'?></svg>", "valid": false, "note": "processing instruction"},
     {"svg": "<?xml version='1.0'<svg viewBox='0 0 10 10'/>", "valid": false, "note": "unterminated XML declaration"}
+  ],
+  "map": [
+    {"input": {"pins": [{"lat": 48.8566, "lng": 2.3522}]}, "expected": {"pins": [[48.8566, 2.3522, null]], "line": false, "alt": null}, "note": "minimal map: one pin"},
+    {"input": {"pins": [{"lat": 48.8566, "lng": 2.3522, "label": "Paris"}, {"lat": -33.8688, "lng": 151.2093, "label": "Sydney"}], "line": true, "alt": "Paris and Sydney."}, "expected": {"pins": [[48.8566, 2.3522, "Paris"], [-33.8688, 151.2093, "Sydney"]], "line": true, "alt": "Paris and Sydney."}, "note": "labels, line and alt"},
+    {"input": {"pins": [{"lat": 90, "lng": 180}, {"lat": -90, "lng": -180}, {"lat": 0, "lng": 0}]}, "expected": {"pins": [[90.0, 180.0, null], [-90.0, -180.0, null], [0.0, 0.0, null]], "line": false, "alt": null}, "note": "the limits are valid"},
+    {"input": {"pins": [{"lat": 90.0001, "lng": 0}]}, "expected": null, "note": "latitude above 90: the only pin is dropped, so the map is ignored"},
+    {"input": {"pins": [{"lat": -90.5, "lng": 0}]}, "expected": null, "note": "latitude below -90"},
+    {"input": {"pins": [{"lat": 10, "lng": 180.5}, {"lat": 11, "lng": 12}]}, "expected": {"pins": [[11.0, 12.0, null]], "line": false, "alt": null}, "note": "longitude above 180: that pin is dropped, the other stays"},
+    {"input": {"pins": [{"lat": 10, "lng": -181}]}, "expected": null, "note": "longitude below -180"},
+    {"input": {"pins": [{"lat": "48.8", "lng": "2.3"}]}, "expected": null, "note": "coordinates as strings are not numbers"},
+    {"input": {"pins": [{"lat": true, "lng": 1}]}, "expected": null, "note": "a boolean is not a number"},
+    {"input": {"pins": [{"lat": null, "lng": 1}, {"lat": 1}]}, "expected": null, "note": "null and missing coordinates"},
+    {"input": {"pins": [5, "x", [1, 2], null, {"lat": 1, "lng": 2}]}, "expected": {"pins": [[1.0, 2.0, null]], "line": false, "alt": null}, "note": "entries that are not objects are dropped"},
+    {"input": {"pins": [{"lat": 48.8, "lng": 0, "label": "x"}, {"lat": 10.0, "lng": 2}]}, "expected": {"pins": [[48.8, 0.0, "x"], [10.0, 2.0, null]], "line": false, "alt": null}, "note": "exponent notation and negative zero"},
+    {"input": {"pins": [{"lat": Infinity, "lng": 0}]}, "expected": null, "note": "a number that overflows is not finite"},
+    {"input": {"pins": [{"lat": 100.0, "lng": 0}]}, "expected": null, "note": "1e2 is 100, out of range"},
+    {"input": {"pins": []}, "expected": null, "note": "no pins"},
+    {"input": {"pins": {"lat": 1, "lng": 2}}, "expected": null, "note": "pins must be an array"},
+    {"input": {"lat": 1, "lng": 2}, "expected": null, "note": "no pins property"},
+    {"input": "Paris", "expected": null, "note": "a map must be an object"},
+    {"input": [{"lat": 1, "lng": 2}], "expected": null, "note": "an array is not a map"},
+    {"input": null, "expected": null, "note": "null is not a map"},
+    {"input": {"pins": [{"lat": 1, "lng": 2}], "line": "yes"}, "expected": {"pins": [[1.0, 2.0, null]], "line": false, "alt": null}, "note": "a line that is not a boolean is ignored"},
+    {"input": {"pins": [{"lat": 1, "lng": 2}, {"lat": 3, "lng": 4}], "line": true}, "expected": {"pins": [[1.0, 2.0, null], [3.0, 4.0, null]], "line": true, "alt": null}, "note": "line"},
+    {"input": {"pins": [{"lat": 1, "lng": 2}], "alt": 7}, "expected": {"pins": [[1.0, 2.0, null]], "line": false, "alt": null}, "note": "alt that is not a string is ignored"},
+    {"input": {"pins": [{"lat": 1, "lng": 2}], "alt": " \t "}, "expected": {"pins": [[1.0, 2.0, null]], "line": false, "alt": null}, "note": "a blank alt is ignored"},
+    {"input": {"pins": [{"lat": 1, "lng": 2, "label": 7}, {"lat": 3, "lng": 4, "label": "  "}, {"lat": 5, "lng": 6, "label": " Rome "}]}, "expected": {"pins": [[1.0, 2.0, null], [3.0, 4.0, null], [5.0, 6.0, " Rome "]], "line": false, "alt": null}, "note": "a label that is not a string or is blank is ignored, the pin stays; labels are kept as written"},
+    {"input": {"pins": [{"lat": 0, "lng": 0}, {"lat": 1, "lng": 1}, {"lat": 2, "lng": 2}, {"lat": 3, "lng": 3}, {"lat": 4, "lng": 4}, {"lat": 5, "lng": 5}, {"lat": 6, "lng": 6}, {"lat": 7, "lng": 7}, {"lat": 8, "lng": 8}, {"lat": 9, "lng": 9}, {"lat": 10, "lng": 10}, {"lat": 11, "lng": 11}, {"lat": 12, "lng": 12}, {"lat": 13, "lng": 13}, {"lat": 14, "lng": 14}, {"lat": 15, "lng": 15}, {"lat": 16, "lng": 16}, {"lat": 17, "lng": 17}, {"lat": 18, "lng": 18}, {"lat": 19, "lng": 19}, {"lat": 20, "lng": 20}]}, "expected": {"pins": [[0.0, 0.0, null], [1.0, 1.0, null], [2.0, 2.0, null], [3.0, 3.0, null], [4.0, 4.0, null], [5.0, 5.0, null], [6.0, 6.0, null], [7.0, 7.0, null], [8.0, 8.0, null], [9.0, 9.0, null], [10.0, 10.0, null], [11.0, 11.0, null], [12.0, 12.0, null], [13.0, 13.0, null], [14.0, 14.0, null], [15.0, 15.0, null], [16.0, 16.0, null], [17.0, 17.0, null], [18.0, 18.0, null], [19.0, 19.0, null]], "line": false, "alt": null}, "note": "21 pins: only the first 20 are used"},
+    {"input": {"pins": [{"lat": 1, "lng": 2}, {"lat": 999, "lng": 0}, {"lat": 3, "lng": 4}]}, "expected": {"pins": [[1.0, 2.0, null], [3.0, 4.0, null]], "line": false, "alt": null}, "note": "invalid pins in between are dropped, the order of the others stays"},
+    {"input": {"pins": [{"lat": 1, "lng": 2}], "zoom": 5, "x-tool": {"a": 1}}, "expected": {"pins": [[1.0, 2.0, null]], "line": false, "alt": null}, "note": "unknown properties are ignored"},
+    {"input": {"pins": [{"lat": 35.68, "lng": 139.65, "label": "Tokyo"}, {"lat": 21.3, "lng": -157.86, "label": "Honolulu"}]}, "expected": {"pins": [[35.68, 139.65, "Tokyo"], [21.3, -157.86, "Honolulu"]], "line": false, "alt": null}, "note": "pins on both sides of the 180th meridian are fine"}
   ]
 }

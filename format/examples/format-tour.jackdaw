@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "format": "jackdaw-pack",
-  "version": 2,
+  "version": 3,
   "id": "com.github.orellbuehler.jackdaw.examples.format-tour",
   "title": "Jackdaw Format Tour",
   "description": "A complete example that uses every property of the format and every item type. It doubles as a small quiz about the format itself.",
@@ -12,9 +12,9 @@
   "tags": ["jackdaw", "format", "example"],
   "icon": "🧭",
   "color": "#7C3AED",
-  "revision": 4,
+  "revision": 5,
   "created": "2026-11-01T09:00:00Z",
-  "updated": "2026-11-20T14:30:00+01:00",
+  "updated": "2026-11-25T10:00:00+01:00",
   "sections": [
     {"id": "basics", "title": "Basics", "description": "Files, ids and updates."},
     {"id": "item-types", "title": "Item types", "description": "How the seven item types are written."}
@@ -169,6 +169,39 @@
         "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 80'><rect x='4' y='4' width='232' height='72' rx='12' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='40' cy='40' r='12' fill='#7C5CFF'><animate attributeName='cx' values='40;200;40' dur='4s' repeatCount='indefinite'/></circle></svg>"
       },
       "explanation": "`figure` is shown with the question, `answerFigure` after answering. Both are self-contained SVG and may be animated."
+    },
+    {
+      "id": "map-pins",
+      "type": "text",
+      "section": "item-types",
+      "question": "What is the maximum number of pins in one map?",
+      "answers": ["20", "twenty"],
+      "map": {
+        "alt": "A world map with pins at Paris, Berlin and Rome.",
+        "pins": [
+          {"lat": 48.86, "lng": 2.35, "label": "Paris"},
+          {"lat": 52.52, "lng": 13.4, "label": "Berlin"},
+          {"lat": 41.9, "lng": 12.5, "label": "Rome"}
+        ]
+      },
+      "explanation": "A map stores only the places. The app draws its own world map, frames it so that every pin is visible and puts the pins on it."
+    },
+    {
+      "id": "map-line",
+      "type": "text",
+      "section": "item-types",
+      "caseSensitive": true,
+      "question": "Which property of a map connects its pins in array order, for example from the source of a river to its mouth?",
+      "answers": ["line"],
+      "answerMap": {
+        "alt": "The Rhine: a line from its source in the Swiss Alps to its mouth on the North Sea in the Netherlands.",
+        "line": true,
+        "pins": [
+          {"lat": 46.62, "lng": 8.67, "label": "Source"},
+          {"lat": 51.98, "lng": 4.12, "label": "Mouth"}
+        ]
+      },
+      "explanation": "`line` is a boolean. `answerMap` is shown after answering, in place of `map`, like `answerFigure`."
     }
   ]
 }

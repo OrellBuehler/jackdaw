@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "title": "Jackdaw Pack",
-  "description": "A Jackdaw Pack (format versions 1 and 2) is a single UTF-8 JSON document that describes a learning dataset: metadata, optional sections and a list of items. Items come in seven types (card, choice, text, cloze, truefalse, order, open) that define how they are learned. Learning progress and spaced-repetition scheduling are NOT part of a pack. This schema is intentionally STRICTER than readers: readers must ignore unknown properties and skip items with an unknown type, but this schema (meant for authors, generators and validators) rejects unknown item types so typos are caught. Unknown properties are allowed everywhere; keys starting with 'x-' are reserved for vendor extensions. Specification: README.md next to this file.",
+  "description": "A Jackdaw Pack (format versions 1, 2 and 3) is a single UTF-8 JSON document that describes a learning dataset: metadata, optional sections and a list of items. Items come in seven types (card, choice, text, cloze, truefalse, order, open) that define how they are learned. Learning progress and spaced-repetition scheduling are NOT part of a pack. This schema is intentionally STRICTER than readers: readers must ignore unknown properties and skip items with an unknown type, but this schema (meant for authors, generators and validators) rejects unknown item types so typos are caught. Unknown properties are allowed everywhere; keys starting with 'x-' are reserved for vendor extensions. Specification: README.md next to this file.",
   "type": "object",
   "required": ["format", "version", "id", "title", "items"],
   "properties": {
@@ -16,8 +16,8 @@
     },
     "version": {
       "type": "integer",
-      "enum": [1, 2],
-      "description": "Required. Version of the pack format: the lowest one that has everything the pack uses. 1, or 2 as soon as an item has a 'figure' or 'answerFigure'. Readers MUST reject files whose version is greater than the highest they support and ask the user to update."
+      "enum": [1, 2, 3],
+      "description": "Required. Version of the pack format: the lowest one that has everything the pack uses. 1; 2 as soon as an item has a 'figure' or 'answerFigure'; 3 as soon as an item has a 'map' or 'answerMap'. Readers MUST reject files whose version is greater than the highest they support and ask the user to update."
     },
     "id": {
       "$ref": "#/$defs/PackId"
@@ -103,22 +103,44 @@
       "description": "Vendor extension. Any property whose name starts with 'x-' may hold any JSON value. Readers ignore extensions they do not understand and never fail because of them."
     }
   },
-  "if": {
-    "required": ["version"],
-    "properties": { "version": { "const": 1 } }
-  },
-  "then": {
-    "description": "Figures are part of format version 2: a pack that declares version 1 has none.",
-    "properties": {
-      "items": {
-        "items": {
-          "not": {
-            "anyOf": [{ "required": ["figure"] }, { "required": ["answerFigure"] }]
+  "allOf": [
+    {
+      "if": {
+        "required": ["version"],
+        "properties": { "version": { "const": 1 } }
+      },
+      "then": {
+        "description": "Figures are part of format version 2: a pack that declares version 1 has none.",
+        "properties": {
+          "items": {
+            "items": {
+              "not": {
+                "anyOf": [{ "required": ["figure"] }, { "required": ["answerFigure"] }]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["version"],
+        "properties": { "version": { "enum": [1, 2] } }
+      },
+      "then": {
+        "description": "Maps are part of format version 3: a pack that declares version 1 or 2 has none.",
+        "properties": {
+          "items": {
+            "items": {
+              "not": {
+                "anyOf": [{ "required": ["map"] }, { "required": ["answerMap"] }]
+              }
+            }
           }
         }
       }
     }
-  },
+  ],
   "$defs": {
     "PackId": {
       "type": "string",
@@ -271,8 +293,20 @@
         "answerFigure": {
           "$ref": "#/$defs/Figure",
           "description": "Optional (format version 2: the pack must declare \"version\": 2). A drawing shown AFTER answering, in place of 'figure'."
+        },
+        "map": {
+          "$ref": "#/$defs/Map",
+          "description": "Optional (format version 3: the pack must declare \"version\": 3). Places on a world map shown WITH the question, above the prompt. An item has either a 'figure' or a 'map' on this side, not both."
+        },
+        "answerMap": {
+          "$ref": "#/$defs/Map",
+          "description": "Optional (format version 3: the pack must declare \"version\": 3). Places on a world map shown AFTER answering, in place of 'map' or 'figure'. An item has either an 'answerFigure' or an 'answerMap', not both."
         }
-      }
+      },
+      "allOf": [
+        { "not": { "required": ["figure", "map"] } },
+        { "not": { "required": ["answerFigure", "answerMap"] } }
+      ]
     },
     "Figure": {
       "type": "object",
@@ -289,6 +323,54 @@
         "alt": {
           "$ref": "#/$defs/PlainText",
           "description": "Required by this schema, optional for readers. What the figure shows, for screen readers and for apps that cannot draw it."
+        }
+      }
+    },
+    "Map": {
+      "type": "object",
+      "required": ["pins", "alt"],
+      "description": "Places on a world map. The map itself is not part of the pack: the app draws its own built-in world map, frames it so that every pin is visible and draws the pins (and the optional connecting line). See the specification, section 'Maps'.",
+      "properties": {
+        "pins": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "description": "Required. The places, 1 to 20.",
+          "items": { "$ref": "#/$defs/MapPin" }
+        },
+        "line": {
+          "type": "boolean",
+          "description": "Optional, default false. When true the pins are connected in array order (birth to death, source to mouth) with a line that shows the direction."
+        },
+        "alt": {
+          "$ref": "#/$defs/PlainText",
+          "description": "Required by this schema, optional for readers. What the map shows, for screen readers and for apps that cannot draw it."
+        }
+      }
+    },
+    "MapPin": {
+      "type": "object",
+      "required": ["lat", "lng"],
+      "description": "One place on a map, in decimal degrees (WGS 84).",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90,
+          "description": "Required. Latitude in degrees, positive north."
+        },
+        "lng": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180,
+          "description": "Required. Longitude in degrees, positive east."
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "\\S",
+          "description": "Optional. Short plain-text name shown next to the pin. Apps may shorten it (about 30 characters are shown)."
         }
       }
     },

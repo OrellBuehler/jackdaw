@@ -388,6 +388,31 @@ class StudySessionTest {
         }
 
     @Test
+    fun mapsTravelWithQuestionAndFeedbackLikeFigures() =
+        runTest {
+            val before = """"map":{"alt":"before","pins":[{"lat":48.86,"lng":2.35,"label":"Paris"}]}"""
+            val after = """"answerMap":{"alt":"after","line":true,"pins":[{"lat":48.86,"lng":2.35},{"lat":51.5,"lng":-0.12}]}"""
+            val session = start("""{"id":"t","type":"text","question":"Q?","answers":["a"],$before,$after}""")
+            val shown = session.question().figure
+            assertEquals("before", shown?.alt)
+            assertTrue(shown!!.svg.contains("<circle"))
+            assertEquals(1.6, shown.aspectRatio)
+            session.submit(TextAnswer("a"))
+            val answered = session.feedback().figure
+            assertEquals("after", answered?.alt)
+            assertTrue(answered!!.svg.contains("<polyline"))
+
+            val answerOnly = start("""{"id":"t","type":"truefalse","statement":"S","answer":true,$after}""")
+            assertNull(answerOnly.question().figure)
+            answerOnly.submit(TrueFalseAnswer(true))
+            assertEquals("after", answerOnly.feedback().figure?.alt)
+
+            val questionOnly = start("""{"id":"t","type":"truefalse","statement":"S","answer":true,$before}""")
+            questionOnly.submit(TrueFalseAnswer(true))
+            assertEquals("before", questionOnly.feedback().figure?.alt)
+        }
+
+    @Test
     fun caseSensitiveCardsAndTextItems() =
         runTest {
             val text = """{"id":"t","type":"text","question":"Sodium?","answers":["Na"],"caseSensitive":true}"""

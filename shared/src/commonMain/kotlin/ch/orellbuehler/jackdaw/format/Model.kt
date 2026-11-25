@@ -55,6 +55,11 @@ internal sealed class Item {
     abstract val explanation: String?
     abstract val figure: Figure?
     abstract val answerFigure: Figure?
+    abstract val map: MapSpec?
+    abstract val answerMap: MapSpec?
+
+    val questionVisual: Figure? get() = figure ?: map?.figure
+    val answerVisual: Figure? get() = answerFigure ?: answerMap?.figure ?: questionVisual
 }
 
 internal data class CardItem(
@@ -74,6 +79,8 @@ internal data class CardItem(
     val caseSensitive: Boolean,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.CARD
 }
@@ -89,6 +96,8 @@ internal data class ChoiceItem(
     val shuffle: Boolean,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.CHOICE
 }
@@ -104,6 +113,8 @@ internal data class TextItem(
     val caseSensitive: Boolean,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.TEXT
 }
@@ -118,6 +129,8 @@ internal data class ClozeItem(
     val caseSensitive: Boolean,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.CLOZE
 }
@@ -132,6 +145,8 @@ internal data class TrueFalseItem(
     val answer: Boolean,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.TRUE_FALSE
 }
@@ -146,6 +161,8 @@ internal data class OrderItem(
     val sequence: List<String>,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.ORDER
 }
@@ -161,6 +178,8 @@ internal data class OpenItem(
     val keyPoints: List<String>,
     override val figure: Figure? = null,
     override val answerFigure: Figure? = null,
+    override val map: MapSpec? = null,
+    override val answerMap: MapSpec? = null,
 ) : Item() {
     override val type: ItemType get() = ItemType.OPEN
 }

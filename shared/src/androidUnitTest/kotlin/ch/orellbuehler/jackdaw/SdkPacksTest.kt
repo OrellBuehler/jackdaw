@@ -94,7 +94,7 @@ class SdkPacksTest {
         runTest {
             fixture.importOk(flipPack())
             val failure =
-                assertIs<ImportResult.Failure>(sdk.importPack("""{"format":"jackdaw-pack","version":3,"id":"x","title":"t","items":[]}"""))
+                assertIs<ImportResult.Failure>(sdk.importPack("""{"format":"jackdaw-pack","version":4,"id":"x","title":"t","items":[]}"""))
             assertEquals(ImportErrorCode.VERSION_TOO_NEW, failure.error.code)
             assertTrue(failure.error.message.isNotBlank())
             assertEquals(ImportErrorCode.NOT_JSON, assertIs<ImportResult.Failure>(sdk.importPack("garbage")).error.code)
@@ -116,14 +116,14 @@ class SdkPacksTest {
         runTest {
             val preview = assertIs<ImportPreview.Valid>(sdk.previewImport(sample("format-tour.jackdaw")))
             assertEquals("Jackdaw Format Tour", preview.title)
-            assertEquals(13, preview.itemCount)
+            assertEquals(15, preview.itemCount)
             assertEquals(2, preview.sectionCount)
-            assertEquals(4, preview.revision)
+            assertEquals(5, preview.revision)
             assertFalse(preview.isUpdate)
             assertEquals(0, preview.skippedCount)
             assertEquals(2, preview.typeCounts.first { it.type == ItemType.CARD }.count)
-            assertEquals(13, preview.typeCounts.sumOf { it.count })
-            assertEquals(13, preview.counts.addedItems)
+            assertEquals(15, preview.typeCounts.sumOf { it.count })
+            assertEquals(15, preview.counts.addedItems)
             assertEquals(emptyList(), sdk.observePacks().first())
             val invalid = assertIs<ImportPreview.Invalid>(sdk.previewImport("{}"))
             assertEquals(ImportErrorCode.NOT_A_PACK, invalid.error.code)
@@ -381,7 +381,7 @@ class SdkPacksTest {
         runTest {
             fixture.importOk(sample("format-tour.jackdaw"))
             val items = sdk.items("com.github.orellbuehler.jackdaw.examples.format-tour").associateBy { it.id }
-            assertEquals(13, items.size)
+            assertEquals(15, items.size)
             val card = items.getValue("card-extension")
             assertEquals(ItemType.CARD, card.type)
             assertEquals("What is the file extension of a Jackdaw pack?", card.title)

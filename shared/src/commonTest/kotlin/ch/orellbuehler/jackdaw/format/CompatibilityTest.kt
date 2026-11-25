@@ -25,6 +25,7 @@ class CompatibilityTest {
         assertEquals(GENERATED_COMPAT_PACKS.keys, manifest.map { it.getValue("file").jsonPrimitive.content }.toSet())
         assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "1.0" })
         assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "2.0" })
+        assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "3.0" })
     }
 
     @Test
@@ -46,6 +47,58 @@ class CompatibilityTest {
                     )
                 assertEquals(result.pack.items[index], stored, "stored item $index of $file")
             }
+        }
+    }
+
+    @Test
+    fun frozenMapsAreRead() {
+        val result = assertIs<ReadResult.Accepted>(PackReader.read(GENERATED_COMPAT_PACKS.getValue("3.0-maps.jackdaw")))
+        val items = result.pack.items.associateBy { it.id }
+        assertEquals(7, items.size)
+        assertEquals(
+            "Paris",
+            items
+                .getValue("card")
+                .map
+                ?.pins
+                ?.single()
+                ?.label,
+        )
+        assertEquals(true, items.getValue("card").answerMap?.line)
+        assertEquals(
+            2,
+            items
+                .getValue("choice")
+                .answerMap
+                ?.pins
+                ?.size,
+        )
+        assertEquals(null, items.getValue("choice").map)
+        assertEquals(
+            3,
+            items
+                .getValue("text")
+                .map
+                ?.pins
+                ?.size,
+        )
+        assertEquals(
+            20,
+            items
+                .getValue("cloze")
+                .map
+                ?.pins
+                ?.size,
+        )
+        assertNotNull(items.getValue("truefalse").figure)
+        assertNotNull(items.getValue("truefalse").answerMap)
+        assertNotNull(items.getValue("order").map)
+        assertNotNull(items.getValue("order").answerFigure)
+        assertEquals("A river from its source to its mouth.", items.getValue("open").answerVisual?.alt)
+        for (item in result.pack.items) {
+            val shown = item.questionVisual ?: item.answerVisual
+            assertNotNull(shown, item.id)
+            assertTrue(shown.svg.length < FigureRules.MAX_LENGTH, item.id)
         }
     }
 

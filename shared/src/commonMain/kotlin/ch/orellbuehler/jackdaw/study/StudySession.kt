@@ -183,7 +183,7 @@ class StudySession internal constructor(
                 isRetry = slot.attempts > 0,
                 hasHint = entry.item.hint != null,
                 hint = null,
-                figure = entry.item.figure,
+                figure = entry.item.questionVisual,
             )
     }
 
@@ -218,7 +218,7 @@ class StudySession internal constructor(
             keyPoints = evaluation.keyPoints,
             statementIsTrue = evaluation.statementIsTrue,
             typo = evaluation.typo,
-            figure = current?.entry?.item?.let { it.answerFigure ?: it.figure },
+            figure = current?.entry?.item?.answerVisual,
         )
 
     private fun summary(abandoned: Boolean): SessionSummary {

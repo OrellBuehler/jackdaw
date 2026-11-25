@@ -300,6 +300,44 @@ def figure_is_well_formed(text):
         return False
 
 
+# Maps (README.md section 8.5). Reference reader: the rules a reader applies to a 'map' value.
+MAP_MAX_PINS = 20
+
+
+def _coordinate(value, limit):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    value = float(value)
+    return value if abs(value) <= limit else None  # NaN and infinity fail the comparison too
+
+
+def _is_blank(text):
+    return all(c in _WS_CHARS for c in text)
+
+
+def read_map(value):
+    """Returns the cleaned map as {"pins": [[lat, lng, label or None], ...], "line": bool, "alt": str or None}, or None when a reader
+    ignores the whole property. Invalid pins are dropped, other invalid optional properties ignored."""
+    if not isinstance(value, dict) or not isinstance(value.get("pins"), list):
+        return None
+    pins = []
+    for entry in value["pins"]:
+        if not isinstance(entry, dict) or len(pins) >= MAP_MAX_PINS:
+            continue
+        lat = _coordinate(entry.get("lat"), 90)
+        lng = _coordinate(entry.get("lng"), 180)
+        if lat is None or lng is None:
+            continue
+        label = entry.get("label")
+        label = label if isinstance(label, str) and not _is_blank(label) else None
+        pins.append([lat, lng, label])
+    if not pins:
+        return None
+    alt = value.get("alt")
+    alt = alt if isinstance(alt, str) and not _is_blank(alt) else None
+    return {"pins": pins, "line": value.get("line") is True, "alt": alt}
+
+
 class Report:
     def __init__(self, name):
         self.name = name
@@ -335,15 +373,19 @@ def _path(err):
 def needed_version(pack):
     """The lowest format version that has everything the pack uses (specification, section 14)."""
     items = pack.get("items") if isinstance(pack.get("items"), list) else []
+    maps = any(isinstance(it, dict) and ("map" in it or "answerMap" in it) for it in items)
     figures = any(isinstance(it, dict) and ("figure" in it or "answerFigure" in it) for it in items)
-    return 2 if figures else 1
+    return 3 if maps else 2 if figures else 1
 
 
 def _schema_errors(validator, pack, type_index):
     """Yield (path, message), replacing oneOf noise on items by the errors of the item's own type."""
     for err in validator.iter_errors(pack):
         if err.validator == "not" and "then" in err.absolute_schema_path:
-            yield _path(err), "figures need \"version\": 2 (the pack declares version 1)"
+            yield _path(err), "needs \"version\": %d (the pack declares version %d)" % (needed_version(pack), pack.get("version"))
+            continue
+        if err.validator == "not" and isinstance(err.instance, dict):
+            yield _path(err), "an item has a figure and a map on the same side (figure with map, answerFigure with answerMap)"
             continue
         if err.validator == "oneOf" and isinstance(err.instance, dict):
             branch = type_index.get(err.instance.get("type")) if isinstance(err.instance.get("type"), str) else None
@@ -417,6 +459,14 @@ def check_semantics(pack, rep, size_bytes):
                 for msg in w:
                     rep.warn("%s.%s" % (where, field), msg + " (escape it as \\* or \\` if literal)")
 
+        for field in ("map", "answerMap"):
+            if field in it:
+                cleaned = read_map(it[field])
+                if cleaned is None:
+                    rep.error("%s.%s" % (where, field), "needs a 'pins' array with at least one valid pin")
+                else:
+                    if cleaned["line"] and len(cleaned["pins"]) < 2:
+                        rep.warn("%s.%s" % (where, field), "'line' needs at least two pins")
         for field in ("figure", "answerFigure"):
             fig = it.get(field)
             if isinstance(fig, dict) and isinstance(fig.get("svg"), str):
@@ -529,7 +579,7 @@ def extract_pack_blocks(md_path):
                 j += 1
             body = "\n".join(lines[start:j])
             if m.group(3) == "item":
-                version = 2 if re.search(r'"(figure|answerFigure)"\s*:', body) else 1
+                version = 3 if re.search(r'"(map|answerMap)"\s*:', body) else 2 if re.search(r'"(figure|answerFigure)"\s*:', body) else 1
                 body = ('{"format": "jackdaw-pack", "version": %d, "id": "snippet", "title": "snippet", "items": [%s]}'
                         % (version, body))
             blocks.append(("%s line %d (%s)" % (md_path.name, start, m.group(3)), body))
@@ -569,7 +619,12 @@ def run_vectors(path):
             errors.append("figure[%d] %r: expected valid=%r, got %r" % (n, v["svg"], v["valid"], problem))
         elif v["valid"] and abs(ratio - v["aspectRatio"]) > 1e-9:
             errors.append("figure[%d] %r: expected aspect ratio %r, got %r" % (n, v["svg"], v["aspectRatio"], ratio))
-    return errors, sum(len(data.get(k, [])) for k in ("normalize", "match", "markup", "cloze", "figure"))
+    for n, v in enumerate(data.get("map", [])):
+        got = read_map(v["input"])
+        expected = v["expected"]
+        if got != expected:
+            errors.append("map[%d] %r: expected %r, got %r" % (n, v["input"], expected, got))
+    return errors, sum(len(data.get(k, [])) for k in ("normalize", "match", "markup", "cloze", "figure", "map"))
 
 
 # --------------------------------------------------------------------------
