@@ -82,7 +82,7 @@ internal class Warnings {
 }
 
 internal object PackReader {
-    const val SUPPORTED_VERSION = 2
+    const val SUPPORTED_VERSION = 3
     private const val MAX_CHARS = 25 * 1024 * 1024
     private const val MAX_ITEMS = 50_000
     private const val MAX_DEPTH = 64
@@ -425,6 +425,72 @@ internal class Props(
         return figure
     }
 
+    class Visuals(
+        val figure: Figure?,
+        val answerFigure: Figure?,
+        val map: MapSpec?,
+        val answerMap: MapSpec?,
+    )
+
+    val visuals: Visuals by lazy {
+        val figure = figure("figure")
+        val answerFigure = figure("answerFigure")
+        var map = map("map")
+        var answerMap = map("answerMap")
+        if (map != null && figure != null) {
+            conflict("map", "figure")
+            map = null
+        }
+        if (answerMap != null && answerFigure != null) {
+            conflict("answerMap", "answerFigure")
+            answerMap = null
+        }
+        Visuals(figure, answerFigure, map, answerMap)
+    }
+
+    private fun conflict(
+        key: String,
+        winner: String,
+    ) {
+        warnings.add(
+            ImportWarningCode.PROPERTY_IGNORED,
+            "Item '$itemId': Ignored '$path$key': the item already has '$winner' on the same side.",
+            itemId,
+            itemIndex,
+            "$path$key",
+        )
+    }
+
+    fun map(key: String): MapSpec? {
+        val element = obj[key] ?: return null
+        val read = MapRules.read(element)
+        val where = if (itemId != null) "Item '$itemId': " else ""
+        if (read.map == null) {
+            ignored(key, "an object with 1 to ${MapRules.MAX_PINS} pins, each with a 'lat' from -90 to 90 and a 'lng' from -180 to 180")
+            return null
+        }
+        for (issue in read.ignored) {
+            warnings.add(
+                ImportWarningCode.PROPERTY_IGNORED,
+                "${where}Ignored '$path$key.$issue': invalid value.",
+                itemId,
+                itemIndex,
+                "$path$key.$issue",
+            )
+        }
+        if (read.droppedPins > 0) {
+            warnings.add(
+                ImportWarningCode.ENTRIES_DROPPED,
+                "${where}Dropped ${read.droppedPins} invalid ${if (read.droppedPins == 1) "pin" else "pins"} from '$path$key.pins'.",
+                itemId,
+                itemIndex,
+                "$path$key.pins",
+                read.droppedPins,
+            )
+        }
+        return read.map
+    }
+
     fun optionalBool(key: String): Boolean? {
         val element = obj[key] ?: return null
         val value = element.asBoolean()
@@ -567,8 +633,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             front = front,
             back = back,
             reversible = props.optionalBool("reversible") ?: study.reversible,
@@ -618,8 +686,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             question = question,
             options = options,
             shuffle = props.optionalBool("shuffle") ?: true,
@@ -640,8 +710,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             question = question,
             answers = answers,
             caseSensitive = props.optionalBool("caseSensitive") ?: false,
@@ -661,8 +733,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             text = text,
             caseSensitive = props.optionalBool("caseSensitive") ?: false,
         )
@@ -682,8 +756,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             statement = statement,
             answer = answer,
         )
@@ -703,8 +779,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             prompt = prompt,
             sequence = sequence,
         )
@@ -722,8 +800,10 @@ internal class ItemReader(
             tags = props.stringList("tags"),
             hint = props.optionalText("hint"),
             explanation = props.optionalText("explanation"),
-            figure = props.figure("figure"),
-            answerFigure = props.figure("answerFigure"),
+            figure = props.visuals.figure,
+            answerFigure = props.visuals.answerFigure,
+            map = props.visuals.map,
+            answerMap = props.visuals.answerMap,
             question = question,
             answer = props.optionalText("answer"),
             keyPoints = props.stringList("keyPoints"),

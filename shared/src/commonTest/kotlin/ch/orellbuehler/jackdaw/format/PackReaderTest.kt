@@ -9,6 +9,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
@@ -71,6 +72,81 @@ class PackReaderTest {
     }
 
     @Test
+    fun mapsAreReadAndInvalidOnesIgnoredWithAWarning() {
+        val pins = """[{"lat":48.86,"lng":2.35,"label":"Paris"},{"lat":200,"lng":0},{"lat":-33.87,"lng":151.21}]"""
+        val ok = """"map":{"alt":"Where","line":true,"pins":$pins}"""
+        val answer = """"answerMap":{"pins":[{"lat":1,"lng":2}],"line":"yes","alt":7}"""
+        val result =
+            accepted(
+                packJson(
+                    card("a", "f", "b", ",$ok,$answer"),
+                    card("b", "f2", "b2", ""","map":"Paris""""),
+                    card("c", "f3", "b3", ""","map":{"pins":[]}"""),
+                    card("d", "f4", "b4", ""","map":{"pins":[{"lat":"1","lng":2}]}"""),
+                ),
+            )
+        assertEquals(4, result.pack.items.size)
+        val first = result.pack.items[0]
+        assertEquals(
+            MapSpec(listOf(MapPin(48.86, 2.35, "Paris"), MapPin(-33.87, 151.21, null)), true, "Where"),
+            first.map,
+        )
+        assertEquals(MapSpec(listOf(MapPin(1.0, 2.0, null)), false, null), first.answerMap)
+        assertEquals(
+            listOf(null, null, null),
+            result.pack.items
+                .drop(1)
+                .map { it.map },
+        )
+        assertEquals(
+            listOf("map.pins" to ImportWarningCode.ENTRIES_DROPPED) +
+                listOf("answerMap.line", "answerMap.alt", "map", "map", "map").map {
+                    it to ImportWarningCode.PROPERTY_IGNORED
+                },
+            result.warnings.map { it.detail to it.code },
+        )
+        assertEquals(1, result.warnings.first().count)
+        assertEquals(0, result.skippedItems)
+    }
+
+    @Test
+    fun aFigureAndAMapOnTheSameSideKeepTheFigure() {
+        val svg = "<svg viewBox='0 0 40 20'/>"
+        val pins = """"pins":[{"lat":1,"lng":2}]"""
+        val result =
+            accepted(
+                packJson(
+                    card("a", "f", "b", ""","figure":{"svg":"$svg"},"map":{$pins},"answerFigure":{"svg":"$svg"},"answerMap":{$pins}"""),
+                    card("b", "f", "b", ""","figure":{"svg":"$svg"},"answerMap":{$pins}"""),
+                    card("c", "f", "b", ""","map":{$pins},"answerFigure":{"svg":"$svg"}"""),
+                ),
+            )
+        val (conflict, figureThenMap, mapThenFigure) = result.pack.items
+        assertNotNull(conflict.figure)
+        assertNull(conflict.map)
+        assertNotNull(conflict.answerFigure)
+        assertNull(conflict.answerMap)
+        assertNotNull(figureThenMap.figure)
+        assertNotNull(figureThenMap.answerMap)
+        assertNotNull(mapThenFigure.map)
+        assertNotNull(mapThenFigure.answerFigure)
+        assertEquals(listOf("map", "answerMap"), result.warnings.map { it.detail })
+        assertTrue(result.warnings.all { it.code == ImportWarningCode.PROPERTY_IGNORED && it.itemId == "a" })
+    }
+
+    @Test
+    fun aMapIsDrawnAsAFigureAndAnswerMapsReplaceWhatTheQuestionShowed() {
+        val map = MapSpec(listOf(MapPin(48.86, 2.35, "Paris")), false, "Paris")
+        val other = MapSpec(listOf(MapPin(-33.87, 151.21, "Sydney")), false, "Sydney")
+        val item = TextItem("t", null, emptyList(), null, null, "Q", listOf("a"), false, map = map, answerMap = other)
+        assertEquals("Paris", item.questionVisual?.alt)
+        assertEquals("Sydney", item.answerVisual?.alt)
+        assertTrue(item.questionVisual!!.svg.startsWith("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1250'>"))
+        assertEquals(null, TextItem("t", null, emptyList(), null, null, "Q", listOf("a"), false, answerMap = other).questionVisual)
+        assertEquals("Paris", TextItem("t", null, emptyList(), null, null, "Q", listOf("a"), false, map = map).answerVisual?.alt)
+    }
+
+    @Test
     fun formatTourDetails() {
         val pack = accepted(GENERATED_SAMPLE_PACKS.first { it.first == "format-tour.jackdaw" }.second).pack
         assertEquals("com.github.orellbuehler.jackdaw.examples.format-tour", pack.id)
@@ -114,7 +190,8 @@ class PackReaderTest {
         assertEquals(1, accepted(withVersion("1")).pack.items.size)
         assertEquals(1, accepted(withVersion("1.0")).pack.items.size)
         assertEquals(1, accepted(withVersion("2")).pack.items.size)
-        assertEquals(ImportErrorCode.VERSION_TOO_NEW, rejected(withVersion("3")))
+        assertEquals(1, accepted(withVersion("3")).pack.items.size)
+        assertEquals(ImportErrorCode.VERSION_TOO_NEW, rejected(withVersion("4")))
         assertEquals(ImportErrorCode.VERSION_TOO_NEW, rejected(withVersion("1000")))
         assertEquals(ImportErrorCode.VERSION_INVALID, rejected(withVersion("0")))
         assertEquals(ImportErrorCode.VERSION_INVALID, rejected(withVersion("-1")))

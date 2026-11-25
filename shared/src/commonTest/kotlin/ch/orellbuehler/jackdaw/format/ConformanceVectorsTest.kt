@@ -53,6 +53,47 @@ class ConformanceVectorsTest {
     }
 
     @Test
+    fun mapVectors() {
+        assertTrue(section("map").size > 25)
+        section("map").forEachIndexed { index, v ->
+            val input = v.getValue("input")
+            val read = MapRules.read(input).map
+            val expected = v.getValue("expected")
+            val label = "map[$index] $input"
+            if (expected is JsonNull) {
+                assertEquals(null, read, label)
+                return@forEachIndexed
+            }
+            val map = read ?: error("expected a map, got none: $label")
+            val pins =
+                expected.jsonObject
+                    .getValue("pins")
+                    .jsonArray
+                    .map { it.jsonArray }
+            assertEquals(pins.size, map.pins.size, label)
+            pins.forEachIndexed { i, pin ->
+                assertEquals(pin[0].jsonPrimitive.content.toDouble(), map.pins[i].lat, 1e-12, label)
+                assertEquals(pin[1].jsonPrimitive.content.toDouble(), map.pins[i].lng, 1e-12, label)
+                assertEquals(pin[2].jsonPrimitive.contentOrNull, map.pins[i].label, label)
+            }
+            assertEquals(
+                expected.jsonObject
+                    .getValue("line")
+                    .jsonPrimitive.boolean,
+                map.line,
+                label,
+            )
+            assertEquals(
+                expected.jsonObject
+                    .getValue("alt")
+                    .jsonPrimitive.contentOrNull,
+                map.alt,
+                label,
+            )
+        }
+    }
+
+    @Test
     fun normalizeVectors() {
         section("normalize").forEachIndexed { index, v ->
             val input = v.getValue("input").jsonPrimitive.content

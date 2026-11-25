@@ -4,6 +4,8 @@ import ch.orellbuehler.jackdaw.FakeClock
 import ch.orellbuehler.jackdaw.JackdawSdk
 import ch.orellbuehler.jackdaw.format.ImportErrorCode
 import ch.orellbuehler.jackdaw.format.PackCombiner
+import ch.orellbuehler.jackdaw.format.PackReader
+import ch.orellbuehler.jackdaw.format.ReadResult
 import ch.orellbuehler.jackdaw.study.Grade
 import ch.orellbuehler.jackdaw.study.SessionConfig
 import ch.orellbuehler.jackdaw.study.SessionState
@@ -307,6 +309,37 @@ class CombineTest {
             val exported = assertNotNull(sdk.exportPack(A))
             assertTrue(Regex(""""version":\s*2""").containsMatchIn(exported))
             assertEquals(3, assertIs<ImportPreview.Valid>(sdk.previewImport(exported)).itemCount)
+        }
+
+    @Test
+    fun mapsFromTheOtherPackMakeTheResultVersionThree() =
+        runTest {
+            val map = ""","answerMap":{"alt":"Paris","pins":[{"lat":48.86,"lng":2.35,"label":"Paris"}]}"""
+            install(pack(A, card("a1", "one", "1", ""","figure":{"alt":"dot","svg":"$SVG"}""")))
+            install(pack(B, card("b1", "two", "2", map), card("b2", "three", "3")))
+            assertIs<ImportResult.Success>(sdk.combinePacks(A, B))
+            val exported = assertNotNull(sdk.exportPack(A))
+            assertTrue(Regex(""""version":\s*3""").containsMatchIn(exported))
+            assertEquals(3, assertIs<ImportPreview.Valid>(sdk.previewImport(exported)).itemCount)
+            val read = assertIs<ReadResult.Accepted>(PackReader.read(exported))
+            assertEquals(
+                "Paris",
+                read.pack.items
+                    .single { it.id == "b1" }
+                    .answerMap
+                    ?.pins
+                    ?.single()
+                    ?.label,
+            )
+        }
+
+    @Test
+    fun aDeclaredVersionIsNeverLowered() =
+        runTest {
+            install(pack(A, card("a1", "one", "1")).replace(""""version":1""", """"version":3"""))
+            install(pack(B, card("b1", "two", "2")))
+            assertIs<ImportResult.Success>(sdk.combinePacks(A, B))
+            assertTrue(Regex(""""version":\s*3""").containsMatchIn(assertNotNull(sdk.exportPack(A))))
         }
 
     @Test

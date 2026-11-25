@@ -100,7 +100,7 @@ All logic lives in `shared/`; the apps only render state and forward input.
 
 A pack is one UTF-8 JSON file (`.jackdaw`, media type `application/vnd.jackdaw.pack+json`).
 
-- Required: `format` (`"jackdaw-pack"`), `version` (`1`, or `2` for a pack with figures), `id` (stable and unique), `title`, and a non-empty `items` array.
+- Required: `format` (`"jackdaw-pack"`), `version` (`1`, `2` for a pack with figures, `3` for a pack with maps), `id` (stable and unique), `title`, and a non-empty `items` array.
 - Optional: `description`, `language`, `author`, `license`, `tags`, `icon`, `color`, `revision`, `sections` (chapters) and `study` (order, new items per session, reversible cards, ...).
 - Every item has a unique `id` and a `type`: `card`, `choice`, `text`, `cloze`, `truefalse`, `order` or `open`. It may also have a `section`, a `hint` (shown before answering) and an `explanation` (shown after).
 - Text is plain with `**bold**`, `*italic*` and `` `code` ``. Cloze gaps are written `{{answer}}`, with an optional hint `{{answer::hint}}` and alternatives `{{colour|color}}`.
@@ -251,3 +251,7 @@ One-time iOS setup: register the App ID `ch.orellbuehler.jackdaw`, create the ap
 The iOS app is in the App Store. The Android app is in a closed beta on Google Play that anyone can join through the [tester group](https://groups.google.com/g/jackdaw-test), and is published as a signed APK with every GitHub release.
 
 No licence has been chosen yet, so nothing in this repository is licensed for reuse for now.
+
+## Credits
+
+- World map: [Natural Earth](https://www.naturalearthdata.com/) admin 0 countries at 1:50m, public domain. `scripts/world-map/build-world-data.py` converts the GeoJSON (from [nvkelso/natural-earth-vector](https://github.com/nvkelso/natural-earth-vector)) into `shared/data/world-50m.txt`, which the build compiles into the shared module. Pack maps ([format spec 8.5](format/README.md#85-maps)) are drawn from it.

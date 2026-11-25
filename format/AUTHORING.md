@@ -175,6 +175,33 @@ Any item can show a drawing ([spec 8.4](README.md#84-figures)): `figure` with th
 - **Single quotes** for SVG attributes, so that the JSON string needs no escaping. Export from drawing programs as plain or optimised SVG (SVGO), then check with `validate.py`.
 - Write `alt`: one sentence that says what the figure shows, without giving the answer away when it is a `figure`.
 
+### 4.11 Maps
+
+Any item can show places on a world map ([spec 8.5](README.md#85-maps)): `map` with the question, `answerMap` after answering. Use it for an event that took place at a location, for the birth and death place of a person, for the source and the mouth of a river, for the route of a journey. You write only the coordinates; the app draws the map.
+
+```json item
+{
+  "id": "waterloo-place",
+  "type": "text",
+  "question": "Near which village in present-day Belgium was Napoleon defeated in 1815?",
+  "answers": ["Waterloo"],
+  "answerMap": {
+    "alt": "A map of western Europe with a pin at Waterloo, south of Brussels.",
+    "pins": [{ "lat": 50.68, "lng": 4.41, "label": "Waterloo" }]
+  }
+}
+```
+
+- **`pins`**: 1 to 20 places, each with `lat` (-90 to 90, north positive) and `lng` (-180 to 180, east positive) as JSON numbers, and an optional short `label` (at most about 30 characters are shown). Two to four decimals are plenty. Coordinates are easy to get wrong (swapped, or a wrong sign for west and south): give only coordinates you are sure about and check the sign of each one.
+- **`line: true`** connects the pins in array order and shows the direction: birth place then death place, source then mouth, the stops of a journey. Without `line` the pins stand alone.
+- **The app frames the map** so that every pin is visible, with enough of the surrounding geography to recognise the region. A single pin shows a region about 40 degrees wide, far apart pins give a bigger view. You cannot and need not choose a zoom.
+- **A map must not answer its own question.** For "Where did it happen?" put the pin into `answerMap`, so that the map appears after answering. Use `map` when the learner has to find out something else from the place ("Which sea lies here?").
+- **Today's borders.** The map shows the borders of today's world. Use it to show *where*, not to ask about historical borders or empires.
+- **One drawing per side.** An item has a `figure` or a `map`, and an `answerFigure` or an `answerMap`, not both on the same side. A figure with an `answerMap` is fine.
+- **A pack with a map is `"version": 3`.** Apps that read an older version do not import it and ask the user to update. Keep `"version": 1` or `2` for a pack without maps.
+- Write `alt`: one sentence that says what the map shows, without giving the answer away when it is a `map`.
+- Reference coordinates to compare with: Paris 48.86, 2.35; New York 40.71, -74.01; Sydney -33.87, 151.21; Cape Town -33.92, 18.42; Tokyo 35.68, 139.65; Reykjavik 64.15, -21.94.
+
 ## 5. IDs
 
 Every item needs an `id`, and the pack needs one. Learning progress is stored per item id, so ids are a promise to the learner.
@@ -230,6 +257,8 @@ Every item needs an `id`, and the pack needs one. Learning progress is stored pe
 | Learner progress, scores or dates in items | Not part of the format | Content only |
 | A figure with `<script>`, links, external images or fonts | The figure is dropped | Self-contained SVG, see [4.10](#410-figures) |
 | A figure that only works on a white background | Unreadable in dark mode | `currentColor` and a transparent background |
+| Latitude and longitude swapped, or west and south written as positive | The pin lands in the wrong place (or is dropped when `lat` is above 90) | `lat` first, north and east positive, see [4.11](#411-maps) |
+| A `map` that shows the answer, or a `figure` together with a `map` | Gives the answer away; the map of that side is ignored | The labelled map goes into `answerMap`, see [4.11](#411-maps) |
 | Everything as `choice` or everything as `card` | Dull and not matched to the material | Use the type that fits ([section 3](#3-choosing-item-types)) |
 | `sections` declared, `section` ids misspelled | Items end up ungrouped | Section ids must match exactly |
 
@@ -247,7 +276,7 @@ Every item needs an `id`, and the pack needs one. Learning progress is stored pe
 
 Self-check before delivering:
 
-- [ ] Top level has `format` = `"jackdaw-pack"`, `version` = `1` (`2` if an item has a figure), `id`, `title`, `items` (non-empty).
+- [ ] Top level has `format` = `"jackdaw-pack"`, `version` = `1` (`2` if an item has a figure, `3` if an item has a map), `id`, `title`, `items` (non-empty).
 - [ ] Every item has `id` (unique, `a-z 0-9 . _ -`) and a `type` from the seven.
 - [ ] `card`: `front` and `back`. `choice`: `question` and 2 or more `options`, at least one `"correct": true`. `text`: `question` and non-empty `answers`. `cloze`: `text` with at least one `{{gap}}`. `truefalse`: `statement` and boolean `answer`. `order`: `prompt` and `sequence` of 2 or more distinct entries in the **correct** order. `open`: `question`.
 - [ ] Every `section` value matches a declared section id.
@@ -298,7 +327,7 @@ FORMAT (Jackdaw Pack)
 The file is one JSON object.
 Top level:
 - "format": "jackdaw-pack"                      (required, always this string)
-- "version": 1                                  (required; the number 1, or the number 2 if any item has a "figure" or "answerFigure")
+- "version": 1                                  (required; the number 1, or 2 if any item has a "figure" or "answerFigure", or 3 if any item has a "map" or "answerMap")
 - "id": string                                  (required; only A-Z a-z 0-9 . _ - ; use "pack." + topic slug + "." + 6 random hex characters, e.g. "pack.roman-emperors.7f3a9c")
 - "title": string                               (required)
 - optional: "description" (string), "language" (BCP-47 tag of the subject, e.g. "es", "en", "de-CH"), "author" (string), "license" (e.g. "CC-BY-4.0"), "tags" (string array), "icon" (ONE emoji), "color" ("#RRGGBB"), "revision": 1, "created" and "updated" ("YYYY-MM-DD")
@@ -323,6 +352,13 @@ Any item may have "figure" (shown with the question) and "answerFigure" (shown a
 - Allowed: shapes, paths, text, gradients, clip paths, filters, a <style> element, and animation with <animate>, <animateTransform>, <animateMotion>, <set> or CSS @keyframes. NOT allowed: <script>, <foreignObject>, <a>, <image>, event attributes (onclick, onload, ...), external fonts, and any href or url() that is not a '#id' inside the same SVG. Write a literal < in a label as &lt;.
 - The figure is shown on a light or a dark background: use stroke='currentColor' / fill='currentColor' for lines and labels, plus colours that are readable on both. Font: font-family='sans-serif'.
 - The figure must not show the answer of its own question; put the labelled version into "answerFigure". A pack with a figure must say "version": 2.
+
+MAPS (places on a world map; for events at a location, the birth and death place of a person, the source and mouth of a river, a journey)
+Any item may have "map" (shown with the question) and "answerMap" (shown after answering, replaces "map"). Each is an object {"alt": "what the map shows", "pins": [{"lat": 48.86, "lng": 2.35, "label": "Paris"}], "line": true}.
+- "pins": 1 to 20 places, each with "lat" (latitude, -90 to 90, north is positive) and "lng" (longitude, -180 to 180, east is positive) as JSON numbers with 2 to 4 decimals, and an optional "label" (short name, at most about 30 characters). Only give coordinates you are sure about.
+- "line": optional boolean. true connects the pins in array order with an arrow (birth to death, source to mouth, a route). Leave it out otherwise.
+- The app draws the world map itself and shows every pin: draw nothing. The map shows today's borders, so do not ask questions that depend on historical borders.
+- An item has either a "figure" or a "map" on the same side, not both. Put the labelled map into "answerMap" when it would give the answer away (not "map" for "Where did the Battle of Waterloo take place?"). A pack with a map must say "version": 3.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.

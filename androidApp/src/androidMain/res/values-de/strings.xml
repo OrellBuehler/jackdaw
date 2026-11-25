@@ -64,8 +64,8 @@
     <string name="paste_continue">Vorschau</string>
     <string name="ai_explainer">Jackdaw-Packs sind einfache JSON-Dateien in einem offenen Format, deshalb kann jeder Chatbot eines für dich schreiben. Wähle die Fragetypen, kopiere den Prompt, nenne dem Chatbot dein Thema und füge die Antwort hier ein oder speichere sie als .jackdaw-Datei.</string>
     <string name="ai_types_title">Fragetypen</string>
-    <string name="ai_figures">Abbildungen</string>
-    <string name="ai_figures_help">Zeichnungen und Diagramme. Ein Pack mit Abbildungen braucht ein aktuelles Jackdaw.</string>
+    <string name="ai_figures">Abbildungen und Karten</string>
+    <string name="ai_figures_help">Zeichnungen, Diagramme und Weltkarten mit Markierungen. Ein Pack mit Abbildungen oder Karten braucht ein aktuelles Jackdaw.</string>
     <string name="ai_copy">Prompt kopieren</string>
     <string name="ai_copied">Prompt kopiert</string>
     <string name="ai_show_full">Ganzen Prompt zeigen</string>

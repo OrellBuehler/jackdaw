@@ -12,7 +12,7 @@ FORMAT (Jackdaw Pack)
 The file is one JSON object.
 Top level:
 - "format": "jackdaw-pack"                      (required, always this string)
-- "version": 1                                  (required; the number 1, or the number 2 if any item has a "figure" or "answerFigure")
+- "version": 1                                  (required; the number 1, or 2 if any item has a "figure" or "answerFigure", or 3 if any item has a "map" or "answerMap")
 - "id": string                                  (required; only A-Z a-z 0-9 . _ - ; use "pack." + topic slug + "." + 6 random hex characters, e.g. "pack.roman-emperors.7f3a9c")
 - "title": string                               (required)
 - optional: "description" (string), "language" (BCP-47 tag of the subject, e.g. "es", "en", "de-CH"), "author" (string), "license" (e.g. "CC-BY-4.0"), "tags" (string array), "icon" (ONE emoji), "color" ("#RRGGBB"), "revision": 1, "created" and "updated" ("YYYY-MM-DD")
@@ -37,6 +37,13 @@ Any item may have "figure" (shown with the question) and "answerFigure" (shown a
 - Allowed: shapes, paths, text, gradients, clip paths, filters, a <style> element, and animation with <animate>, <animateTransform>, <animateMotion>, <set> or CSS @keyframes. NOT allowed: <script>, <foreignObject>, <a>, <image>, event attributes (onclick, onload, ...), external fonts, and any href or url() that is not a '#id' inside the same SVG. Write a literal < in a label as &lt;.
 - The figure is shown on a light or a dark background: use stroke='currentColor' / fill='currentColor' for lines and labels, plus colours that are readable on both. Font: font-family='sans-serif'.
 - The figure must not show the answer of its own question; put the labelled version into "answerFigure". A pack with a figure must say "version": 2.
+
+MAPS (places on a world map; for events at a location, the birth and death place of a person, the source and mouth of a river, a journey)
+Any item may have "map" (shown with the question) and "answerMap" (shown after answering, replaces "map"). Each is an object {"alt": "what the map shows", "pins": [{"lat": 48.86, "lng": 2.35, "label": "Paris"}], "line": true}.
+- "pins": 1 to 20 places, each with "lat" (latitude, -90 to 90, north is positive) and "lng" (longitude, -180 to 180, east is positive) as JSON numbers with 2 to 4 decimals, and an optional "label" (short name, at most about 30 characters). Only give coordinates you are sure about.
+- "line": optional boolean. true connects the pins in array order with an arrow (birth to death, source to mouth, a route). Leave it out otherwise.
+- The app draws the world map itself and shows every pin: draw nothing. The map shows today's borders, so do not ask questions that depend on historical borders.
+- An item has either a "figure" or a "map" on the same side, not both. Put the labelled map into "answerMap" when it would give the answer away (not "map" for "Where did the Battle of Waterloo take place?"). A pack with a map must say "version": 3.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.

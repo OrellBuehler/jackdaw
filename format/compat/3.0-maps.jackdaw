@@ -1,0 +1,270 @@
+{
+  "format": "jackdaw-pack",
+  "version": 3,
+  "id": "ch.orellbuehler.jackdaw.compat.maps",
+  "title": "Compatibility: maps",
+  "description": "Frozen pack of format version 3. Every item type with maps. Never edit this file.",
+  "language": "en",
+  "revision": 1,
+  "items": [
+    {
+      "id": "card",
+      "type": "card",
+      "front": "front",
+      "back": "back",
+      "reversible": true,
+      "map": {
+        "alt": "One city.",
+        "pins": [
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris"
+          }
+        ]
+      },
+      "answerMap": {
+        "alt": "A line from Paris to Sydney.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 48.8566,
+            "lng": 2.3522,
+            "label": "Paris"
+          },
+          {
+            "lat": -33.8688,
+            "lng": 151.2093,
+            "label": "Sydney"
+          }
+        ]
+      }
+    },
+    {
+      "id": "choice",
+      "type": "choice",
+      "question": "Pick one.",
+      "options": [
+        {
+          "text": "A",
+          "correct": true
+        },
+        {
+          "text": "B"
+        }
+      ],
+      "answerMap": {
+        "alt": "Two cities on both sides of the 180th meridian.",
+        "pins": [
+          {
+            "lat": -18.14,
+            "lng": 178.44,
+            "label": "Suva"
+          },
+          {
+            "lat": -13.83,
+            "lng": -171.76,
+            "label": "Apia"
+          }
+        ]
+      }
+    },
+    {
+      "id": "text",
+      "type": "text",
+      "question": "Type it.",
+      "answers": [
+        "it"
+      ],
+      "map": {
+        "alt": "The poles and the equator.",
+        "pins": [
+          {
+            "lat": 90,
+            "lng": 0,
+            "label": "North"
+          },
+          {
+            "lat": 0,
+            "lng": 0
+          },
+          {
+            "lat": -90,
+            "lng": 180,
+            "label": "South"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cloze",
+      "type": "cloze",
+      "text": "The {{answer}} is here.",
+      "map": {
+        "alt": "Twenty pins, the most a map can have.",
+        "pins": [
+          {
+            "lat": -60.0,
+            "lng": -170.0
+          },
+          {
+            "lat": -53.7,
+            "lng": -152.5
+          },
+          {
+            "lat": -47.4,
+            "lng": -135.0
+          },
+          {
+            "lat": -41.1,
+            "lng": -117.5
+          },
+          {
+            "lat": -34.8,
+            "lng": -100.0
+          },
+          {
+            "lat": -28.5,
+            "lng": -82.5
+          },
+          {
+            "lat": -22.2,
+            "lng": -65.0
+          },
+          {
+            "lat": -15.9,
+            "lng": -47.5
+          },
+          {
+            "lat": -9.6,
+            "lng": -30.0
+          },
+          {
+            "lat": -3.3,
+            "lng": -12.5
+          },
+          {
+            "lat": 3.0,
+            "lng": 5.0
+          },
+          {
+            "lat": 9.3,
+            "lng": 22.5
+          },
+          {
+            "lat": 15.6,
+            "lng": 40.0
+          },
+          {
+            "lat": 21.9,
+            "lng": 57.5
+          },
+          {
+            "lat": 28.2,
+            "lng": 75.0
+          },
+          {
+            "lat": 34.5,
+            "lng": 92.5
+          },
+          {
+            "lat": 40.8,
+            "lng": 110.0
+          },
+          {
+            "lat": 47.1,
+            "lng": 127.5
+          },
+          {
+            "lat": 53.4,
+            "lng": 145.0
+          },
+          {
+            "lat": 59.7,
+            "lng": 162.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "truefalse",
+      "type": "truefalse",
+      "statement": "True.",
+      "answer": true,
+      "figure": {
+        "alt": "A dot moving left and right.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      },
+      "answerMap": {
+        "alt": "Mexico City.",
+        "pins": [
+          {
+            "lat": 19.4326,
+            "lng": -99.1332,
+            "label": "Mexico City"
+          }
+        ]
+      }
+    },
+    {
+      "id": "order",
+      "type": "order",
+      "prompt": "Order them.",
+      "sequence": [
+        "first",
+        "second",
+        "third"
+      ],
+      "map": {
+        "alt": "A route.",
+        "line": true,
+        "pins": [
+          {
+            "lat": 51.5,
+            "lng": -0.12,
+            "label": "London"
+          },
+          {
+            "lat": 48.86,
+            "lng": 2.35,
+            "label": "Paris"
+          },
+          {
+            "lat": 41.9,
+            "lng": 12.5,
+            "label": "Rome"
+          }
+        ]
+      },
+      "answerFigure": {
+        "alt": "A dot moving left and right.",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><circle cx='20' cy='30' r='10' fill='currentColor'><animate attributeName='cx' values='20;100;20' dur='3s' repeatCount='indefinite'/></circle></svg>"
+      }
+    },
+    {
+      "id": "open",
+      "type": "open",
+      "question": "Explain.",
+      "answer": "An answer.",
+      "keyPoints": [
+        "a point"
+      ],
+      "answerMap": {
+        "alt": "A river from its source to its mouth.",
+        "line": true,
+        "pins": [
+          {
+            "lat": -2.27,
+            "lng": 30.0,
+            "label": "Source"
+          },
+          {
+            "lat": 31.5,
+            "lng": 31.0,
+            "label": "Mouth"
+          }
+        ]
+      }
+    }
+  ]
+}
