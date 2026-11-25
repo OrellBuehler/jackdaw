@@ -224,7 +224,7 @@ internal object ExerciseFactory {
             is ChoiceItem -> buildChoiceItem(item, facet, random)
             is TextItem ->
                 BuiltType(
-                    TypeExercise(item.id, facet, RichText.parse(item.question)),
+                    TypeExercise(item.id, facet, RichText.parse(item.question), answerKeyboard(item.answers.first())),
                     item.answers,
                     RichText.fromPlain(item.answers.first()),
                     item.caseSensitive,
@@ -267,7 +267,7 @@ internal object ExerciseFactory {
         }
         if (type == ExerciseType.TYPE) {
             return BuiltType(
-                TypeExercise(card.id, facet, prompt),
+                TypeExercise(card.id, facet, prompt, answerKeyboard(answer.plain)),
                 acceptedAnswers(card, facet),
                 answer,
                 card.caseSensitive,
@@ -306,7 +306,7 @@ internal object ExerciseFactory {
             parts.map { part ->
                 when (part) {
                     is ClozePart.Text -> ClozeSegment.Text(RichText.parse(part.raw))
-                    is ClozePart.Gap -> ClozeSegment.Gap(gapIndex++, part.hint)
+                    is ClozePart.Gap -> ClozeSegment.Gap(gapIndex++, part.hint, answerKeyboard(part.answers.first()))
                 }
             }
         return BuiltCloze(

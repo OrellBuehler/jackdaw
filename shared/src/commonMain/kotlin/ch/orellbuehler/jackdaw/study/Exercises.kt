@@ -37,6 +37,7 @@ sealed class ClozeSegment {
     data class Gap(
         val index: Int,
         val hint: String?,
+        val keyboard: AnswerKeyboard = AnswerKeyboard.TEXT,
     ) : ClozeSegment()
 }
 
@@ -68,6 +69,7 @@ data class TypeExercise(
     override val itemId: String,
     override val facet: Facet,
     val prompt: RichText,
+    val keyboard: AnswerKeyboard = AnswerKeyboard.TEXT,
 ) : Exercise() {
     override val type: ExerciseType get() = ExerciseType.TYPE
 }

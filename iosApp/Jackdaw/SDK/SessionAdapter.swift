@@ -144,7 +144,16 @@ enum SessionAdapter {
             )
         }
         if let x = e as? TypeExercise {
-            return info(e, kind: .typed, prompt: Mapping.styled(x.prompt))
+            return ExerciseInfo(
+                itemId: x.itemId,
+                kind: .typed,
+                prompt: Mapping.styled(x.prompt),
+                options: [],
+                multiSelect: false,
+                segments: [],
+                gapCount: 0,
+                keyboard: answerKeyboard(x.keyboard)
+            )
         }
         if let x = e as? ClozeExercise {
             return ExerciseInfo(
@@ -182,9 +191,17 @@ enum SessionAdapter {
         case .text(let t):
             return .text(Mapping.styled(t.text))
         case .gap(let g):
-            return .gap(index: Int(g.index), hint: g.hint)
+            return .gap(index: Int(g.index), hint: g.hint, keyboard: answerKeyboard(g.keyboard))
         default:
             return .text(.empty)
+        }
+    }
+
+    static func answerKeyboard(_ keyboard: AnswerKeyboard) -> AnswerKeyboardInfo {
+        switch keyboard {
+        case .integer: return .integer
+        case .decimal: return .decimal
+        default: return .text
         }
     }
 
