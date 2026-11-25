@@ -114,19 +114,23 @@ fun OrderView(
                                 },
                             shadowElevation = elevation,
                             modifier =
-                                Modifier.semantics {
-                                    customActions =
-                                        listOf(
-                                            CustomAccessibilityAction(moveUp) {
-                                                if (index > 0) ids.add(index - 1, ids.removeAt(index))
-                                                true
-                                            },
-                                            CustomAccessibilityAction(moveDown) {
-                                                if (index < ids.lastIndex) ids.add(index + 1, ids.removeAt(index))
-                                                true
-                                            },
-                                        )
-                                },
+                                Modifier
+                                    .semantics {
+                                        customActions =
+                                            listOf(
+                                                CustomAccessibilityAction(moveUp) {
+                                                    if (index > 0) ids.add(index - 1, ids.removeAt(index))
+                                                    true
+                                                },
+                                                CustomAccessibilityAction(moveDown) {
+                                                    if (index < ids.lastIndex) ids.add(index + 1, ids.removeAt(index))
+                                                    true
+                                                },
+                                            )
+                                    }.longPressDraggableHandle(
+                                        onDragStarted = { haptics.performHapticFeedback(HapticFeedbackType.GestureThresholdActivate) },
+                                        onDragStopped = { haptics.performHapticFeedback(HapticFeedbackType.GestureEnd) },
+                                    ),
                         ) {
                             Row(
                                 Modifier.padding(start = 14.dp, end = 6.dp, top = 6.dp, bottom = 6.dp),

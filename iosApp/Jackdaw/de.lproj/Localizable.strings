@@ -275,6 +275,7 @@
 "study.flip.front" = "Frage";
 "study.flip.tap" = "Zum Umdrehen tippen";
 "study.hint" = "Hinweis anzeigen";
+"study.keyboard.next" = "Weiter";
 "study.label.choice" = "Wähle eine Antwort";
 "study.label.cloze" = "Fülle die Lücken";
 "study.label.multi" = "Wähle alle zutreffenden";
@@ -289,7 +290,7 @@
 "study.open.think" = "Überlege dir deine Antwort und decke dann die Musterantwort auf.";
 "study.order.down" = "Nach unten";
 "study.order.expected" = "Erwartet:";
-"study.order.hint" = "Bringe die Einträge mit den Pfeilen in die richtige Reihenfolge.";
+"study.order.hint" = "Ziehe am Griff oder nutze die Pfeile, um die Einträge in die richtige Reihenfolge zu bringen.";
 "study.order.up" = "Nach oben";
 "study.figure" = "Abbildung";
 "study.retry" = "Zweiter Versuch";

@@ -6,6 +6,11 @@ struct OrderExerciseView: View {
     let style: PackStyle
     @State private var entries: [OptionInfo]
     @State private var moves = 0
+    @State private var heights: [String: CGFloat] = [:]
+    @State private var draggingID: String?
+    @State private var dragTranslation: CGFloat = 0
+
+    private let rowSpacing: CGFloat = 10
 
     init(store: StudyStore, current: StudyCurrent, style: PackStyle) {
         self.store = store
@@ -48,37 +53,140 @@ struct OrderExerciseView: View {
     }
 
     private var editableList: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: rowSpacing) {
             Text("study.order.hint")
                 .font(.brand(.footnote))
                 .foregroundStyle(Brand.textSecondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
-                HStack(spacing: 12) {
-                    Text(String(index + 1))
-                        .font(.brand(.subheadline, weight: .bold))
-                        .foregroundStyle(style.onBase)
-                        .frame(width: 30, height: 30)
-                        .background(style.base, in: Circle())
-                    RichTextView(text: entry.text, font: .brand(.body, weight: .medium))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    VStack(spacing: 2) {
-                        moveButton(systemName: "chevron.up", enabled: index > 0) {
-                            move(index, by: -1)
-                        }
-                        moveButton(systemName: "chevron.down", enabled: index < entries.count - 1) {
-                            move(index, by: 1)
-                        }
-                    }
-                }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 12)
-                .background(Brand.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .strokeBorder(Brand.hairline, lineWidth: 1)
+            VStack(spacing: rowSpacing) {
+                ForEach(Array(entries.enumerated()), id: \.element.id) { index, entry in
+                    row(index: index, entry: entry)
                 }
             }
+        }
+        .onChange(of: dragTarget) { _, target in
+            if target != nil { moves += 1 }
+        }
+    }
+
+    private func row(index: Int, entry: OptionInfo) -> some View {
+        let isDragged = entry.id == draggingID
+        let shift = rowOffset(at: index)
+        return HStack(spacing: 12) {
+            Text(String(displayedPosition(at: index)))
+                .font(.brand(.subheadline, weight: .bold))
+                .foregroundStyle(style.onBase)
+                .frame(width: 30, height: 30)
+                .background(style.base, in: Circle())
+            RichTextView(text: entry.text, font: .brand(.body, weight: .medium))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(spacing: 2) {
+                moveButton(systemName: "chevron.up", enabled: index > 0) {
+                    move(index, by: -1)
+                }
+                moveButton(systemName: "chevron.down", enabled: index < entries.count - 1) {
+                    move(index, by: 1)
+                }
+            }
+            dragHandle(id: entry.id)
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 12)
+        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(isDragged ? style.base : Brand.hairline, lineWidth: isDragged ? 2 : 1)
+        }
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.size.height
+        } action: { height in
+            heights[entry.id] = height
+        }
+        .scaleEffect(isDragged ? 1.02 : 1)
+        .shadow(color: .black.opacity(isDragged ? 0.18 : 0), radius: 10, y: 4)
+        .offset(y: shift)
+        .animation(.snappy(duration: 0.2), value: isDragged ? 0 : shift)
+        .zIndex(isDragged ? 1 : 0)
+    }
+
+    private func dragHandle(id: String) -> some View {
+        Image(systemName: "line.3.horizontal")
+            .font(.system(size: 18, weight: .semibold))
+            .foregroundStyle(Brand.textSecondary)
+            .frame(width: 36, height: 44)
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                    .onChanged { value in
+                        if draggingID == nil { draggingID = id }
+                        if draggingID == id { dragTranslation = value.translation.height }
+                    }
+                    .onEnded { _ in
+                        finishDrag(id: id)
+                    }
+            )
+            .accessibilityHidden(true)
+    }
+
+    private func height(of id: String) -> CGFloat {
+        heights[id] ?? 0
+    }
+
+    private func top(of index: Int) -> CGFloat {
+        entries[..<index].reduce(0) { $0 + height(of: $1.id) + rowSpacing }
+    }
+
+    private var draggedIndex: Int? {
+        guard let draggingID else { return nil }
+        return entries.firstIndex { $0.id == draggingID }
+    }
+
+    private func clampedShift(from index: Int) -> CGFloat {
+        let own = height(of: entries[index].id)
+        let total = top(of: entries.count) - rowSpacing
+        let lowest = -top(of: index)
+        let highest = total - top(of: index) - own
+        return min(max(dragTranslation, lowest), highest)
+    }
+
+    private var dragTarget: Int? {
+        guard let from = draggedIndex else { return nil }
+        let center = top(of: from) + height(of: entries[from].id) / 2 + clampedShift(from: from)
+        var target = 0
+        for (index, entry) in entries.enumerated() where index != from {
+            if top(of: index) + height(of: entry.id) / 2 < center { target += 1 }
+        }
+        return target
+    }
+
+    private func rowOffset(at index: Int) -> CGFloat {
+        guard let from = draggedIndex, let target = dragTarget else { return 0 }
+        if index == from { return clampedShift(from: from) }
+        let step = height(of: entries[from].id) + rowSpacing
+        if target < from && index >= target && index < from { return step }
+        if target > from && index > from && index <= target { return -step }
+        return 0
+    }
+
+    private func displayedPosition(at index: Int) -> Int {
+        guard let from = draggedIndex, let target = dragTarget else { return index + 1 }
+        if index == from { return target + 1 }
+        if target < from && index >= target && index < from { return index + 2 }
+        if target > from && index > from && index <= target { return index }
+        return index + 1
+    }
+
+    private func finishDrag(id: String) {
+        guard draggingID == id else { return }
+        let from = draggedIndex
+        let target = dragTarget
+        withAnimation(.snappy(duration: 0.25)) {
+            if let from, let target, from != target {
+                let moved = entries.remove(at: from)
+                entries.insert(moved, at: target)
+            }
+            draggingID = nil
+            dragTranslation = 0
         }
     }
 
