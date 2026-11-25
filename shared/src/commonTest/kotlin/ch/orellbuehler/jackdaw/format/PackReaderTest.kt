@@ -150,7 +150,7 @@ class PackReaderTest {
     fun formatTourDetails() {
         val pack = accepted(GENERATED_SAMPLE_PACKS.first { it.first == "format-tour.jackdaw" }.second).pack
         assertEquals("com.github.orellbuehler.jackdaw.examples.format-tour", pack.id)
-        assertEquals(5, pack.revision)
+        assertEquals(4, pack.revision)
         assertEquals("#7C3AED", pack.color)
         assertEquals(listOf("basics", "item-types"), pack.sections.map { it.id })
         assertEquals(5, pack.study.newPerSession)

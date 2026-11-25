@@ -43,8 +43,8 @@
       "language": "en",
       "icon": "🧭",
       "color": "#7C3AED",
-      "items": 15,
-      "revision": 5
+      "items": 13,
+      "revision": 4
     },
     {
       "id": "com.github.orellbuehler.jackdaw.examples.french-basics",
