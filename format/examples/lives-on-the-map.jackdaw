@@ -69,9 +69,7 @@
       "back": "Alexander the Great",
       "alternatives": [
         "Alexander III of Macedon",
-        "Alexander III",
-        "Alexander of Macedon",
-        "Alexander"
+        "Alexander of Macedon"
       ],
       "hint": "A king of ancient Macedon.",
       "explanation": "King of Macedon who conquered the Persian Empire and created an empire stretching from Greece to India. Born in Pella in Macedonia, died in Babylon.",
@@ -168,7 +166,7 @@
         "Constantinus"
       ],
       "hint": "A Roman emperor of the 4th century.",
-      "explanation": "Roman emperor who ended the persecution of Christians and founded Constantinople as a new capital. Born in Naissus, today Niš in Serbia, died in near Nicomedia, today İzmit in Turkey.",
+      "explanation": "Roman emperor who ended the persecution of Christians and founded Constantinople as a new capital. Born in Naissus, today Niš in Serbia, died near Nicomedia, today İzmit in Turkey.",
       "map": {
         "alt": "A world map with a line from the birthplace in south-eastern Europe (born c. 272) to the place of death in Turkey (died 337).",
         "line": true,
@@ -304,7 +302,6 @@
       "front": "Who was born at the first pin and died at the second?",
       "back": "William the Conqueror",
       "alternatives": [
-        "William I",
         "William I of England",
         "William of Normandy",
         "William the Bastard"
@@ -404,7 +401,7 @@
         "Mehmed Fatih"
       ],
       "hint": "An Ottoman sultan.",
-      "explanation": "Ottoman sultan who conquered Constantinople in 1453 at the age of 21. Born in Edirne, died in near Gebze in Turkey.",
+      "explanation": "Ottoman sultan who conquered Constantinople in 1453 at the age of 21. Born in Edirne, died near Gebze in Turkey.",
       "map": {
         "alt": "A world map with a line between two places in Turkey: the birthplace (born 1432) and the place of death (died 1481).",
         "line": true,
@@ -446,12 +443,10 @@
       "back": "Suleiman the Magnificent",
       "alternatives": [
         "Suleiman I",
-        "Suleiman",
         "Suleyman the Magnificent",
         "Süleyman the Magnificent",
         "Suleyman I",
-        "Süleyman I",
-        "Suleyman"
+        "Süleyman I"
       ],
       "hint": "An Ottoman sultan.",
       "explanation": "Ottoman sultan under whom the empire reached the height of its power; he died during a siege in Hungary. Born in Trabzon, died in Szigetvár in Hungary.",
@@ -544,7 +539,6 @@
       "front": "Who was born at the first pin and died at the second?",
       "back": "Peter the Great",
       "alternatives": [
-        "Peter I",
         "Peter I of Russia",
         "Peter the First"
       ],
@@ -778,7 +772,6 @@
       "alternatives": [
         "Nicholas II",
         "Tsar Nicholas II",
-        "Tsar Nicholas",
         "Nikolai II",
         "Nicholas the Second"
       ],
@@ -825,8 +818,7 @@
       "back": "Elizabeth II",
       "alternatives": [
         "Queen Elizabeth II",
-        "Elizabeth the Second",
-        "Queen Elizabeth"
+        "Elizabeth the Second"
       ],
       "hint": "A British queen of the 20th and 21st centuries.",
       "explanation": "Queen of the United Kingdom from 1952 to 2022, the longest-reigning British monarch. Born in Mayfair in London, died in Balmoral Castle in Scotland.",
@@ -1069,8 +1061,8 @@
             "label": "b. 1870"
           },
           {
-            "lat": 55.43,
-            "lng": 37.76,
+            "lat": 55.5045,
+            "lng": 37.765,
             "label": "d. 1924"
           }
         ]
@@ -1085,8 +1077,8 @@
             "label": "Simbirsk (Ulyanovsk), 1870"
           },
           {
-            "lat": 55.43,
-            "lng": 37.76,
+            "lat": 55.5045,
+            "lng": 37.765,
             "label": "Gorki, 1924"
           }
         ]
@@ -1480,7 +1472,6 @@
         "JFK",
         "John Kennedy",
         "John F Kennedy",
-        "Kennedy",
         "President Kennedy"
       ],
       "hint": "A US president of the 20th century.",
@@ -1527,9 +1518,7 @@
       "alternatives": [
         "FDR",
         "Franklin Roosevelt",
-        "Franklin Delano Roosevelt",
-        "Roosevelt",
-        "President Roosevelt"
+        "Franklin Delano Roosevelt"
       ],
       "hint": "A US president of the 20th century.",
       "explanation": "The only US president elected four times, who led the country through the Great Depression and most of the Second World War. Born in Hyde Park in New York State, died in Warm Springs in Georgia.",
@@ -1588,8 +1577,8 @@
             "label": "b. 1890"
           },
           {
-            "lat": 48.3333,
-            "lng": 4.8833,
+            "lat": 48.2242,
+            "lng": 4.8867,
             "label": "d. 1970"
           }
         ]
@@ -1604,8 +1593,8 @@
             "label": "Lille, 1890"
           },
           {
-            "lat": 48.3333,
-            "lng": 4.8833,
+            "lat": 48.2242,
+            "lng": 4.8867,
             "label": "Colombey-les-Deux-Églises"
           }
         ]
@@ -1635,8 +1624,8 @@
             "label": "b. 1928"
           },
           {
-            "lat": -18.7,
-            "lng": -64.1,
+            "lat": -18.7947,
+            "lng": -64.2011,
             "label": "d. 1967"
           }
         ]
@@ -1651,8 +1640,8 @@
             "label": "Rosario, 1928"
           },
           {
-            "lat": -18.7,
-            "lng": -64.1,
+            "lat": -18.7947,
+            "lng": -64.2011,
             "label": "La Higuera, 1967"
           }
         ]
@@ -1674,8 +1663,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 4.9,
-            "lng": -2.1,
+            "lat": 4.9639,
+            "lng": -2.3222,
             "label": "b. 1909"
           },
           {
@@ -1690,8 +1679,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 4.9,
-            "lng": -2.1,
+            "lat": 4.9639,
+            "lng": -2.3222,
             "label": "Nkroful, 1909"
           },
           {
@@ -2042,8 +2031,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 39.77,
-            "lng": 64.43,
+            "lat": 39.994,
+            "lng": 64.379,
             "label": "b. 980"
           },
           {
@@ -2058,8 +2047,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 39.77,
-            "lng": 64.43,
+            "lat": 39.994,
+            "lng": 64.379,
             "label": "near Bukhara, 980"
           },
           {
@@ -2172,7 +2161,7 @@
         "Erasmus of Rotterdam"
       ],
       "hint": "A Dutch humanist scholar.",
-      "explanation": "Dutch humanist and scholar who edited the Greek New Testament and wrote 'In Praise of Folly'. Born in Rotterdam, died in Basel in Switzerland.",
+      "explanation": "Dutch humanist and scholar who edited the Greek New Testament and wrote 'In Praise of Folly'. Born in Rotterdam (possibly Gouda), died in Basel in Switzerland.",
       "map": {
         "alt": "A world map with a line from the birthplace in western Europe (born c. 1466) to the place of death in central Europe (died 1536).",
         "line": true,
@@ -2406,8 +2395,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 55.98,
-            "lng": 13.0,
+            "lat": 55.979,
+            "lng": 13.135,
             "label": "b. 1546"
           },
           {
@@ -2422,8 +2411,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 55.98,
-            "lng": 13.0,
+            "lat": 55.979,
+            "lng": 13.135,
             "label": "Knutstorp, 1546"
           },
           {
@@ -2814,7 +2803,7 @@
         "Dmitri Ivanovich Mendeleev"
       ],
       "hint": "A Russian chemist.",
-      "explanation": "Russian chemist who devised the periodic table of the elements. Born in Tobolsk in Siberia, died in Saint Petersburg.",
+      "explanation": "Russian chemist who devised the periodic table of the elements. Born near Tobolsk in Siberia, died in Saint Petersburg.",
       "map": {
         "alt": "A world map with a line from the birthplace in Siberia (born 1834) to the place of death in eastern Europe (died 1907).",
         "line": true,
@@ -2832,13 +2821,13 @@
         ]
       },
       "answerMap": {
-        "alt": "A world map with a line from Tobolsk, 1834 to Saint Petersburg, 1907.",
+        "alt": "A world map with a line from near Tobolsk, 1834 to Saint Petersburg, 1907.",
         "line": true,
         "pins": [
           {
             "lat": 58.2,
             "lng": 68.25,
-            "label": "Tobolsk, 1834"
+            "label": "near Tobolsk, 1834"
           },
           {
             "lat": 59.9343,
@@ -2995,7 +2984,6 @@
         "Marie Sklodowska-Curie",
         "Maria Skłodowska",
         "Madame Curie",
-        "Curie",
         "Skłodowska-Curie",
         "Sklodowska-Curie"
       ],
@@ -3225,19 +3213,19 @@
         "Yury Gagarin"
       ],
       "hint": "A Soviet cosmonaut.",
-      "explanation": "Soviet cosmonaut who became the first human in space in 1961. Born in Klushino near Smolensk, died in near Novosyolovo, east of Moscow.",
+      "explanation": "Soviet cosmonaut who became the first human in space in 1961. Born in Klushino near Smolensk, died near Novosyolovo, east of Moscow.",
       "map": {
         "alt": "A world map with a line between two places in eastern Europe: the birthplace (born 1934) and the place of death (died 1968).",
         "line": true,
         "pins": [
           {
-            "lat": 55.7511,
-            "lng": 34.8872,
+            "lat": 55.6708,
+            "lng": 35.0533,
             "label": "b. 1934"
           },
           {
-            "lat": 56.0,
-            "lng": 39.0,
+            "lat": 56.067,
+            "lng": 39.05,
             "label": "d. 1968"
           }
         ]
@@ -3247,13 +3235,13 @@
         "line": true,
         "pins": [
           {
-            "lat": 55.7511,
-            "lng": 34.8872,
+            "lat": 55.6708,
+            "lng": 35.0533,
             "label": "Klushino, 1934"
           },
           {
-            "lat": 56.0,
-            "lng": 39.0,
+            "lat": 56.067,
+            "lng": 39.05,
             "label": "near Novosyolovo, 1968"
           }
         ]
@@ -3316,7 +3304,7 @@
         "Drake"
       ],
       "hint": "An English sea captain of the 16th century.",
-      "explanation": "English sea captain who sailed round the world in 1577-1580 and fought the Spanish Armada. Born in Tavistock in Devon, died in at sea off Portobelo in Panama.",
+      "explanation": "English sea captain who sailed round the world in 1577-1580 and fought the Spanish Armada. Born in Tavistock in Devon, died at sea off Portobelo in Panama.",
       "map": {
         "alt": "A world map with a line from the birthplace in the British Isles (born c. 1540) to the place of death in the Caribbean coast of Central America (died 1596).",
         "line": true,
@@ -4629,7 +4617,7 @@
         "Greco"
       ],
       "hint": "A Greek-born painter of the Spanish Renaissance.",
-      "explanation": "Greek-born painter of the Spanish Renaissance, known for his elongated figures, who worked in Toledo. Born in Candia, today Heraklion on Crete, died in Toledo in Spain.",
+      "explanation": "Greek-born painter of the Spanish Renaissance, known for his elongated figures, who worked in Toledo. Born on Crete, probably in Candia, today Heraklion, died in Toledo in Spain.",
       "map": {
         "alt": "A world map with a line from the birthplace in south-eastern Europe (born 1541) to the place of death in the Iberian Peninsula (died 1614).",
         "line": true,
@@ -5458,8 +5446,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 18.3,
-            "lng": -77.1,
+            "lat": 18.2978,
+            "lng": -77.2781,
             "label": "b. 1945"
           },
           {
@@ -5474,8 +5462,8 @@
         "line": true,
         "pins": [
           {
-            "lat": 18.3,
-            "lng": -77.1,
+            "lat": 18.2978,
+            "lng": -77.2781,
             "label": "Nine Mile, 1945"
           },
           {
@@ -5630,7 +5618,6 @@
       "alternatives": [
         "Cassius Clay",
         "Cassius Marcellus Clay",
-        "Ali",
         "Cassius Marcellus Clay Jr."
       ],
       "hint": "An American heavyweight boxer.",
