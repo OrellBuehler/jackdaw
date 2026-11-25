@@ -3,6 +3,7 @@ import SwiftUI
 private enum DetailSheet: Identifiable {
     case edit
     case groups
+    case combine
 
     var id: Self { self }
 }
@@ -61,6 +62,10 @@ struct PackDetailView: View {
                 }
             case .groups:
                 PackGroupsSheet(store: store)
+            case .combine:
+                if let pack = store.detail?.pack {
+                    CombineSheet(store: store, packTitle: pack.title)
+                }
             }
         }
     }
@@ -84,6 +89,11 @@ struct PackDetailView: View {
                 activeSheet = .groups
             } label: {
                 Label("groups.title", systemImage: "folder")
+            }
+            Button {
+                activeSheet = .combine
+            } label: {
+                Label("detail.combine", systemImage: "plus.square.on.square")
             }
             Button {
                 Task { await store.setArchived(!isArchived) }

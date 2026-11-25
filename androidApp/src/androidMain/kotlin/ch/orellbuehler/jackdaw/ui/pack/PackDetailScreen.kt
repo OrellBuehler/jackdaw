@@ -37,6 +37,7 @@ import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Folder
 import androidx.compose.material.icons.rounded.Keyboard
+import androidx.compose.material.icons.rounded.LibraryAdd
 import androidx.compose.material.icons.rounded.LinkOff
 import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.PlayArrow
@@ -156,6 +157,7 @@ private fun PackDetailContent(
     var confirm by rememberSaveable { mutableStateOf(Confirm.None) }
     var editing by rememberSaveable { mutableStateOf(false) }
     var grouping by rememberSaveable { mutableStateOf(false) }
+    var combining by rememberSaveable { mutableStateOf(false) }
     val exportFailed = stringResource(R.string.export_failed)
     val savedText = stringResource(R.string.export_saved)
 
@@ -214,6 +216,7 @@ private fun PackDetailContent(
                         onDelete = { confirm = Confirm.Delete },
                         onEdit = { editing = true },
                         onGroups = { grouping = true },
+                        onCombine = { combining = true },
                         onArchive = { viewModel.setArchived(!summary.archived) },
                         onUnlink = if (summary.sourceUrl == null) null else viewModel::removeLink,
                     )
@@ -273,6 +276,19 @@ private fun PackDetailContent(
         )
     }
     if (grouping) GroupsSheet(groupsViewModel, packId = summary.id, onDismiss = { grouping = false })
+    if (combining) {
+        CombineSheet(
+            viewModel = viewModel,
+            packTitle = summary.title,
+            onDone = { added ->
+                combining = false
+                scope.launch {
+                    snackbar.showSnackbar(context.resources.getQuantityString(R.plurals.combine_done, added, added))
+                }
+            },
+            onDismiss = { combining = false },
+        )
+    }
 
     when (confirm) {
         Confirm.None -> Unit
@@ -335,6 +351,7 @@ private fun Hero(
     onDelete: () -> Unit,
     onEdit: () -> Unit,
     onGroups: () -> Unit,
+    onCombine: () -> Unit,
     onArchive: () -> Unit,
     onUnlink: (() -> Unit)?,
 ) {
@@ -374,6 +391,14 @@ private fun Hero(
                         onClick = {
                             menu = false
                             onGroups()
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.menu_combine)) },
+                        leadingIcon = { Icon(Icons.Rounded.LibraryAdd, null) },
+                        onClick = {
+                            menu = false
+                            onCombine()
                         },
                     )
                     DropdownMenuItem(

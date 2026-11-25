@@ -347,4 +347,26 @@
     <string name="item_delete_body">Sein Fortschritt wird ebenfalls gelöscht.</string>
     <string name="error_item_invalid">Dieser Eintrag ist nicht gültig.</string>
     <string name="error_pack_missing">Dieses Pack ist nicht mehr installiert.</string>
+    <string name="menu_combine">Einträge aus anderem Pack hinzufügen</string>
+    <string name="combine_pick">Wähle das Pack, dessen Einträge du zu «%1$s» hinzufügen willst.</string>
+    <string name="combine_none">Auf diesem Gerät gibt es noch keine anderen Packs.</string>
+    <string name="combine_nothing">Nichts hinzuzufügen: Jeder Eintrag von «%1$s» ist schon in diesem Pack.</string>
+    <string name="combine_note">«%1$s» bleibt unverändert. Die hinzugefügten Einträge beginnen in diesem Pack als neu.</string>
+    <string name="combine_confirm">Einträge hinzufügen</string>
+    <plurals name="combine_added">
+        <item quantity="one">%d Eintrag wird hinzugefügt.</item>
+        <item quantity="other">%d Einträge werden hinzugefügt.</item>
+    </plurals>
+    <plurals name="combine_duplicates">
+        <item quantity="one">%d Eintrag wird übersprungen, weil dieses Pack genau den gleichen schon hat.</item>
+        <item quantity="other">%d Einträge werden übersprungen, weil dieses Pack genau die gleichen schon hat.</item>
+    </plurals>
+    <plurals name="combine_sections">
+        <item quantity="one">%d Abschnitt kommt mit.</item>
+        <item quantity="other">%d Abschnitte kommen mit.</item>
+    </plurals>
+    <plurals name="combine_done">
+        <item quantity="one">%d Eintrag hinzugefügt</item>
+        <item quantity="other">%d Einträge hinzugefügt</item>
+    </plurals>
 </resources>

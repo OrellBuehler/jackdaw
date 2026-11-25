@@ -58,6 +58,14 @@ final class PackDetailStore {
         await client.updatePackInfo(packId, title: title, description: description)
     }
 
+    func previewCombine(with otherPackId: String) async -> CombineOutcome {
+        await client.previewCombine(packId, with: otherPackId)
+    }
+
+    func combine(with otherPackId: String) async -> ImportOutcome {
+        await client.combinePacks(packId, with: otherPackId)
+    }
+
     func exportFile() async -> URL? {
         guard let title = detail?.pack.title, let text = await client.exportPack(packId) else { return nil }
         return try? PackFile.exportURL(title: title, text: text)

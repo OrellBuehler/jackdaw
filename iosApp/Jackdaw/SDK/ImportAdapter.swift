@@ -57,6 +57,24 @@ enum ImportAdapter {
         }
     }
 
+    static func combineOutcome(_ preview: CombinePreview) -> CombineOutcome {
+        switch onEnum(of: preview) {
+        case .valid(let ok):
+            return .valid(
+                CombinePreviewInfo(
+                    otherTitle: ok.otherTitle,
+                    addedCount: Int(ok.addedCount),
+                    duplicateCount: Int(ok.duplicateCount),
+                    sectionCount: Int(ok.sectionCount)
+                )
+            )
+        case .invalid(let bad):
+            return .invalid(issue(bad.error))
+        default:
+            return .invalid(ImportIssue(kind: .other, message: ""))
+        }
+    }
+
     static func counts(_ c: ImportCounts) -> ImportCountsInfo {
         ImportCountsInfo(
             added: Int(c.addedItems),
