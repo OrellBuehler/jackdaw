@@ -55,6 +55,39 @@ class MapFigureTest {
     }
 
     @Test
+    fun aPinInTheOceanWidensTheViewUntilLandIsInIt() {
+        val places =
+            mapOf(
+                "Pearl Harbor" to pin(21.36, -157.95),
+                "St Helena" to pin(-15.96, -5.71),
+                "Easter Island" to pin(-27.11, -109.35),
+            )
+        for ((name, place) in places) {
+            val view = MapFigure.view(listOf(place))
+            assertTrue(view.width > 50.0, "$name: ${view.width}")
+            assertTrue(view.width < 360.0, "$name: ${view.width}")
+            assertTrue(WorldData.landShare(view.west, view.south, view.width, view.height) >= 0.15, name)
+            assertEquals(place.lng, view.west + view.width / 2, 1e-9)
+            assertEquals(MapFigure.mercatorY(place.lat), view.south + view.height / 2, 1e-9)
+            val svg = MapFigure.render(spec(place)).svg
+            assertTrue(svg.length < 100_000, "$name: ${svg.length}")
+            assertTrue("<circle cx='1000'" in svg)
+        }
+        assertTrue(MapFigure.view(listOf(pin(-15.96, -5.71))).width < MapFigure.view(listOf(pin(21.36, -157.95))).width)
+    }
+
+    @Test
+    fun viewsThatAlreadyShowLandAreNotWidened() {
+        for (place in listOf(paris, pin(50.68, 4.41), pin(64.1466, -21.9426), pin(-51.7, -57.85))) {
+            assertEquals(MapFigure.MIN_WIDTH_DEGREES, MapFigure.view(listOf(place)).width, 1e-9)
+        }
+        val rhine = MapFigure.view(listOf(pin(46.62, 8.67), pin(51.98, 4.12)))
+        assertEquals(MapFigure.MIN_WIDTH_DEGREES, rhine.width, 1e-9)
+        val share = WorldData.landShare(rhine.west, rhine.south, rhine.width, rhine.height)
+        assertTrue(share > 0.3 && share < 1.0, "share $share")
+    }
+
+    @Test
     fun farApartPinsAreAllVisibleWithMargin() {
         val view = MapFigure.view(listOf(paris, sydney, pin(40.7, -74.0), pin(-33.9, 18.4)))
         for (i in view.xs.indices) {
@@ -79,7 +112,7 @@ class MapFigureTest {
     @Test
     fun pinsOnBothSidesOfTheAntimeridianAreFramedTheShortWay() {
         val view = MapFigure.view(listOf(pin(-18.14, 178.44, "Suva"), pin(-13.83, -171.76, "Apia")))
-        assertEquals(MapFigure.MIN_WIDTH_DEGREES, view.width, 1e-9)
+        assertTrue(view.width >= MapFigure.MIN_WIDTH_DEGREES && view.width < 360.0)
         assertEquals(178.44, view.xs[0], 1e-9)
         assertEquals(188.24, view.xs[1], 1e-9)
         assertEquals(183.34, view.west + view.width / 2, 1e-9)
@@ -88,7 +121,7 @@ class MapFigureTest {
         val far = MapFigure.view(listOf(pin(35.68, 139.65), pin(21.3, -157.86)))
         assertEquals(139.65, far.xs[0], 1e-9)
         assertEquals(202.14, far.xs[1], 1e-9)
-        assertTrue(far.width < 100.0)
+        assertTrue(far.width < 360.0)
     }
 
     @Test
@@ -230,7 +263,7 @@ class MapFigureTest {
         val regional = MapFigure.render(spec(pin(50.68, 4.41, "Waterloo"))).svg
         assertTrue(regional.length < 60_000, "regional: ${regional.length}")
         val empty = MapFigure.render(spec(pin(-45.0, -140.0, "Pacific"))).svg
-        assertFalse("fill-rule" in empty)
+        assertTrue(empty.length < 100_000, "ocean: ${empty.length}")
         assertTrue(FigureRules.check(empty) != null)
     }
 

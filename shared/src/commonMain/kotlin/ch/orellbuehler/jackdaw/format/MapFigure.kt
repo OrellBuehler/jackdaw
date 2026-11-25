@@ -24,6 +24,8 @@ internal object MapFigure {
     const val MAX_LATITUDE = 85.0511287798
     private const val ASPECT = 1.6
     private const val FILL = 0.7
+    private const val WIDEN = 1.1
+    private const val MIN_LAND_SHARE = 0.15
     private const val PIN_RADIUS = 22.0
     private const val FONT_SIZE = 70.0
     private const val LABEL_GAP = 14.0
@@ -65,12 +67,17 @@ internal object MapFigure {
         val lowest = ys.min()
         val highest = ys.max()
         val ySpan = highest - lowest
-        var width = max(max(MIN_WIDTH_DEGREES, span / FILL), ySpan / FILL * ASPECT)
-        width = min(width, 360.0)
-        var height = width / ASPECT
-        if (ySpan / 0.9 > height) height = min(ySpan / 0.9, 360.0)
-        val west = start + span / 2 - width / 2
-        val south = (lowest + highest) / 2 - height / 2
+        val centerX = start + span / 2
+        val centerY = (lowest + highest) / 2
+        val minHeight = min(ySpan / 0.9, 360.0)
+        var width = min(max(max(MIN_WIDTH_DEGREES, span / FILL), ySpan / FILL * ASPECT), 360.0)
+        var height = max(width / ASPECT, minHeight)
+        while (width < 360.0 && WorldData.landShare(centerX - width / 2, centerY - height / 2, width, height) < MIN_LAND_SHARE) {
+            width = min(width * WIDEN, 360.0)
+            height = max(width / ASPECT, minHeight)
+        }
+        val west = centerX - width / 2
+        val south = centerY - height / 2
         return MapView(west, south, width, height, xs, ys)
     }
 
