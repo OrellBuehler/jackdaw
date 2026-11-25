@@ -1345,7 +1345,7 @@
         "The Drava"
       ],
       "hint": "A river in Europe.",
-      "explanation": "It rises near Innichen in the Italian Alps and ends where it joins the Danube near Osijek. It flows through Italy, Austria, Slovenia and Croatia and is about 720 km long.",
+      "explanation": "It rises near Innichen in the Italian Alps and ends where it joins the Danube near Osijek. It flows through Italy, Austria, Slovenia and Croatia and along the border of Croatia and Hungary and is about 720 km long.",
       "map": {
         "alt": "A map of Europe with a line from the source of a river to its mouth.",
         "line": true,
@@ -1718,7 +1718,7 @@
         "Northern Dwina"
       ],
       "hint": "A river in Europe.",
-      "explanation": "It rises at Veliky Ustyug, where the Sukhona and the Vychegda meet and ends in the White Sea. It flows through north-western Russia, through Kotlas and Arkhangelsk and is about 740 km long.",
+      "explanation": "It rises at Veliky Ustyug, where the Sukhona and the Yug meet and ends in the White Sea. It flows through north-western Russia, through Kotlas and Arkhangelsk and is about 740 km long.",
       "map": {
         "alt": "A map of Europe with a line from the source of a river to its mouth.",
         "line": true,
@@ -1729,8 +1729,8 @@
             "label": "Source"
           },
           {
-            "lat": 64.55,
-            "lng": 40.5,
+            "lat": 64.8,
+            "lng": 40.4,
             "label": "Mouth"
           }
         ]
@@ -1745,8 +1745,8 @@
             "label": "Source"
           },
           {
-            "lat": 64.55,
-            "lng": 40.5,
+            "lat": 64.8,
+            "lng": 40.4,
             "label": "Mouth"
           }
         ]
@@ -2514,7 +2514,7 @@
         "Dicle"
       ],
       "hint": "A river in South and West Asia.",
-      "explanation": "It rises at Lake Hazar in eastern Turkey and ends where it meets the Euphrates to form the Shatt al-Arab. It flows through Turkey, Syria and Iraq, through Diyarbakır, Mosul and Baghdad and is about 1,750 km long.",
+      "explanation": "It rises at Lake Hazar in eastern Turkey and ends where it meets the Euphrates to form the Shatt al-Arab. It flows through Turkey, Syria and Iraq, through Diyarbakır, Mosul and Baghdad and is about 1,750 to 1,900 km long, depending on the source.",
       "map": {
         "alt": "A map of South and West Asia with a line from the source of a river to its mouth.",
         "line": true,
@@ -2609,7 +2609,7 @@
         "Nile River"
       ],
       "hint": "A river in Africa.",
-      "explanation": "It rises in the highlands of Rwanda, whose water reaches Lake Victoria and ends in the Mediterranean Sea in the Nile Delta. It flows through Uganda, South Sudan, Sudan and Egypt, through Khartoum and Cairo and is about 6,650 km long.",
+      "explanation": "It rises in the highlands of Rwanda, whose water reaches Lake Victoria and ends in the Mediterranean Sea in the Nile Delta. It flows through Uganda, South Sudan, Sudan and Egypt, through Khartoum and Cairo and is about 6,650 km long (newer measurements give up to about 7,000 km).",
       "map": {
         "alt": "A map of Africa with a line from the source of a river to its mouth.",
         "line": true,
@@ -2702,7 +2702,7 @@
         "The Niger"
       ],
       "hint": "A river in Africa.",
-      "explanation": "It rises in the Guinea Highlands only 250 km from the Atlantic coast and ends in the Gulf of Guinea in the Niger Delta. It flows through Guinea, Mali, Niger and Nigeria, through Bamako and Niamey and is about 4,180 km long.",
+      "explanation": "It rises in the Guinea Highlands only 240 km from the Atlantic coast and ends in the Gulf of Guinea in the Niger Delta. It flows through Guinea, Mali, Niger and Nigeria, along the border of Benin, through Bamako and Niamey and is about 4,180 km long.",
       "map": {
         "alt": "A map of Africa with a line from the source of a river to its mouth.",
         "line": true,
@@ -2749,7 +2749,7 @@
         "The Zambezi"
       ],
       "hint": "A river in Africa.",
-      "explanation": "It rises at Kalene Hill in north-western Zambia and ends in the Indian Ocean in Mozambique. It flows through Zambia, Angola, Botswana, Zimbabwe and Mozambique, over the Victoria Falls and is about 2,570 km long.",
+      "explanation": "It rises at Kalene Hill in north-western Zambia and ends in the Indian Ocean in Mozambique. It flows through Zambia, Angola, Namibia, Botswana, Zimbabwe and Mozambique, over the Victoria Falls and is about 2,570 km long.",
       "map": {
         "alt": "A map of Africa with a line from the source of a river to its mouth.",
         "line": true,
@@ -2797,7 +2797,7 @@
         "The Orange"
       ],
       "hint": "A river in Africa.",
-      "explanation": "It rises in the Drakensberg Mountains in Lesotho and ends in the Atlantic Ocean at Alexander Bay. It flows through Lesotho, South Africa and Namibia and is about 2,200 km long.",
+      "explanation": "It rises in the Drakensberg Mountains in Lesotho and ends in the Atlantic Ocean at Alexander Bay. It flows through Lesotho, South Africa and Namibia and is about 2,200 km long (sources give 2,100 to 2,430 km).",
       "map": {
         "alt": "A map of Africa with a line from the source of a river to its mouth.",
         "line": true,
@@ -3446,7 +3446,7 @@
         "The Madeira"
       ],
       "hint": "A river in South America.",
-      "explanation": "It rises where the Beni and the Mamoré meet on the Bolivian-Brazilian border and ends where it joins the Amazon east of Manaus. It flows through Bolivia and Brazil, through Porto Velho and is about 3,250 km long.",
+      "explanation": "It rises where the Beni and the Mamoré meet on the Bolivian-Brazilian border and ends where it joins the Amazon east of Manaus. It flows through Bolivia and Brazil, through Porto Velho and is about 1,450 km long, or about 3,250 km with the Mamoré.",
       "map": {
         "alt": "A map of South America with a line from the source of a river to its mouth.",
         "line": true,
@@ -3856,7 +3856,10 @@
       "answers": [
         "Baltic Sea",
         "The Baltic Sea",
-        "Baltic"
+        "Baltic",
+        "Gulf of Gdańsk",
+        "Bay of Gdańsk",
+        "Gdańsk Bay"
       ],
       "explanation": "The Vistula ends in the Gulf of Gdańsk in the Baltic Sea.",
       "answerMap": {
@@ -3920,7 +3923,8 @@
       "question": "Into which sea, gulf or ocean does the Ob flow?",
       "answers": [
         "Kara Sea",
-        "The Kara Sea"
+        "The Kara Sea",
+        "Gulf of Ob"
       ],
       "explanation": "The Ob ends in the Gulf of Ob and the Kara Sea.",
       "answerMap": {
@@ -3941,7 +3945,9 @@
       "question": "Into which sea, gulf or ocean does the Yenisei flow?",
       "answers": [
         "Kara Sea",
-        "The Kara Sea"
+        "The Kara Sea",
+        "Yenisei Gulf",
+        "Gulf of Yenisei"
       ],
       "explanation": "The Yenisei ends in the Yenisei Gulf and the Kara Sea.",
       "answerMap": {

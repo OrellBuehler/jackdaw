@@ -4,7 +4,7 @@
   "version": 3,
   "id": "com.github.orellbuehler.jackdaw.examples.history-on-the-map",
   "title": "History on the Map",
-  "description": "124 turning points of world history, from the Battle of Marathon to the 2008 Sichuan earthquake. You see a pin on the world map and a year and name the event; after the answer the map shows the place. Mostly multiple choice, with typed answers for the shorter names, and a last chapter of 31 questions that asks where it happened.",
+  "description": "124 turning points of world history, from the Minoan eruption of Thera to the 2008 Sichuan earthquake. You see a pin on the world map and a year and name the event; after the answer the map shows the place. Mostly multiple choice, with typed answers for the shorter names, and a last chapter of 31 questions that asks where it happened.",
   "language": "en",
   "author": "Jackdaw project",
   "license": "CC0-1.0",
@@ -99,7 +99,7 @@
         "Great Fire of London"
       ],
       "hint": "A volcanic eruption.",
-      "explanation": "One of the largest volcanic eruptions in human history blew apart the island of Thera, today Santorini in the Aegean Sea, and buried a Bronze Age town at Akrotiri.",
+      "explanation": "One of the largest volcanic eruptions in human history blew apart the island of Thera, today Santorini in the Aegean Sea, and buried a Bronze Age town at Akrotiri; its exact date is still debated.",
       "map": {
         "alt": "A world map with a pin in south-eastern Europe.",
         "pins": [
@@ -292,23 +292,23 @@
         "Battle of Salamis"
       ],
       "hint": "A battle.",
-      "explanation": "Alexander the Great defeated the Persian king Darius III on a plain in what is now northern Iraq, which sealed the fall of the Achaemenid Empire.",
+      "explanation": "Alexander the Great defeated the Persian king Darius III on a plain in what is now northern Iraq, probably near Tel Gomel (the exact site is uncertain), which sealed the fall of the Achaemenid Empire.",
       "map": {
         "alt": "A world map with a pin in the Middle East.",
         "pins": [
           {
-            "lat": 36.36,
-            "lng": 43.25
+            "lat": 36.56,
+            "lng": 43.44
           }
         ]
       },
       "answerMap": {
-        "alt": "A world map with a pin labelled Gaugamela.",
+        "alt": "A world map with a pin labelled Gaugamela (probable site).",
         "pins": [
           {
-            "lat": 36.36,
-            "lng": 43.25,
-            "label": "Gaugamela"
+            "lat": 36.56,
+            "lng": 43.44,
+            "label": "Gaugamela (probable site)"
           }
         ]
       }
@@ -409,7 +409,7 @@
         "Assassination of Archduke Franz Ferdinand"
       ],
       "hint": "A political assassination.",
-      "explanation": "A group of senators stabbed Julius Caesar to death on the Ides of March in a hall beside the Theatre of Pompey in Rome.",
+      "explanation": "A group of senators stabbed Julius Caesar to death on the Ides of March in the Curia of Pompey, a hall that was part of the Theatre of Pompey complex in Rome.",
       "map": {
         "alt": "A world map with a pin in Italy.",
         "pins": [
@@ -488,7 +488,7 @@
         "Siege of Jerusalem (70 CE)"
       ],
       "hint": "An ambush.",
-      "explanation": "Germanic tribes under Arminius ambushed and wiped out three Roman legions led by Varus, which ended Roman expansion east of the Rhine.",
+      "explanation": "Germanic tribes under Arminius ambushed and wiped out three Roman legions led by Varus, which halted Roman expansion east of the Rhine.",
       "map": {
         "alt": "A world map with a pin in central Europe.",
         "pins": [
@@ -597,7 +597,7 @@
       "id": "red-cliffs",
       "type": "card",
       "section": "antiquity",
-      "front": "Which event took place here in **208 CE**?",
+      "front": "Which event took place here in **208-209 CE**?",
       "back": "Battle of Red Cliffs",
       "alternatives": [
         "Red Cliffs",
@@ -610,23 +610,23 @@
         "Battle of the Teutoburg Forest"
       ],
       "hint": "A naval battle.",
-      "explanation": "The warlords Sun Quan and Liu Bei beat the much larger fleet of Cao Cao on the Yangtze river, which kept China divided into three kingdoms.",
+      "explanation": "The warlords Sun Quan and Liu Bei beat the much larger forces of Cao Cao on the Yangtze river, at a site that is still disputed but traditionally placed near Chibi, which kept China divided into three kingdoms.",
       "map": {
         "alt": "A world map with a pin in East Asia.",
         "pins": [
           {
-            "lat": 29.72,
-            "lng": 113.88
+            "lat": 29.87,
+            "lng": 113.62
           }
         ]
       },
       "answerMap": {
-        "alt": "A world map with a pin labelled Red Cliffs (Chibi).",
+        "alt": "A world map with a pin labelled Red Cliffs (probable site).",
         "pins": [
           {
-            "lat": 29.72,
-            "lng": 113.88,
-            "label": "Red Cliffs (Chibi)"
+            "lat": 29.87,
+            "lng": 113.62,
+            "label": "Red Cliffs (probable site)"
           }
         ]
       }
@@ -1021,7 +1021,7 @@
         "Battle of Hattin"
       ],
       "hint": "A siege.",
-      "explanation": "A Mongol army under Hulagu Khan took and sacked Baghdad and killed the last Abbasid caliph in Baghdad, ending the Abbasid caliphate.",
+      "explanation": "A Mongol army under Hulagu Khan took and sacked Baghdad and executed the caliph al-Musta'sim, ending the Abbasid caliphate in its capital.",
       "map": {
         "alt": "A world map with a pin in the Middle East.",
         "pins": [
@@ -1058,7 +1058,7 @@
         "Battle of Las Navas de Tolosa"
       ],
       "hint": "A battle.",
-      "explanation": "The Egyptian Mamluks defeated a Mongol army in the Jezreel Valley, the first major defeat of the Mongols in the Middle East.",
+      "explanation": "The Egyptian Mamluks defeated a Mongol army in the Jezreel Valley, often seen as the first time the Mongol advance was permanently halted.",
       "map": {
         "alt": "A world map with a pin in the Middle East.",
         "pins": [
@@ -1133,7 +1133,7 @@
         "Siege of Orléans"
       ],
       "hint": "A battle.",
-      "explanation": "Grand Prince Dmitry of Moscow defeated a Mongol-Tatar army under Mamai on the upper Don, the first big Russian victory over the Golden Horde.",
+      "explanation": "Grand Prince Dmitry of Moscow defeated a Mongol-Tatar army under Mamai on the upper Don, traditionally seen as the turning point when Mongol power began to wane and Moscow's began to rise.",
       "map": {
         "alt": "A world map with a pin in eastern Europe.",
         "pins": [
@@ -1250,7 +1250,7 @@
         "Fall of Constantinople"
       ],
       "hint": "A siege.",
-      "explanation": "Joan of Arc led the French relief of Orléans, which the English had besieged since October 1428, and lifted the siege in May 1429.",
+      "explanation": "Inspired by Joan of Arc, French forces relieved Orléans, which the English had besieged since October 1428, and lifted the siege in May 1429.",
       "map": {
         "alt": "A world map with a pin in western Europe.",
         "pins": [
@@ -1288,7 +1288,7 @@
         "Siege of Orléans"
       ],
       "hint": "A siege.",
-      "explanation": "Ottoman forces under Sultan Mehmed II took Constantinople on 29 May after a siege of about seven weeks, ending the Byzantine Empire; the city, now Istanbul, became the Ottoman capital.",
+      "explanation": "Ottoman forces under Sultan Mehmed II took Constantinople on 29 May after a siege of 53 days, ending the Byzantine Empire; the city, now Istanbul, became the Ottoman capital.",
       "map": {
         "alt": "A world map with a pin in Turkey.",
         "pins": [
@@ -1405,7 +1405,7 @@
         "type"
       ],
       "hint": "A siege.",
-      "explanation": "Hernán Cortés and his Spanish and indigenous allies captured the Aztec capital Tenochtitlan after a siege of about three months; Mexico City was later built on its ruins.",
+      "explanation": "Hernán Cortés and his Spanish and indigenous allies captured the Aztec capital Tenochtitlan after a siege of about eleven weeks; Mexico City was later built on its ruins.",
       "map": {
         "alt": "A world map with a pin in Mexico.",
         "pins": [
@@ -1555,7 +1555,7 @@
         "1815 eruption of Mount Tambora"
       ],
       "hint": "An earthquake.",
-      "explanation": "The deadliest earthquake on record struck the Wei river valley in Shaanxi province on 23 January and killed an estimated 830,000 people, many of them in cave dwellings dug into the loess.",
+      "explanation": "The earthquake traditionally ranked as the deadliest on record struck the Wei river valley in Shaanxi province on 23 January (Julian calendar) and is said to have killed about 830,000 people, many of them in cave dwellings dug into the loess.",
       "map": {
         "alt": "A world map with a pin in East Asia.",
         "pins": [
@@ -2002,7 +2002,7 @@
         "type"
       ],
       "hint": "A battle.",
-      "explanation": "Robert Clive's East India Company troops defeated the Nawab of Bengal, helped by the betrayal of his commander Mir Jafar, and began British rule in India.",
+      "explanation": "Robert Clive's East India Company troops defeated the Nawab of Bengal, helped by the betrayal of his commander Mir Jafar, and gave the Company control of Bengal, the first step to British rule in India.",
       "map": {
         "alt": "A world map with a pin in South Asia.",
         "pins": [
@@ -2524,7 +2524,7 @@
         "Armistice of Compiègne"
       ],
       "hint": "A treaty.",
-      "explanation": "Under the guns of Commodore Perry's US Navy squadron, Japan signed a treaty near today's Yokohama that opened the ports of Shimoda and Hakodate and ended more than two centuries of near-total isolation.",
+      "explanation": "Under the guns of Commodore Perry's US Navy squadron, Japan signed a treaty at today's Yokohama that opened the ports of Shimoda and Hakodate and ended more than two centuries of near-total isolation.",
       "map": {
         "alt": "A world map with a pin in East Asia.",
         "pins": [
@@ -3062,7 +3062,7 @@
         "type"
       ],
       "hint": "A shipwreck.",
-      "explanation": "The liner Titanic struck an iceberg on her maiden voyage from Southampton to New York and sank in the North Atlantic with the loss of more than 1,500 lives.",
+      "explanation": "The liner Titanic struck an iceberg on her maiden voyage from Southampton to New York and sank in the North Atlantic with the loss of about 1,500 lives.",
       "map": {
         "alt": "A world map with a pin in the North Atlantic.",
         "pins": [
@@ -3269,7 +3269,7 @@
         "type"
       ],
       "hint": "A naval battle.",
-      "explanation": "The British Grand Fleet and the German High Seas Fleet clashed in the North Sea off Denmark in the largest naval battle of the First World War, after which the German fleet never again challenged British control of the seas.",
+      "explanation": "The British Grand Fleet and the German High Seas Fleet clashed in the North Sea off Denmark in the largest naval battle of the First World War, after which the German fleet avoided another major fleet battle.",
       "map": {
         "alt": "A world map with a pin in northern Europe.",
         "pins": [
@@ -3908,7 +3908,7 @@
       "id": "el-alamein",
       "type": "card",
       "section": "ww2",
-      "front": "Which event took place here in **1942**?",
+      "front": "Which event took place here in **October-November 1942**?",
       "back": "Second Battle of El Alamein",
       "alternatives": [
         "El Alamein",
@@ -4114,7 +4114,7 @@
         "Molotov–Ribbentrop Pact"
       ],
       "hint": "A summit.",
-      "explanation": "Truman, Stalin and Churchill, later Attlee, met at Cecilienhof Palace near Berlin to settle the postwar order in Europe, and issued the Potsdam Declaration calling on Japan to surrender.",
+      "explanation": "Truman, Stalin and Churchill, later Attlee, met at Cecilienhof Palace near Berlin to settle the postwar order in Europe, and during the conference the United States, Britain and China issued the Potsdam Declaration calling on Japan to surrender.",
       "map": {
         "alt": "A world map with a pin in central Europe.",
         "pins": [
@@ -4366,7 +4366,7 @@
         "type"
       ],
       "hint": "A battle.",
-      "explanation": "Viet Minh forces under Võ Nguyên Giáp besieged and overran the French garrison in a remote valley in north-western Vietnam, which ended French colonial rule in Indochina.",
+      "explanation": "Viet Minh forces under Võ Nguyên Giáp besieged and overran the French garrison in a remote valley in north-western Vietnam, which led to the end of French colonial rule in Indochina.",
       "map": {
         "alt": "A world map with a pin in South-East Asia.",
         "pins": [
@@ -4407,7 +4407,7 @@
         "type"
       ],
       "hint": "A massacre.",
-      "explanation": "South African police opened fire on a crowd protesting against the apartheid pass laws in the township of Sharpeville and killed 69 people.",
+      "explanation": "South African police opened fire on a crowd protesting against the apartheid pass laws in the township of Sharpeville and killed at least 69 people.",
       "map": {
         "alt": "A world map with a pin in southern Africa.",
         "pins": [
@@ -4692,7 +4692,7 @@
         "type"
       ],
       "hint": "A rescue raid.",
-      "explanation": "Israeli commandos flew some 4,000 kilometres to Entebbe airport in Uganda and freed hostages of a hijacked Air France plane in a raid of about 90 minutes.",
+      "explanation": "Israeli commandos flew some 4,000 kilometres to Entebbe airport in Uganda and freed hostages of a hijacked Air France plane in a raid that took less than an hour.",
       "map": {
         "alt": "A world map with a pin in East Africa.",
         "pins": [
@@ -4816,7 +4816,7 @@
         "type"
       ],
       "hint": "A volcanic eruption.",
-      "explanation": "On 18 May the volcano in Washington state erupted after a huge landslide, killing 57 people in the deadliest and most destructive volcanic event in US history.",
+      "explanation": "On 18 May the volcano in Washington state erupted after a huge landslide, killing 57 people in the deadliest and most destructive volcanic eruption in the history of the contiguous United States.",
       "map": {
         "alt": "A world map with a pin in the United States.",
         "pins": [
@@ -5114,7 +5114,7 @@
         "Moscow",
         "Moskva"
       ],
-      "explanation": "Ribbentrop flew to Moscow, where the pact was signed in the Kremlin on the night of 23 August.",
+      "explanation": "Ribbentrop flew to Moscow, where the pact, dated 23 August, was signed in the Kremlin in the early hours of 24 August.",
       "answerMap": {
         "alt": "A world map with a pin at Moscow.",
         "pins": [
@@ -5471,7 +5471,7 @@
       "answers": [
         "New Mexico"
       ],
-      "explanation": "The test site lies in the desert about 100 kilometres north-west of Alamogordo, New Mexico.",
+      "explanation": "The test site lies in the desert about 56 kilometres south-east of Socorro, New Mexico.",
       "answerMap": {
         "alt": "A world map with a pin at Trinity site.",
         "pins": [
@@ -5532,7 +5532,7 @@
       "answers": [
         "Khartoum"
       ],
-      "explanation": "Omdurman is today part of the Khartoum metropolitan area in Sudan, at the junction of the Blue and White Nile.",
+      "explanation": "Omdurman is today part of the Khartoum metropolitan area in Sudan, on the west bank of the Nile opposite Khartoum.",
       "answerMap": {
         "alt": "A world map with a pin at Omdurman.",
         "pins": [
