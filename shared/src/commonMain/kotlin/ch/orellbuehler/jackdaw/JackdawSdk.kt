@@ -14,6 +14,7 @@ import ch.orellbuehler.jackdaw.format.PackUrl
 import ch.orellbuehler.jackdaw.format.ReadResult
 import ch.orellbuehler.jackdaw.format.Study
 import ch.orellbuehler.jackdaw.samples.Catalog
+import ch.orellbuehler.jackdaw.samples.DemoLibrary
 import ch.orellbuehler.jackdaw.samples.Samples
 import ch.orellbuehler.jackdaw.store.AppSettings
 import ch.orellbuehler.jackdaw.store.CombinePreview
@@ -290,6 +291,14 @@ class JackdawSdk internal constructor(
                 )
         return withContext(dispatcher) { install(sample.json, allowDowngrade = true) }
     }
+
+    suspend fun seedDemoLibrary(): Boolean =
+        withContext(dispatcher) {
+            val seeded = DemoLibrary(database, env, packStore).seed { install(it, allowDowngrade = true) }
+            if (seeded) settingsStore.setOnboardingSeen(true)
+            env.changed()
+            seeded
+        }
 
     suspend fun previewSession(
         packId: String,

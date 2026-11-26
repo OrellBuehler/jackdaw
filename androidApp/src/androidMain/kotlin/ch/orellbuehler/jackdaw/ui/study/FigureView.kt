@@ -2,6 +2,7 @@ package ch.orellbuehler.jackdaw.ui.study
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -146,6 +147,7 @@ private fun FigureDialog(
 
 private fun zoomableWebView(context: android.content.Context): WebView =
     WebView(context).apply {
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         setBackgroundColor(Color.TRANSPARENT)
         settings.javaScriptEnabled = false
         settings.blockNetworkLoads = true
@@ -168,6 +170,7 @@ private fun zoomableWebView(context: android.content.Context): WebView =
 @SuppressLint("ClickableViewAccessibility")
 private fun passiveWebView(context: android.content.Context): WebView =
     WebView(context).apply {
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         setBackgroundColor(Color.TRANSPARENT)
         settings.javaScriptEnabled = false
         settings.blockNetworkLoads = true

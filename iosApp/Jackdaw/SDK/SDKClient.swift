@@ -274,6 +274,12 @@ final class SDKClient: @unchecked Sendable {
         } catch {}
     }
 
+    func seedDemoLibrary() async {
+        do {
+            _ = try await sdk.seedDemoLibrary()
+        } catch {}
+    }
+
     func setOnboardingSeen(_ seen: Bool) async {
         do {
             try await sdk.setOnboardingSeen(seen: seen)
