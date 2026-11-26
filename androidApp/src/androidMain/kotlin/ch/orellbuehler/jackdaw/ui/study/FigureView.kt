@@ -2,6 +2,7 @@ package ch.orellbuehler.jackdaw.ui.study
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -41,6 +42,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import ch.orellbuehler.jackdaw.R
+import ch.orellbuehler.jackdaw.StoreScreenshots
 import ch.orellbuehler.jackdaw.format.Figure
 import ch.orellbuehler.jackdaw.ui.theme.cardSurface
 
@@ -178,6 +180,7 @@ private fun passiveWebView(context: android.content.Context): WebView =
         isFocusable = false
         isLongClickable = false
         importantForAccessibility = WebView.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        if (StoreScreenshots.active) setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         webViewClient =
             object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(

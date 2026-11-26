@@ -18,6 +18,9 @@ object StoreScreenshots {
     const val EXTRA_FILTER = "store_screenshot_filter"
     private const val PACK_PREFIX = "com.github.orellbuehler.jackdaw.examples."
 
+    var active = false
+        private set
+
     fun prepare(
         activity: Activity,
         intent: Intent,
@@ -25,6 +28,7 @@ object StoreScreenshots {
         val debuggable = activity.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         val screen = intent.getStringExtra(EXTRA_SCREEN)
         if (!debuggable || screen == null) return null
+        active = true
         runBlocking { (activity.application as JackdawApplication).sdk.seedDemoLibrary() }
         val packId = PACK_PREFIX + intent.getStringExtra(EXTRA_PACK).orEmpty()
         return when (screen) {

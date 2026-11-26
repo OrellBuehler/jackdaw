@@ -175,5 +175,4 @@ for locale in en de; do
   shoot "$locale" stats-dark "$activity" stats || failed=1
 done
 
-adb logcat -d >"$OUT_DIR/logcat.txt" || true
 exit "$failed"
