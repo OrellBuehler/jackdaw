@@ -46,6 +46,8 @@ prepare_device() {
   adb shell settings put global window_animation_scale 0
   adb shell settings put global transition_animation_scale 0
   adb shell settings put global animator_duration_scale 0
+  # A slow emulator reports "Pixel Launcher isn't responding" on top of the app.
+  adb shell settings put global hide_error_dialogs 1
   # Offline, so the pack list on the add screen is the bundled one on every run.
   adb shell svc wifi disable || true
   adb shell svc data disable || true
@@ -67,6 +69,7 @@ prepare_device() {
 
 restore_device() {
   demo_cmd exit || true
+  adb shell settings put global hide_error_dialogs 0 || true
   adb shell svc wifi enable || true
   adb shell cmd uimode night no || true
   adb shell wm size reset || true
@@ -95,8 +98,11 @@ dump_ui() {
 wait_for_text() {
   local timeout="$1" text="$2" waited=0 ui
   while [ "$waited" -lt "$timeout" ]; do
-    if ui="$(dump_ui)" && grep -qF "$text" <<<"$ui"; then
-      return 0
+    if ui="$(dump_ui)"; then
+      if grep -qF "$text" <<<"$ui"; then return 0; fi
+      if grep -qF "responding" <<<"$ui"; then
+        adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS >/dev/null || true
+      fi
     fi
     sleep 1
     waited=$((waited + 1))
