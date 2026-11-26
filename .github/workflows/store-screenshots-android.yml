@@ -78,7 +78,7 @@ jobs:
           profile: pixel_2
           emulator-boot-timeout: 600
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -noaudio -no-boot-anim
+          emulator-options: -no-window -gpu guest -no-snapshot-save -noaudio -no-boot-anim
           script: |
             adb install -r -t androidApp/build/outputs/apk/debug/androidApp-debug.apk
             ./scripts/android/store-screenshots.sh ${{ runner.temp }}/store-screenshots
