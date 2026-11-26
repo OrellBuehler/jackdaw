@@ -80,7 +80,7 @@ fun FlipView(
                     content = MaterialTheme.colorScheme.onSurface,
                     border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 ) {
-                    PromptText(exercise.prompt, textAlign = TextAlign.Center)
+                    PromptText(exercise.prompt, textAlign = TextAlign.Center, large = true)
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         Icon(Icons.Rounded.TouchApp, null, Modifier.size(18.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                         Text(
@@ -98,7 +98,7 @@ fun FlipView(
                         content = palette.onAccent,
                         border = null,
                     ) {
-                        if (feedback != null) PromptText(feedback.correctAnswer, textAlign = TextAlign.Center)
+                        if (feedback != null) PromptText(feedback.correctAnswer, textAlign = TextAlign.Center, large = true)
                     }
                 }
             }

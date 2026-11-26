@@ -86,7 +86,7 @@ fun TypeView(
             modifier = Modifier.fillMaxWidth().focusRequester(focus),
             readOnly = feedback != null,
             singleLine = true,
-            textStyle = MaterialTheme.typography.titleLarge,
+            textStyle = StudyTextStyle,
             label = { Text(stringResource(R.string.type_hint)) },
             shape = MaterialTheme.shapes.large,
             keyboardOptions =
@@ -117,7 +117,7 @@ fun TypeView(
                         style = MaterialTheme.typography.labelLarge,
                         color = scheme.onSurfaceVariant,
                     )
-                    RichTextView(feedback.correctAnswer, style = MaterialTheme.typography.titleLarge, color = success.success)
+                    RichTextView(feedback.correctAnswer, style = StudyTextStyle, color = success.success)
                 }
             }
             ExplanationCard(feedback.explanation)

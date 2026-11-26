@@ -133,7 +133,7 @@ fun FinishedScreen(
                         scheme.onSecondaryContainer,
                         stringResource(R.string.finish_learned),
                     ) {
-                        Text("${summary.newFacets}", style = MaterialTheme.typography.displaySmall)
+                        Text("${summary.newFacets}", style = MaterialTheme.typography.headlineSmall)
                     }
                 }
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {

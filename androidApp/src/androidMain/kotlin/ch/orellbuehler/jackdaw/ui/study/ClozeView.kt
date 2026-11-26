@@ -134,7 +134,7 @@ fun ClozeView(
     LaunchedEffect(feedback == null) {
         if (feedback == null) runCatching { first.requestFocus() } else keyboard?.hide()
     }
-    val style = MaterialTheme.typography.titleLarge
+    val style = StudyTextStyle
     val scheme = MaterialTheme.colorScheme
     val success = MaterialTheme.jackdaw
     val results = feedback?.gapResults.orEmpty().associateBy { it.index }
