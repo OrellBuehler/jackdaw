@@ -31,9 +31,16 @@ internal object MapFigure {
     private const val LABEL_GAP = 14.0
     private const val LABEL_MARGIN = 14.0
     private const val MAX_LABEL = 30
+    private const val LINE_CLEARANCE = 14.0
+    private const val PIN_CLEARANCE = 25.0
+    private const val LABEL_CLEARANCE = 6.0
+    private const val ARROW_REACH = 36.0
+    private const val ARROW_MIN_LENGTH = 200.0
+    private const val COLLISION = 10_000.0
     private const val CLIP_MARGIN = 24.0
     private const val MAX_PATH = 150_000
     private const val ACCENT = "#E5484D"
+    private val RINGS = doubleArrayOf(1.0, 2.2, 3.6)
     private val SIMPLIFY = doubleArrayOf(2.0, 4.0, 8.0, 16.0)
 
     fun mercatorY(lat: Double): Double {
@@ -100,10 +107,19 @@ internal object MapFigure {
                     "stroke-linejoin='round' fill-rule='evenodd' d='$land'/>",
             )
         }
-        if (spec.line && spec.pins.size > 1) appendLine(svg, px, py)
-        val obstacles = ArrayList<DoubleArray>()
+        val lined = spec.line && spec.pins.size > 1
+        val segments = ArrayList<DoubleArray>()
+        val boxes = ArrayList<DoubleArray>()
+        if (lined) {
+            for (i in 0 until px.size - 1) segments += doubleArrayOf(px[i], py[i], px[i + 1], py[i + 1])
+            for (arrow in arrows(px, py)) {
+                boxes += doubleArrayOf(arrow[0] - ARROW_REACH, arrow[1] - ARROW_REACH, arrow[0] + ARROW_REACH, arrow[1] + ARROW_REACH)
+            }
+            appendLine(svg, px, py)
+        }
+        val circles = ArrayList<DoubleArray>()
         for (i in px.indices) {
-            obstacles += doubleArrayOf(px[i] - PIN_RADIUS, py[i] - PIN_RADIUS, px[i] + PIN_RADIUS, py[i] + PIN_RADIUS)
+            circles += doubleArrayOf(px[i], py[i], PIN_CLEARANCE)
             svg.append(
                 "<circle cx='${round(
                     px[i],
@@ -113,15 +129,30 @@ internal object MapFigure {
         for (i in px.indices) {
             val label = spec.pins[i].label?.let { displayLabel(it) } ?: continue
             val width = label.length * FONT_SIZE * 0.6
-            val place = placeLabel(px[i], py[i], width, WIDTH.toDouble(), height.toDouble(), obstacles)
-            obstacles += place.rect
+            val place = placeLabel(px[i], py[i], width, WIDTH.toDouble(), height.toDouble(), boxes, circles, segments)
+            boxes += place.rect
             svg.append(
                 "<text x='${round(place.x)}' y='${round(place.baseline)}' text-anchor='start' font-family='sans-serif' " +
                     "font-size='${FONT_SIZE.toInt()}' font-weight='600' fill='currentColor'>${escape(label)}</text>",
             )
         }
         svg.append("</svg>")
-        return Figure(svg.toString(), spec.alt, WIDTH.toDouble() / height)
+        return Figure(svg.toString(), spec.alt, WIDTH.toDouble() / height, isMap = true)
+    }
+
+    private fun arrows(
+        px: DoubleArray,
+        py: DoubleArray,
+    ): List<DoubleArray> {
+        val result = ArrayList<DoubleArray>()
+        for (i in 0 until px.size - 1) {
+            val dx = px[i + 1] - px[i]
+            val dy = py[i + 1] - py[i]
+            val length = sqrt(dx * dx + dy * dy)
+            if (length < ARROW_MIN_LENGTH) continue
+            result += doubleArrayOf((px[i] + px[i + 1]) / 2, (py[i] + py[i + 1]) / 2, dx / length, dy / length)
+        }
+        return result
     }
 
     private fun appendLine(
@@ -133,15 +164,11 @@ internal object MapFigure {
         svg.append(
             "<polyline points='$points' fill='none' stroke='$ACCENT' stroke-opacity='.85' stroke-width='9' stroke-linejoin='round' stroke-linecap='round'/>",
         )
-        for (i in 0 until px.size - 1) {
-            val dx = px[i + 1] - px[i]
-            val dy = py[i + 1] - py[i]
-            val length = sqrt(dx * dx + dy * dy)
-            if (length < 200.0) continue
-            val ux = dx / length
-            val uy = dy / length
-            val mx = (px[i] + px[i + 1]) / 2
-            val my = (py[i] + py[i + 1]) / 2
+        for (arrow in arrows(px, py)) {
+            val mx = arrow[0]
+            val my = arrow[1]
+            val ux = arrow[2]
+            val uy = arrow[3]
             val tip = "${round(mx + ux * 34)} ${round(my + uy * 34)}"
             val left = "${round(mx - ux * 22 - uy * 26)} ${round(my - uy * 22 + ux * 26)}"
             val right = "${round(mx - ux * 22 + uy * 26)} ${round(my - uy * 22 - ux * 26)}"
@@ -161,37 +188,93 @@ internal object MapFigure {
         width: Double,
         viewWidth: Double,
         viewHeight: Double,
-        obstacles: List<DoubleArray>,
+        boxes: List<DoubleArray>,
+        circles: List<DoubleArray> = emptyList(),
+        segments: List<DoubleArray> = emptyList(),
     ): Place {
         val half = FONT_SIZE / 2
         val reach = PIN_RADIUS + LABEL_GAP
-        val candidates = ArrayList<Place>(6)
-
-        fun candidate(
-            x: Double,
-            centerY: Double,
-        ) = Place(x, centerY + FONT_SIZE * 0.35, doubleArrayOf(x, centerY - half, x + width, centerY + half))
-        candidates += candidate(pinX + reach, pinY)
-        candidates += candidate(pinX - reach - width, pinY)
-        val centered = (pinX - width / 2).coerceIn(LABEL_MARGIN, max(LABEL_MARGIN, viewWidth - LABEL_MARGIN - width))
-        candidates += candidate(centered, pinY - reach - half)
-        candidates += candidate(centered, pinY + reach + half)
-        var fallback: Place? = null
-        for (place in candidates) {
-            val r = place.rect
-            val inside =
-                r[0] >= LABEL_MARGIN && r[2] <= viewWidth - LABEL_MARGIN && r[1] >= LABEL_MARGIN && r[3] <= viewHeight - LABEL_MARGIN
-            if (!inside) continue
-            if (fallback == null) fallback = place
-            if (obstacles.none { overlaps(it, r) }) return place
+        val offsets = ArrayList<DoubleArray>(24)
+        for (ring in RINGS) {
+            val side = reach * ring
+            val diagonal = side * 0.7
+            offsets += doubleArrayOf(side, 0.0)
+            offsets += doubleArrayOf(-side - width, 0.0)
+            offsets += doubleArrayOf(-width / 2, -side - half)
+            offsets += doubleArrayOf(-width / 2, side + half)
+            offsets += doubleArrayOf(diagonal, -diagonal - half)
+            offsets += doubleArrayOf(-diagonal - width, -diagonal - half)
+            offsets += doubleArrayOf(diagonal, diagonal + half)
+            offsets += doubleArrayOf(-diagonal - width, diagonal + half)
         }
-        return fallback ?: candidates[2]
+        val own = doubleArrayOf(pinX, pinY, PIN_CLEARANCE)
+        val minX = LABEL_MARGIN
+        val maxX = max(LABEL_MARGIN, viewWidth - LABEL_MARGIN - width)
+        val minY = LABEL_MARGIN + half
+        val maxY = max(minY, viewHeight - LABEL_MARGIN - half)
+        var best: Place? = null
+        var bestCost = 0.0
+        for (index in offsets.indices) {
+            val x = (pinX + offsets[index][0]).coerceIn(minX, maxX)
+            val centerY = (pinY + offsets[index][1]).coerceIn(minY, maxY)
+            val rect = doubleArrayOf(x, centerY - half, x + width, centerY + half)
+            val moved = abs(x - (pinX + offsets[index][0])) + abs(centerY - (pinY + offsets[index][1]))
+            var cost = index * 2.0 + moved * 0.5 + circleCost(own, rect)
+            for (circle in circles) cost += circleCost(circle, rect)
+            for (box in boxes) cost += boxCost(box, rect)
+            for (segment in segments) cost += segmentCost(segment, rect)
+            if (best == null || cost < bestCost) {
+                best = Place(x, centerY + FONT_SIZE * 0.35, rect)
+                bestCost = cost
+            }
+        }
+        return best!!
     }
 
-    private fun overlaps(
-        a: DoubleArray,
-        b: DoubleArray,
-    ): Boolean = a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3]
+    private fun boxCost(
+        box: DoubleArray,
+        rect: DoubleArray,
+    ): Double {
+        val w = min(box[2], rect[2] + LABEL_CLEARANCE) - max(box[0], rect[0] - LABEL_CLEARANCE)
+        val h = min(box[3], rect[3] + LABEL_CLEARANCE) - max(box[1], rect[1] - LABEL_CLEARANCE)
+        return if (w > 0 && h > 0) COLLISION + w * h / 50 else 0.0
+    }
+
+    private fun circleCost(
+        circle: DoubleArray,
+        rect: DoubleArray,
+    ): Double {
+        val dx = circle[0] - circle[0].coerceIn(rect[0], rect[2])
+        val dy = circle[1] - circle[1].coerceIn(rect[1], rect[3])
+        val depth = circle[2] + LABEL_CLEARANCE - sqrt(dx * dx + dy * dy)
+        return if (depth > 0) COLLISION + depth * 20 else 0.0
+    }
+
+    private fun segmentCost(
+        segment: DoubleArray,
+        rect: DoubleArray,
+    ): Double {
+        val left = rect[0] - LINE_CLEARANCE
+        val top = rect[1] - LINE_CLEARANCE
+        val right = rect[2] + LINE_CLEARANCE
+        val bottom = rect[3] + LINE_CLEARANCE
+        val dx = segment[2] - segment[0]
+        val dy = segment[3] - segment[1]
+        var enter = 0.0
+        var leave = 1.0
+        val p = doubleArrayOf(-dx, dx, -dy, dy)
+        val q = doubleArrayOf(segment[0] - left, right - segment[0], segment[1] - top, bottom - segment[1])
+        for (i in 0 until 4) {
+            if (p[i] == 0.0) {
+                if (q[i] < 0) return 0.0
+            } else {
+                val t = q[i] / p[i]
+                if (p[i] < 0) enter = max(enter, t) else leave = min(leave, t)
+            }
+        }
+        if (enter >= leave) return 0.0
+        return COLLISION + (leave - enter) * sqrt(dx * dx + dy * dy)
+    }
 
     fun displayLabel(label: String): String {
         val clean = StringBuilder()

@@ -308,6 +308,9 @@
 "study.order.hint" = "Drag the handle to bring the entries into the right order.";
 "study.order.up" = "Move up";
 "study.figure" = "Figure";
+"study.figure.open" = "Open figure";
+"study.map" = "Map";
+"study.map.open" = "Open map";
 "study.retry" = "Second try";
 "study.reveal" = "Show answer";
 "study.tf.false" = "False";

@@ -97,7 +97,7 @@ enum Mapping {
     }
 
     static func figure(_ f: Figure) -> FigureInfo {
-        FigureInfo(html: f.html(textColor: nil), alt: f.alt, aspectRatio: f.aspectRatio)
+        FigureInfo(html: f.html(textColor: nil), alt: f.alt, aspectRatio: f.aspectRatio, isMap: f.isMap)
     }
 
     static func settings(_ s: AppSettings) -> SettingsInfo {

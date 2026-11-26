@@ -311,6 +311,151 @@ class MapFigureTest {
         }
     }
 
+    private class Drawn(
+        val pins: List<Pair<Double, Double>>,
+        val line: List<Pair<Double, Double>>,
+        val arrows: List<Pair<Double, Double>>,
+        val labels: List<DoubleArray>,
+        val height: Double,
+    )
+
+    private fun parse(figure: Figure): Drawn {
+        val svg = figure.svg
+        val pins =
+            Regex(
+                "<circle cx='(-?\\d+)' cy='(-?\\d+)'",
+            ).findAll(svg).map { it.groupValues[1].toDouble() to it.groupValues[2].toDouble() }.toList()
+        val line =
+            Regex("<polyline points='([^']*)'")
+                .find(svg)
+                ?.groupValues
+                ?.get(1)
+                ?.split(' ')
+                ?.map { it.split(',').let { xy -> xy[0].toDouble() to xy[1].toDouble() } }
+                .orEmpty()
+        val arrows =
+            Regex("<path d='M(-?\\d+) (-?\\d+) L(-?\\d+) (-?\\d+) L(-?\\d+) (-?\\d+) Z'")
+                .findAll(svg)
+                .map {
+                    val v = it.groupValues.drop(1).map { n -> n.toDouble() }
+                    ((v[0] + v[2] + v[4]) / 3) to ((v[1] + v[3] + v[5]) / 3)
+                }.toList()
+        val labels =
+            Regex("<text x='(-?\\d+)' y='(-?\\d+)'[^>]*>([^<]*)</text>")
+                .findAll(svg)
+                .map {
+                    val x = it.groupValues[1].toDouble()
+                    val baseline = it.groupValues[2].toDouble()
+                    doubleArrayOf(x, baseline - 70 * 0.85, x + it.groupValues[3].length * 70 * 0.6, baseline + 70 * 0.15)
+                }.toList()
+        return Drawn(pins, line, arrows, labels, MapFigure.WIDTH / figure.aspectRatio)
+    }
+
+    private fun touches(
+        r: DoubleArray,
+        x: Double,
+        y: Double,
+        reach: Double,
+    ) = x > r[0] - reach && x < r[2] + reach && y > r[1] - reach && y < r[3] + reach
+
+    private fun assertReadable(figure: Figure) {
+        val drawn = parse(figure)
+        for ((index, r) in drawn.labels.withIndex()) {
+            assertTrue(r[0] >= 0 && r[2] <= MapFigure.WIDTH && r[1] >= 0 && r[3] <= drawn.height, "label $index leaves the picture")
+            for ((px, py) in drawn.pins) {
+                val nearX = px.coerceIn(r[0], r[2])
+                val nearY = py.coerceIn(r[1], r[3])
+                assertTrue((px - nearX) * (px - nearX) + (py - nearY) * (py - nearY) > 25.0 * 25.0, "label $index covers a pin")
+            }
+            for ((ax, ay) in drawn.arrows) assertFalse(touches(r, ax, ay, 30.0), "label $index covers an arrowhead")
+            for (i in 0 until drawn.line.size - 1) {
+                val (x0, y0) = drawn.line[i]
+                val (x1, y1) = drawn.line[i + 1]
+                for (step in 0..400) {
+                    val t = step / 400.0
+                    assertFalse(touches(r, x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, 5.0), "label $index sits on the line")
+                }
+            }
+            for (j in index + 1 until drawn.labels.size) {
+                val o = drawn.labels[j]
+                assertFalse(r[0] < o[2] && o[0] < r[2] && r[1] < o[3] && o[1] < r[3], "labels $index and $j overlap")
+            }
+        }
+    }
+
+    @Test
+    fun theLabelOfTheLinesEndPinStaysOffTheLine() {
+        val ends = spec(pin(33.0, 45.0, "b. c. 1137"), pin(33.2, 35.0, "d. 1193"), line = true)
+        val figure = MapFigure.render(ends)
+        assertEquals(2, parse(figure).labels.size)
+        assertEquals(1, parse(figure).arrows.size)
+        assertReadable(figure)
+        assertReadable(MapFigure.render(spec(pin(33.2, 35.0, "d. 1193"), pin(33.0, 45.0, "b. c. 1137"), line = true)))
+        assertReadable(MapFigure.render(spec(pin(30.0, 35.0, "d. 1193"), pin(36.0, 38.0, "b. c. 1137"), line = true)))
+        assertReadable(MapFigure.render(spec(pin(36.0, 35.0, "d. 1193"), pin(30.0, 38.0, "b. c. 1137"), line = true)))
+    }
+
+    @Test
+    fun labelsAlongALineStayOffIt() {
+        val row = spec(pin(40.0, 0.0, "Alpha"), pin(40.0, 10.0, "Beta"), pin(40.0, 20.0, "Gamma"), line = true)
+        assertEquals(3, parse(MapFigure.render(row)).labels.size)
+        assertReadable(MapFigure.render(row))
+        val steep = spec(pin(30.0, 10.0, "South"), pin(40.0, 10.5, "Middle"), pin(50.0, 11.0, "North"), line = true)
+        assertReadable(MapFigure.render(steep))
+        val zigzag =
+            spec(
+                *Array(10) { pin(40.0 + (it % 2) * 3.0 + it * 0.4, -5.0 + it * 2.5, "Place number $it") },
+                line = true,
+            )
+        assertEquals(10, parse(MapFigure.render(zigzag)).labels.size)
+    }
+
+    @Test
+    fun labelsOfPinsAtThePictureEdgeStayInside() {
+        for ((x, y) in listOf(10.0 to 10.0, 1990.0 to 10.0, 10.0 to 1240.0, 1990.0 to 1240.0, 1000.0 to 5.0, 1000.0 to 1245.0)) {
+            val place = MapFigure.placeLabel(x, y, 420.0, 2000.0, 1250.0, emptyList())
+            val r = place.rect
+            assertTrue(r[0] >= 0 && r[2] <= 2000 && r[1] >= 0 && r[3] <= 1250, "label of $x,$y is outside: ${r.toList()}")
+            val nearX = x.coerceIn(r[0], r[2])
+            val nearY = y.coerceIn(r[1], r[3])
+            assertTrue((x - nearX) * (x - nearX) + (y - nearY) * (y - nearY) > 22.0 * 22.0, "label of $x,$y covers its pin")
+        }
+        val poles = MapFigure.render(spec(pin(90.0, 0.0, "North Pole"), pin(-90.0, 0.0, "South Pole"), line = true))
+        assertReadable(poles)
+        assertReadable(MapFigure.render(spec(pin(-18.14, 178.44, "Suva"), pin(-13.83, -171.76, "Apia"), line = true)))
+    }
+
+    @Test
+    fun aLabelAvoidsTheLineThroughItsPin() {
+        val line = listOf(doubleArrayOf(0.0, 600.0, 1000.0, 600.0))
+        val place = MapFigure.placeLabel(1000.0, 600.0, 300.0, 2000.0, 1250.0, emptyList(), emptyList(), line)
+        assertTrue(place.rect[3] < 600.0 - 14.0 || place.rect[1] > 600.0 + 14.0 || place.rect[0] > 1000.0)
+        val blocked =
+            MapFigure.placeLabel(
+                500.0,
+                600.0,
+                300.0,
+                2000.0,
+                1250.0,
+                emptyList(),
+                listOf(doubleArrayOf(900.0, 600.0, 30.0)),
+                listOf(doubleArrayOf(0.0, 600.0, 500.0, 600.0)),
+            )
+        assertTrue(blocked.rect[0] > 500.0)
+    }
+
+    @Test
+    fun theSameMapIsAlwaysDrawnTheSame() {
+        val map = spec(pin(33.0, 45.0, "b. c. 1137"), pin(33.2, 35.0, "d. 1193"), pin(31.0, 40.0, "Third"), line = true)
+        assertEquals(MapFigure.render(map).svg, MapFigure.render(map).svg)
+    }
+
+    @Test
+    fun mapsAreMarkedAsMaps() {
+        assertTrue(MapFigure.render(spec(paris)).isMap)
+        assertFalse(FigureRules.read("<svg viewBox='0 0 10 10'/>", null)!!.isMap)
+    }
+
     @Test
     fun aLabelNearTheRightEdgeGoesToTheLeftOfItsPin() {
         val place = MapFigure.placeLabel(1950.0, 600.0, 300.0, 2000.0, 1250.0, emptyList())
