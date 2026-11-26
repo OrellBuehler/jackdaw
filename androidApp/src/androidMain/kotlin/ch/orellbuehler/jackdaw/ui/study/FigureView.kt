@@ -109,6 +109,7 @@ private fun PassiveFigure(
         update = { view ->
             if (view.tag != html) {
                 view.tag = html
+                android.util.Log.i("FigureDebug", "load ${html.length} chars: ${html.take(600)}")
                 view.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
             }
         },
@@ -187,5 +188,25 @@ private fun passiveWebView(context: android.content.Context): WebView =
                     view: WebView,
                     request: WebResourceRequest,
                 ): Boolean = true
+
+                override fun onPageStarted(view: WebView, url: String?, favicon: android.graphics.Bitmap?) {
+                    android.util.Log.i("FigureDebug", "started $url ${view.width}x${view.height} attached=${view.isAttachedToWindow} shown=${view.isShown}")
+                }
+
+                override fun onPageFinished(view: WebView, url: String?) {
+                    android.util.Log.i("FigureDebug", "finished $url ${view.width}x${view.height} content=${view.contentHeight} progress=${view.progress} shown=${view.isShown} alpha=${view.alpha}")
+                    view.postDelayed({
+                        android.util.Log.i("FigureDebug", "later ${view.width}x${view.height} content=${view.contentHeight} shown=${view.isShown} layer=${view.layerType} hw=${view.isHardwareAccelerated}")
+                    }, 3000)
+                }
+
+                override fun onReceivedError(view: WebView, request: WebResourceRequest, error: android.webkit.WebResourceError) {
+                    android.util.Log.i("FigureDebug", "error ${request.url} ${error.errorCode} ${error.description}")
+                }
+
+                override fun onRenderProcessGone(view: WebView, detail: android.webkit.RenderProcessGoneDetail): Boolean {
+                    android.util.Log.i("FigureDebug", "render process gone crash=${detail.didCrash()}")
+                    return true
+                }
             }
     }

@@ -47,10 +47,8 @@ prepare_device() {
   adb shell settings put global transition_animation_scale 0
   adb shell settings put global animator_duration_scale 0
   # Offline, so the pack list on the add screen is the bundled one on every run.
-  if [ "${OFFLINE:-1}" = "1" ]; then
-    adb shell svc wifi disable || true
-    adb shell svc data disable || true
-  fi
+  adb shell svc wifi disable || true
+  adb shell svc data disable || true
   adb shell cmd uimode night no
   # A new display size or a night mode switch can rebuild System UI, which drops demo
   # mode, so it is switched on last, after things have settled.
@@ -177,4 +175,5 @@ for locale in en de; do
   shoot "$locale" stats-dark "$activity" stats || failed=1
 done
 
+adb logcat -d -s FigureDebug:V chromium:V >"$OUT_DIR/logcat.txt" || true
 exit "$failed"
