@@ -230,15 +230,19 @@ private fun figureDebugVariants(
     val csp = "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">"
     val simple = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' width='200' height='200'><rect width='10' height='10' fill='#0000ff'/></svg>"
     val green = html.replace("background:transparent", "background:#00ff00")
+    val rule = "body>svg{display:block;width:100%;height:100%}"
     val variants =
         listOf(
-            "simple-fixed" to "<!DOCTYPE html><html><body style=\"margin:0;background:#00ff00\">$simple</body></html>",
-            "div-percent" to "<!DOCTYPE html><html><head><style>html,body{margin:0;height:100%;background:#00ff00}body>div{width:100%;height:100%;background:#0000ff}</style></head><body><div></div></body></html>",
-            "svg-vh" to green.replace("body>svg{display:block;width:100%;height:100%}", "body>svg{display:block;width:100vw;height:100vh}"),
-            "svg-px" to green.replace("body>svg{display:block;width:100%;height:100%}", "body>svg{display:block;width:200px;height:120px}"),
-            "svg-nostyle" to green.replace("body>svg{display:block;width:100%;height:100%}", ""),
-            "svg-noblock" to green.replace("display:block;", ""),
-            "original-green" to green,
+            "plain-selector" to green.replace(rule, "svg{display:block;width:100%;height:100%}"),
+            "spaced-selector" to green.replace(rule, "body > svg{display:block;width:100%;height:100%}"),
+            "descendant-selector" to green.replace(rule, "body svg{display:block;width:100%;height:100%}"),
+            "unrelated-rule" to green.replace(rule, "p{color:red}"),
+            "inline-style" to green.replace(rule, "").replace("<body><svg ", "<body><svg style=\"display:block;width:100%;height:100%\" "),
+            "rule-first" to green.replace(rule, "").replace("<style>", "<style>$rule"),
+            "width-only" to green.replace(rule, "body>svg{width:100%}"),
+            "height-only" to green.replace(rule, "body>svg{height:100%}"),
+            "block-only" to green.replace(rule, "body>svg{display:block}"),
+            "no-html-height" to green.replace("height:100%;background", "background"),
         )
     fun probe(name: String) {
         val bitmap = android.graphics.Bitmap.createBitmap(view.width, view.height, android.graphics.Bitmap.Config.ARGB_8888)
