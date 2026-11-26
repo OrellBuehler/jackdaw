@@ -268,6 +268,18 @@ class MapFigureTest {
     }
 
     @Test
+    fun everyRingOfTheLandPathIsAValidSubpath() {
+        val pella = MapFigure.render(spec(pin(40.7611, 22.5239), pin(32.5363, 44.4209), line = true)).svg
+        assertFalse("lz" in pella)
+        for (lat in -50..70 step 8) {
+            for (lng in -180..170 step 7) {
+                val svg = MapFigure.render(spec(pin(lat + 0.37, lng + 0.61), pin(lat + 9.13, lng + 17.29))).svg
+                assertFalse("lz" in svg, "$lat $lng")
+            }
+        }
+    }
+
+    @Test
     fun landIsDrawnOnBothSidesOfTheAntimeridian() {
         val figure = MapFigure.render(spec(pin(-18.14, 178.44, "Suva"), pin(-13.83, -171.76, "Apia")))
         assertTrue("fill-rule='evenodd'" in figure.svg)
