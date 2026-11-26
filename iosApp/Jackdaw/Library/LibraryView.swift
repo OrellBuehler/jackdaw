@@ -10,7 +10,8 @@ struct LibraryView: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        NavigationStack {
+        @Bindable var model = model
+        NavigationStack(path: $model.libraryPath) {
             ScrollView {
                 if !model.packsLoaded {
                     Color.clear.frame(height: 1)

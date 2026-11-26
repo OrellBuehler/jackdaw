@@ -123,6 +123,7 @@ private fun NavBackStackEntry?.isTopLevel(): Boolean {
 fun JackdawApp(
     appViewModel: AppViewModel,
     importViewModel: ImportViewModel,
+    startRoute: Any? = null,
 ) {
     val settings by appViewModel.settings.collectAsStateWithLifecycle()
     JackdawTheme(settings?.theme ?: ThemePreference.SYSTEM) {
@@ -134,6 +135,7 @@ fun JackdawApp(
                     startOnboarding = !loaded.onboardingSeen,
                     appViewModel = appViewModel,
                     importViewModel = importViewModel,
+                    startRoute = startRoute,
                 )
             }
         }
@@ -162,6 +164,7 @@ private fun AppNavigation(
     startOnboarding: Boolean,
     appViewModel: AppViewModel,
     importViewModel: ImportViewModel,
+    startRoute: Any?,
 ) {
     val context = LocalContext.current
     val resources = LocalResources.current
@@ -172,6 +175,10 @@ private fun AppNavigation(
     val showBar = backStack.isTopLevel()
     val snackbar = remember { SnackbarHostState() }
     val barInset = 80.dp + with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
+
+    LaunchedEffect(startRoute) {
+        if (startRoute != null && !startOnboarding) nav.navigate(startRoute) { launchSingleTop = true }
+    }
 
     val openText = stringResource(R.string.action_open)
     LaunchedEffect(Unit) {

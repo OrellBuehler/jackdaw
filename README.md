@@ -216,6 +216,7 @@ Before the first sync build also make sure the App ID `ch.orellbuehler.jackdaw` 
 | `android.yml` | pull requests and pushes to `main`, manual | ktlint, shared module build, debug APK (uploaded as artifact), Android lint, shared and Android unit tests, informational Kover coverage. `android-gate` is the always-reporting required check. |
 | `ios.yml` | pull requests and pushes to `main`, manual | `ios-build` (CloudKit schema check, shared framework and simulator app build, the fast compile signal), then `ios-tests` (Kotlin/Native tests of `shared`). `ios-gate` is the always-reporting required check. |
 | `release.yml` | published GitHub release, manual dispatch | Signed release builds, see below. |
+| `store-screenshots-android.yml`, `store-screenshots-ios.yml` | manual, and pull requests that change the capture | Store screenshots in English and German, light and dark, from an emulator and a simulator. A debug build launched with `store_screenshot <screen>` fills an empty library with bundled packs and an invented study history (`JackdawSdk.seedDemoLibrary`) and opens that screen; `scripts/android/store-screenshots.sh` and `scripts/ios/store-screenshots.sh` take the pictures, which are uploaded as the `android-store-screenshots` and `ios-store-screenshots` artifacts. |
 
 The iOS jobs run on GitHub's `xcode-27` image with the Xcode 27.0 GM pinned and verified by `.github/actions/ios-setup`. Dependabot proposes weekly Gradle and GitHub Actions updates (Kotlin is bumped by hand together with SKIE).
 

@@ -71,6 +71,7 @@ Create exactly one instance per process and keep it alive (application scope). O
 Editing rewrites the stored pack source and installs it like an import (same progress rules), then marks the pack `PackSummary.edited`. An import over an edited pack says so in `ImportPreview.Valid.overwritesEdits` and clears the mark. Archive, link, the edited mark and groups are stored per device (`Library.sq`) and are not synced.
 | `samplePacks()` | `List<SamplePack>` | Bundled packs (from `format/examples`). Not suspending. |
 | `importSample(sampleId)` | `ImportResult` | `sampleId` is the pack id (`SamplePack.id`) of a bundled pack. |
+| `seedDemoLibrary()` | `Boolean` | For the store screenshots of debug builds only: when the library is empty, installs some bundled packs with an invented study history, marks onboarding as seen and returns `true`. Does nothing otherwise. |
 | `catalogUrl()` | `String` | Where the online pack list is (`format/examples/index.json` on `main`). The UI downloads it; `shared` has no network code. |
 | `readCatalog(text)` | `List<SamplePack>?` | The sample library for a downloaded list, or `null` when the text is not a catalogue this version understands. Not suspending. |
 

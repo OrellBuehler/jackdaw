@@ -54,11 +54,14 @@ final class AppModel {
     var selectedTab: AppTab = .library
     var studyRequest: StudyRequest?
     var addPackRoute: AddPackRoute?
+    var libraryPath: [PackRoute] = []
 
     private let client = SDKClient.shared
     @ObservationIgnored private var watchers: [Task<Void, Never>] = []
     @ObservationIgnored private var writeChain: Task<Void, Never>?
     @ObservationIgnored private var pendingWrites = 0
+    @ObservationIgnored private var pendingScreenshot = StoreScreenshot.requested
+    @ObservationIgnored private var seeding = false
 
     var showOnboarding: Bool {
         settingsLoaded && !settings.onboardingSeen
@@ -113,7 +116,20 @@ final class AppModel {
     }
 
     func start() {
-        guard watchers.isEmpty else { return }
+        guard watchers.isEmpty, !seeding else { return }
+        if pendingScreenshot != nil {
+            seeding = true
+            Task {
+                await client.seedDemoLibrary()
+                seeding = false
+                watch()
+            }
+            return
+        }
+        watch()
+    }
+
+    private func watch() {
         let client = self.client
         samples = client.samplePacks()
         library = samples
@@ -264,6 +280,31 @@ final class AppModel {
     private func applyPacks(_ value: [PackInfo]) {
         packs = value
         packsLoaded = true
+        openScreenshot()
+    }
+
+    private func openScreenshot() {
+        guard let shot = pendingScreenshot, !packs.isEmpty else { return }
+        pendingScreenshot = nil
+        let pack = packs.first { $0.id == shot.packId }
+        switch shot.screen {
+        case "stats":
+            selectedTab = .stats
+        case "settings":
+            selectedTab = .settings
+        case "add":
+            presentAddPack()
+        case "pack":
+            if let pack {
+                libraryPath = [PackRoute(id: pack.id)]
+            }
+        case "study":
+            if let pack {
+                studyRequest = .learn(pack: pack, sectionId: shot.sectionId)
+            }
+        default:
+            break
+        }
     }
 
     private func applyGroups(_ value: [PackGroupInfo]) {

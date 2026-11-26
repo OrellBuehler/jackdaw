@@ -27,7 +27,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent { JackdawApp(appViewModel, importViewModel) }
+        val screenshot = StoreScreenshots.prepare(this, intent)
+        setContent { JackdawApp(appViewModel, importViewModel, screenshot) }
         if (savedInstanceState == null) handleIncoming(intent)
     }
 
