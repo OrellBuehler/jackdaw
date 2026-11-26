@@ -80,14 +80,6 @@ struct OrderExerciseView: View {
                 .background(style.base, in: Circle())
             RichTextView(text: entry.text, font: .brand(.body, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            VStack(spacing: 2) {
-                moveButton(systemName: "chevron.up", enabled: index > 0) {
-                    move(index, by: -1)
-                }
-                moveButton(systemName: "chevron.down", enabled: index < entries.count - 1) {
-                    move(index, by: 1)
-                }
-            }
             dragHandle(id: entry.id)
         }
         .padding(.vertical, 10)
@@ -107,6 +99,13 @@ struct OrderExerciseView: View {
         .offset(y: shift)
         .animation(.snappy(duration: 0.2), value: isDragged ? 0 : shift)
         .zIndex(isDragged ? 1 : 0)
+        .accessibilityElement(children: .combine)
+        .accessibilityAction(named: Text("study.order.up")) {
+            move(index, by: -1)
+        }
+        .accessibilityAction(named: Text("study.order.down")) {
+            move(index, by: 1)
+        }
     }
 
     private func dragHandle(id: String) -> some View {
@@ -188,19 +187,6 @@ struct OrderExerciseView: View {
             draggingID = nil
             dragTranslation = 0
         }
-    }
-
-    private func moveButton(systemName: String, enabled: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: 14, weight: .bold))
-                .foregroundStyle(enabled ? style.accentText : Brand.textSecondary.opacity(0.3))
-                .frame(width: 36, height: 26)
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .disabled(!enabled)
-        .accessibilityLabel(L10n.tr(systemName == "chevron.up" ? "study.order.up" : "study.order.down"))
     }
 
     private func resultList(_ feedback: FeedbackInfo) -> some View {
