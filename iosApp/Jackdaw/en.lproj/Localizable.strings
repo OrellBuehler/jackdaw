@@ -305,7 +305,7 @@
 "study.open.think" = "Think of your answer, then reveal the model answer.";
 "study.order.down" = "Move down";
 "study.order.expected" = "Expected:";
-"study.order.hint" = "Drag the handle or use the arrows to bring the entries into the right order.";
+"study.order.hint" = "Drag the handle to bring the entries into the right order.";
 "study.order.up" = "Move up";
 "study.figure" = "Figure";
 "study.retry" = "Second try";

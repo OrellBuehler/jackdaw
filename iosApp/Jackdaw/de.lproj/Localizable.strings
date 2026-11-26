@@ -305,7 +305,7 @@
 "study.open.think" = "Überlege dir deine Antwort und decke dann die Musterantwort auf.";
 "study.order.down" = "Nach unten";
 "study.order.expected" = "Erwartet:";
-"study.order.hint" = "Ziehe am Griff oder nutze die Pfeile, um die Einträge in die richtige Reihenfolge zu bringen.";
+"study.order.hint" = "Ziehe am Griff, um die Einträge in die richtige Reihenfolge zu bringen.";
 "study.order.up" = "Nach oben";
 "study.figure" = "Abbildung";
 "study.retry" = "Zweiter Versuch";
