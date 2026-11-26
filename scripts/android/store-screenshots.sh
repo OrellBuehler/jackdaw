@@ -17,7 +17,7 @@ WIDTH=1080
 HEIGHT=1920
 DENSITY=420
 SETTLE_SECONDS="${SETTLE_SECONDS:-3}"
-FIGURE_SECONDS="${FIGURE_SECONDS:-35}"
+FIGURE_SECONDS="${FIGURE_SECONDS:-5}"
 ATTEMPTS="${ATTEMPTS:-3}"
 # A blank or half-loaded 1080x1920 screen compresses to far less than any real one.
 MIN_PNG_BYTES=30000
@@ -175,5 +175,4 @@ for locale in en de; do
   shoot "$locale" stats-dark "$activity" stats || failed=1
 done
 
-adb logcat -d -s FigureDebug:V chromium:V >"$OUT_DIR/logcat.txt" || true
 exit "$failed"

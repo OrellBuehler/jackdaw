@@ -2,7 +2,7 @@ package ch.orellbuehler.jackdaw.ui.study
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -42,7 +42,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import ch.orellbuehler.jackdaw.R
-import ch.orellbuehler.jackdaw.StoreScreenshots
 import ch.orellbuehler.jackdaw.format.Figure
 import ch.orellbuehler.jackdaw.ui.theme.cardSurface
 
@@ -109,7 +108,6 @@ private fun PassiveFigure(
         update = { view ->
             if (view.tag != html) {
                 view.tag = html
-                android.util.Log.i("FigureDebug", "load ${html.length} chars: ${html.take(600)}")
                 view.loadDataWithBaseURL(null, html, "text/html", "utf-8", null)
             }
         },
@@ -149,6 +147,7 @@ private fun FigureDialog(
 
 private fun zoomableWebView(context: android.content.Context): WebView =
     WebView(context).apply {
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         setBackgroundColor(Color.TRANSPARENT)
         settings.javaScriptEnabled = false
         settings.blockNetworkLoads = true
@@ -171,6 +170,7 @@ private fun zoomableWebView(context: android.content.Context): WebView =
 @SuppressLint("ClickableViewAccessibility")
 private fun passiveWebView(context: android.content.Context): WebView =
     WebView(context).apply {
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         setBackgroundColor(Color.TRANSPARENT)
         settings.javaScriptEnabled = false
         settings.blockNetworkLoads = true
@@ -181,84 +181,11 @@ private fun passiveWebView(context: android.content.Context): WebView =
         isFocusable = false
         isLongClickable = false
         importantForAccessibility = WebView.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
-        if (StoreScreenshots.active) setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         webViewClient =
             object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
                     view: WebView,
                     request: WebResourceRequest,
                 ): Boolean = true
-
-                override fun onPageStarted(view: WebView, url: String?, favicon: android.graphics.Bitmap?) {
-                    android.util.Log.i("FigureDebug", "started $url ${view.width}x${view.height} attached=${view.isAttachedToWindow} shown=${view.isShown}")
-                }
-
-                override fun onPageFinished(view: WebView, url: String?) {
-                    android.util.Log.i("FigureDebug", "finished $url ${view.width}x${view.height} content=${view.contentHeight} progress=${view.progress} shown=${view.isShown} alpha=${view.alpha}")
-                    view.postDelayed({
-                        android.util.Log.i("FigureDebug", "later ${view.width}x${view.height} content=${view.contentHeight} shown=${view.isShown} layer=${view.layerType} hw=${view.isHardwareAccelerated}")
-                        val bitmap = android.graphics.Bitmap.createBitmap(view.width, view.height, android.graphics.Bitmap.Config.ARGB_8888)
-                        view.draw(android.graphics.Canvas(bitmap))
-                        val probes = listOf(0.1f, 0.3f, 0.5f, 0.7f, 0.9f).map { Integer.toHexString(bitmap.getPixel((view.width * it).toInt(), view.height / 2)) }
-                        var p: android.view.ViewParent? = view.parent
-                        val chain = StringBuilder()
-                        while (p != null) { chain.append(p.javaClass.simpleName).append(if (p is View) "(a=${p.alpha},v=${p.visibility},${p.width}x${p.height},layer=${p.layerType})" else "").append(" < "); p = p.parent }
-                        android.util.Log.i("FigureDebug", "probe $probes scroll=${view.scrollX},${view.scrollY} scale=${view.scaleX} parents=$chain")
-                        figureDebugVariants(view, view.tag as? String ?: "")
-                    }, 3000)
-                }
-
-                override fun onReceivedError(view: WebView, request: WebResourceRequest, error: android.webkit.WebResourceError) {
-                    android.util.Log.i("FigureDebug", "error ${request.url} ${error.errorCode} ${error.description}")
-                }
-
-                override fun onRenderProcessGone(view: WebView, detail: android.webkit.RenderProcessGoneDetail): Boolean {
-                    android.util.Log.i("FigureDebug", "render process gone crash=${detail.didCrash()}")
-                    return true
-                }
             }
     }
-
-private var figureDebugRan = false
-
-private fun figureDebugVariants(
-    view: WebView,
-    html: String,
-) {
-    if (figureDebugRan) return
-    figureDebugRan = true
-    val csp = "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">"
-    val simple = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' width='200' height='200'><rect width='10' height='10' fill='#0000ff'/></svg>"
-    val green = html.replace("background:transparent", "background:#00ff00")
-    val rule = "body>svg{display:block;width:100%;height:100%}"
-    val variants =
-        listOf(
-            "plain-selector" to green.replace(rule, "svg{display:block;width:100%;height:100%}"),
-            "spaced-selector" to green.replace(rule, "body > svg{display:block;width:100%;height:100%}"),
-            "descendant-selector" to green.replace(rule, "body svg{display:block;width:100%;height:100%}"),
-            "unrelated-rule" to green.replace(rule, "p{color:red}"),
-            "inline-style" to green.replace(rule, "").replace("<body><svg ", "<body><svg style=\"display:block;width:100%;height:100%\" "),
-            "rule-first" to green.replace(rule, "").replace("<style>", "<style>$rule"),
-            "width-only" to green.replace(rule, "body>svg{width:100%}"),
-            "height-only" to green.replace(rule, "body>svg{height:100%}"),
-            "block-only" to green.replace(rule, "body>svg{display:block}"),
-            "no-html-height" to green.replace("height:100%;background", "background"),
-        )
-    fun probe(name: String) {
-        val bitmap = android.graphics.Bitmap.createBitmap(view.width, view.height, android.graphics.Bitmap.Config.ARGB_8888)
-        view.draw(android.graphics.Canvas(bitmap))
-        val probes = listOf(0.1f, 0.3f, 0.5f, 0.7f, 0.9f).map { Integer.toHexString(bitmap.getPixel((view.width * it).toInt(), view.height / 2)) }
-        val top = Integer.toHexString(bitmap.getPixel(40, 40))
-        android.util.Log.i("FigureDebug", "variant $name top=$top $probes content=${view.contentHeight}")
-    }
-    fun step(index: Int) {
-        if (index >= variants.size) return
-        view.tag = "debug"
-        view.loadDataWithBaseURL(null, variants[index].second, "text/html", "utf-8", null)
-        view.postDelayed({
-            probe(variants[index].first)
-            step(index + 1)
-        }, 2500)
-    }
-    step(0)
-}
