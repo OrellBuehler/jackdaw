@@ -17,6 +17,12 @@
       "revision": "3.0",
       "sha256": "cee0418e4b505ea3625ef71df8133e6be26b0fbdd396b7990dd711d47d959354",
       "items": 7
+    },
+    {
+      "file": "4.0-code.jackdaw",
+      "revision": "4.0",
+      "sha256": "5b26ce02954e3f6d1ff7cbd30bab55a3de1009262388d54f5df64d07b18a10fd",
+      "items": 11
     }
   ]
 }

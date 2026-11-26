@@ -28,7 +28,7 @@ class ClozeTokensTest {
     @Test
     fun stylesSurviveTokenisation() {
         val text =
-            RichText(
+            RichText.of(
                 listOf(
                     TextSpan("a ", bold = false, italic = false, code = false),
                     TextSpan("bold word", bold = true, italic = false, code = false),

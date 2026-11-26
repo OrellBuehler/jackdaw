@@ -1,5 +1,8 @@
 package ch.orellbuehler.jackdaw.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -20,11 +23,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import ch.orellbuehler.jackdaw.format.RichText
+import ch.orellbuehler.jackdaw.format.TextBlock
+import ch.orellbuehler.jackdaw.format.TextSpan
 
-fun RichText.toAnnotated(codeBackground: Color): AnnotatedString =
+fun RichText.toAnnotated(codeBackground: Color): AnnotatedString = spans.toAnnotated(codeBackground)
+
+fun List<TextSpan>.toAnnotated(codeBackground: Color): AnnotatedString =
     buildAnnotatedString {
-        spans.forEach { span ->
+        forEach { span ->
             val style =
                 SpanStyle(
                     fontWeight = if (span.bold) FontWeight.Bold else null,
@@ -55,16 +63,40 @@ fun RichTextView(
     lineHeight: TextUnit = TextUnit.Unspecified,
     inlineContent: Map<String, InlineTextContent> = emptyMap(),
 ) {
-    Text(
-        text = rememberAnnotated(text),
-        modifier = modifier,
-        style = style,
-        color = color,
-        textAlign = textAlign,
-        maxLines = maxLines,
-        overflow = overflow,
-        fontWeight = fontWeight,
-        lineHeight = lineHeight,
-        inlineContent = inlineContent,
-    )
+    if (!text.hasCode) {
+        Text(
+            text = rememberAnnotated(text),
+            modifier = modifier,
+            style = style,
+            color = color,
+            textAlign = textAlign,
+            maxLines = maxLines,
+            overflow = overflow,
+            fontWeight = fontWeight,
+            lineHeight = lineHeight,
+            inlineContent = inlineContent,
+        )
+        return
+    }
+    val background = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        text.blocks.forEach { block ->
+            when (block) {
+                is TextBlock.Paragraph ->
+                    Text(
+                        text = remember(block, background) { block.spans.toAnnotated(background) },
+                        modifier = if (textAlign != null) Modifier.fillMaxWidth() else Modifier,
+                        style = style,
+                        color = color,
+                        textAlign = textAlign,
+                        maxLines = maxLines,
+                        overflow = overflow,
+                        fontWeight = fontWeight,
+                        lineHeight = lineHeight,
+                        inlineContent = inlineContent,
+                    )
+                is TextBlock.Code -> CodeBlockView(block.lines)
+            }
+        }
+    }
 }

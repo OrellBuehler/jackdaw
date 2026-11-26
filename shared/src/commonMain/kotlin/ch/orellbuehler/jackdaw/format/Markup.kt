@@ -7,21 +7,60 @@ data class TextSpan(
     val code: Boolean,
 )
 
+sealed class TextBlock {
+    data class Paragraph(
+        val spans: List<TextSpan>,
+    ) : TextBlock()
+
+    data class Code(
+        val language: String?,
+        val code: String,
+    ) : TextBlock() {
+        val lines: List<List<CodeSpan>> by lazy { codeLines(highlight(language, code)) }
+    }
+}
+
 data class RichText(
-    val spans: List<TextSpan>,
+    val blocks: List<TextBlock>,
 ) {
     val plain: String
-        get() = spans.joinToString("") { it.text }
+        get() =
+            blocks.joinToString("\n") { block ->
+                when (block) {
+                    is TextBlock.Paragraph -> block.spans.joinToString("") { it.text }
+                    is TextBlock.Code -> block.code
+                }
+            }
 
     val isEmpty: Boolean
-        get() = spans.isEmpty()
+        get() = blocks.isEmpty()
+
+    val hasCode: Boolean
+        get() = blocks.any { it is TextBlock.Code }
+
+    val spans: List<TextSpan>
+        get() = blocks.filterIsInstance<TextBlock.Paragraph>().flatMap { it.spans }
 
     companion object {
-        fun parse(source: String): RichText = RichText(parseMarkup(source))
+        fun parse(source: String): RichText = RichText(parseBlocks(source))
+
+        fun of(spans: List<TextSpan>): RichText = RichText(if (spans.isEmpty()) emptyList() else listOf(TextBlock.Paragraph(spans)))
 
         fun fromPlain(text: String): RichText =
-            RichText(if (text.isEmpty()) emptyList() else listOf(TextSpan(text, bold = false, italic = false, code = false)))
+            of(if (text.isEmpty()) emptyList() else listOf(TextSpan(text, bold = false, italic = false, code = false)))
     }
+}
+
+internal fun parseBlocks(input: String): List<TextBlock> {
+    val s = normalizeNewlines(input)
+    val blocks = ArrayList<TextBlock>()
+    for (raw in splitCodeBlocks(s)) {
+        when (raw) {
+            is RawBlock.Text -> parseMarkup(raw.raw).takeIf { it.isNotEmpty() }?.let { blocks += TextBlock.Paragraph(it) }
+            is RawBlock.Code -> if (raw.code.isNotEmpty()) blocks += TextBlock.Code(raw.language, raw.code)
+        }
+    }
+    return blocks
 }
 
 private const val ESCAPABLE = "\\*`{}|:"

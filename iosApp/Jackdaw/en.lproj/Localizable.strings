@@ -23,8 +23,8 @@
 "ai.copied" = "Copied";
 "ai.copy" = "Copy prompt";
 "ai.explanation" = "Jackdaw packs are plain JSON files in an open format, so any chatbot can write one for you. Choose the question types, copy the prompt below, give it your topic, and paste the answer back here.";
-"ai.figures" = "Figures and maps";
-"ai.figures.note" = "Drawings, diagrams and world maps with pins. A pack with figures or maps needs an up-to-date Jackdaw.";
+"ai.figures" = "Figures, maps and code";
+"ai.figures.note" = "Drawings, diagrams, world maps with pins and code snippets. A pack with any of these needs an up-to-date Jackdaw.";
 "ai.headline" = "Let an assistant write your pack";
 "ai.paste" = "Paste the answer";
 "ai.prompt.label" = "Prompt";

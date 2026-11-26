@@ -8,7 +8,7 @@ Package root `ch.orellbuehler.jackdaw`. On iOS the module is the `shared` framew
 |---|---|
 | `JackdawSdk` | The one entry point (see below). |
 | `db` | `DatabaseDriverFactory` (expect/actual), SQLDelight schema (`Pack.sq`, `Review.sq`, `Setting.sq`, `Sync.sq`). |
-| `format` | Pack reader (tolerant, spec section 11), markup/cloze parsers, answer normalisation. Public: `RichText`, `TextSpan`, `ItemType`, `Import*` types. Everything else is `internal`. |
+| `format` | Pack reader (tolerant, spec section 11), markup/cloze parsers, answer normalisation. Public: `RichText`, `TextBlock`, `TextSpan`, `CodeSpan`, `TokenKind`, `ItemType`, `Import*` types. The code block parser (`CodeBlocks.kt`, spec 8.6) and the syntax highlighter (`Highlighter.kt`) live here. Everything else is `internal`. |
 | `study` | Scheduler, planner, exercise factory and the `StudySession` state machine. |
 | `store` | Repositories and the read models the UIs render (`PackSummary`, `Stats`, ...). |
 | `sync` | Platform independent half of iCloud sync: what changed locally, applying fetched records, merge rules (see "Sync"). Still no network code. |
@@ -19,7 +19,7 @@ Package root `ch.orellbuehler.jackdaw`. On iOS the module is the `shared` framew
 - **Time** is always `Long` epoch milliseconds (`lastStudiedAt`, `dueAt`, `importedAt`, `durationMs`). `0` means "never" / "not scheduled". Days are `Int` epoch days plus an ISO date string (`"2026-11-20"`) in the device time zone.
 - **No nullable primitives.** Optional numbers use `0` (`PackDetail.revision == 0` means none). Optional strings are `String?`.
 - **Section ids**: `""` is the implicit "ungrouped" group (its `SectionSummary.isUngrouped` is true and its title is empty: localise it in the UI). `null` in `SessionConfig.sectionId` means the whole pack.
-- **Rich text** is `RichText(spans: [TextSpan])`, each span has `text` and the flags `bold`, `italic`, `code` (styles never nest). Newlines are kept inside span text. `plain` gives the text without styling. Render spans as text, never as HTML or links.
+- **Rich text** is `RichText(blocks: [TextBlock])`. A `TextBlock.Paragraph(spans)` is ordinary text: each `TextSpan` has `text` and the flags `bold`, `italic`, `code` (styles never nest), newlines are kept inside span text. A `TextBlock.Code(language, code)` is a fenced code block (spec 8.6, format version 4): `code` is the literal text, `language` the lowercase name after the opening fence or `null`, and `lines` (`[[CodeSpan]]`, one list per line, tabs already shown as four spaces) is the highlighted code: a `CodeSpan` has `text` and a `TokenKind` (`PLAIN`, `KEYWORD`, `STRING`, `COMMENT`, `NUMBER`, `TYPE`). The tokenizer is generic and table driven (python, javascript, typescript, kotlin, java, swift, c, cpp, csharp, go, rust, sql, bash, json, html, css and the usual aliases), never throws, and its spans always add up to the input; an unknown or missing language is one `PLAIN` span. Empty blocks are dropped. `RichText.spans` is the flat list of the paragraph spans, `hasCode` tells whether there is a block. `plain` gives the text without styling, the code of a block without fences, one line break between the blocks (spec 9.3). Render spans as text, never as HTML or links, and draw a code block in a monospace box that scrolls sideways instead of wrapping. `RichText.of(spans)` builds a one-paragraph text.
 - **Ids are strings** (pack, section, item, option, entry ids). Option and entry ids of an exercise are only valid for that exercise instance.
 - Progress is tracked per **facet**: `Facet.FORWARD` and, for reversible cards, `Facet.REVERSE`. Everything else has only a forward facet. Counts in `PackSummary` are facet counts, `itemCount` is the number of items.
 - Public functions never throw for misuse. Wrong-state calls on a `StudySession` are ignored. Import problems are returned as values (`ImportResult.Failure`).
@@ -66,7 +66,7 @@ Create exactly one instance per process and keep it alive (application scope). O
 - Added items come after the pack's own items, in the other pack's order, and start as new. The pack's `study` hints and metadata stay the pack's own: added cards follow its `reversible`, `exercises` and `ignoreDiacritics`.
 - An item id that the pack already uses becomes `<id>-<16 hex digits>` (FNV-1a of the other pack's id and the item id, id cut to fit 64 characters), so two devices that combine the same packs get the same ids.
 - A section of the other pack comes along when an added item uses it. A section id that exists with the same title is reused; with another title the section gets a new derived id the same way. Items naming an unknown section stay ungrouped.
-- `version` becomes 2 when an added item has a figure. The result must read back as a valid pack, otherwise nothing is written.
+- `version` is raised to the lowest one that has everything the pack uses when an added item has a figure (2), a map (3) or a code block (4). The result must read back as a valid pack, otherwise nothing is written.
 
 Editing rewrites the stored pack source and installs it like an import (same progress rules), then marks the pack `PackSummary.edited`. An import over an edited pack says so in `ImportPreview.Valid.overwritesEdits` and clears the mark. Archive, link, the edited mark and groups are stored per device (`Library.sq`) and are not synced.
 | `samplePacks()` | `List<SamplePack>` | Bundled packs (from `format/examples`). Not suspending. |
@@ -104,7 +104,7 @@ Errors and warnings carry a stable `code` for localisation and an English `messa
 | `ImportErrorCode` | Meaning |
 |---|---|
 | `NOT_JSON`, `NOT_AN_OBJECT`, `NOT_A_PACK` | Not a Jackdaw file. |
-| `VERSION_INVALID`, `VERSION_TOO_NEW` | Format version unreadable / newer than supported (the reader supports versions 1 to 3; figures make a pack version 2, maps version 3): tell the user to update the app. |
+| `VERSION_INVALID`, `VERSION_TOO_NEW` | Format version unreadable / newer than supported (the reader supports versions 1 to 4; figures make a pack version 2, maps version 3, code blocks version 4): tell the user to update the app. |
 | `ID_INVALID`, `TITLE_INVALID`, `ITEMS_MISSING`, `NO_VALID_ITEMS` | Required pack properties missing or no item survived validation. |
 | `TOO_LARGE`, `TOO_MANY_ITEMS` | Over 25 MB / 50,000 items. |
 | `REVISION_DOWNGRADE` | Installed revision is higher. Ask the user, then call `importPackAllowingDowngrade`. |
@@ -215,7 +215,7 @@ Every first answer is written to the database before `submit`/`selfGrade` return
 | `FlipExercise(prompt)` | prompt, then "reveal" | `reveal()`, then `selfGrade(AGAIN/HARD/GOOD/EASY)` | self |
 | `ChoiceExercise(question, options, multiSelect)` | options as radio buttons / checkboxes (`multiSelect`: "select all that apply") | `submit(ChoiceAnswer(selectedIds))` (option ids) | the selected set must equal the correct set |
 | `TypeExercise(prompt, keyboard)` | text field (`keyboard`: see below) | `submit(TextAnswer(text))` | spec section 9 normal form; empty is wrong |
-| `ClozeExercise(segments, gapCount)` | `ClozeSegment.Text(text: RichText)` and `ClozeSegment.Gap(index, hint, keyboard)` inline, all gaps at once | `submit(ClozeAnswer(gaps))` (`gaps[i]` answers gap `index == i`) | every gap must match (`hint` is plain text shown with the gap) |
+| `ClozeExercise(segments, gapCount)` | `ClozeSegment.Text(text: RichText)` and `ClozeSegment.Gap(index, hint, keyboard)` inline, all gaps at once; a `ClozeSegment.Code(lines)` is a code block of the text (spec 8.3, 8.6) drawn as its own block between the inline runs: `lines` are the highlighted lines, each a list of `ClozePiece.Span(text, kind)` and `ClozePiece.Gap(index, hint, keyboard)`, so the gaps of a block are drawn inside the code | `submit(ClozeAnswer(gaps))` (`gaps[i]` answers gap `index == i`) | every gap must match (`hint` is plain text shown with the gap) |
 | `TrueFalseExercise(statement)` | two buttons | `submit(TrueFalseAnswer(value))` | |
 | `OrderExercise(prompt, entries)` | entries (already shuffled, never in the right order), user arranges | `submit(OrderAnswer(entryIds))` (all entry ids in the arranged order) | position by position |
 | `OpenExercise(question)` | question, "reveal" | `reveal()`, then `selfGrade(grade)` | self (use `feedback.suggestedGrade(tickedKeyPoints)` as the default) |
@@ -307,7 +307,7 @@ session.next()
 Notes for Swift: `List<T>` arrives as `[T]` (no public API uses `List<Int>`/`List<Boolean>`, so there is no `KotlinInt` boxing; ids are `[String]`); `Long` is `Int64`, `Int` is `Int32`; nullable properties are optionals; sealed class case names derive from the subclass name (check Xcode's completion for the exact spelling, e.g. `.flipExercise`); a Kotlin property called `type` is `type`; an enum inside a `List` (`PackDetail.practiceFilters`) may arrive as the Kotlin class `__PracticeFilter` instead of the Swift enum, because SKIE does not swap enums in generics (`toSwiftEnum()` converts it; `Mapping` matches it by name). Rich text is an array of spans:
 
 ```swift
-func attributed(_ text: RichText) -> AttributedString {
+func attributed(_ text: RichText) -> AttributedString {  // the paragraphs only; code blocks are `TextBlock.Code`
     text.spans.reduce(into: AttributedString()) { result, span in
         var part = AttributedString(span.text)
         if span.bold { part.inlinePresentationIntent = .stronglyEmphasized }

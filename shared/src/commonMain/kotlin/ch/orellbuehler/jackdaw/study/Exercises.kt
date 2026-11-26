@@ -1,6 +1,7 @@
 package ch.orellbuehler.jackdaw.study
 
 import ch.orellbuehler.jackdaw.format.RichText
+import ch.orellbuehler.jackdaw.format.TokenKind
 
 enum class ExerciseType(
     val code: Int,
@@ -29,9 +30,26 @@ data class OrderEntry(
     val text: RichText,
 )
 
+sealed class ClozePiece {
+    data class Span(
+        val text: String,
+        val kind: TokenKind,
+    ) : ClozePiece()
+
+    data class Gap(
+        val index: Int,
+        val hint: String?,
+        val keyboard: AnswerKeyboard = AnswerKeyboard.TEXT,
+    ) : ClozePiece()
+}
+
 sealed class ClozeSegment {
     data class Text(
         val text: RichText,
+    ) : ClozeSegment()
+
+    data class Code(
+        val lines: List<List<ClozePiece>>,
     ) : ClozeSegment()
 
     data class Gap(
