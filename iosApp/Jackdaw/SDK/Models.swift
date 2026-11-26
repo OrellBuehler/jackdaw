@@ -447,6 +447,7 @@ struct FigureInfo: Hashable, Sendable {
     let html: String
     let alt: String?
     let aspectRatio: Double
+    let isMap: Bool
 }
 
 struct QuestionInfo: Hashable, Sendable {

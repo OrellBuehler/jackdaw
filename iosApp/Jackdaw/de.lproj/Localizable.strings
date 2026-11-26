@@ -308,6 +308,9 @@
 "study.order.hint" = "Ziehe am Griff oder nutze die Pfeile, um die Einträge in die richtige Reihenfolge zu bringen.";
 "study.order.up" = "Nach oben";
 "study.figure" = "Abbildung";
+"study.figure.open" = "Abbildung öffnen";
+"study.map" = "Karte";
+"study.map.open" = "Karte öffnen";
 "study.retry" = "Zweiter Versuch";
 "study.reveal" = "Antwort zeigen";
 "study.tf.false" = "Falsch";

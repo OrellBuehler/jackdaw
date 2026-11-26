@@ -172,6 +172,10 @@
     <string name="study_hint_cd">Show hint</string>
     <string name="study_hint_label">Hint</string>
     <string name="figure_cd">Figure</string>
+    <string name="map_cd">Map</string>
+    <string name="map_open">Open map</string>
+    <string name="figure_open">Open figure</string>
+    <string name="figure_close">Close</string>
     <string name="study_progress_cd">Question %1$d of %2$d</string>
     <string name="study_end_title">End session?</string>
     <string name="study_end_body">Your answers so far are saved.</string>

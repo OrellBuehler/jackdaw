@@ -4,13 +4,14 @@ data class Figure(
     val svg: String,
     val alt: String?,
     val aspectRatio: Double,
+    val isMap: Boolean = false,
 ) {
     fun html(textColor: String?): String {
         val color = if (textColor != null) "color:$textColor" else "color-scheme:light dark;color:CanvasText"
         return "<!DOCTYPE html><html><head><meta charset=\"utf-8\">" +
-            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
+            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=10,user-scalable=yes\">" +
             "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">" +
-            "<style>html,body{margin:0;padding:0;height:100%;overflow:hidden;background:transparent;$color}" +
+            "<style>html,body{margin:0;padding:0;height:100%;background:transparent;$color}" +
             "body>svg{display:block;width:100%;height:100%}</style></head><body>$svg</body></html>"
     }
 }
