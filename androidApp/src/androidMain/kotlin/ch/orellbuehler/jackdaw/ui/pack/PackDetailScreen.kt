@@ -471,7 +471,7 @@ private fun Hero(
                 }
                 Text(
                     summary.title,
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = MaterialTheme.typography.headlineSmall,
                     color = on,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,

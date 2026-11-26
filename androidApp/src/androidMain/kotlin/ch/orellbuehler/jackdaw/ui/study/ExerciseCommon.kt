@@ -44,8 +44,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ch.orellbuehler.jackdaw.R
 import ch.orellbuehler.jackdaw.format.RichText
 import ch.orellbuehler.jackdaw.study.Answer
@@ -172,18 +174,24 @@ fun ExplanationCard(
     }
 }
 
+const val LONG_PROMPT_LENGTH = 200
+
+val StudyTextStyle: TextStyle
+    @Composable get() = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp, lineHeight = 28.sp)
+
 @Composable
 fun PromptText(
     text: RichText,
     modifier: Modifier = Modifier,
     textAlign: TextAlign? = null,
+    large: Boolean = false,
 ) {
-    val length = text.plain.length
+    val base = StudyTextStyle
     val style =
         when {
-            length <= 60 -> MaterialTheme.typography.headlineMedium
-            length <= 160 -> MaterialTheme.typography.headlineSmall
-            else -> MaterialTheme.typography.titleLarge
+            text.plain.length > LONG_PROMPT_LENGTH -> base.copy(fontSize = 18.sp, lineHeight = 26.sp)
+            large -> base.copy(fontSize = 22.sp, lineHeight = 28.sp)
+            else -> base
         }
     RichTextView(text, modifier = modifier, style = style, textAlign = textAlign)
 }
