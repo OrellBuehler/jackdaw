@@ -204,6 +204,7 @@ private fun passiveWebView(context: android.content.Context): WebView =
                         val chain = StringBuilder()
                         while (p != null) { chain.append(p.javaClass.simpleName).append(if (p is View) "(a=${p.alpha},v=${p.visibility},${p.width}x${p.height},layer=${p.layerType})" else "").append(" < "); p = p.parent }
                         android.util.Log.i("FigureDebug", "probe $probes scroll=${view.scrollX},${view.scrollY} scale=${view.scaleX} parents=$chain")
+                        figureDebugVariants(view, view.tag as? String ?: "")
                     }, 3000)
                 }
 
@@ -217,3 +218,39 @@ private fun passiveWebView(context: android.content.Context): WebView =
                 }
             }
     }
+
+private var figureDebugRan = false
+
+private fun figureDebugVariants(
+    view: WebView,
+    html: String,
+) {
+    if (figureDebugRan) return
+    figureDebugRan = true
+    val csp = "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">"
+    val variants =
+        listOf(
+            "red" to "<!DOCTYPE html><html><body style=\"background:red\">x</body></html>",
+            "nocsp" to html.replace(csp, ""),
+            "cspred" to "<!DOCTYPE html><html><head>$csp<style>body{background:red}</style></head><body>x</body></html>",
+            "opaque" to html.replace("background:transparent", "background:#00ff00"),
+            "noviewport" to html.replace(Regex("<meta name=\"viewport\"[^>]*>"), ""),
+            "original" to html,
+        )
+    fun probe(name: String) {
+        val bitmap = android.graphics.Bitmap.createBitmap(view.width, view.height, android.graphics.Bitmap.Config.ARGB_8888)
+        view.draw(android.graphics.Canvas(bitmap))
+        val probes = listOf(0.1f, 0.3f, 0.5f, 0.7f, 0.9f).map { Integer.toHexString(bitmap.getPixel((view.width * it).toInt(), view.height / 2)) }
+        android.util.Log.i("FigureDebug", "variant $name $probes content=${view.contentHeight}")
+    }
+    fun step(index: Int) {
+        if (index >= variants.size) return
+        view.tag = "debug"
+        view.loadDataWithBaseURL(null, variants[index].second, "text/html", "utf-8", null)
+        view.postDelayed({
+            probe(variants[index].first)
+            step(index + 1)
+        }, 2500)
+    }
+    step(0)
+}
