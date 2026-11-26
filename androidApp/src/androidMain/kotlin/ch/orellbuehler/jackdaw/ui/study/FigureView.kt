@@ -197,6 +197,13 @@ private fun passiveWebView(context: android.content.Context): WebView =
                     android.util.Log.i("FigureDebug", "finished $url ${view.width}x${view.height} content=${view.contentHeight} progress=${view.progress} shown=${view.isShown} alpha=${view.alpha}")
                     view.postDelayed({
                         android.util.Log.i("FigureDebug", "later ${view.width}x${view.height} content=${view.contentHeight} shown=${view.isShown} layer=${view.layerType} hw=${view.isHardwareAccelerated}")
+                        val bitmap = android.graphics.Bitmap.createBitmap(view.width, view.height, android.graphics.Bitmap.Config.ARGB_8888)
+                        view.draw(android.graphics.Canvas(bitmap))
+                        val probes = listOf(0.1f, 0.3f, 0.5f, 0.7f, 0.9f).map { Integer.toHexString(bitmap.getPixel((view.width * it).toInt(), view.height / 2)) }
+                        var p: android.view.ViewParent? = view.parent
+                        val chain = StringBuilder()
+                        while (p != null) { chain.append(p.javaClass.simpleName).append(if (p is View) "(a=${p.alpha},v=${p.visibility},${p.width}x${p.height},layer=${p.layerType})" else "").append(" < "); p = p.parent }
+                        android.util.Log.i("FigureDebug", "probe $probes scroll=${view.scrollX},${view.scrollY} scale=${view.scaleX} parents=$chain")
                     }, 3000)
                 }
 
