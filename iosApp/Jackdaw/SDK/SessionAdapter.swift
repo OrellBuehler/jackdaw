@@ -192,8 +192,21 @@ enum SessionAdapter {
             return .text(Mapping.styled(t.text))
         case .gap(let g):
             return .gap(index: Int(g.index), hint: g.hint, keyboard: answerKeyboard(g.keyboard))
+        case .code(let c):
+            return .code(lines: c.lines.map { line in line.map { clozePiece($0) } })
         default:
             return .text(.empty)
+        }
+    }
+
+    static func clozePiece(_ piece: ClozePiece) -> ClozeCodePiece {
+        switch onEnum(of: piece) {
+        case .span(let s):
+            return .token(CodeToken(text: s.text, kind: Mapping.tokenKind(s.kind)))
+        case .gap(let g):
+            return .gap(index: Int(g.index), hint: g.hint, keyboard: answerKeyboard(g.keyboard))
+        default:
+            return .token(CodeToken(text: "", kind: .plain))
         }
     }
 

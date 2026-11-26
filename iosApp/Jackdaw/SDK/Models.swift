@@ -391,19 +391,74 @@ struct StyledSpan: Hashable, Sendable {
     let code: Bool
 }
 
-struct StyledText: Hashable, Sendable {
-    let spans: [StyledSpan]
+enum CodeTokenKind: Hashable, Sendable {
+    case plain
+    case keyword
+    case string
+    case comment
+    case number
+    case typeName
+}
 
-    static let empty = StyledText(spans: [])
+struct CodeToken: Hashable, Sendable {
+    let text: String
+    let kind: CodeTokenKind
+}
+
+enum StyledBlock: Hashable, Sendable {
+    case paragraph([StyledSpan])
+    case code([[CodeToken]])
+}
+
+struct StyledText: Hashable, Sendable {
+    let blocks: [StyledBlock]
+
+    init(blocks: [StyledBlock]) {
+        self.blocks = blocks
+    }
+
+    init(spans: [StyledSpan]) {
+        self.blocks = spans.isEmpty ? [] : [.paragraph(spans)]
+    }
+
+    static let empty = StyledText(blocks: [])
 
     static func plain(_ text: String) -> StyledText {
         if text.isEmpty { return .empty }
         return StyledText(spans: [StyledSpan(text: text, bold: false, italic: false, code: false)])
     }
 
-    var plainText: String { spans.map(\.text).joined() }
+    var spans: [StyledSpan] {
+        blocks.flatMap { block -> [StyledSpan] in
+            if case .paragraph(let spans) = block { return spans }
+            return []
+        }
+    }
 
-    var isEmpty: Bool { spans.isEmpty }
+    var hasCode: Bool {
+        blocks.contains { block in
+            if case .code = block { return true }
+            return false
+        }
+    }
+
+    var plainText: String {
+        blocks.map { block -> String in
+            switch block {
+            case .paragraph(let spans):
+                return spans.map(\.text).joined()
+            case .code(let lines):
+                return lines.map { line in line.map(\.text).joined() }.joined(separator: "\n")
+            }
+        }.joined(separator: "\n")
+    }
+
+    var isEmpty: Bool { blocks.isEmpty }
+}
+
+enum ClozeCodePiece: Hashable, Sendable {
+    case token(CodeToken)
+    case gap(index: Int, hint: String?, keyboard: AnswerKeyboardInfo)
 }
 
 struct OptionInfo: Identifiable, Hashable, Sendable {
@@ -420,6 +475,7 @@ enum AnswerKeyboardInfo: Hashable, Sendable {
 enum ClozeSegmentInfo: Hashable, Sendable {
     case text(StyledText)
     case gap(index: Int, hint: String?, keyboard: AnswerKeyboardInfo)
+    case code(lines: [[ClozeCodePiece]])
 }
 
 enum ExerciseKind: Hashable, Sendable {
