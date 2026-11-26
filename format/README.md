@@ -1,6 +1,6 @@
 # Jackdaw Pack Format
 
-**Format version 3** · specification revision 3.0 (2026-11-25)
+**Format version 4** · specification revision 4.0 (2026-11-26)
 
 A **Jackdaw pack** is a single UTF-8 JSON file that describes a learning dataset: foreign-language vocabulary, history facts, exam questions, interview preparation, anything you can ask a question about. The Jackdaw app imports packs, schedules the learning (spaced repetition) and keeps the learning progress. The file format is open and documented so that people, scripts and AI assistants can create packs without the app.
 
@@ -24,7 +24,7 @@ A **Jackdaw pack** is a single UTF-8 JSON file that describes a learning dataset
 5. [Sections](#5-sections)
 6. [Study hints](#6-study-hints)
 7. [Items](#7-items)
-8. [Text: plain text, inline markup and cloze gaps](#8-text-plain-text-inline-markup-and-cloze-gaps)
+8. [Text: plain text, inline markup, cloze gaps and code blocks](#8-text-plain-text-inline-markup-cloze-gaps-and-code-blocks)
 9. [Answer matching](#9-answer-matching)
 10. [Compatibility and extensibility](#10-compatibility-and-extensibility)
 11. [What a reader does with invalid input](#11-what-a-reader-does-with-invalid-input)
@@ -81,7 +81,7 @@ A [complete example](#16-complete-example) that uses every property except maps 
 
 - The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT** and **MAY** are used as in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 - A **writer** is anything that produces a pack (a person, a script, an AI assistant, an exporter). A **reader** is anything that consumes one (the Jackdaw app, a converter, a validator). Requirements on writers are what the JSON Schema checks. Requirements on readers say how to behave when a file does not meet them.
-- Property tables list the JSON type, whether the property is required (**yes**/no) and its default. Types: *string*, *integer*, *boolean*, *array*, *object*. Two kinds of strings exist: **plain text** (taken literally) and **rich text** (a few inline markup characters are interpreted, see [section 8](#8-text-plain-text-inline-markup-and-cloze-gaps)). Every table says which one a property is.
+- Property tables list the JSON type, whether the property is required (**yes**/no) and its default. Types: *string*, *integer*, *boolean*, *array*, *object*. Two kinds of strings exist: **plain text** (taken literally) and **rich text** (a few inline markup characters are interpreted, see [section 8](#8-text-plain-text-inline-markup-cloze-gaps-and-code-blocks)). Every table says which one a property is.
 - Property names are case-sensitive and use lowerCamelCase. The order of properties inside an object is not significant. Within arrays, order is significant.
 - "Unicode whitespace" means the characters listed in [section 9.1](#91-whitespace).
 
@@ -95,7 +95,7 @@ The top level of the file is one JSON object.
 |---|---|---|---|---|
 | `$schema` | string | no | | URL of the JSON Schema. Lets editors validate and complete. Ignored by readers. |
 | `format` | string | **yes** | | Constant `"jackdaw-pack"`. |
-| `version` | integer | **yes** | | Format version: the lowest one that has everything the pack uses ([section 14](#14-versioning-policy)). `1`; `2` for a pack with figures ([8.4](#84-figures)); `3` for a pack with maps ([8.5](#85-maps)). |
+| `version` | integer | **yes** | | Format version: the lowest one that has everything the pack uses ([section 14](#14-versioning-policy)). `1`; `2` for a pack with figures ([8.4](#84-figures)); `3` for a pack with maps ([8.5](#85-maps)); `4` for a pack with code blocks ([8.6](#86-code-blocks)). |
 | `id` | string | **yes** | | Stable, globally unique identifier of the pack ([4.1](#41-identifiers)). |
 | `title` | string | **yes** | | Name of the pack. Plain text, one line, 1 to 200 characters. |
 | `description` | string | no | | What the pack covers. Plain text, newlines allowed, at most 2000 characters. |
@@ -439,16 +439,16 @@ An open question that the learner answers in their head or aloud and then grades
 
 ---
 
-## 8. Text: plain text, inline markup and cloze gaps
+## 8. Text: plain text, inline markup, cloze gaps and code blocks
 
 ### 8.1 Plain text and rich text
 
 Every string in a pack is either **plain text** or **rich text**.
 
 - **Plain text** is taken literally. No character has a special meaning, not even the backslash. Plain text properties: `title`, `description`, `author`, `license`, section `title` and `description`, `tags`, and the answer lists `alternatives`, `frontAlternatives` and `answers`.
-- **Rich text** supports the tiny inline markup of [8.2](#82-inline-markup). All other string properties that are shown to the learner are rich text: `front`, `back`, `distractors`, `frontDistractors`, `question`, option `text`, `statement`, `prompt`, `sequence` entries, `answer`, `keyPoints`, `hint`, `explanation`, and the text of a `cloze` item outside of its gaps.
+- **Rich text** supports the tiny inline markup of [8.2](#82-inline-markup) and fenced code blocks ([8.6](#86-code-blocks)). All other string properties that are shown to the learner are rich text: `front`, `back`, `distractors`, `frontDistractors`, `question`, option `text`, `statement`, `prompt`, `sequence` entries, `answer`, `keyPoints`, `hint`, `explanation`, and the text of a `cloze` item outside of its gaps.
 
-There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text. A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)) and places as a map ([8.5](#85-maps)), never embedded in text. Photos and audio are not part of the format; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
+There is **no HTML**, no links, no images and no other Markdown (headings, lists, tables) in text, apart from the fenced code blocks of [8.6](#86-code-blocks). A reader MUST display characters like `<`, `&`, `[` and `#` as they are. Drawings are attached to an item as a figure ([8.4](#84-figures)) and places as a map ([8.5](#85-maps)), never embedded in text. Photos and audio are not part of the format; the property name `media` is reserved for them ([section 10](#10-compatibility-and-extensibility)).
 
 A newline is the character U+000A, written `\n` in JSON. Readers normalise `\r\n` and `\r` to U+000A before interpreting rich text. Rich text may contain several lines; single-line properties (titles, ids, answers) SHOULD NOT contain newlines.
 
@@ -463,7 +463,7 @@ A newline is the character U+000A, written `\n` in JSON. Readers normalise `\r\n
 
 To show one of the marker characters literally, put a backslash in front of it: `\*`, `` \` ``, `\\`, `\{`, `\}`, `\|` and `\:` stand for the character itself (rule 1 below).
 
-Rules (normative). A reader scans a rich text string from left to right. At each position it applies the **first** rule that matches; if none matches, the character is shown literally and scanning continues with the next character.
+Rules (normative). A reader first sets aside the code blocks of the string ([8.6](#86-code-blocks)); a string without a code block is one run. The rules below apply to every run of text between code blocks, separately: markup never spans a code block. A reader scans a run from left to right. At each position it applies the **first** rule that matches; if none matches, the character is shown literally and scanning continues with the next character.
 
 1. **Escape.** A backslash followed by one of the seven characters `\` `*` `` ` `` `{` `}` `|` `:` stands for that character, literally. A backslash before any other character is a literal backslash.
 2. **Code.** A backtick, then one or more characters that are neither a backtick nor a newline, then a backtick. The content is shown in code style, with no escapes and no markup processed inside.
@@ -503,6 +503,8 @@ A **gap** is `{{`, content, `}}` on a single line. The text of a `cloze` item is
 4. Drop empty alternatives. If **no** alternative is left (`{{}}`, `{{ }}`, `{{::hint}}`), the gap is invalid: the characters are literal text and not a gap.
 
 Gap answers and hints are plain text: no markup is interpreted inside a gap. The text between gaps is rich text, interpreted piece by piece (markup cannot span a gap). A cloze item without any valid gap is invalid.
+
+**Gaps in code blocks** (*version 4*). A cloze text may contain code blocks ([8.6](#86-code-blocks)), and a gap may be written inside one: "fill in the missing code". The reader finds the code blocks of the whole text first, which are made of whole lines, and then the gaps of step 1 and 2 in every run of text and in the code of every block. A gap lies on one line, so a gap never contains a fence and the gaps found are the same as without the code blocks. Inside a block the text between the gaps is code: it is shown literally and no escape is resolved (`\{` shows the backslash, and a `{{` that forms a gap is a gap, so a literal `{{...}}` cannot be written in the code of a cloze item). Each gap is drawn at its place in the code. Gap answers and hints are plain text as always, and `{{a + b}}` is the answer `a + b`. [`test-vectors.json`](test-vectors.json) (`clozeCode`) lists the expected result.
 
 Examples, as they appear in the decoded text (more in [`test-vectors.json`](test-vectors.json)):
 
@@ -617,6 +619,79 @@ A **pin** is an object:
 
 **A pack with a map is a version 3 pack.** A writer MUST declare `"version": 3` as soon as one item has a `map` or an `answerMap`, so that an app without maps asks for an update instead of showing questions with the map missing. A pack without maps stays at version 1 or 2 and opens in every app that reads that version. Readers are forgiving here as everywhere: a reader that supports version 3 draws the maps of a pack whatever version it declares.
 
+### 8.6 Code blocks
+
+*Format version 4. A pack with a code block declares `"version": 4`; an app that only reads version 1, 2 or 3 does not import it and asks the user to update ([section 14](#14-versioning-policy)).*
+
+A **code block** shows a short snippet of program code, a command, a query or any other text in which line breaks, indentation and special characters matter. It is shown in monospace on a surface of its own, and an app may colour the words of well-known languages (syntax highlighting). A block is written like fenced code in Markdown, inside any rich text property:
+
+````text
+What does this code print?
+```python
+x = [10, 20, 30]
+print(x[1])
+```
+````
+
+Inside JSON the line breaks are `\n`, so that item is written like this:
+
+```json item
+{
+  "id": "list-index",
+  "type": "text",
+  "question": "What does this code print?\n```python\nx = [10, 20, 30]\nprint(x[1])\n```",
+  "answers": ["20"]
+}
+```
+
+**Syntax** (normative). A reader first normalises `\r\n` and `\r` to U+000A and splits the string into lines at every U+000A. It then goes through the lines from the top:
+
+- An **opening fence** is a line that consists of: any number of spaces (U+0020), three backticks, any number of spaces, an optional **language name**, any number of spaces, and nothing else. A language name is 0 to 20 characters from `A-Z a-z 0-9 + # -`. A line that has anything else after the three backticks (`` ```python title=x ``, `` ```{.py} ``, a fourth backtick, a name longer than 20 characters) is not an opening fence.
+- A **closing fence** is a line that consists of three backticks and then any number of spaces, and nothing else. There is no space before the backticks, and no language name.
+- The first opening fence for which a closing fence follows later starts a **code block**. The block ends at the first closing fence line after it, and the reader goes on with the line after that. A bare line of three backticks closes a block that is open, and opens one otherwise.
+- An opening fence without a closing fence after it is not a fence: the line stays ordinary text, like an unmatched `*` in rule 5 of [8.2](#82-inline-markup), and so does every fence line after it. A fence in the middle of a line (`text ` followed by three backticks) is nothing special: the fences must be whole lines.
+- The **code** of a block is its lines between the two fence lines, joined with U+000A and without a line break at the end. Nothing is changed: indentation, blank lines, trailing spaces, tabs and every character stay. **No markup, no escape and no gap is interpreted** in the code (apart from the gaps of a `cloze` item, [8.3](#83-cloze-gaps)): `**x**`, `` `x` `` and `\*` are shown as they are. A block with no code line, or with one empty line, is **empty** and shows nothing.
+- The **language** of a block is its language name in lowercase, or none. It is only a hint for highlighting and never an error.
+- The text before and after a block is ordinary rich text ([8.2](#82-inline-markup)), interpreted for each run separately. The line break before an opening fence and the one after a closing fence belong to the fence lines and are not shown as empty lines. A blank line between a text and a block is a line of the text.
+
+Fences work in **every rich text property** ([8.1](#81-plain-text-and-rich-text)). In plain text properties (`title`, `description`, `alternatives`, `answers`, ...) three backticks mean nothing special.
+
+[`test-vectors.json`](test-vectors.json) (`code`) contains the expected results for edge cases. A reader MUST reproduce them.
+
+**What the app shows.** The look is up to the app; what a writer can rely on:
+
+- The code is monospace, whitespace and indentation as written, a tab as four spaces, in a size smaller than the surrounding text, on a surface that sets it apart from the text, aligned to the left even if the surrounding text is centred.
+- A long line is **not wrapped and not cut off**: the block scrolls sideways. Code is never interpreted, executed, linked or sent anywhere.
+- **Highlighting is up to the app and not part of the format.** An app is encouraged to recognise these language names (case-insensitive), and the aliases in brackets: `python` (`py`), `javascript` (`js`), `typescript` (`ts`), `kotlin` (`kt`), `java`, `swift`, `c`, `cpp` (`c++`), `csharp` (`cs`, `c#`), `go` (`golang`), `rust` (`rs`), `sql`, `bash` (`sh`, `shell`), `json`, `html` and `css`. The Jackdaw apps colour keywords, strings, comments, numbers and type names of these. A block without a language, or with one the app does not know, is shown as plain monospace text. Two apps may colour the same code differently; no question may depend on a colour.
+- A place that shows a one-line summary of a text (a list row, a notification) uses the plain-text rendering of [9.3](#93-matching) with line breaks collapsed.
+
+**Keep blocks short.** A block is for a snippet that fits on a phone screen: **at most about 15 lines of 60 columns**. A longer listing makes a poor question: split it into several items. `validate.py` warns above 30 lines or 100 columns ([section 12](#12-limits-and-size-guidance)).
+
+**Examples**
+
+```json item
+{
+  "id": "add-function",
+  "type": "cloze",
+  "text": "Complete the function:\n```python\ndef add(a, b):\n    return {{a + b}}\n```"
+}
+```
+
+```json item
+{
+  "id": "loop-output",
+  "type": "choice",
+  "question": "How many lines does this loop print?\n```js\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}\n```",
+  "options": [
+    { "text": "3", "correct": true },
+    { "text": "2" },
+    { "text": "4" }
+  ]
+}
+```
+
+**A pack with a code block is a version 4 pack.** A writer MUST declare `"version": 4` as soon as one rich text property contains a code block (an opening fence line followed later by a closing fence line, empty or not), so that an app without code blocks asks for an update instead of showing the fences and the code as one text. A pack without code blocks stays at its version and opens in every app that reads that version. Readers are forgiving here as everywhere: a reader that supports version 4 draws the blocks of a pack whatever version it declares. Before version 4 a line of three backticks was ordinary text; a version 4 reader reads a pair of such lines as a block in a pack of any version, as stated above. None of the example packs and none of the frozen packs of versions 1 to 3 has one.
+
 ---
 
 ## 9. Answer matching
@@ -660,7 +735,7 @@ A typed answer is correct if its normal form **equals** the normal form of at le
 | `text` | every entry of `answers` |
 | `cloze` | every alternative of the gap being answered |
 
-The **plain-text rendering** of rich text is the concatenation of its text after interpreting [8.2](#82-inline-markup), i.e. without the markers and with escapes resolved (`**hola**` renders `hola`). Entries of `alternatives`, `frontAlternatives` and `answers`, and gap alternatives, are used as they are. What the user types is never interpreted as markup. An empty input is never correct.
+The **plain-text rendering** of rich text is the concatenation of its text after interpreting [8.2](#82-inline-markup), i.e. without the markers and with escapes resolved (`**hola**` renders `hola`). A code block ([8.6](#86-code-blocks)) renders as its code, without the fences and the language name; the runs of text and the blocks of a string are joined with one U+000A, and an empty block leaves nothing (`Before`, a block with the code `x = 1`, `After` render as `Before`, `x = 1` and `After` on three lines). The rendering is also what a place uses that cannot show a block: a notification, a search, an accessibility label. Entries of `alternatives`, `frontAlternatives` and `answers`, and gap alternatives, are used as they are. What the user types is never interpreted as markup. An empty input is never correct.
 
 Nothing else is equal. In particular these are **not** matched automatically; list them explicitly as alternatives: spelling variants (`colour`/`color`), synonyms, digits versus words (`3`/`three`), a missing article (`el pan`/`pan`), hyphen versus space, abbreviations. Accents are significant unless the pack sets `ignoreDiacritics`.
 
@@ -707,6 +782,7 @@ Readers MUST NOT crash, hang or run out of memory on invalid files. They apply t
 | A pin of a map is not an object, or its `lat` or `lng` is missing, not a number or out of range; more than 20 pins | **Drop that pin** (the first 20 valid pins are used), warn. |
 | The `line`, `alt` or a pin's `label` of a map has the wrong type | **Ignore that property**, warn. |
 | An item has a `figure` and a `map` (or an `answerFigure` and an `answerMap`) | **Keep the figure, ignore the map**, warn. |
+| An opening code fence has no closing fence ([8.6](#86-code-blocks)) | **Show the line as text**, no block. A reader does not need to warn. |
 | A section is not an object, lacks `id` or `title`, or has a duplicate `id` (first wins) | **Drop that section**, warn. |
 | An item names a `section` that does not exist | Treat the item as **ungrouped**, warn. |
 | Unknown properties or unknown item types | Ignore / skip as described in [section 10](#10-compatibility-and-extensibility). |
@@ -728,6 +804,7 @@ A reader can be built in this order: (1) parse the JSON, tolerating a BOM; (2) c
 | Text properties (`front`, `back`, `question`, `text`, `explanation`, ...) | 4,000 characters |
 | Answers, alternatives | 500 characters each |
 | `svg` of a figure | 200,000 characters (most figures need less than 5,000) |
+| Code block ([8.6](#86-code-blocks)) | about 15 lines of 60 columns (`validate.py` warns above 30 lines or 100 columns) |
 | Pins of a map | 20 |
 | `label` of a pin | 60 characters |
 | `alt` of a figure or a map | 500 characters |
@@ -757,7 +834,7 @@ There are three layers:
    - `order` entries are different from each other;
    - every figure passes the rules of [8.4](#84-figures) and is well-formed XML;
    - every map has 1 to 20 pins with `lat` and `lng` in range, and no item has a figure and a map on the same side ([8.5](#85-maps));
-   - `version` is the lowest version that has everything the pack uses (`3` with maps, `2` with figures, otherwise `1`);
+   - `version` is the lowest version that has everything the pack uses (`4` with code blocks, `3` with maps, `2` with figures, otherwise `1`);
    - the JSON has no duplicate property names within an object.
 3. **Reader behaviour** ([section 11](#11-what-a-reader-does-with-invalid-input)): what the app does with whatever it receives.
 
@@ -775,14 +852,14 @@ Any other JSON Schema 2020-12 validator (for example `ajv`) can check layer 1.
 
 ## 14. Versioning policy
 
-- `version` is the version of the format, an integer. This specification describes versions 1, 2 and 3.
-- **A pack declares the lowest version that has everything it uses.** A pack without figures and maps is `"version": 1` and opens in every app; a pack with a figure is `"version": 2`; a pack with a map is `"version": 3`.
-- **What the learner would miss gets a new version:** an addition that changes what the learner sees or is asked (figures, maps, a new item type, a new exercise kind) increases `version`. An app that does not know that version rejects the pack and asks the user to update ([section 10](#10-compatibility-and-extensibility)), instead of showing a pack with parts missing.
+- `version` is the version of the format, an integer. This specification describes versions 1, 2, 3 and 4.
+- **A pack declares the lowest version that has everything it uses.** A pack without figures, maps and code blocks is `"version": 1` and opens in every app; a pack with a figure is `"version": 2`; a pack with a map is `"version": 3`; a pack with a code block is `"version": 4`.
+- **What the learner would miss gets a new version:** an addition that changes what the learner sees or is asked (figures, maps, code blocks, a new item type, a new exercise kind) increases `version`. An app that does not know that version rejects the pack and asks the user to update ([section 10](#10-compatibility-and-extensibility)), instead of showing a pack with parts missing.
 - **What can be ignored does not:** a new optional property that an older app can leave out without the learner noticing (metadata, information for tools) keeps the version. Readers cope with it through the rules of [section 10](#10-compatibility-and-extensibility).
 - **Breaking changes increase `version`** as well: removing or renaming a property, changing the meaning or default of a property, making an optional property required, changing the rules for ids, normalisation or grading. A pack that needs a breaking feature declares the higher version, and older apps reject it with a clear message.
 - A reader that supports version N MUST also read all earlier versions.
 - **Compatibility promise.** A pack that is valid under any version stays valid, and keeps its meaning, under every later version. Each version says where it adds something ("version 3") and adds a frozen pack to [`compat/`](compat/) that uses it. The validator checks that the frozen packs are unchanged and still valid, and the reference reader is tested to import them without skipping anything.
-- Version history: **1** first release. **2** figures (`figure`, `answerFigure`, [8.4](#84-figures)). **3** maps (`map`, `answerMap`, [8.5](#85-maps)).
+- Version history: **1** first release. **2** figures (`figure`, `answerFigure`, [8.4](#84-figures)). **3** maps (`map`, `answerMap`, [8.5](#85-maps)). **4** code blocks in rich text ([8.6](#86-code-blocks)).
 - The JSON Schema describes every version and checks that a pack does not use more than the version it declares.
 - Editorial and clarifying changes of this document only change the *specification revision* shown at the top.
 
@@ -795,6 +872,7 @@ A pack is untrusted input, possibly written by a stranger or generated by a prog
 - Render all text as text. Never interpret it as HTML, a URL to open, a file path or code. Do not turn text into links automatically.
 - **Figures are the one place where pack content reaches a renderer.** Apply the rules of [8.4](#84-figures) when importing, and do not rely on them alone: draw the SVG in a renderer that has scripting disabled, cannot reach the network, the file system or other app content, and cannot navigate (in a web view: JavaScript off, network loads blocked, a content security policy of `default-src 'none'; style-src 'unsafe-inline'`, no handling of links). Bound the size of the figure on screen.
 - A map ([8.5](#85-maps)) is data, not a drawing: the app turns the pins into a picture with its own code and its own map data, and escapes every label. Treat `label` and `alt` as plain text like any other.
+- A code block ([8.6](#86-code-blocks)) is text: it is never run, never passed to an interpreter and never turned into HTML. Highlighting is done with the app's own tokenizer on the text; no pack content reaches a web view or a script engine.
 - Do not fetch `source` or any other URL automatically.
 - Bound the memory and time used for parsing (file size, nesting depth, number of items, length of strings) as in [section 12](#12-limits-and-size-guidance). Use a JSON parser with a nesting limit.
 - Importing a pack never executes anything and never needs permissions beyond reading the file.
@@ -805,7 +883,7 @@ A pack is untrusted input, possibly written by a stranger or generated by a prog
 
 ## 16. Complete example
 
-This pack uses every property of the format (except maps, see [8.5](#85-maps), which would make it a version 3 pack) and every item type. It is also stored as [`examples/format-tour.jackdaw`](examples/format-tour.jackdaw), and doubles as a short quiz about the format.
+This pack uses every property of the format (except maps, see [8.5](#85-maps), and code blocks, see [8.6](#86-code-blocks), which would make it a version 3 or 4 pack) and every item type. It is also stored as [`examples/format-tour.jackdaw`](examples/format-tour.jackdaw), and doubles as a short quiz about the format.
 
 ```json pack
 {
@@ -1013,7 +1091,7 @@ More examples in [`examples/`](examples/): [`spanish-basics.jackdaw`](examples/s
 
 **Is there matching of pairs, drawing, audio or images?** Drawings yes: any item can show an SVG figure ([8.4](#84-figures)), which makes the pack a version 2 pack. Places on a world map too: a `map` with pins ([8.5](#85-maps)), which makes it a version 3 pack. Matching of pairs, drawing by the learner, photos and audio are not part of the format. Pairs are best as separate `card` items (the app builds multiple choice from them).
 
-**How do I mark a formula or code?** Use backticks: `` `E = mc^2` ``. Everything is plain Unicode text; there is no math typesetting.
+**How do I mark a formula or code?** A word or an expression inside a sentence: backticks, `` `E = mc^2` `` or `` `len(x)` ``. A snippet of several lines, with indentation: a code block ([8.6](#86-code-blocks)), three backticks and the language name on a line of their own, the code, and three backticks on a line of their own. It is shown in monospace with syntax highlighting and makes the pack a version 4 pack. Formulas are plain Unicode text; there is no math typesetting.
 
 **How long should a pack be?** 20 to 500 items is typical. Split by topic when a pack grows beyond a few hundred items ([`AUTHORING.md`](AUTHORING.md)).
 

@@ -12,7 +12,7 @@ FORMAT (Jackdaw Pack)
 The file is one JSON object.
 Top level:
 - "format": "jackdaw-pack"                      (required, always this string)
-- "version": 1                                  (required; the number 1, or 2 if any item has a "figure" or "answerFigure", or 3 if any item has a "map" or "answerMap")
+- "version": 1                                  (required; the number 1, or 2 if any item has a "figure" or "answerFigure", or 3 if any item has a "map" or "answerMap", or 4 if any text contains a code block)
 - "id": string                                  (required; only A-Z a-z 0-9 . _ - ; use "pack." + topic slug + "." + 6 random hex characters, e.g. "pack.roman-emperors.7f3a9c")
 - "title": string                               (required)
 - optional: "description" (string), "language" (BCP-47 tag of the subject, e.g. "es", "en", "de-CH"), "author" (string), "license" (e.g. "CC-BY-4.0"), "tags" (string array), "icon" (ONE emoji), "color" ("#RRGGBB"), "revision": 1, "created" and "updated" ("YYYY-MM-DD")
@@ -44,6 +44,16 @@ Any item may have "map" (shown with the question) and "answerMap" (shown after a
 - "line": optional boolean. true connects the pins in array order with an arrow (birth to death, source to mouth, a route). Leave it out otherwise.
 - The app draws the world map itself and shows every pin: draw nothing. The map shows today's borders, so do not ask questions that depend on historical borders.
 - An item has either a "figure" or a "map" on the same side, not both. Put the labelled map into "answerMap" when it would give the answer away (not "map" for "Where did the Battle of Waterloo take place?"). A pack with a map must say "version": 3.
+
+CODE BLOCKS (short snippets of program code, shell commands or queries; for programming, scripting and database packs)
+Besides the markup of the TEXT RULES below, any text that is shown to the learner (front, back, question, option text, statement, prompt, sequence entries, answer, keyPoints, hint, explanation, and the text of a cloze item) can contain a code block: a line with three backticks and optionally a language name, then the lines of code, then a line with three backticks. Inside the JSON string the line breaks are written \n, for example "question": "What does this print?\n```python\nprint(len('abc'))\n```".
+- The two fence lines stand alone on their lines, with nothing else on them, and the closing fence must exist (an unclosed block is shown as ordinary text). Text before and after a block is ordinary text.
+- The language name is optional and one of: python, javascript, typescript, kotlin, java, swift, c, cpp, csharp, go, rust, sql, bash, json, html, css. It only turns on syntax highlighting; leave it out for anything else.
+- The code is shown literally in monospace: no **bold**, *italic* or backslash escapes inside it, but indentation and blank lines are kept. Escape a double quote inside the code as \" and a backslash as \\ because of JSON.
+- Keep it short: at most about 15 lines of at most 60 characters, one idea per item. State only what the code really does; never invent output you have not worked out.
+- Typed answers (text items, the back of a card, cloze gaps) stay short: ask for the value, the output or the missing word, and show the code in the question. Do not put code blocks into "answers" or "alternatives" (they are literal text).
+- In a cloze a {{gap}} may stand inside a block to hide a missing piece of code: "text": "Complete the function:\n```python\ndef add(a, b):\n    return {{a + b}}\n```". Do not use cloze for code that contains {{ }} of its own. Everything inside a block except the gaps is literal, so a backslash stays a backslash.
+- Use a code block, not `inline code`, for anything of more than one line. A pack with a code block must say "version": 4.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.

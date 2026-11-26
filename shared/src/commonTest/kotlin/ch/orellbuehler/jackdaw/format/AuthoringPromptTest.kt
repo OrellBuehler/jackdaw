@@ -37,8 +37,11 @@ class AuthoringPromptTest {
         assertTrue("\n\nTEXT RULES\n" in text)
         assertFalse("\n\n\n" in text)
         assertFalse("\"map\"" in text || "MAPS" in text)
+        assertFalse("CODE BLOCKS" in text || "contains a code block" in text || "\"version\": 4" in text)
         assertTrue("\nFIGURES (" in prompt(figures = true))
         assertTrue("\nMAPS (" in prompt(figures = true))
+        assertTrue("\nCODE BLOCKS (" in prompt(figures = true))
+        assertTrue("or 4 if any text contains a code block)" in prompt(figures = true))
     }
 
     @Test

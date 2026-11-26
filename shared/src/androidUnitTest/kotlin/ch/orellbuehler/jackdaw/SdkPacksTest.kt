@@ -94,7 +94,7 @@ class SdkPacksTest {
         runTest {
             fixture.importOk(flipPack())
             val failure =
-                assertIs<ImportResult.Failure>(sdk.importPack("""{"format":"jackdaw-pack","version":4,"id":"x","title":"t","items":[]}"""))
+                assertIs<ImportResult.Failure>(sdk.importPack("""{"format":"jackdaw-pack","version":5,"id":"x","title":"t","items":[]}"""))
             assertEquals(ImportErrorCode.VERSION_TOO_NEW, failure.error.code)
             assertTrue(failure.error.message.isNotBlank())
             assertEquals(ImportErrorCode.NOT_JSON, assertIs<ImportResult.Failure>(sdk.importPack("garbage")).error.code)

@@ -202,6 +202,30 @@ Any item can show places on a world map ([spec 8.5](README.md#85-maps)): `map` w
 - Write `alt`: one sentence that says what the map shows, without giving the answer away when it is a `map`.
 - Reference coordinates to compare with: Paris 48.86, 2.35; New York 40.71, -74.01; Sydney -33.87, 151.21; Cape Town -33.92, 18.42; Tokyo 35.68, 139.65; Reykjavik 64.15, -21.94.
 
+### 4.12 Code blocks
+
+Any text can contain a **code block** ([spec 8.6](README.md#86-code-blocks)): a short snippet of program code, a shell command or a query, shown in monospace with syntax highlighting. Use it for programming, scripting and database packs, wherever indentation and special characters matter. A word or an expression inside a sentence stays an inline `` `code` `` span.
+
+A block is a line with three backticks and optionally a language name, the lines of code, and a line with three backticks. Inside JSON the line breaks are `\n`:
+
+```json item
+{
+  "id": "slice-length",
+  "type": "text",
+  "question": "How many elements does this list have?\n```python\nitems = [1, 2, 3, 4, 5]\nprint(len(items[1:4]))\n```",
+  "answers": ["3", "three"],
+  "explanation": "The slice `items[1:4]` has the elements at the positions 1, 2 and 3."
+}
+```
+
+- **Fence lines stand alone.** Nothing else on the line, the closing fence must exist (otherwise the lines are shown as plain text), and the language name has at most 20 characters from `A-Z a-z 0-9 + # -`. Highlighting knows `python`, `javascript`, `typescript`, `kotlin`, `java`, `swift`, `c`, `cpp`, `csharp`, `go`, `rust`, `sql`, `bash`, `json`, `html` and `css` (and common short names such as `py`, `js`, `ts`, `sh`). Leave the name out, or use another one, and the block is shown as plain monospace.
+- **Everything inside is literal.** No bold, italic or escapes; the code is shown as written, with its indentation and blank lines. In JSON a quote inside the code is `\"` and a backslash `\\`.
+- **Keep it short.** A block is for a snippet that fits on a phone screen: at most about 15 lines of 60 columns. `validate.py` warns above 30 lines or 100 columns. Split a longer listing into several items, one idea each.
+- **Ask for something short.** The learner types a value, an output or a missing word, not the code: show the code in the question of a `text`, `choice` or `truefalse` item and keep the answer to a word or a number. A card may have a block on the back (the learner flips it, or picks it from choices), but then restrict it to `"exercises": ["flip", "choice"]` unless the code is a single short line.
+- **Fill in the code with a cloze.** A `{{gap}}` may stand inside a block: `"Complete the function:\n```python\ndef add(a, b):\n    return {{a + b}}\n```"`. Every gap is shown inside the code. Code that has `{{` and `}}` of its own (template engines, nested braces in JavaScript objects) does not belong in a cloze item.
+- **Run the code.** Every claim about what a snippet prints or returns must be checked by running it (or reading it very carefully); a wrong output teaches an error.
+- **A pack with a code block is `"version": 4`.** Apps that read an older version do not import it and ask the user to update. Keep the lower version for a pack without code blocks.
+
 ## 5. IDs
 
 Every item needs an `id`, and the pack needs one. Learning progress is stored per item id, so ids are a promise to the learner.
@@ -253,12 +277,16 @@ Every item needs an `id`, and the pack needs one. Learning progress is stored pe
 | Facts you are not sure of | The learner memorises errors | Leave out or mark for review |
 | HTML tags, Markdown headings, bullet lists, links | Not supported, shown literally | Plain text; `**bold**`, `*italic*`, `` `code` `` only |
 | Stray `*` or `` ` `` in text | May turn into styling | Escape with `\\*` in JSON, or rephrase |
-| Markdown fences or explanations inside the file | Not valid JSON | Output the JSON only |
+| Markdown fences or explanations around or inside the file | Not valid JSON | Output the JSON only. (Fences inside a text string are code blocks, see [4.12](#412-code-blocks).) |
 | Learner progress, scores or dates in items | Not part of the format | Content only |
 | A figure with `<script>`, links, external images or fonts | The figure is dropped | Self-contained SVG, see [4.10](#410-figures) |
 | A figure that only works on a white background | Unreadable in dark mode | `currentColor` and a transparent background |
 | Latitude and longitude swapped, or west and south written as positive | The pin lands in the wrong place (or is dropped when `lat` is above 90) | `lat` first, north and east positive, see [4.11](#411-maps) |
 | A `map` that shows the answer, or a `figure` together with a `map` | Gives the answer away; the map of that side is ignored | The labelled map goes into `answerMap`, see [4.11](#411-maps) |
+| Code in single backticks over several lines, or indented with spaces in the text | Newlines and indentation are lost | A code block, see [4.12](#412-code-blocks) |
+| A fence that shares its line with text, or an opening fence without a closing one | No code block: the lines are shown as text | The fences on lines of their own, both of them |
+| A code block of 40 lines | Does not fit on a phone and is no atomic question | At most about 15 lines; split the item |
+| Output of a snippet that was never run | The learner memorises a wrong output | Run it |
 | Everything as `choice` or everything as `card` | Dull and not matched to the material | Use the type that fits ([section 3](#3-choosing-item-types)) |
 | `sections` declared, `section` ids misspelled | Items end up ungrouped | Section ids must match exactly |
 
@@ -276,7 +304,7 @@ Every item needs an `id`, and the pack needs one. Learning progress is stored pe
 
 Self-check before delivering:
 
-- [ ] Top level has `format` = `"jackdaw-pack"`, `version` = `1` (`2` if an item has a figure, `3` if an item has a map), `id`, `title`, `items` (non-empty).
+- [ ] Top level has `format` = `"jackdaw-pack"`, `version` = `1` (`2` if an item has a figure, `3` if an item has a map, `4` if any text contains a code block), `id`, `title`, `items` (non-empty).
 - [ ] Every item has `id` (unique, `a-z 0-9 . _ -`) and a `type` from the seven.
 - [ ] `card`: `front` and `back`. `choice`: `question` and 2 or more `options`, at least one `"correct": true`. `text`: `question` and non-empty `answers`. `cloze`: `text` with at least one `{{gap}}`. `truefalse`: `statement` and boolean `answer`. `order`: `prompt` and `sequence` of 2 or more distinct entries in the **correct** order. `open`: `question`.
 - [ ] Every `section` value matches a declared section id.
@@ -327,7 +355,7 @@ FORMAT (Jackdaw Pack)
 The file is one JSON object.
 Top level:
 - "format": "jackdaw-pack"                      (required, always this string)
-- "version": 1                                  (required; the number 1, or 2 if any item has a "figure" or "answerFigure", or 3 if any item has a "map" or "answerMap")
+- "version": 1                                  (required; the number 1, or 2 if any item has a "figure" or "answerFigure", or 3 if any item has a "map" or "answerMap", or 4 if any text contains a code block)
 - "id": string                                  (required; only A-Z a-z 0-9 . _ - ; use "pack." + topic slug + "." + 6 random hex characters, e.g. "pack.roman-emperors.7f3a9c")
 - "title": string                               (required)
 - optional: "description" (string), "language" (BCP-47 tag of the subject, e.g. "es", "en", "de-CH"), "author" (string), "license" (e.g. "CC-BY-4.0"), "tags" (string array), "icon" (ONE emoji), "color" ("#RRGGBB"), "revision": 1, "created" and "updated" ("YYYY-MM-DD")
@@ -359,6 +387,16 @@ Any item may have "map" (shown with the question) and "answerMap" (shown after a
 - "line": optional boolean. true connects the pins in array order with an arrow (birth to death, source to mouth, a route). Leave it out otherwise.
 - The app draws the world map itself and shows every pin: draw nothing. The map shows today's borders, so do not ask questions that depend on historical borders.
 - An item has either a "figure" or a "map" on the same side, not both. Put the labelled map into "answerMap" when it would give the answer away (not "map" for "Where did the Battle of Waterloo take place?"). A pack with a map must say "version": 3.
+
+CODE BLOCKS (short snippets of program code, shell commands or queries; for programming, scripting and database packs)
+Besides the markup of the TEXT RULES below, any text that is shown to the learner (front, back, question, option text, statement, prompt, sequence entries, answer, keyPoints, hint, explanation, and the text of a cloze item) can contain a code block: a line with three backticks and optionally a language name, then the lines of code, then a line with three backticks. Inside the JSON string the line breaks are written \n, for example "question": "What does this print?\n```python\nprint(len('abc'))\n```".
+- The two fence lines stand alone on their lines, with nothing else on them, and the closing fence must exist (an unclosed block is shown as ordinary text). Text before and after a block is ordinary text.
+- The language name is optional and one of: python, javascript, typescript, kotlin, java, swift, c, cpp, csharp, go, rust, sql, bash, json, html, css. It only turns on syntax highlighting; leave it out for anything else.
+- The code is shown literally in monospace: no **bold**, *italic* or backslash escapes inside it, but indentation and blank lines are kept. Escape a double quote inside the code as \" and a backslash as \\ because of JSON.
+- Keep it short: at most about 15 lines of at most 60 characters, one idea per item. State only what the code really does; never invent output you have not worked out.
+- Typed answers (text items, the back of a card, cloze gaps) stay short: ask for the value, the output or the missing word, and show the code in the question. Do not put code blocks into "answers" or "alternatives" (they are literal text).
+- In a cloze a {{gap}} may stand inside a block to hide a missing piece of code: "text": "Complete the function:\n```python\ndef add(a, b):\n    return {{a + b}}\n```". Do not use cloze for code that contains {{ }} of its own. Everything inside a block except the gaps is literal, so a backslash stays a backslash.
+- Use a code block, not `inline code`, for anything of more than one line. A pack with a code block must say "version": 4.
 
 TEXT RULES
 - Text is plain text. The only markup is **bold**, *italic*, `code` and \n for a new line. No HTML, no links, no Markdown headings or lists. Avoid stray * or ` characters.

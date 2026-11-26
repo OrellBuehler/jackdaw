@@ -4,12 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,9 +51,13 @@ import ch.orellbuehler.jackdaw.format.TextSpan
 import ch.orellbuehler.jackdaw.study.AnswerKeyboard
 import ch.orellbuehler.jackdaw.study.ClozeAnswer
 import ch.orellbuehler.jackdaw.study.ClozeExercise
+import ch.orellbuehler.jackdaw.study.ClozePiece
 import ch.orellbuehler.jackdaw.study.ClozeSegment
 import ch.orellbuehler.jackdaw.study.SessionState
+import ch.orellbuehler.jackdaw.ui.components.CodeSurface
+import ch.orellbuehler.jackdaw.ui.components.CodeTextStyle
 import ch.orellbuehler.jackdaw.ui.components.RichTextView
+import ch.orellbuehler.jackdaw.ui.theme.code
 import ch.orellbuehler.jackdaw.ui.theme.jackdaw
 
 sealed interface ClozeToken {
@@ -69,7 +75,7 @@ fun clozeTokens(text: RichText): List<ClozeToken> {
     var hasTrailingSpace = false
 
     fun flush() {
-        if (current.isNotEmpty()) tokens += ClozeToken.Word(RichText(current))
+        if (current.isNotEmpty()) tokens += ClozeToken.Word(RichText.of(current))
         current = ArrayList()
         hasWord = false
         hasTrailingSpace = false
@@ -138,6 +144,37 @@ fun ClozeView(
     val scheme = MaterialTheme.colorScheme
     val success = MaterialTheme.jackdaw
     val results = feedback?.gapResults.orEmpty().associateBy { it.index }
+    val codeColors = MaterialTheme.code
+
+    @Composable
+    fun gap(
+        index: Int,
+        hint: String?,
+        keyboard: AnswerKeyboard,
+        gapStyle: TextStyle,
+        compact: Boolean,
+    ) {
+        val result = results[index]
+        if (result == null) {
+            GapField(
+                value = answers.getOrElse(index) { "" },
+                hint = hint,
+                keyboard = keyboard,
+                index = index,
+                isLast = index == exercise.gapCount - 1,
+                focusRequester = if (index == 0) first else null,
+                style = gapStyle,
+                compact = compact,
+                enabled = feedback == null,
+                onChange = { answers[index] = it },
+                onDone = {
+                    if (answers.any { it.isNotBlank() }) actions.submit(ClozeAnswer(answers.toList()))
+                },
+            )
+        } else {
+            GapResultView(result.given, result.canonical, result.correct, result.typo, gapStyle, compact)
+        }
+    }
     ExerciseFrame(
         hint = question?.hint,
         isRetry = question?.isRetry == true,
@@ -168,27 +205,35 @@ fun ClozeView(
                                 ClozeToken.LineBreak -> Spacer(Modifier.fillMaxWidth().height(0.dp))
                             }
                         }
-                    is ClozeSegment.Gap -> {
-                        val result = results[segment.index]
-                        if (result == null) {
-                            GapField(
-                                value = answers.getOrElse(segment.index) { "" },
-                                hint = segment.hint,
-                                keyboard = segment.keyboard,
-                                index = segment.index,
-                                isLast = segment.index == exercise.gapCount - 1,
-                                focusRequester = if (segment.index == 0) first else null,
-                                style = style,
-                                enabled = feedback == null,
-                                onChange = { answers[segment.index] = it },
-                                onDone = {
-                                    if (answers.any { it.isNotBlank() }) actions.submit(ClozeAnswer(answers.toList()))
-                                },
-                            )
-                        } else {
-                            GapResultView(result.given, result.canonical, result.correct, result.typo, style)
+                    is ClozeSegment.Gap -> gap(segment.index, segment.hint, segment.keyboard, style, compact = false)
+                    is ClozeSegment.Code ->
+                        CodeSurface {
+                            Column {
+                                segment.lines.forEach { line ->
+                                    Row(Modifier.heightIn(min = 19.dp), verticalAlignment = Alignment.CenterVertically) {
+                                        line.forEach { piece ->
+                                            when (piece) {
+                                                is ClozePiece.Span ->
+                                                    Text(
+                                                        piece.text,
+                                                        style = CodeTextStyle,
+                                                        color = codeColors.of(piece.kind),
+                                                        softWrap = false,
+                                                    )
+                                                is ClozePiece.Gap ->
+                                                    gap(
+                                                        piece.index,
+                                                        piece.hint,
+                                                        piece.keyboard,
+                                                        CodeTextStyle,
+                                                        compact = true,
+                                                    )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
                 }
             }
         }
@@ -205,6 +250,7 @@ private fun GapField(
     isLast: Boolean,
     focusRequester: FocusRequester?,
     style: TextStyle,
+    compact: Boolean,
     enabled: Boolean,
     onChange: (String) -> Unit,
     onDone: () -> Unit,
@@ -241,16 +287,24 @@ private fun GapField(
         decorationBox = { inner ->
             Box(
                 Modifier
-                    .widthIn(min = 84.dp)
-                    .height(44.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .widthIn(min = if (compact) 56.dp else 84.dp)
+                    .height(if (compact) 26.dp else 44.dp)
+                    .clip(RoundedCornerShape(if (compact) 6.dp else 12.dp))
                     .background(if (focused) scheme.primaryContainer else scheme.surfaceContainerHigh)
-                    .border(if (focused) 2.dp else 1.dp, if (focused) scheme.primary else scheme.outlineVariant, RoundedCornerShape(12.dp))
-                    .padding(horizontal = 12.dp),
+                    .border(
+                        if (focused) 2.dp else 1.dp,
+                        if (focused) scheme.primary else scheme.outlineVariant,
+                        RoundedCornerShape(if (compact) 6.dp else 12.dp),
+                    ).padding(horizontal = if (compact) 6.dp else 12.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 if (value.isEmpty() && !hint.isNullOrBlank()) {
-                    Text(hint, style = MaterialTheme.typography.labelMedium, color = scheme.onSurfaceVariant, maxLines = 1)
+                    Text(
+                        hint,
+                        style = if (compact) MaterialTheme.typography.labelSmall else MaterialTheme.typography.labelMedium,
+                        color = scheme.onSurfaceVariant,
+                        maxLines = 1,
+                    )
                 }
                 inner()
             }
@@ -265,6 +319,7 @@ private fun GapResultView(
     correct: Boolean,
     typo: Boolean,
     style: TextStyle,
+    compact: Boolean,
 ) {
     val success = MaterialTheme.jackdaw
     val scheme = MaterialTheme.colorScheme
@@ -274,11 +329,11 @@ private fun GapResultView(
         modifier = Modifier.padding(horizontal = 2.dp),
     ) {
         if (correct) {
-            Chip(given, success.successContainer, success.onSuccessContainer, style, typo)
-            if (typo) Chip(canonical, success.successContainer, success.onSuccessContainer, style, false)
+            Chip(given, success.successContainer, success.onSuccessContainer, style, typo, compact)
+            if (typo) Chip(canonical, success.successContainer, success.onSuccessContainer, style, false, compact)
         } else {
-            Chip(given.ifBlank { "—" }, scheme.errorContainer, scheme.onErrorContainer, style, true)
-            Chip(canonical, success.successContainer, success.onSuccessContainer, style, false)
+            Chip(given.ifBlank { "—" }, scheme.errorContainer, scheme.onErrorContainer, style, true, compact)
+            Chip(canonical, success.successContainer, success.onSuccessContainer, style, false, compact)
         }
     }
 }
@@ -290,12 +345,18 @@ private fun Chip(
     content: androidx.compose.ui.graphics.Color,
     style: TextStyle,
     strike: Boolean,
+    compact: Boolean,
 ) {
     Text(
         text,
         style = style,
         color = content,
+        softWrap = !compact,
         textDecoration = if (strike) TextDecoration.LineThrough else null,
-        modifier = Modifier.clip(RoundedCornerShape(12.dp)).background(container).padding(horizontal = 12.dp, vertical = 6.dp),
+        modifier =
+            Modifier
+                .clip(RoundedCornerShape(if (compact) 6.dp else 12.dp))
+                .background(container)
+                .padding(horizontal = if (compact) 6.dp else 12.dp, vertical = if (compact) 1.dp else 6.dp),
     )
 }

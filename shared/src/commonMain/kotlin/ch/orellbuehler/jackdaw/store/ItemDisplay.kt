@@ -2,6 +2,7 @@ package ch.orellbuehler.jackdaw.store
 
 import ch.orellbuehler.jackdaw.format.CardItem
 import ch.orellbuehler.jackdaw.format.ChoiceItem
+import ch.orellbuehler.jackdaw.format.ClozeBlock
 import ch.orellbuehler.jackdaw.format.ClozeItem
 import ch.orellbuehler.jackdaw.format.ClozePart
 import ch.orellbuehler.jackdaw.format.Item
@@ -11,7 +12,7 @@ import ch.orellbuehler.jackdaw.format.RichText
 import ch.orellbuehler.jackdaw.format.TextItem
 import ch.orellbuehler.jackdaw.format.TrueFalseItem
 import ch.orellbuehler.jackdaw.format.isSpecWhitespace
-import ch.orellbuehler.jackdaw.format.parseCloze
+import ch.orellbuehler.jackdaw.format.parseClozeBlocks
 
 private const val MAX_DISPLAY_LENGTH = 200
 
@@ -47,10 +48,12 @@ private fun clozeText(
     item: ClozeItem,
     filled: Boolean,
 ): String =
-    parseCloze(item.text).joinToString("") { part ->
-        when (part) {
-            is ClozePart.Text -> plain(part.raw)
-            is ClozePart.Gap -> if (filled) part.answers.first() else "\u2026"
+    parseClozeBlocks(item.text).joinToString("\n") { block ->
+        block.parts.joinToString("") { part ->
+            when (part) {
+                is ClozePart.Text -> if (block is ClozeBlock.Code) part.raw else plain(part.raw)
+                is ClozePart.Gap -> if (filled) part.answers.first() else "\u2026"
+            }
         }
     }
 

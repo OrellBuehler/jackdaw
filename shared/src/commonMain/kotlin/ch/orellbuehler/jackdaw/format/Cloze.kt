@@ -115,3 +115,28 @@ private fun splitUnescaped(
     parts += s.substring(start)
     return parts
 }
+
+internal sealed class ClozeBlock {
+    abstract val parts: List<ClozePart>
+
+    class Text(
+        override val parts: List<ClozePart>,
+    ) : ClozeBlock()
+
+    class Code(
+        val language: String?,
+        override val parts: List<ClozePart>,
+    ) : ClozeBlock()
+}
+
+// Code blocks are found on the whole text, then the gaps inside every run of text and every block. A gap never contains a newline and a
+// fence is a whole line, so this finds exactly the gaps that parseCloze finds on the whole text.
+internal fun parseClozeBlocks(text: String): List<ClozeBlock> {
+    if (text.indexOf("```") < 0) return listOf(ClozeBlock.Text(parseCloze(text)))
+    return splitCodeBlocks(normalizeNewlines(text)).map { raw ->
+        when (raw) {
+            is RawBlock.Text -> ClozeBlock.Text(parseCloze(raw.raw))
+            is RawBlock.Code -> ClozeBlock.Code(raw.language, parseCloze(raw.code))
+        }
+    }
+}

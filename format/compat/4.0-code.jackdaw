@@ -1,0 +1,113 @@
+{
+  "format": "jackdaw-pack",
+  "version": 4,
+  "id": "ch.orellbuehler.jackdaw.compat.code",
+  "title": "Compatibility: code blocks",
+  "description": "Frozen pack of format version 4. Code blocks in every item type, in cloze gaps and in every rich text property. Never edit this file.",
+  "language": "en",
+  "revision": 1,
+  "items": [
+    {
+      "id": "print-math",
+      "type": "card",
+      "front": "What does this print?\n```python\nprint(2 + 3 * 4)\n```",
+      "back": "14",
+      "hint": "Multiplication binds tighter than addition:\n```python\nprint(3 * 4)\n```",
+      "explanation": "`3 * 4` is 12, and 2 + 12 is 14."
+    },
+    {
+      "id": "pick-the-line",
+      "type": "card",
+      "front": "Which line prints 3?",
+      "back": "```python\nprint(1 + 2)\n```",
+      "distractors": [
+        "```python\nprint(1 - 2)\n```",
+        "```python\nprint('1' + '2')\n```",
+        "```python\nprint(1 * 2)\n```"
+      ],
+      "exercises": [
+        "flip",
+        "choice"
+      ]
+    },
+    {
+      "id": "list-literal",
+      "type": "choice",
+      "question": "Which snippet creates an empty list in Python?",
+      "options": [
+        {
+          "text": "```python\nx = []\n```",
+          "correct": true
+        },
+        {
+          "text": "```python\nx = {}\n```",
+          "explanation": "That is an empty dict."
+        },
+        {
+          "text": "```python\nx = ()\n```",
+          "explanation": "That is an empty tuple:\n```python\nprint(type(()))\n```"
+        }
+      ]
+    },
+    {
+      "id": "len-abc",
+      "type": "text",
+      "question": "What does this print?\n```python\nprint(len('abc'))\n```",
+      "answers": [
+        "3",
+        "three"
+      ]
+    },
+    {
+      "id": "for-loop",
+      "type": "cloze",
+      "text": "```python\nfor i in {{range(3)}}:\n    print(i)\n```\nThe loop prints {{0}}, 1 and 2."
+    },
+    {
+      "id": "arrow-sum",
+      "type": "cloze",
+      "text": "Fill in the missing operator:\n```js\nconst sum = (a, b) => a {{+::an operator}} b;\nconsole.log(sum(2, 3));\n```",
+      "explanation": "It logs 5:\n```js\nconsole.log(2 + 3);\n```"
+    },
+    {
+      "id": "floor-division",
+      "type": "truefalse",
+      "statement": "```python\nprint(10 // 3)\n```\nThis prints 3.",
+      "answer": true,
+      "explanation": "`//` divides and rounds down: 10 // 3 is 3."
+    },
+    {
+      "id": "run-order",
+      "type": "order",
+      "prompt": "Put these Python lines in the order in which they must run.",
+      "sequence": [
+        "```python\nx = 1\n```",
+        "```python\ny = x + 1\n```",
+        "```python\nprint(y)\n```"
+      ]
+    },
+    {
+      "id": "mutable-default",
+      "type": "open",
+      "question": "Why can this function surprise you?\n```python\ndef add(x, items=[]):\n    items.append(x)\n    return items\n```",
+      "answer": "The default list is created once, when the function is defined, and every call without `items` shares it. Use `None` instead:\n```python\ndef add(x, items=None):\n    if items is None:\n        items = []\n    items.append(x)\n    return items\n```",
+      "keyPoints": [
+        "The default value is evaluated once",
+        "Calls without `items` share the same list",
+        "Use `None` and create the list inside"
+      ]
+    },
+    {
+      "id": "no-language",
+      "type": "card",
+      "front": "A block without a language name:\n```\nline one\n    indented line\n```",
+      "back": "ok"
+    },
+    {
+      "id": "tab-and-unknown-language",
+      "type": "card",
+      "front": "```Brainfuck\n\t+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.\n```",
+      "back": "ok"
+    }
+  ]
+}

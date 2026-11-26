@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/OrellBuehler/jackdaw/main/format/jackdaw-pack.schema.json",
   "title": "Jackdaw Pack",
-  "description": "A Jackdaw Pack (format versions 1, 2 and 3) is a single UTF-8 JSON document that describes a learning dataset: metadata, optional sections and a list of items. Items come in seven types (card, choice, text, cloze, truefalse, order, open) that define how they are learned. Learning progress and spaced-repetition scheduling are NOT part of a pack. This schema is intentionally STRICTER than readers: readers must ignore unknown properties and skip items with an unknown type, but this schema (meant for authors, generators and validators) rejects unknown item types so typos are caught. Unknown properties are allowed everywhere; keys starting with 'x-' are reserved for vendor extensions. Specification: README.md next to this file.",
+  "description": "A Jackdaw Pack (format versions 1, 2, 3 and 4) is a single UTF-8 JSON document that describes a learning dataset: metadata, optional sections and a list of items. Items come in seven types (card, choice, text, cloze, truefalse, order, open) that define how they are learned. Learning progress and spaced-repetition scheduling are NOT part of a pack. This schema is intentionally STRICTER than readers: readers must ignore unknown properties and skip items with an unknown type, but this schema (meant for authors, generators and validators) rejects unknown item types so typos are caught. Unknown properties are allowed everywhere; keys starting with 'x-' are reserved for vendor extensions. Specification: README.md next to this file.",
   "type": "object",
   "required": ["format", "version", "id", "title", "items"],
   "properties": {
@@ -16,8 +16,8 @@
     },
     "version": {
       "type": "integer",
-      "enum": [1, 2, 3],
-      "description": "Required. Version of the pack format: the lowest one that has everything the pack uses. 1; 2 as soon as an item has a 'figure' or 'answerFigure'; 3 as soon as an item has a 'map' or 'answerMap'. Readers MUST reject files whose version is greater than the highest they support and ask the user to update."
+      "enum": [1, 2, 3, 4],
+      "description": "Required. Version of the pack format: the lowest one that has everything the pack uses. 1; 2 as soon as an item has a 'figure' or 'answerFigure'; 3 as soon as an item has a 'map' or 'answerMap'; 4 as soon as a rich text property contains a fenced code block. Readers MUST reject files whose version is greater than the highest they support and ask the user to update."
     },
     "id": {
       "$ref": "#/$defs/PackId"
@@ -139,9 +139,52 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "required": ["version"],
+        "properties": { "version": { "enum": [1, 2, 3] } }
+      },
+      "then": {
+        "description": "Code blocks are part of format version 4: a pack that declares version 1, 2 or 3 has none in any rich text property.",
+        "properties": {
+          "items": {
+            "items": {
+              "properties": {
+                "hint": { "$ref": "#/$defs/NoCodeBlock" },
+                "explanation": { "$ref": "#/$defs/NoCodeBlock" },
+                "front": { "$ref": "#/$defs/NoCodeBlock" },
+                "back": { "$ref": "#/$defs/NoCodeBlock" },
+                "question": { "$ref": "#/$defs/NoCodeBlock" },
+                "text": { "$ref": "#/$defs/NoCodeBlock" },
+                "statement": { "$ref": "#/$defs/NoCodeBlock" },
+                "prompt": { "$ref": "#/$defs/NoCodeBlock" },
+                "answer": { "$ref": "#/$defs/NoCodeBlock" },
+                "distractors": { "items": { "$ref": "#/$defs/NoCodeBlock" } },
+                "frontDistractors": { "items": { "$ref": "#/$defs/NoCodeBlock" } },
+                "sequence": { "items": { "$ref": "#/$defs/NoCodeBlock" } },
+                "keyPoints": { "items": { "$ref": "#/$defs/NoCodeBlock" } },
+                "options": {
+                  "items": {
+                    "properties": {
+                      "text": { "$ref": "#/$defs/NoCodeBlock" },
+                      "explanation": { "$ref": "#/$defs/NoCodeBlock" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "$defs": {
+    "NoCodeBlock": {
+      "description": "A string that contains no fenced code block (an opening fence line, then a closing fence line).",
+      "if": { "type": "string" },
+      "then": { "not": { "pattern": "(^|[\\r\\n]) *``` *[A-Za-z0-9+#-]{0,20} *(\\r\\n|\\r|\\n)([\\s\\S]*[\\r\\n])?``` *(\\r\\n|\\r|\\n|$)" } }
+    },
     "PackId": {
       "type": "string",
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$",
@@ -173,7 +216,7 @@
       "minLength": 1,
       "maxLength": 4000,
       "pattern": "\\S",
-      "description": "Rich text: plain text with the tiny inline markup subset **bold**, *italic*, `code` and newlines. Backslash escapes a marker (\\*, \\`, \\\\). No HTML, no links, no images. At most 4000 characters."
+      "description": "Rich text: plain text with the tiny inline markup subset **bold**, *italic*, `code` and newlines. Backslash escapes a marker (\\*, \\`, \\\\). A fenced code block (a line with three backticks and an optional language name, the code lines, a line with three backticks; format version 4) is shown as code, literally. No HTML, no links, no images. At most 4000 characters."
     },
     "PlainText": {
       "type": "string",

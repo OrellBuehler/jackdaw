@@ -26,6 +26,7 @@ class CompatibilityTest {
         assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "1.0" })
         assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "2.0" })
         assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "3.0" })
+        assertTrue(manifest.any { it.getValue("revision").jsonPrimitive.content == "4.0" })
     }
 
     @Test
@@ -48,6 +49,22 @@ class CompatibilityTest {
                 assertEquals(result.pack.items[index], stored, "stored item $index of $file")
             }
         }
+    }
+
+    @Test
+    fun frozenCodeBlocksAreRead() {
+        val result = assertIs<ReadResult.Accepted>(PackReader.read(GENERATED_COMPAT_PACKS.getValue("4.0-code.jackdaw")))
+        val items = result.pack.items.associateBy { it.id }
+        val card = items.getValue("print-math") as CardItem
+        assertEquals("What does this print?\n```python\nprint(2 + 3 * 4)\n```", card.front)
+        assertEquals(listOf("What does this print?", "print(2 + 3 * 4)"), RichText.parse(card.front).plain.lines())
+        val cloze = items.getValue("for-loop") as ClozeItem
+        val blocks = parseClozeBlocks(cloze.text)
+        assertEquals(2, blocks.size)
+        assertEquals("python", (blocks[0] as ClozeBlock.Code).language)
+        assertEquals(listOf("range(3)"), (blocks[0].parts[1] as ClozePart.Gap).answers)
+        assertEquals(listOf("0"), (blocks[1].parts[1] as ClozePart.Gap).answers)
+        assertEquals(4, FormatVersion.needed(result.payloads.map { Json.parseToJsonElement(it) }))
     }
 
     @Test

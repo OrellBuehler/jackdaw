@@ -32,6 +32,8 @@ SCHEMA_PATH = HERE / "jackdaw-pack.schema.json"
 VECTORS_PATH = HERE / "test-vectors.json"
 
 MAX_ITEMS = 5000
+CODE_MAX_LINES = 30
+CODE_MAX_COLUMNS = 100
 MAX_BYTES = 5 * 1024 * 1024
 
 
@@ -111,8 +113,74 @@ def parse_markup(s, warnings=None):
 
 
 def plain_text(s):
-    """Plain-text rendering of rich text (what the learner sees, without styling)."""
-    return "".join(t for _, t in parse_markup(s))
+    """Plain-text rendering of rich text (what the learner sees, without styling): the text after markup, the code of every
+    block without its fences, one line break between them."""
+    return "\n".join("".join(t for _, t in b[1]) if b[0] == "p" else b[2] for b in parse_rich(s))
+
+
+_FENCE_OPEN = re.compile(r" *``` *([A-Za-z0-9+#-]{0,20}) *")
+_FENCE_CLOSE = re.compile(r"``` *")
+
+
+def normalize_newlines(s):
+    return s.replace("\r\n", "\n").replace("\r", "\n")
+
+
+def split_code_blocks(s):
+    """Normalised rich text -> list of ('t', raw text) and ('c', language or None, code) (README.md section 8.6)."""
+    if "```" not in s:
+        return [("t", s)] if s else []
+    lines = s.split("\n")
+    blocks = []
+    text_from = 0
+    i = 0
+    while i < len(lines):
+        m = _FENCE_OPEN.fullmatch(lines[i])
+        if not m:
+            i += 1
+            continue
+        j = i + 1
+        while j < len(lines) and not _FENCE_CLOSE.fullmatch(lines[j]):
+            j += 1
+        if j >= len(lines):
+            break  # no closing fence: this and every later fence line stays literal text
+        if i > text_from:
+            blocks.append(("t", "\n".join(lines[text_from:i])))
+        blocks.append(("c", m.group(1).lower() or None, "\n".join(lines[i + 1:j])))
+        i = j + 1
+        text_from = i
+    if len(lines) > text_from:
+        blocks.append(("t", "\n".join(lines[text_from:])))
+    return blocks
+
+
+def parse_rich(s):
+    """Rich text -> list of ('p', spans) and ('c', language, code); empty paragraphs and empty blocks are dropped."""
+    out = []
+    for block in split_code_blocks(normalize_newlines(s)):
+        if block[0] == "t":
+            spans = parse_markup(block[1])
+            if spans:
+                out.append(("p", spans))
+        elif block[2]:
+            out.append(("c", block[1], block[2]))
+    return out
+
+
+def has_code_block(s):
+    return any(b[0] == "c" for b in split_code_blocks(normalize_newlines(s)))
+
+
+def markup_warnings(s):
+    """Warnings for unmatched markup markers in the text outside of code blocks."""
+    found = []
+    for block in split_code_blocks(normalize_newlines(s)):
+        if block[0] == "t":
+            if any(_FENCE_OPEN.fullmatch(line) for line in block[1].split("\n")):
+                found.append("a line of three backticks has no matching fence and is shown as text (a code block needs an opening "
+                             "and a closing fence line)")
+            parse_markup(block[1], found)
+    return found
 
 
 def _split_unescaped(s, sep):
@@ -188,6 +256,16 @@ def parse_cloze(text):
         i += 1
     flush()
     return segs
+
+
+def parse_cloze_blocks(text):
+    """Cloze text -> list of ('t', segments) and ('c', language, segments); the segments are those of parse_cloze."""
+    if "```" not in text:
+        return [("t", parse_cloze(text))]
+    out = []
+    for b in split_code_blocks(normalize_newlines(text)):
+        out.append(("t", parse_cloze(b[1])) if b[0] == "t" else ("c", b[1], parse_cloze(b[2])))
+    return out
 
 
 _QUOTES = {
@@ -370,11 +448,42 @@ def _path(err):
     return "/" + "/".join(str(p) for p in err.absolute_path)
 
 
+_MARKUP_CHECKED = frozenset(("hint", "explanation", "front", "back", "question", "statement", "prompt", "answer"))
+
+_RICH_FIELDS = {
+    "card": ("front", "back", "distractors", "frontDistractors"),
+    "choice": ("question",),
+    "text": ("question",),
+    "cloze": ("text",),
+    "truefalse": ("statement",),
+    "order": ("prompt", "sequence"),
+    "open": ("question", "answer", "keyPoints"),
+}
+
+
+def rich_strings(item):
+    """Yields (property, text) for every rich text property of an item that holds a string (README.md section 8.1)."""
+    kind = item.get("type") if isinstance(item.get("type"), str) else None
+    for field in ("hint", "explanation") + _RICH_FIELDS.get(kind, ()):
+        value = item.get(field)
+        for text in value if isinstance(value, list) else [value]:
+            if isinstance(text, str):
+                yield field, text
+    options = item.get("options") if kind == "choice" else None
+    for option in options if isinstance(options, list) else []:
+        if isinstance(option, dict):
+            for field in ("text", "explanation"):
+                if isinstance(option.get(field), str):
+                    yield "options/" + field, option[field]
+
+
 def needed_version(pack):
     """The lowest format version that has everything the pack uses (specification, section 14)."""
-    items = pack.get("items") if isinstance(pack.get("items"), list) else []
-    maps = any(isinstance(it, dict) and ("map" in it or "answerMap" in it) for it in items)
-    figures = any(isinstance(it, dict) and ("figure" in it or "answerFigure" in it) for it in items)
+    items = [it for it in pack.get("items", []) if isinstance(it, dict)] if isinstance(pack.get("items"), list) else []
+    if any(has_code_block(text) for it in items for _, text in rich_strings(it)):
+        return 4
+    maps = any("map" in it or "answerMap" in it for it in items)
+    figures = any("figure" in it or "answerFigure" in it for it in items)
     return 3 if maps else 2 if figures else 1
 
 
@@ -451,13 +560,21 @@ def check_semantics(pack, rep, size_bytes):
         elif section_ids:
             rep.warn(where, "item has no 'section' although the pack declares sections")
 
-        for field in ("hint", "explanation", "front", "back", "question", "statement", "prompt", "answer"):
-            v = it.get(field)
-            if isinstance(v, str):
-                w = []
-                parse_markup(v, w)
-                for msg in w:
-                    rep.warn("%s.%s" % (where, field), msg + " (escape it as \\* or \\` if literal)")
+        for field, v in rich_strings(it):
+            if field not in _MARKUP_CHECKED:
+                continue  # option texts and cloze text are checked in their own branch below
+            for msg in markup_warnings(v):
+                hint = " (escape it as \\* or \\` if literal)" if msg.startswith("unmatched") else ""
+                rep.warn("%s.%s" % (where, field), msg + hint)
+        for field, v in rich_strings(it):
+            for block in split_code_blocks(normalize_newlines(v)):
+                if block[0] != "c":
+                    continue
+                code_lines = block[2].split("\n") if block[2] else []
+                columns = max((len(line.replace("\t", "    ")) for line in code_lines), default=0)
+                if len(code_lines) > CODE_MAX_LINES or columns > CODE_MAX_COLUMNS:
+                    rep.warn("%s.%s" % (where, field), "code block of %d lines and %d columns: code blocks are for short snippets "
+                             "(at most %d lines and %d columns, ideally 15 and 60)" % (len(code_lines), columns, CODE_MAX_LINES, CODE_MAX_COLUMNS))
 
         for field in ("map", "answerMap"):
             if field in it:
@@ -497,9 +614,7 @@ def check_semantics(pack, rep, size_bytes):
                     rep.warn(where, "two options have the same text")
                 for o in opts:
                     if isinstance(o, dict) and isinstance(o.get("text"), str):
-                        w = []
-                        parse_markup(o["text"], w)
-                        for msg in w:
+                        for msg in markup_warnings(o["text"]):
                             rep.warn(where + ".options", msg)
         elif t == "text":
             ans = it.get("answers")
@@ -510,7 +625,8 @@ def check_semantics(pack, rep, size_bytes):
         elif t == "cloze":
             text = it.get("text")
             if isinstance(text, str):
-                segs = parse_cloze(text)
+                blocks = parse_cloze_blocks(text)
+                segs = [seg for b in blocks for seg in (b[1] if b[0] == "t" else b[2])]
                 gaps = [s for k, s in segs if k == "g"]
                 if not gaps:
                     rep.error(where, "cloze text contains no valid {{gap}}")
@@ -522,15 +638,18 @@ def check_semantics(pack, rep, size_bytes):
                             rep.error(where, "gap answer %r is empty after normalisation" % a)
                 if re.search(r"\{\{\s*\}\}|\{\{\s*::", text):
                     rep.error(where, "empty gap")
-                literal = "".join(s for k, s in segs if k == "t")
-                if "{{" in re.sub(r"\\.", "", literal) or "}}" in re.sub(r"\\.", "", literal):
-                    rep.warn(where, "stray '{{' or '}}' outside a valid gap (escape with \\{ and \\} if literal)")
-                for k, s in segs:
-                    if k == "t":
-                        w = []
-                        parse_markup(s, w)
-                        for msg in w:
-                            rep.warn(where + ".text", msg)
+                for b in blocks:
+                    if b[0] != "t":
+                        continue  # in a code block everything but the gaps is literal
+                    literal = "".join(s for k, s in b[1] if k == "t")
+                    if "{{" in re.sub(r"\\.", "", literal) or "}}" in re.sub(r"\\.", "", literal):
+                        rep.warn(where, "stray '{{' or '}}' outside a valid gap (escape with \\{ and \\} if literal)")
+                    for k, s in b[1]:
+                        if k == "t":
+                            w = []
+                            parse_markup(s, w)
+                            for msg in w:
+                                rep.warn(where + ".text", msg)
         elif t == "order":
             seq = it.get("sequence")
             if isinstance(seq, list):
@@ -579,7 +698,10 @@ def extract_pack_blocks(md_path):
                 j += 1
             body = "\n".join(lines[start:j])
             if m.group(3) == "item":
-                version = 3 if re.search(r'"(map|answerMap)"\s*:', body) else 2 if re.search(r'"(figure|answerFigure)"\s*:', body) else 1
+                try:
+                    version = needed_version({"items": [json.loads(body)]})
+                except ValueError:
+                    version = 1  # the validator reports the broken JSON
                 body = ('{"format": "jackdaw-pack", "version": %d, "id": "snippet", "title": "snippet", "items": [%s]}'
                         % (version, body))
             blocks.append(("%s line %d (%s)" % (md_path.name, start, m.group(3)), body))
@@ -591,6 +713,12 @@ def extract_pack_blocks(md_path):
 # --------------------------------------------------------------------------
 # Test vectors
 # --------------------------------------------------------------------------
+
+def _cloze_block_json(block):
+    """A block of parse_cloze_blocks as in test-vectors.json: pieces are ['l', raw text] or ['g', gap]."""
+    pieces = [["l" if kind == "t" else "g", value] for kind, value in (block[1] if block[0] == "t" else block[2])]
+    return ["t", pieces] if block[0] == "t" else ["c", block[1], pieces]
+
 
 def run_vectors(path):
     errors = []
@@ -613,6 +741,18 @@ def run_vectors(path):
         got = [[k, s] for k, s in parse_cloze(v["input"])]
         if got != v["segments"]:
             errors.append("cloze[%d] %r: expected %r, got %r" % (n, v["input"], v["segments"], got))
+    for n, v in enumerate(data.get("code", [])):
+        got = [list(b) for b in split_code_blocks(normalize_newlines(v["input"]))]
+        if got != v["blocks"]:
+            errors.append("code[%d] %r: expected %r, got %r" % (n, v["input"], v["blocks"], got))
+        if plain_text(v["input"]) != v["plain"]:
+            errors.append("code[%d] %r: plain expected %r, got %r" % (n, v["input"], v["plain"], plain_text(v["input"])))
+        if has_code_block(v["input"]) != any(b[0] == "c" for b in v["blocks"]):
+            errors.append("code[%d] %r: has_code_block disagrees with the blocks" % (n, v["input"]))
+    for n, v in enumerate(data.get("clozeCode", [])):
+        got = [_cloze_block_json(b) for b in parse_cloze_blocks(v["input"])]
+        if got != v["blocks"]:
+            errors.append("clozeCode[%d] %r: expected %r, got %r" % (n, v["input"], v["blocks"], got))
     for n, v in enumerate(data.get("figure", [])):
         problem, ratio = check_figure(v["svg"])
         if (problem is None) != v["valid"]:
@@ -624,7 +764,7 @@ def run_vectors(path):
         expected = v["expected"]
         if got != expected:
             errors.append("map[%d] %r: expected %r, got %r" % (n, v["input"], expected, got))
-    return errors, sum(len(data.get(k, [])) for k in ("normalize", "match", "markup", "cloze", "figure", "map"))
+    return errors, sum(len(data.get(k, [])) for k in ("normalize", "match", "markup", "cloze", "code", "clozeCode", "figure", "map"))
 
 
 # --------------------------------------------------------------------------

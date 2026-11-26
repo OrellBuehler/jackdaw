@@ -32,6 +32,77 @@ class ConformanceVectorsTest {
         assertTrue(section("match").size > 10)
         assertTrue(section("markup").size > 20)
         assertTrue(section("cloze").size > 15)
+        assertTrue(section("code").size > 30)
+        assertTrue(section("clozeCode").size > 8)
+    }
+
+    @Test
+    fun codeVectors() {
+        section("code").forEachIndexed { index, v ->
+            val input = v.getValue("input").jsonPrimitive.content
+            val actual =
+                splitCodeBlocks(normalizeNewlines(input)).map { block ->
+                    when (block) {
+                        is RawBlock.Text -> JsonArray(listOf(JsonPrimitive("t"), JsonPrimitive(block.raw)))
+                        is RawBlock.Code ->
+                            JsonArray(
+                                listOf(
+                                    JsonPrimitive("c"),
+                                    block.language?.let { JsonPrimitive(it) } ?: JsonNull,
+                                    JsonPrimitive(block.code),
+                                ),
+                            )
+                    }
+                }
+            val expected: List<JsonElement> = v.getValue("blocks").jsonArray.toList()
+            assertEquals(expected, actual, "code[$index] $input")
+            assertEquals(v.getValue("plain").jsonPrimitive.content, RichText.parse(input).plain, "code plain[$index] $input")
+            assertEquals(
+                expected.any { it.jsonArray[0].jsonPrimitive.content == "c" },
+                containsCodeBlock(input),
+                "code contains[$index] $input",
+            )
+        }
+    }
+
+    @Test
+    fun clozeCodeVectors() {
+        section("clozeCode").forEachIndexed { index, v ->
+            val input = v.getValue("input").jsonPrimitive.content
+
+            fun pieces(parts: List<ClozePart>): JsonArray =
+                JsonArray(
+                    parts.map { part ->
+                        when (part) {
+                            is ClozePart.Text -> JsonArray(listOf(JsonPrimitive("l"), JsonPrimitive(part.raw)))
+                            is ClozePart.Gap ->
+                                JsonArray(
+                                    listOf(
+                                        JsonPrimitive("g"),
+                                        JsonObject(
+                                            mapOf(
+                                                "answers" to JsonArray(part.answers.map { JsonPrimitive(it) }),
+                                                "hint" to (part.hint?.let { JsonPrimitive(it) } ?: JsonNull),
+                                            ),
+                                        ),
+                                    ),
+                                )
+                        }
+                    },
+                )
+            val actual =
+                parseClozeBlocks(input).map { block ->
+                    when (block) {
+                        is ClozeBlock.Text -> JsonArray(listOf(JsonPrimitive("t"), pieces(block.parts)))
+                        is ClozeBlock.Code ->
+                            JsonArray(
+                                listOf(JsonPrimitive("c"), block.language?.let { JsonPrimitive(it) } ?: JsonNull, pieces(block.parts)),
+                            )
+                    }
+                }
+            val expected: List<JsonElement> = v.getValue("blocks").jsonArray.toList()
+            assertEquals(expected, actual, "clozeCode[$index] $input")
+        }
     }
 
     @Test

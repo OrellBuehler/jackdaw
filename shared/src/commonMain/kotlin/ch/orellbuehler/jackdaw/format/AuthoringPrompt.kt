@@ -4,11 +4,11 @@ internal object AuthoringPrompt {
     private val typeLine = Regex("""^\d+\. "([a-z]+)": """)
     private val exampleItem = Regex("""^ {4}\{ "id": "[^"]+", "type": "([a-z]+)"""")
     private const val PREFERRED_TYPES = "Preferred item types: "
-    private val FIGURE_HEADINGS = listOf("FIGURES", "MAPS")
+    private val FIGURE_HEADINGS = listOf("FIGURES", "MAPS", "CODE BLOCKS")
     private const val EXAMPLE_ITEMS = "  \"items\": ["
     private const val EXAMPLE_ITEMS_END = "  ]"
     private const val VERSION_WITH_FIGURES =
-        "(required; the number 1, or 2 if any item has a \"figure\" or \"answerFigure\", or 3 if any item has a \"map\" or \"answerMap\")"
+        "(required; the number 1, or 2 if any item has a \"figure\" or \"answerFigure\", or 3 if any item has a \"map\" or \"answerMap\", or 4 if any text contains a code block)"
     private const val VERSION_WITHOUT_FIGURES = "(required, always the number 1)"
     private const val EXAMPLE_VERSION = "  \"version\": 2,"
     private val exampleFigure = Regex("""^ +"(figure|answerFigure)": """)

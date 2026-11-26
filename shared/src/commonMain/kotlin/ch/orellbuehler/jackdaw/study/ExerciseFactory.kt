@@ -4,19 +4,26 @@ import ch.orellbuehler.jackdaw.format.AnswerMatch
 import ch.orellbuehler.jackdaw.format.CardItem
 import ch.orellbuehler.jackdaw.format.CardKind
 import ch.orellbuehler.jackdaw.format.ChoiceItem
+import ch.orellbuehler.jackdaw.format.ClozeBlock
 import ch.orellbuehler.jackdaw.format.ClozeItem
 import ch.orellbuehler.jackdaw.format.ClozePart
+import ch.orellbuehler.jackdaw.format.GAP_PLACEHOLDER
 import ch.orellbuehler.jackdaw.format.Item
 import ch.orellbuehler.jackdaw.format.OpenItem
 import ch.orellbuehler.jackdaw.format.OrderItem
 import ch.orellbuehler.jackdaw.format.RichText
 import ch.orellbuehler.jackdaw.format.Study
+import ch.orellbuehler.jackdaw.format.TextBlock
 import ch.orellbuehler.jackdaw.format.TextItem
 import ch.orellbuehler.jackdaw.format.TextSpan
 import ch.orellbuehler.jackdaw.format.TrueFalseItem
+import ch.orellbuehler.jackdaw.format.highlight
 import ch.orellbuehler.jackdaw.format.matchAnswer
 import ch.orellbuehler.jackdaw.format.normalize
+import ch.orellbuehler.jackdaw.format.normalizeNewlines
 import ch.orellbuehler.jackdaw.format.parseCloze
+import ch.orellbuehler.jackdaw.format.parseClozeBlocks
+import ch.orellbuehler.jackdaw.format.parseMarkup
 import kotlin.random.Random
 
 internal class PackContext(
@@ -299,19 +306,28 @@ internal object ExerciseFactory {
         facet: Facet,
         tolerateTypos: Boolean,
     ): BuiltExercise {
-        val parts = parseCloze(item.text)
-        val gaps = parts.filterIsInstance<ClozePart.Gap>()
+        val blocks = parseClozeBlocks(item.text)
         var gapIndex = 0
-        val segments =
-            parts.map { part ->
-                when (part) {
-                    is ClozePart.Text -> ClozeSegment.Text(RichText.parse(part.raw))
-                    is ClozePart.Gap -> ClozeSegment.Gap(gapIndex++, part.hint, answerKeyboard(part.answers.first()))
+        val segments = ArrayList<ClozeSegment>()
+        for (block in blocks) {
+            when (block) {
+                is ClozeBlock.Text ->
+                    for (part in block.parts) {
+                        segments +=
+                            when (part) {
+                                is ClozePart.Text -> ClozeSegment.Text(RichText.of(parseMarkup(normalizeNewlines(part.raw))))
+                                is ClozePart.Gap -> ClozeSegment.Gap(gapIndex++, part.hint, answerKeyboard(part.answers.first()))
+                            }
+                    }
+                is ClozeBlock.Code -> {
+                    segments += ClozeSegment.Code(clozeCodeLines(block, gapIndex))
+                    gapIndex += block.parts.count { it is ClozePart.Gap }
                 }
             }
+        }
         return BuiltCloze(
-            ClozeExercise(item.id, facet, segments, gaps.size),
-            parts,
+            ClozeExercise(item.id, facet, segments, gapIndex),
+            blocks,
             item.caseSensitive,
             context,
             tolerateTypos,
@@ -341,12 +357,61 @@ internal fun joinRich(
     parts: List<RichText>,
     separator: String,
 ): RichText {
-    val spans = ArrayList<TextSpan>()
+    val blocks = ArrayList<TextBlock>()
     parts.forEachIndexed { index, part ->
-        if (index > 0) spans += TextSpan(separator, bold = false, italic = false, code = false)
-        spans += part.spans
+        val last = blocks.lastOrNull()
+        val first = part.blocks.firstOrNull()
+        if (index > 0 && last is TextBlock.Paragraph && (first == null || first is TextBlock.Paragraph)) {
+            val separatorSpan = TextSpan(separator, bold = false, italic = false, code = false)
+            val joined = last.spans + separatorSpan + (if (first is TextBlock.Paragraph) first.spans else emptyList())
+            blocks[blocks.lastIndex] = TextBlock.Paragraph(joined)
+            blocks += part.blocks.drop(1)
+        } else {
+            blocks += part.blocks
+        }
     }
-    return RichText(spans)
+    return RichText(blocks)
+}
+
+private fun clozeCodeLines(
+    block: ClozeBlock.Code,
+    firstGap: Int,
+): List<List<ClozePiece>> {
+    val masked = StringBuilder()
+    val gaps = ArrayList<ClozePart.Gap>()
+    for (part in block.parts) {
+        when (part) {
+            is ClozePart.Text -> masked.append(part.raw.replace(GAP_PLACEHOLDER, '\uFFFD'))
+            is ClozePart.Gap -> {
+                masked.append(GAP_PLACEHOLDER)
+                gaps += part
+            }
+        }
+    }
+    val lines = ArrayList<List<ClozePiece>>()
+    var current = ArrayList<ClozePiece>()
+    var gapNo = 0
+    for (span in highlight(block.language, masked.toString())) {
+        val text = span.text.replace("\t", "    ")
+        var from = 0
+        for (k in text.indices) {
+            val c = text[k]
+            if (c != '\n' && c != GAP_PLACEHOLDER) continue
+            if (k > from) current += ClozePiece.Span(text.substring(from, k), span.kind)
+            if (c == '\n') {
+                lines += current
+                current = ArrayList()
+            } else {
+                val gap = gaps[gapNo]
+                current += ClozePiece.Gap(firstGap + gapNo, gap.hint, answerKeyboard(gap.answers.first()))
+                gapNo++
+            }
+            from = k + 1
+        }
+        if (from < text.length) current += ClozePiece.Span(text.substring(from), span.kind)
+    }
+    lines += current
+    return lines
 }
 
 private class BuiltFlip(
@@ -417,7 +482,7 @@ private class BuiltType(
 
 private class BuiltCloze(
     override val exercise: ClozeExercise,
-    private val parts: List<ClozePart>,
+    private val blocks: List<ClozeBlock>,
     private val caseSensitive: Boolean,
     private val context: PackContext,
     private val tolerateTypos: Boolean,
@@ -428,7 +493,7 @@ private class BuiltCloze(
 
     override fun evaluate(answer: Answer): Evaluation? {
         if (answer !is ClozeAnswer) return null
-        val gaps = parts.filterIsInstance<ClozePart.Gap>()
+        val gaps = blocks.flatMap { it.parts }.filterIsInstance<ClozePart.Gap>()
         val results =
             gaps.mapIndexed { index, gap ->
                 val given = answer.gaps.getOrElse(index) { "" }
@@ -436,17 +501,35 @@ private class BuiltCloze(
                     matchAnswer(given, gap.answers, caseSensitive, context.study.ignoreDiacritics, tolerateTypos, context.typedAnswers)
                 GapResult(index, given, gap.answers.first(), match != AnswerMatch.NONE, match == AnswerMatch.TYPO)
             }
-        val spans = ArrayList<TextSpan>()
+        val filled = ArrayList<TextBlock>()
         var gapIndex = 0
-        for (part in parts) {
-            when (part) {
-                is ClozePart.Text -> spans += RichText.parse(part.raw).spans
-                is ClozePart.Gap -> spans += TextSpan(results[gapIndex++].canonical, bold = true, italic = false, code = false)
+        for (block in blocks) {
+            when (block) {
+                is ClozeBlock.Text -> {
+                    val spans = ArrayList<TextSpan>()
+                    for (part in block.parts) {
+                        when (part) {
+                            is ClozePart.Text -> spans += parseMarkup(normalizeNewlines(part.raw))
+                            is ClozePart.Gap -> spans += TextSpan(results[gapIndex++].canonical, bold = true, italic = false, code = false)
+                        }
+                    }
+                    if (spans.isNotEmpty()) filled += TextBlock.Paragraph(spans)
+                }
+                is ClozeBlock.Code -> {
+                    val code = StringBuilder()
+                    for (part in block.parts) {
+                        when (part) {
+                            is ClozePart.Text -> code.append(part.raw)
+                            is ClozePart.Gap -> code.append(results[gapIndex++].canonical)
+                        }
+                    }
+                    if (code.isNotEmpty()) filled += TextBlock.Code(block.language, code.toString())
+                }
             }
         }
         return Evaluation(
             results.all { it.correct },
-            RichText(spans),
+            RichText(filled),
             results.joinToString(", ") { it.given },
             gapResults = results,
             typo = results.any { it.typo },
