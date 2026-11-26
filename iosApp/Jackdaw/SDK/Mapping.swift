@@ -214,9 +214,35 @@ enum Mapping {
 
     static func styled(_ text: RichText) -> StyledText {
         StyledText(
-            spans: text.spans.map {
-                StyledSpan(text: $0.text, bold: $0.bold, italic: $0.italic, code: $0.code)
+            blocks: text.blocks.map { block -> StyledBlock in
+                switch onEnum(of: block) {
+                case .paragraph(let paragraph):
+                    return .paragraph(
+                        paragraph.spans.map {
+                            StyledSpan(text: $0.text, bold: $0.bold, italic: $0.italic, code: $0.code)
+                        }
+                    )
+                case .code(let code):
+                    return .code(codeTokens(code.lines))
+                default:
+                    return .paragraph([])
+                }
             }
         )
+    }
+
+    static func codeTokens(_ lines: [[CodeSpan]]) -> [[CodeToken]] {
+        lines.map { line in line.map { CodeToken(text: $0.text, kind: tokenKind($0.kind)) } }
+    }
+
+    static func tokenKind(_ kind: TokenKind) -> CodeTokenKind {
+        switch kind {
+        case .keyword: return .keyword
+        case .string: return .string
+        case .comment: return .comment
+        case .number: return .number
+        case .type: return .typeName
+        default: return .plain
+        }
     }
 }
