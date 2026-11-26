@@ -228,20 +228,24 @@ private fun figureDebugVariants(
     if (figureDebugRan) return
     figureDebugRan = true
     val csp = "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'\">"
+    val simple = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' width='200' height='200'><rect width='10' height='10' fill='#0000ff'/></svg>"
+    val green = html.replace("background:transparent", "background:#00ff00")
     val variants =
         listOf(
-            "red" to "<!DOCTYPE html><html><body style=\"background:red\">x</body></html>",
-            "nocsp" to html.replace(csp, ""),
-            "cspred" to "<!DOCTYPE html><html><head>$csp<style>body{background:red}</style></head><body>x</body></html>",
-            "opaque" to html.replace("background:transparent", "background:#00ff00"),
-            "noviewport" to html.replace(Regex("<meta name=\"viewport\"[^>]*>"), ""),
-            "original" to html,
+            "simple-fixed" to "<!DOCTYPE html><html><body style=\"margin:0;background:#00ff00\">$simple</body></html>",
+            "div-percent" to "<!DOCTYPE html><html><head><style>html,body{margin:0;height:100%;background:#00ff00}body>div{width:100%;height:100%;background:#0000ff}</style></head><body><div></div></body></html>",
+            "svg-vh" to green.replace("body>svg{display:block;width:100%;height:100%}", "body>svg{display:block;width:100vw;height:100vh}"),
+            "svg-px" to green.replace("body>svg{display:block;width:100%;height:100%}", "body>svg{display:block;width:200px;height:120px}"),
+            "svg-nostyle" to green.replace("body>svg{display:block;width:100%;height:100%}", ""),
+            "svg-noblock" to green.replace("display:block;", ""),
+            "original-green" to green,
         )
     fun probe(name: String) {
         val bitmap = android.graphics.Bitmap.createBitmap(view.width, view.height, android.graphics.Bitmap.Config.ARGB_8888)
         view.draw(android.graphics.Canvas(bitmap))
         val probes = listOf(0.1f, 0.3f, 0.5f, 0.7f, 0.9f).map { Integer.toHexString(bitmap.getPixel((view.width * it).toInt(), view.height / 2)) }
-        android.util.Log.i("FigureDebug", "variant $name $probes content=${view.contentHeight}")
+        val top = Integer.toHexString(bitmap.getPixel(40, 40))
+        android.util.Log.i("FigureDebug", "variant $name top=$top $probes content=${view.contentHeight}")
     }
     fun step(index: Int) {
         if (index >= variants.size) return
