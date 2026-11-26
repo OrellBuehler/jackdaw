@@ -17,6 +17,7 @@ WIDTH=1080
 HEIGHT=1920
 DENSITY=420
 SETTLE_SECONDS="${SETTLE_SECONDS:-3}"
+FIGURE_SECONDS="${FIGURE_SECONDS:-8}"
 ATTEMPTS="${ATTEMPTS:-3}"
 # A blank or half-loaded 1080x1920 screen compresses to far less than any real one.
 MIN_PNG_BYTES=30000
@@ -73,11 +74,12 @@ restore_device() {
 }
 trap 'restore_device; rm -rf "$WORK_DIR"' EXIT
 
-# launch <screen> [pack] [section]
+# launch <screen> [pack] [practice filter] [section]
 launch() {
-  local screen="$1" pack="${2:-}" section="${3:-}"
+  local screen="$1" pack="${2:-}" filter="${3:-}" section="${4:-}"
   local args=(--es store_screenshot "$screen")
   if [ -n "$pack" ]; then args+=(--es store_screenshot_pack "$pack"); fi
+  if [ -n "$filter" ]; then args+=(--es store_screenshot_filter "$filter"); fi
   if [ -n "$section" ]; then args+=(--es store_screenshot_section "$section"); fi
   adb shell am force-stop "$PKG"
   adb shell am start -W -n "$ACTIVITY" "${args[@]}" >/dev/null
@@ -110,7 +112,7 @@ save_debug() {
   dump_ui >"$dir/$1.xml" || true
 }
 
-# shoot <locale> <name> <ready text> <screen> [pack] [section]
+# shoot <locale> <name> <ready text> <screen> [pack] [practice filter] [section]
 shoot() {
   local locale="$1" name="$2" ready="$3"
   shift 3
@@ -124,6 +126,8 @@ shoot() {
       save_debug "$locale-$name-$attempt"
       continue
     fi
+    # Figures are drawn by a web view, which is slow to start on an emulator.
+    if [ "$1" = "study" ]; then sleep "$FIGURE_SECONDS"; fi
     sleep "$SETTLE_SECONDS"
     adb exec-out screencap -p >"$file"
     bytes="$(stat -c%s "$file")"
@@ -159,15 +163,15 @@ for locale in en de; do
   adb shell cmd uimode night no
   shoot "$locale" library "Flags of the World" library || failed=1
   shoot "$locale" pack "Flags of the World" pack flags-of-the-world || failed=1
-  shoot "$locale" study-flags "$close" study flags-of-the-world || failed=1
-  shoot "$locale" study-map "$close" study history-on-the-map antiquity || failed=1
-  shoot "$locale" study-quiz "$close" study solar-system || failed=1
+  shoot "$locale" study-flags "$close" study flags-of-the-world quiz europe-west || failed=1
+  shoot "$locale" study-map "$close" study history-on-the-map flashcards antiquity || failed=1
+  shoot "$locale" study-quiz "$close" study solar-system quiz || failed=1
   shoot "$locale" stats "$activity" stats || failed=1
   shoot "$locale" add "$add" add || failed=1
 
   adb shell cmd uimode night yes
   shoot "$locale" library-dark "Flags of the World" library || failed=1
-  shoot "$locale" study-map-dark "$close" study history-on-the-map antiquity || failed=1
+  shoot "$locale" study-map-dark "$close" study history-on-the-map flashcards antiquity || failed=1
   shoot "$locale" stats-dark "$activity" stats || failed=1
 done
 

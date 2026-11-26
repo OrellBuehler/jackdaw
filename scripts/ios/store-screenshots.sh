@@ -17,9 +17,9 @@ xcrun simctl status_bar "$DEVICE_ID" override \
   --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 \
   --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
 
-# capture <locale> <name> <appearance> <screen> [pack] [section]
+# capture <locale> <name> <appearance> <screen> [pack] [practice filter] [section]
 capture() {
-  local locale="$1" name="$2" appearance="$3" screen="$4" pack="${5:-}" section="${6:-}"
+  local locale="$1" name="$2" appearance="$3" screen="$4" pack="${5:-}" filter="${6:-}" section="${7:-}"
   xcrun simctl ui "$DEVICE_ID" appearance "$appearance"
   xcrun simctl terminate "$DEVICE_ID" "$BUNDLE_ID" 2>/dev/null || true
   local args=(
@@ -28,6 +28,7 @@ capture() {
     -AppleLocale "${locale}_CH"
   )
   if [ -n "$pack" ]; then args+=(-store_screenshot_pack "$pack"); fi
+  if [ -n "$filter" ]; then args+=(-store_screenshot_filter "$filter"); fi
   if [ -n "$section" ]; then args+=(-store_screenshot_section "$section"); fi
   xcrun simctl launch "$DEVICE_ID" "$BUNDLE_ID" "${args[@]}" >/dev/null
   sleep "$SETTLE_SECONDS"
@@ -50,13 +51,13 @@ sleep 25
 for locale in en de; do
   capture "$locale" library light library
   capture "$locale" pack light pack flags-of-the-world
-  capture "$locale" study-flags light study flags-of-the-world
-  capture "$locale" study-map light study history-on-the-map antiquity
-  capture "$locale" study-quiz light study solar-system
+  capture "$locale" study-flags light study flags-of-the-world quiz europe-west
+  capture "$locale" study-map light study history-on-the-map flashcards antiquity
+  capture "$locale" study-quiz light study solar-system quiz
   capture "$locale" stats light stats
   capture "$locale" add light add
   capture "$locale" library-dark dark library
-  capture "$locale" study-map-dark dark study history-on-the-map antiquity
+  capture "$locale" study-map-dark dark study history-on-the-map flashcards antiquity
   capture "$locale" stats-dark dark stats
 done
 

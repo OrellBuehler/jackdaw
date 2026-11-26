@@ -300,7 +300,7 @@ final class AppModel {
             }
         case "study":
             if let pack {
-                studyRequest = .learn(pack: pack, sectionId: shot.sectionId)
+                studyRequest = .practice(pack: pack, filter: shot.filter, sectionId: shot.sectionId)
             }
         default:
             break

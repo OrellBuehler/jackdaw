@@ -3,6 +3,7 @@ package ch.orellbuehler.jackdaw
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import ch.orellbuehler.jackdaw.study.SessionMode
 import ch.orellbuehler.jackdaw.ui.nav.AddPackRoute
 import ch.orellbuehler.jackdaw.ui.nav.PackRoute
 import ch.orellbuehler.jackdaw.ui.nav.SettingsRoute
@@ -14,6 +15,7 @@ object StoreScreenshots {
     const val EXTRA_SCREEN = "store_screenshot"
     const val EXTRA_PACK = "store_screenshot_pack"
     const val EXTRA_SECTION = "store_screenshot_section"
+    const val EXTRA_FILTER = "store_screenshot_filter"
     private const val PACK_PREFIX = "com.github.orellbuehler.jackdaw.examples."
 
     fun prepare(
@@ -27,7 +29,13 @@ object StoreScreenshots {
         val packId = PACK_PREFIX + intent.getStringExtra(EXTRA_PACK).orEmpty()
         return when (screen) {
             "pack" -> PackRoute(packId)
-            "study" -> StudyRoute(packId, sectionId = intent.getStringExtra(EXTRA_SECTION))
+            "study" ->
+                StudyRoute(
+                    packId,
+                    mode = SessionMode.PRACTICE.name,
+                    sectionId = intent.getStringExtra(EXTRA_SECTION),
+                    filter = intent.getStringExtra(EXTRA_FILTER).orEmpty().uppercase(),
+                )
             "stats" -> StatsRoute
             "settings" -> SettingsRoute
             "add" -> AddPackRoute
