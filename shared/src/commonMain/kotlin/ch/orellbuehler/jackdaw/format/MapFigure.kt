@@ -392,6 +392,8 @@ internal object MapFigure {
         }
         var lastX = round(polygon.xs[0])
         var lastY = round(polygon.ys[0])
+        val start = out.length
+        var moves = 0
         out
             .append('M')
             .append(lastX)
@@ -409,8 +411,13 @@ internal object MapFigure {
                 .append(' ')
             lastX = x
             lastY = y
+            moves++
         }
-        if (out.last() == ' ') out.setLength(out.length - 1)
+        if (moves < 2) {
+            out.setLength(start)
+            return
+        }
+        out.setLength(out.length - 1)
         out.append('z')
     }
 
