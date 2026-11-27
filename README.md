@@ -251,7 +251,9 @@ One-time iOS setup: register the App ID `ch.orellbuehler.jackdaw`, create the ap
 
 The iOS app is in the App Store. The Android app is in a closed beta on Google Play that anyone can join through the [tester group](https://groups.google.com/g/jackdaw-test), and is published as a signed APK with every GitHub release.
 
-No licence has been chosen yet, so nothing in this repository is licensed for reuse for now.
+## License
+
+[PolyForm Noncommercial 1.0.0](LICENSE) — free for personal and other noncommercial use.
 
 ## Credits
 
